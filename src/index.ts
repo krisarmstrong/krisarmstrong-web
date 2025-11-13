@@ -23,5 +23,7 @@ export {
 export { PageHeader } from './components/PageHeader';
 export { NavCard } from './components/NavCard';
 export { StarRating } from './components/StarRating';
+export { ContentCard } from './components/ContentCard';
+export type { ContentCardProps } from './components/ContentCard';
 export { SOCIAL_ICONS, createSocialLinks } from './constants/socialIcons';
 export type { SocialIcon } from './constants/socialIcons';

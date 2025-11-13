@@ -1,6 +1,6 @@
 {
-  "name": "@krisarmstrong/site-shell",
-  "version": "0.2.1",
+  "name": "@krisarmstrong/web-foundation",
+  "version": "0.3.0",
   "type": "module",
   "main": "./src/index.ts",
   "module": "./src/index.ts",
