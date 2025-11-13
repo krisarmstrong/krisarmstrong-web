@@ -17,9 +17,14 @@ export const SOCIAL_ICONS = {
       <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.025-3.037-1.852-3.037-1.853 0-2.136 1.446-2.136 2.939v5.667h-3.554v-11.5h3.414v1.569h.049c.476-.899 1.637-1.849 3.369-1.849 3.602 0 4.268 2.368 4.268 5.452v6.328zM5.337 7.433c-1.144 0-2.068-.926-2.068-2.065 0-1.143.924-2.065 2.068-2.065 1.141 0 2.065.922 2.065 2.065 0 1.139-.924 2.065-2.065 2.065zm1.777 13.019h-3.554v-11.5h3.554v11.5zm15.385-19.014h-17.338c-1.104 0-2 .896-2 2v20.014c0 1.104.896 2 2 2h17.338c1.104 0 2-.896 2-2v-20.014c0-1.104-.896-2-2-2z" />
     </svg>
   ),
-  twitter: (className = "w-6 h-6") => (
+  x: (className = "w-6 h-6") => (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  ),
+  youtube: (className = "w-6 h-6") => (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
     </svg>
   ),
   facebook: (className = "w-6 h-6") => (
@@ -34,8 +39,12 @@ export const SOCIAL_ICONS = {
   ),
 };
 
-export function createSocialLinks(username: string): SocialIcon[] {
-  return [
+export function createSocialLinks(username: string, options?: {
+  youtube?: string;
+  facebook?: string;
+  instagram?: string;
+}): SocialIcon[] {
+  const links: SocialIcon[] = [
     {
       label: 'GitHub',
       href: `https://github.com/${username}`,
@@ -47,9 +56,35 @@ export function createSocialLinks(username: string): SocialIcon[] {
       icon: SOCIAL_ICONS.linkedin(),
     },
     {
-      label: 'Twitter',
-      href: `https://twitter.com/${username}`,
-      icon: SOCIAL_ICONS.twitter(),
+      label: 'X',
+      href: `https://x.com/${username}`,
+      icon: SOCIAL_ICONS.x(),
     },
   ];
+
+  if (options?.youtube) {
+    links.push({
+      label: 'YouTube',
+      href: `https://youtube.com/@${options.youtube}`,
+      icon: SOCIAL_ICONS.youtube(),
+    });
+  }
+
+  if (options?.facebook) {
+    links.push({
+      label: 'Facebook',
+      href: `https://facebook.com/${options.facebook}`,
+      icon: SOCIAL_ICONS.facebook(),
+    });
+  }
+
+  if (options?.instagram) {
+    links.push({
+      label: 'Instagram',
+      href: `https://instagram.com/${options.instagram}`,
+      icon: SOCIAL_ICONS.instagram(),
+    });
+  }
+
+  return links;
 }

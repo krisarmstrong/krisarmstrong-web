@@ -57,3 +57,4 @@ export type {
 } from './components/Error';
 export { SOCIAL_ICONS, createSocialLinks } from './constants/socialIcons';
 export type { SocialIcon } from './constants/socialIcons';
+export { useClickOutside, useEscapeKey, useBodyScrollLock } from './hooks';
