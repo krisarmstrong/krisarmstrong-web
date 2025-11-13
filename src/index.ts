@@ -22,5 +22,6 @@ export {
 } from './components/ui/Typography';
 export { PageHeader } from './components/PageHeader';
 export { NavCard } from './components/NavCard';
+export { StarRating } from './components/StarRating';
 export { SOCIAL_ICONS, createSocialLinks } from './constants/socialIcons';
 export type { SocialIcon } from './constants/socialIcons';
