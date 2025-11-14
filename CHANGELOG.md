@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.1] - 2025-01-14
+
+### Fixed
+- **CRITICAL SECURITY**: Removed unsafe `new Function()` constructor from Error.tsx
+  - Replaced eval-like pattern with safe import.meta.env check
+  - Eliminates code injection vulnerability
+- **ContentSort** dropdown text now visible before clicking
+  - Added custom dropdown arrow with white color
+  - Improved option styling with explicit background/text colors
+  - Better UX with visible select text
+
+### Changed
+- Improved environment detection in Error component
+  - Now safely checks both Vite (import.meta.env) and webpack (process.env)
+  - Falls back gracefully when import.meta is unavailable
+
 ## [0.6.0] - 2025-01-14
 
 ### Added

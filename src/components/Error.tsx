@@ -4,23 +4,26 @@ import { AlertCircle, RefreshCw } from 'lucide-react';
 // Type declaration for process (when available at runtime)
 declare const process: { env?: { NODE_ENV?: string } };
 
-const resolveImportMetaMode = (): string | undefined => {
-  try {
-    // eslint-disable-next-line no-new-func
-    const getter = new Function(
-      'return typeof import.meta !== "undefined" ? import.meta.env?.MODE : undefined;'
-    ) as () => string | undefined;
-    return getter();
-  } catch {
-    return undefined;
+/**
+ * Safely check if we're in development mode.
+ * This works for both Vite (import.meta.env.MODE) and webpack (process.env.NODE_ENV).
+ */
+const isDevelopmentEnvironment = (() => {
+  // Check process.env.NODE_ENV (webpack/CRA)
+  if (typeof process !== 'undefined' && process?.env?.NODE_ENV === 'production') {
+    return false;
   }
-};
 
-const importMetaMode = resolveImportMetaMode();
-
-const isDevelopmentEnvironment =
-  (typeof process !== 'undefined' && process?.env?.NODE_ENV !== 'production') ||
-  (importMetaMode !== undefined && importMetaMode !== 'production');
+  // Check import.meta.env.MODE (Vite) - safe because import.meta is statically analyzed
+  // at build time and replaced with the actual value
+  try {
+    // @ts-ignore - import.meta may not be available in all environments
+    return import.meta.env?.MODE !== 'production';
+  } catch {
+    // Fallback to process.env check if import.meta is not available
+    return typeof process !== 'undefined' && process?.env?.NODE_ENV !== 'production';
+  }
+})();
 
 // ============================================================================
 // Error Message
