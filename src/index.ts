@@ -28,6 +28,10 @@ export { NavCard } from './components/NavCard';
 export { StarRating } from './components/StarRating';
 export { ContentCard } from './components/ContentCard';
 export type { ContentCardProps } from './components/ContentCard';
+export { ContentSearch } from './components/ContentSearch';
+export type { ContentSearchProps, SearchableItem } from './components/ContentSearch';
+export { ContentSort } from './components/ContentSort';
+export type { ContentSortProps, SortOption } from './components/ContentSort';
 export {
   LoadingSpinner,
   LoadingCard,
