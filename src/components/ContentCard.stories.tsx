@@ -169,3 +169,139 @@ export const AllVariants: Story = {
     </div>
   ),
 };
+
+export const WithImage: Story = {
+  args: {
+    href: '/blog/image-example',
+    title: 'Content Card with Image',
+    excerpt: 'This card includes an image thumbnail that appears above the content. The image is clickable and links to the same destination as the title.',
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=400&fit=crop',
+    imageAlt: 'Developer working on laptop',
+    date: '2024-01-20',
+    readTime: 8,
+    tags: ['Design', 'UX'],
+    accentColor: 'blue',
+  },
+};
+
+export const WithAuthor: Story = {
+  args: {
+    href: '/blog/author-example',
+    title: 'Article with Author Information',
+    excerpt: 'This card displays author information including name and avatar, perfect for multi-author blogs or team sites.',
+    author: 'Kris Armstrong',
+    authorAvatar: 'https://github.com/krisarmstrong.png',
+    date: '2024-01-22',
+    readTime: 6,
+    tags: ['Tutorial', 'React'],
+    accentColor: 'violet',
+  },
+};
+
+export const CompactVariant: Story = {
+  args: {
+    href: '/compact-example',
+    title: 'Compact Card Variant',
+    excerpt: 'The compact variant displays content in a horizontal layout, perfect for sidebars or list views.',
+    variant: 'compact',
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop',
+    date: '2024-01-18',
+    readTime: 3,
+    tags: ['Quick Read'],
+    accentColor: 'blue',
+  },
+};
+
+export const ExpandedVariant: Story = {
+  args: {
+    href: '/expanded-example',
+    title: 'Expanded Card Variant for Feature Articles',
+    excerpt: 'The expanded variant provides more space and prominence for featured or important content. Great for hero sections or highlighting key articles.',
+    variant: 'expanded',
+    image: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&h=400&fit=crop',
+    author: 'Kris Armstrong',
+    authorAvatar: 'https://github.com/krisarmstrong.png',
+    date: '2024-01-25',
+    readTime: 15,
+    tags: ['In-Depth', 'Analysis', 'Featured'],
+    featured: true,
+    accentColor: 'violet',
+  },
+};
+
+export const WithBookmarkAndShare: Story = {
+  args: {
+    href: '/interactive-example',
+    title: 'Interactive Card with Bookmark and Share',
+    excerpt: 'This card includes bookmark and share functionality. Click the bookmark icon to save for later, or share with others.',
+    date: '2024-01-23',
+    readTime: 7,
+    tags: ['Interactive', 'Features'],
+    accentColor: 'blue',
+    onBookmark: () => console.log('Bookmark toggled'),
+    onShare: () => console.log('Share clicked'),
+  },
+};
+
+export const WithProgress: Story = {
+  args: {
+    href: '/progress-example',
+    title: 'Article with Reading Progress',
+    excerpt: 'The progress bar at the top shows how much of the article has been read. This is useful for tracking reading progress in longer content.',
+    progress: 65,
+    date: '2024-01-24',
+    readTime: 12,
+    tags: ['Long Form', 'Tutorial'],
+    accentColor: 'violet',
+  },
+};
+
+export const LoadingState: Story = {
+  args: {
+    href: '/loading',
+    title: 'Loading Skeleton',
+    excerpt: 'This will not be shown',
+    isLoading: true,
+    image: 'placeholder.jpg',
+    accentColor: 'violet',
+  },
+};
+
+export const FullyLoaded: Story = {
+  args: {
+    href: '/full-example',
+    title: 'Fully Featured Content Card',
+    excerpt: 'This card demonstrates all available features: image, author, progress, bookmarks, sharing, tags, and metadata. It showcases the complete capabilities of the ContentCard component.',
+    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=400&fit=crop',
+    imageAlt: 'Code on screen',
+    author: 'Kris Armstrong',
+    authorAvatar: 'https://github.com/krisarmstrong.png',
+    date: '2024-01-26',
+    readTime: 10,
+    tags: ['Comprehensive', 'Guide', 'Best Practices'],
+    featured: true,
+    metadata: 'Web Development • React',
+    metadataIcon: <Wifi size={14} />,
+    progress: 35,
+    accentColor: 'violet',
+    onBookmark: () => console.log('Bookmark toggled'),
+    onShare: () => console.log('Share clicked'),
+    onTagClick: (tag) => console.log(`Tag clicked: ${tag}`),
+  },
+};
+
+export const CompactWithImage: Story = {
+  args: {
+    href: '/compact-image',
+    title: 'Compact Layout with Image',
+    excerpt: 'Compact variant with image creates an efficient horizontal layout perfect for news feeds or article lists.',
+    variant: 'compact',
+    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=300&fit=crop',
+    author: 'Kris Armstrong',
+    date: '2024-01-19',
+    readTime: 4,
+    tags: ['News', 'Update'],
+    accentColor: 'blue',
+    onBookmark: () => console.log('Bookmarked'),
+  },
+};

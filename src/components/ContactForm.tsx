@@ -1,5 +1,7 @@
 import { FormEvent, ReactNode, useId, useState } from 'react';
 import { Button } from './ui/Button';
+import { useTelemetry } from '../hooks/useTelemetry';
+import type { TelemetryConfig } from '../hooks/useTelemetry';
 
 const toneStyles = {
   violet: {
@@ -69,6 +71,8 @@ export interface ContactFormProps {
   cardClassName?: string;
   onSubmitSuccess?: () => void;
   onSubmitError?: (error: Error) => void;
+  /** Telemetry configuration for tracking form events */
+  telemetry?: TelemetryConfig;
 }
 
 export function ContactForm({
@@ -94,6 +98,7 @@ export function ContactForm({
   cardClassName = '',
   onSubmitSuccess,
   onSubmitError,
+  telemetry = { enabled: false },
 }: ContactFormProps) {
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -103,16 +108,25 @@ export function ContactForm({
 
   const palette = toneStyles[tone];
   const surface = surfaces[background];
+  const telemetryHook = useTelemetry(telemetry);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!endpoint) {
       setError('Contact endpoint is not configured.');
+      telemetryHook.trackEvent('contact_form_error', {
+        error: 'no_endpoint',
+        tone,
+      });
       return;
     }
 
     if (honeypot.trim().length > 0) {
+      // Honeypot detected - likely spam
+      telemetryHook.trackEvent('contact_form_spam_detected', {
+        tone,
+      });
       setSent(true);
       setError(null);
       event.currentTarget.reset();
@@ -123,6 +137,13 @@ export function ContactForm({
     setError(null);
 
     const formData = new FormData(event.currentTarget);
+
+    telemetryHook.trackEvent('contact_form_submit_attempt', {
+      tone,
+      hasName: !!formData.get('name'),
+      hasEmail: !!formData.get('email'),
+      hasMessage: !!formData.get('message'),
+    });
 
     try {
       const response = await fetch(endpoint, {
@@ -137,10 +158,23 @@ export function ContactForm({
 
       event.currentTarget.reset();
       setSent(true);
+      telemetryHook.trackEvent('contact_form_success', {
+        tone,
+      });
       onSubmitSuccess?.();
     } catch (err) {
       const errorObject = err instanceof Error ? err : new Error('Failed to submit contact form');
       setError('We couldn\'t send your message. Please try again or email me directly.');
+      telemetryHook.trackError({
+        message: errorObject.message,
+        stack: errorObject.stack,
+        component: 'ContactForm',
+        tone,
+      });
+      telemetryHook.trackEvent('contact_form_error', {
+        error: 'submission_failed',
+        tone,
+      });
       onSubmitError?.(errorObject);
     } finally {
       setSubmitting(false);
@@ -233,7 +267,7 @@ export function ContactForm({
             className="w-full justify-center text-lg"
             isLoading={submitting}
             disabled={submitting || !endpoint}
-            aria-label="Send message"
+            aria-label={submitLabel}
           >
             {submitLabel}
           </Button>

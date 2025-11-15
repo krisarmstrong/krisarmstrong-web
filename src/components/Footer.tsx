@@ -1,5 +1,7 @@
 import type { FooterProps, Theme } from '../types';
 import { themeTokens } from '../tokens';
+import { useOptionalTheme } from '../context/ThemeContext';
+import { CSSProperties } from 'react';
 
 const defaultSocial = [
   {
@@ -19,7 +21,19 @@ export function Footer({
   copyright,
   theme = 'dark',
 }: FooterProps) {
-  const palette = themeTokens[theme] || themeTokens.dark;
+  // Use theme context if available, otherwise fall back to theme prop
+  const themeContext = useOptionalTheme();
+  const contextTheme = themeContext?.theme;
+
+  // If ThemeProvider is available, use its colors; otherwise use themeTokens
+  const palette = contextTheme
+    ? {
+        surfaceRaised: contextTheme.surface?.raised || themeTokens[theme].surfaceRaised,
+        textPrimary: contextTheme.text?.primary || themeTokens[theme].textPrimary,
+        textMuted: contextTheme.text?.muted || themeTokens[theme].textMuted,
+        border: contextTheme.surface?.border || themeTokens[theme].border,
+      }
+    : themeTokens[theme] || themeTokens.dark;
 
   return (
     <footer

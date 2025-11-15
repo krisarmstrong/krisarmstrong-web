@@ -87,5 +87,14 @@ export { EmptyState } from './components/EmptyState';
 export type { EmptyStateProps } from './components/EmptyState';
 export { useProgressiveLoad } from './hooks/useProgressiveLoad';
 export type { UseProgressiveLoadOptions, UseProgressiveLoadReturn } from './hooks/useProgressiveLoad';
+export { useTelemetry } from './hooks/useTelemetry';
+export type {
+  TelemetryConfig,
+  TelemetryEventProperties,
+  TelemetryErrorContext,
+  TelemetryPageViewProperties,
+  TelemetryProvider,
+  UseTelemetryReturn,
+} from './hooks/useTelemetry';
 export { ContactForm } from './components/ContactForm';
 export type { ContactFormProps, ContactFormTone, ContactFormSurface } from './components/ContactForm';
