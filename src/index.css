@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure all component classes are generated */
+@layer components {
+  .web-foundation-ready {
+    @apply hidden;
+  }
+}

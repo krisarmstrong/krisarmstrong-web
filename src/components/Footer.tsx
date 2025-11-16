@@ -63,7 +63,7 @@ export function Footer({
           <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
             {legalLinks.map((link, index) => (
               <span key={link.path} className="flex items-center gap-4">
-                {index > 0 && <span style={{ color: palette.textMuted }}>|</span>}
+                {index > 0 && <span aria-hidden="true" style={{ color: palette.textMuted }}>|</span>}
                 <a
                   href={link.path}
                   className="transition-colors hover:underline"

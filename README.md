@@ -12,17 +12,6 @@ Shared layout primitives (PageShell, Footer, Breadcrumbs, PrimaryNav, UI tokens)
 
 Both Wi-Fi Vigilante and the portfolio currently reference the package via `file:../web-foundation`, which means your CI/CD job must place the shared package next to each repo (monorepo checkout, git submodule, or npm registry publish).
 
-### Storybook playground
-
-The Storybook instance runs on Vite + Tailwind (same toolchain as each site), so components look identical whether they render in isolation or inside an app. Use it for a11y audits and rapid visual QA.
-
-```bash
-npm run storybook        # dev server on http://localhost:6006
-npm run build-storybook  # static export for CI artifacts / Chromatic
-```
-
-When you add a component, drop a `.stories.tsx` companion so we can regression test props and light/dark palettes automatically.
-
 ## Publishing
 
 When you’re ready to cut a release:

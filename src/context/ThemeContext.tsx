@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode, useMemo } from 'react';
+import { createContext, useContext, ReactNode, useMemo, useState, useEffect } from 'react';
 
 /**
  * Theme configuration interface
@@ -205,8 +205,8 @@ export function ThemeProvider({
   initialMode = 'dark',
   allowThemeUpdates = true,
 }: ThemeProviderProps) {
-  const [theme, setThemeState] = React.useState<ThemeConfig>(initialTheme);
-  const [mode, setModeState] = React.useState<ColorMode>(initialMode);
+  const [theme, setThemeState] = useState<ThemeConfig>(initialTheme);
+  const [mode, setModeState] = useState<ColorMode>(initialMode);
 
   const setTheme = useMemo(
     () => (allowThemeUpdates ? setThemeState : () => {}),
@@ -219,7 +219,7 @@ export function ThemeProvider({
   );
 
   // Apply CSS variables to document root
-  React.useEffect(() => {
+  useEffect(() => {
     const root = document.documentElement;
 
     // Brand colors
@@ -288,6 +288,3 @@ export function useTheme(): ThemeContextValue {
 export function useOptionalTheme(): ThemeContextValue | null {
   return useContext(ThemeContext);
 }
-
-// Re-export React for use in this file
-import * as React from 'react';

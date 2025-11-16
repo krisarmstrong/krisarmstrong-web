@@ -2,43 +2,7 @@ import { Loader2 } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import type { Theme } from '../types';
 import { themeTokens } from '../tokens';
-
-// Type declaration for process (when available at runtime)
-declare const process: { env?: { NODE_ENV?: string } };
-
-/**
- * Safely check if we're in development mode.
- * This works for both Vite (import.meta.env.MODE) and webpack (process.env.NODE_ENV).
- */
-const isDevelopmentEnvironment = (() => {
-  // Check process.env.NODE_ENV (webpack/CRA)
-  if (typeof process !== 'undefined' && process?.env?.NODE_ENV === 'production') {
-    return false;
-  }
-
-  // Check import.meta.env.MODE (Vite) - safe because import.meta is statically analyzed
-  // at build time and replaced with the actual value
-  try {
-    // @ts-ignore - import.meta may not be available in all environments
-    return import.meta.env?.MODE !== 'production';
-  } catch {
-    // Fallback to process.env check if import.meta is not available
-    return typeof process !== 'undefined' && process?.env?.NODE_ENV !== 'production';
-  }
-})();
-
-/**
- * Safely try to get Sentry if it's available
- * Returns null if Sentry is not installed (optional peer dependency)
- */
-function getSentry(): typeof import('@sentry/react') | null {
-  try {
-    // @ts-ignore - Sentry is an optional peer dependency
-    return require('@sentry/react');
-  } catch {
-    return null;
-  }
-}
+import { isDevelopmentEnvironment, getSentry } from '../utils/env';
 
 // ============================================================================
 // Loading Spinner
@@ -129,8 +93,9 @@ export function LoadingSpinner({
   }, [trackSlowLoadingAfter, loadingContext]);
 
   return (
-    <div className={`flex items-center justify-center ${className}`}>
-      <Loader2 size={size} className={`animate-spin ${spinnerColors[variant]}`} />
+    <div className={`flex items-center justify-center ${className}`} role="status" aria-live="polite">
+      <Loader2 size={size} className={`animate-spin ${spinnerColors[variant]}`} aria-hidden="true" />
+      <span className="sr-only">Loading...</span>
     </div>
   );
 }

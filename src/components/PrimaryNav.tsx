@@ -22,7 +22,7 @@ const variantClasses: Record<NavVariant, { active: string; inactive: string }> =
     inactive: 'text-gray-300 hover:bg-gray-700 hover:text-white',
   },
   sage: {
-    active: 'bg-accent text-primary-dark shadow-md',
+    active: 'bg-accent text-white shadow-md',
     inactive: 'text-text-main hover:bg-accent/10 hover:text-accent',
   },
 };

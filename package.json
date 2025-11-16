@@ -15,20 +15,27 @@
       "types": "./dist/tokens.d.ts",
       "import": "./dist/tokens.js",
       "require": "./dist/tokens.cjs"
+    },
+    "./dist/index.css": {
+      "default": "./dist/index.css"
     }
   },
   "files": [
     "src",
-    "dist"
+    "dist",
+    "LICENSE",
+    "README.md"
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "build": "tsup src/index.ts src/tokens.ts --dts --sourcemap --format esm,cjs --out-dir dist",
-    "dev": "tsup src/index.ts src/tokens.ts --dts --watch --format esm,cjs --out-dir dist",
+    "build:js": "tsup src/index.ts src/tokens.ts --dts --sourcemap --format esm,cjs --out-dir dist",
+    "build:css": "npx @tailwindcss/cli@latest -i ./src/index.css -o ./dist/index.css --minify",
+    "build": "npm run clean && npm run build:js && npm run build:css",
+    "dev:js": "tsup src/index.ts src/tokens.ts --dts --watch --format esm,cjs --out-dir dist",
+    "dev:css": "npx @tailwindcss/cli@latest -i ./src/index.css -o ./dist/index.css --watch",
+    "dev": "npm run build:css && npm-run-all --parallel dev:js dev:css",
     "lint": "tsc --noEmit",
-    "prepare": "npm run build",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "prepare": "npm run build"
   },
   "peerDependencies": {
     "@sentry/react": "^10.25.0",
@@ -38,23 +45,19 @@
     "react-router-dom": "^7.9.6"
   },
   "devDependencies": {
-    "@storybook/addon-a11y": "^10.0.7",
-    "@storybook/react-vite": "^10.0.7",
+    "@tailwindcss/postcss": "^4.1.17",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
-    "rimraf": "^6.0.1",
-    "storybook": "^10.0.7",
-    "tsup": "^8.3.0",
-    "typescript": "^5.9.3",
-    "vitest": "^4.0.9",
-    "playwright": "^1.56.1",
     "@vitest/browser-playwright": "^4.0.9",
     "@vitest/coverage-v8": "^4.0.9",
-    "@tailwindcss/postcss": "^4.1.17",
+    "npm-run-all": "^4.1.5",
+    "playwright": "^1.56.1",
     "postcss": "^8.5.6",
-    "@storybook/addon-docs": "^10.0.7",
-    "@storybook/addon-onboarding": "^10.0.7",
-    "@storybook/addon-vitest": "^10.0.7"
+    "rimraf": "^6.1.0",
+    "tailwindcss": "^4.1.17",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.9"
   },
   "license": "MIT"
 }

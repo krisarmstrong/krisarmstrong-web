@@ -149,9 +149,15 @@ export function Button({
     <button
       className={classList}
       disabled={disabled || isLoading}
+      aria-busy={isLoading}
       {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
     >
-      {isLoading && <Spinner className={children ? 'mr-2' : ''} />}
+      {isLoading && (
+        <>
+          <Spinner className={children ? 'mr-2' : ''} />
+          <span className="sr-only">Loading...</span>
+        </>
+      )}
       {!isLoading && leftIcon && (
         <span className={children ? 'mr-1.5 -ml-0.5' : ''}>{leftIcon}</span>
       )}

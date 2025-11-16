@@ -1,4 +1,4 @@
-import { RefObject, useEffect } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 
 /**
  * Hook that alerts clicks outside of the passed ref
@@ -18,6 +18,13 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(
   ref: RefObject<T>,
   handler: (event: MouseEvent | TouchEvent) => void
 ) {
+  // Store handler in ref to avoid re-running effect when handler changes
+  const handlerRef = useRef(handler);
+
+  useEffect(() => {
+    handlerRef.current = handler;
+  }, [handler]);
+
   useEffect(() => {
     if (typeof document === 'undefined') {
       return;
@@ -31,7 +38,7 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(
         return;
       }
 
-      handler(event);
+      handlerRef.current(event);
     };
 
     document.addEventListener('mousedown', listener);
@@ -41,5 +48,5 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(
       document.removeEventListener('mousedown', listener);
       document.removeEventListener('touchstart', listener);
     };
-  }, [ref, handler]);
+  }, [ref]); // Only re-run if ref changes
 }

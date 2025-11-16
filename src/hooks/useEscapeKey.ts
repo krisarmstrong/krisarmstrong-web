@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 /**
  * Hook that calls handler when Escape key is pressed
@@ -12,12 +12,19 @@ import { useEffect } from 'react';
  * ```
  */
 export function useEscapeKey(handler: () => void, isActive: boolean = true) {
+  // Store handler in ref to avoid re-running effect when handler changes
+  const handlerRef = useRef(handler);
+
+  useEffect(() => {
+    handlerRef.current = handler;
+  }, [handler]);
+
   useEffect(() => {
     if (!isActive || typeof document === 'undefined') return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        handler();
+        handlerRef.current();
       }
     };
 
@@ -26,5 +33,5 @@ export function useEscapeKey(handler: () => void, isActive: boolean = true) {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [handler, isActive]);
+  }, [isActive]); // Only re-run if isActive changes
 }

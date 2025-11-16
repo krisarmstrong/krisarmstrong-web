@@ -7,16 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.8.0] - 2025-11-15
 
+## [0.9.1] - 2025-11-16
+
+### Fixed
+- **CRITICAL**: Fixed React import location in ThemeContext.tsx - now properly imports useState and useEffect at top of file
+- **HIGH**: Fixed hook performance issues in useClickOutside and useEscapeKey - now use useRef to prevent unnecessary re-renders
+- **HIGH**: Removed CommonJS require() usage - replaced with shared ESM utility functions
+- **HIGH**: Deduplicated isDevelopmentEnvironment and getSentry code into shared utils/env.ts module
+- **MEDIUM**: Added missing accessibility attributes:
+  - Footer separators now have aria-hidden="true"
+  - Button loading states now have aria-busy and screen reader text
+  - LoadingSpinner now has role="status", aria-live, and screen reader text
+- **DOCS**: Removed false Storybook claims from README (Storybook not yet implemented)
+
+### Added
+- LICENSE file (MIT License)
+- Shared utils/env.ts module for environment detection and Sentry access
+- Comprehensive accessibility improvements across components
+
+### Changed
+- package.json now includes LICENSE and README.md in published files
+
 ## [0.9.0] - 2025-11-15
 
 ### Added
-- ContactForm component with spam protection, offline messaging, and tone/background theming so Wi-Fi Vigilante and krisarmstrong.org can share the exact same UX with one source of truth.
-- Tailwind/PostCSS pipeline plus Storybook dark/light themes (`src/styles/storybook.css`) so components render identically to production.
-- Storybook stories for the new ContactForm and CSS import so Chromatic/QA can validate every primitive.
+- ContactForm component with spam protection, offline messaging, and tone/background theming
+- Three complete theme configurations for wifivigilante.com, krisarmstrong.org, and intrinsicmomentummindset.com
+- Comprehensive component library including:
+  - Navigation: Navbar, PrimaryNav, Breadcrumbs, SiteSearch
+  - Layout: PageShell, PageHeader, Section, Footer
+  - UI Components: Button, Card, Input, Typography, List, Avatar
+  - Content: ContentCard, ServiceCard, NavCard, StarRating
+  - State: Loading components, Error boundaries, EmptyState
+  - Forms: ContactForm with telemetry
+  - Utilities: useClickOutside, useEscapeKey, useBodyScrollLock, useProgressiveLoad, useTelemetry
+- Social icons for GitHub, LinkedIn, X (Twitter), YouTube, Facebook, Instagram
+- Theme context with light/dark mode support
 
 ### Changed
-- Button gained an `emerald` tone and the existing `sage` theme reuses the shared emerald palette for consistency across brands.
-- Storybook config now relies on explicit addon packages (`addon-docs`, `addon-a11y`, `addon-vitest`, `addon-onboarding`) instead of the removed `addon-essentials` meta package.
+- Button gained an `emerald` tone for WiFi Vigilante branding
+- Sage theme optimized for Intrinsic Momentum Mindset's earth tones
 
 ### Added
 - Theme-aware tokens (`themeTokens`) and optional `theme` props across layout primitives (PageShell, Footer, Breadcrumbs, NavCard, Card, PageHeader) so components render correctly in both dark and light palettes out of the box.
