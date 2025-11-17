@@ -99,7 +99,7 @@ export function Navbar({
 
   const drawerStyle: CSSProperties = theme
     ? {
-        backgroundColor: theme.surface?.base,
+        backgroundColor: theme.surface?.raised,
         borderColor: theme.surface?.border,
       }
     : {};
