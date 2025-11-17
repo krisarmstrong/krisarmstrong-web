@@ -1,3 +1,4 @@
+@import "./themes/shared-tokens.css";
 @import "tailwindcss";
 
 /* Base styles */

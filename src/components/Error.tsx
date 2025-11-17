@@ -80,10 +80,13 @@ export function ErrorMessage({
         <AlertCircle className={`${errorTextColors[variant]} flex-shrink-0 mt-0.5`} size={20} />
         <div className="flex-1">
           <h3 className={`${errorTextColors[variant]} font-semibold mb-1`}>Error</h3>
-          <p
-            className={`${errorTextColors[variant]} text-sm`}
-            dangerouslySetInnerHTML={sanitizedErrorMessage}
-          ></p>
+          <p className={`${errorTextColors[variant]} text-sm`}>
+            {sanitizedErrorMessage.__html && sanitizedErrorMessage.__html.length > 0 ? (
+              <span dangerouslySetInnerHTML={sanitizedErrorMessage} />
+            ) : (
+              errorMessage
+            )}
+          </p>
           {onRetry && (
             <button
               onClick={onRetry}
@@ -135,7 +138,13 @@ export function ErrorCard({ error, onRetry, variant = 'red' }: ErrorCardProps) {
       <h3 className={`text-xl font-semibold ${errorTextColors[variant]} mb-2`}>
         Something went wrong
       </h3>
-      <p className="text-gray-300 mb-4" dangerouslySetInnerHTML={sanitizedErrorMessage}></p>
+      <p className="text-gray-300 mb-4">
+        {sanitizedErrorMessage.__html && sanitizedErrorMessage.__html.length > 0 ? (
+          <span dangerouslySetInnerHTML={sanitizedErrorMessage} />
+        ) : (
+          errorMessage
+        )}
+      </p>
       {onRetry && (
         <button
           onClick={onRetry}

@@ -1,0 +1,21 @@
+:root {
+  --theme-brand-primary: #3b82f6;
+  --theme-brand-accent: #60a5fa;
+  --theme-surface-base: #0f172a;
+  --theme-surface-raised: #1e293b;
+  --theme-surface-border: #334155;
+  --theme-surface-hover: #1e293b;
+  --theme-text-primary: #f1f5f9;
+  --theme-text-muted: #94a3b8;
+  --theme-text-accent: #60a5fa;
+  --theme-text-inverse: #0f172a;
+  --theme-interactive-default: #3b82f6;
+  --theme-interactive-hover: #2563eb;
+  --theme-interactive-active: #60a5fa;
+  --theme-interactive-focus: #60a5fa;
+  --theme-interactive-disabled: #64748b;
+  --theme-status-success: #10b981;
+  --theme-status-warning: #f59e0b;
+  --theme-status-error: #ef4444;
+  --theme-status-info: #3b82f6;
+}
