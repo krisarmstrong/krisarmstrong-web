@@ -168,14 +168,14 @@ export function Navbar({
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-4">
           <PrimaryNav items={navItems} variant={variant === 'default' ? 'violet' : variant} />
           {desktopActions}
         </div>
 
         {/* Mobile: Hamburger */}
         <button
-          className={`md:hidden ${finalAccentColor} focus:outline-none focus:ring-2 rounded-lg p-2 hover:bg-opacity-10 transition-colors`}
+          className={`lg:hidden ${finalAccentColor} focus:outline-none focus:ring-2 rounded-lg p-2 hover:bg-opacity-10 transition-colors`}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen(!menuOpen)}
@@ -188,7 +188,7 @@ export function Navbar({
           <>
             {/* Backdrop */}
             <div
-              className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300"
+              className="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300"
               onClick={closeMenu}
               aria-hidden="true"
             />
@@ -196,7 +196,7 @@ export function Navbar({
             {/* Drawer */}
             <div
               ref={menuRef}
-              className={`md:hidden fixed top-0 right-0 h-screen w-80 max-w-[85vw] ${finalBgColor} border-l ${finalBorderColor} z-50 overflow-y-auto transform transition-transform duration-300 ease-in-out shadow-2xl flex flex-col`}
+              className={`fixed top-0 right-0 h-screen w-80 max-w-[85vw] ${finalBgColor} border-l ${finalBorderColor} z-50 overflow-y-auto transform transition-transform duration-300 ease-in-out shadow-2xl flex flex-col`}
               style={drawerStyle}
               role="dialog"
               aria-modal="true"
