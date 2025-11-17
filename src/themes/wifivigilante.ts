@@ -7,7 +7,7 @@ export const wifivigilanteTheme = {
   '--theme-surface-border': '#4b5563',
   '--theme-surface-hover': '#374151',
 
-  '--theme-text-primary': '#111827',
+  '--theme-text-primary': '#f1f5f9',
   '--theme-text-muted': '#6B7280',
   '--theme-text-accent': '#60a5fa',
   '--theme-text-inverse': '#f1f5f9', // Assuming a light inverse text for dark surfaces
