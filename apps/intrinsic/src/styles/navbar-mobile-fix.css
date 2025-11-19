@@ -1,0 +1,7 @@
+/* Mobile header height stabilization for Navbar */
+@media (max-width: 767px) {
+  /* Ensure the navbar header height remains fixed on mobile */
+  .intrinsic-navbar > nav {
+    height: 72px; /* a stable header height across mobile widths */
+  }
+}
