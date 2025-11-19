@@ -193,7 +193,14 @@ export function Navbar({
       {menuOpen && (
         <div
           ref={menuRef}
-          className={`fixed right-4 top-20 w-72 rounded-lg shadow-2xl ${finalBgColor} ${finalTextColor} border-2 ${finalBorderColor} transition-all duration-200 ease-in-out z-[60]`}
+          className={`rounded-lg shadow-2xl ${finalBgColor} ${finalTextColor} border-2 ${finalBorderColor} transition-all duration-200 ease-in-out`}
+          style={{
+            position: 'fixed',
+            right: '1rem',
+            top: '5rem',
+            width: '18rem',
+            zIndex: 60,
+          }}
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation"

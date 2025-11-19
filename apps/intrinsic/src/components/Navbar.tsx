@@ -5,59 +5,26 @@ import { useCallback, useEffect, useState } from 'react';
 
 function IntrinsicThemeToggle() {
   const { mode, setMode, setTheme } = useTheme();
-  const [actualMode, setActualMode] = useState<'light' | 'dark'>('light');
+  const isDark = mode === 'dark';
 
-  // Determine the actual rendered mode (for 'auto', check system preference)
-  useEffect(() => {
-    if (mode === 'auto') {
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      setActualMode(mediaQuery.matches ? 'dark' : 'light');
-
-      const handleChange = (e: MediaQueryListEvent) => {
-        setActualMode(e.matches ? 'dark' : 'light');
-      };
-
-      mediaQuery.addEventListener('change', handleChange);
-      return () => mediaQuery.removeEventListener('change', handleChange);
-    } else {
-      setActualMode(mode);
-    }
-  }, [mode]);
-
-  const toggleTheme = useCallback(() => {
-    // Cycle through: light -> dark -> auto -> light
-    if (mode === 'light') {
-      setMode('dark');
-      setTheme(intrinsicDarkTheme);
-    } else if (mode === 'dark') {
-      setMode('auto');
-      // For auto mode, set theme based on current system preference
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setTheme(prefersDark ? intrinsicDarkTheme : intrinsicTheme);
-    } else {
+  const toggleTheme = () => {
+    if (isDark) {
       setMode('light');
       setTheme(intrinsicTheme);
+    } else {
+      setMode('dark');
+      setTheme(intrinsicDarkTheme);
     }
-  }, [mode, setMode, setTheme]);
-
-  const getIcon = () => {
-    if (mode === 'auto') return <Monitor size={18} />;
-    return actualMode === 'dark' ? <Sun size={18} /> : <Moon size={18} />;
-  };
-
-  const getLabel = () => {
-    if (mode === 'auto') return 'Switch to light mode';
-    return actualMode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
   };
 
   return (
     <button
       onClick={toggleTheme}
       className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-surface-raised text-text-primary border border-surface-border hover:bg-surface-hover"
-      aria-label={getLabel()}
-      title={mode === 'auto' ? 'Auto (follows system)' : `${mode === 'dark' ? 'Dark' : 'Light'} mode`}
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      title={isDark ? 'Dark mode' : 'Light mode'}
     >
-      {getIcon()}
+      {isDark ? <Sun size={18} /> : <Moon size={18} />}
     </button>
   );
 }

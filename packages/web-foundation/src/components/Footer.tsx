@@ -36,11 +36,16 @@ export function Footer({
 
   return (
     <footer
-      className="px-4 py-8 transition-colors duration-200"
+      className="transition-colors duration-200"
       style={{
         backgroundColor: palette.surfaceRaised,
         color: palette.textMuted,
         borderTop: `1px solid ${palette.border}`,
+        marginTop: '8rem',
+        paddingTop: '4rem',
+        paddingBottom: '4rem',
+        paddingLeft: '1rem',
+        paddingRight: '1rem',
       }}
     >
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 text-center">
