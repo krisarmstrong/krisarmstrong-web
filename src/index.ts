@@ -19,6 +19,7 @@ export { Breadcrumbs } from './components/Breadcrumbs';
 export { PageShell } from './components/PageShell';
 export { PrimaryNav } from './components/PrimaryNav';
 export { Navbar } from './components/Navbar';
+export { ThemeToggle } from './components/ThemeToggle';
 export { SiteSearch } from './components/SiteSearch';
 export type { SearchResult } from './components/SiteSearch';
 export { Avatar } from './components/Avatar';
@@ -67,12 +68,7 @@ export type {
   SkeletonProps,
   SkeletonTextProps,
 } from './components/Loading';
-export {
-  ErrorMessage,
-  ErrorCard,
-  ErrorPage,
-  ErrorBoundary,
-} from './components/Error';
+export { ErrorMessage, ErrorCard, ErrorPage, ErrorBoundary } from './components/Error';
 export type {
   ErrorMessageProps,
   ErrorCardProps,
@@ -89,7 +85,10 @@ export type { LoadMoreButtonProps } from './components/LoadMoreButton';
 export { EmptyState } from './components/EmptyState';
 export type { EmptyStateProps } from './components/EmptyState';
 export { useProgressiveLoad } from './hooks/useProgressiveLoad';
-export type { UseProgressiveLoadOptions, UseProgressiveLoadReturn } from './hooks/useProgressiveLoad';
+export type {
+  UseProgressiveLoadOptions,
+  UseProgressiveLoadReturn,
+} from './hooks/useProgressiveLoad';
 export { useTelemetry } from './hooks/useTelemetry';
 export type {
   TelemetryConfig,
@@ -100,4 +99,8 @@ export type {
   UseTelemetryReturn,
 } from './hooks/useTelemetry';
 export { ContactForm } from './components/ContactForm';
-export type { ContactFormProps, ContactFormTone, ContactFormSurface } from './components/ContactForm';
+export type {
+  ContactFormProps,
+  ContactFormTone,
+  ContactFormSurface,
+} from './components/ContactForm';

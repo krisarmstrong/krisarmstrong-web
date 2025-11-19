@@ -1,6 +1,6 @@
 {
   "name": "@krisarmstrong/web-foundation",
-  "version": "0.9.9",
+  "version": "0.9.10",
   "type": "module",
   "repository": {
     "type": "git",
@@ -19,9 +19,6 @@
       "types": "./dist/tokens.d.ts",
       "import": "./dist/tokens.js",
       "require": "./dist/tokens.cjs"
-    },
-    "./dist/index.css": {
-      "default": "./dist/index.css"
     }
   },
   "files": [
@@ -32,12 +29,8 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "build:js": "tsup src/index.ts src/tokens.ts --dts --sourcemap --format esm,cjs --out-dir dist --metafile",
-    "build:css": "npx @tailwindcss/cli@latest -i ./src/index.css -o ./dist/index.css --minify",
-    "build": "npm run clean && npm run build:js && npm run build:css",
-    "dev:js": "tsup src/index.ts src/tokens.ts --dts --watch --format esm,cjs --out-dir dist",
-    "dev:css": "npx @tailwindcss/cli@latest -i ./src/index.css -o ./dist/index.css --watch",
-    "dev": "npm run build:css && npm-run-all --parallel dev:js dev:css",
+    "build": "npm run clean && tsup src/index.ts src/tokens.ts --dts --sourcemap --format esm,cjs --out-dir dist --metafile",
+    "dev": "tsup src/index.ts src/tokens.ts --dts --watch --format esm,cjs --out-dir dist",
     "lint": "eslint . --ext .ts,.tsx && tsc --noEmit",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "test": "vitest run",
@@ -99,6 +92,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "clsx": "^2.1.1",
     "dompurify": "^3.3.0"
   }
 }
