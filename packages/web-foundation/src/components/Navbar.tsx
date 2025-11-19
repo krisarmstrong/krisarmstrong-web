@@ -4,7 +4,6 @@ import { Menu, X } from 'lucide-react';
 import { PrimaryNav } from './PrimaryNav';
 import type { NavItem } from '../types';
 import { useOptionalTheme } from '../context/ThemeContext';
-import clsx from 'clsx';
 
 type NavVariant = 'violet' | 'blue' | 'sage' | 'default';
 
@@ -176,45 +175,40 @@ export function Navbar({
           )}
 
           {/* Mobile Menu - Dropdown */}
-          <div
-            ref={menuRef}
-            className={clsx(
-              `absolute right-0 top-full mt-2 w-56 rounded-lg shadow-2xl ${finalBgColor} ${finalTextColor} border-2 ${finalBorderColor} transition-all duration-300 ease-in-out`,
-              {
-                'opacity-100 translate-y-0': menuOpen,
-                'opacity-0 -translate-y-4 pointer-events-none': !menuOpen,
-              }
-            )}
-            style={{ zIndex: 9999 }}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Mobile navigation"
-          >
-            {/* Mobile Actions */}
-            {mobileActions && (
-              <div className={`p-4 border-b ${finalBorderColor}`}>{mobileActions}</div>
-            )}
+          {menuOpen && (
+            <div
+              ref={menuRef}
+              className={`absolute right-0 top-full mt-2 w-56 rounded-lg shadow-2xl ${finalBgColor} ${finalTextColor} border-2 ${finalBorderColor} animate-in fade-in slide-in-from-top-2 duration-300 z-[9999]`}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile navigation"
+            >
+              {/* Mobile Actions */}
+              {mobileActions && (
+                <div className={`p-4 border-b ${finalBorderColor}`}>{mobileActions}</div>
+              )}
 
-            {/* Navigation Links */}
-            <nav className="py-2">
-              <PrimaryNav
-                items={navItems}
-                orientation="vertical"
-                variant={variant === 'default' ? 'violet' : variant}
-                onNavigate={closeMenu}
-              />
-            </nav>
+              {/* Navigation Links */}
+              <nav className="py-2">
+                <PrimaryNav
+                  items={navItems}
+                  orientation="vertical"
+                  variant={variant === 'default' ? 'violet' : variant}
+                  onNavigate={closeMenu}
+                />
+              </nav>
 
-            {/* Desktop Actions in Mobile Menu */}
-            {desktopActions && (
-              <div className={`p-4 border-t ${finalBorderColor}`}>{desktopActions}</div>
-            )}
+              {/* Desktop Actions in Mobile Menu */}
+              {desktopActions && (
+                <div className={`p-4 border-t ${finalBorderColor}`}>{desktopActions}</div>
+              )}
 
-            {/* Footer */}
-            {mobileFooter && (
-              <div className={`p-4 border-t ${finalBorderColor}`}>{mobileFooter}</div>
-            )}
-          </div>
+              {/* Footer */}
+              {mobileFooter && (
+                <div className={`p-4 border-t ${finalBorderColor}`}>{mobileFooter}</div>
+              )}
+            </div>
+          )}
         </div>
       </nav>
     </>
