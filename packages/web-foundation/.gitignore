@@ -1,0 +1,19 @@
+node_modules/
+dist/
+*.log
+.DS_Store
+
+*storybook.log
+storybook-static
+*.tgz
+
+# Secrets and environment variables
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*.p12
+*.pfx
+secrets.json
+credentials.json

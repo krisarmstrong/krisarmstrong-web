@@ -1,0 +1,24 @@
+name: Weekly Health Check
+on:
+  schedule:
+    - cron: '0 6 * * 0'
+  workflow_dispatch:
+
+jobs:
+  weekly-health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install
+        run: npm ci
+      - name: Run weekly health aggregator
+        run: node scripts/weekly-health-aggregator.js --output weekly-health-report-$(date +%F).md
+      - name: Upload weekly health report
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-health-report
+          path: weekly-health-report-*.md
