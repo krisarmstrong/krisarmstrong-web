@@ -16,8 +16,14 @@ export function PageShell({ breadcrumbs, children, className = '' }: PageShellPr
     >
       <main
         id="main-content"
-        className="flex-grow px-4 py-8 sm:px-6 lg:px-8"
-        style={{ maxWidth: layoutTokens.contentMaxWidth, width: '100%', margin: '0 auto' }}
+        className="flex-grow px-4 sm:px-6 lg:px-8"
+        style={{
+          maxWidth: layoutTokens.contentMaxWidth,
+          width: '100%',
+          margin: '0 auto',
+          paddingTop: '2rem',
+          paddingBottom: '8rem'
+        }}
       >
         {breadcrumbs && breadcrumbs.length > 0 && (
           <Breadcrumbs items={breadcrumbs} className="mb-6" />

@@ -7,7 +7,18 @@
       "Bash(npm run build:*)",
       "Bash(git commit -m \"$(cat <<''EOF''\nfeat: Professional architecture refactor with dark/light mode\n\nThis is a comprehensive re-architecture of the monorepo following\nprofessional best practices for scalability and maintainability.\n\n## ✨ Features\n\n- Dark/light mode with localStorage persistence and system preference detection\n- Theme toggle with 3 modes: light, dark, auto (follows system)\n- Professional monorepo structure with npm workspaces + Turbo\n\n## 🏗️ Architecture Improvements\n\n- Removed dual theme system - now uses single source of truth\n- Standardized component APIs (no more inconsistent tone/variant props)\n- Fixed TypeScript anti-patterns:\n  - Removed `[key: string]: unknown` prop spreading\n  - Implemented proper polymorphic component types\n  - Eliminated non-null assertions (to!)\n- Theme-aware components using CSS variables\n- Optimized bundle with manual chunk splitting\n\n## 📦 Dependencies\n\n- Downgraded React 19 RC to stable React 18.3.x\n- Removed unused dependencies:\n  - framer-motion (not used)\n  - tailwind-variants (redundant)\n  - class-variance-authority (not consistently used)\n- Clean dependency tree with no peer dependency conflicts\n\n## 🎨 Component Refactoring\n\n- Button: Theme-aware variants, proper TypeScript types, error handling\n- Typography: Polymorphic components, no prop spreading, semantic HTML\n- All components now use CSS variables for theming\n\n## ⚡ Performance Optimizations\n\n- Manual chunk splitting (vendor-react, vendor-ui, vendor-sentry)\n- Terser minification with console removal in production\n- Modern ES2020+ target for smaller bundles\n- Source maps for production debugging\n\n## 📝 Documentation\n\n- Comprehensive README with:\n  - Architecture overview\n  - Component usage examples\n  - Theme system documentation\n  - Best practices guide\n  - Troubleshooting section\n  - Deployment instructions\n\n## 🔧 Build Configuration\n\n- Optimized Vite config with rollup options\n- Increased chunk size limits for vendor bundles\n- Removed unnecessary workspace path resolutions\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git commit:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(for port in 3000 3001 3002 3003 5173 8080 8000)",
+      "Bash(do lsof -ti:$port)",
+      "Bash(xargs kill -9)",
+      "Bash(done)",
+      "Bash(pkill:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(.husky/pre-commit)",
+      "Bash(chmod:*)",
+      "Bash(git config:*)",
+      "Bash(cat:*)",
+      "Bash(npx commitlint --help:*)"
     ],
     "deny": [],
     "ask": []
