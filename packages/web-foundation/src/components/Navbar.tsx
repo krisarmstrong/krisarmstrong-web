@@ -144,14 +144,15 @@ export function Navbar({
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-4">
-          <PrimaryNav items={navItems} variant={variant === 'default' ? 'violet' : variant} />
-          {desktopActions}
+        <div style={{ display: 'none' }} className="desktop-nav">
+          <div className="flex items-center gap-4">
+            <PrimaryNav items={navItems} variant={variant === 'default' ? 'violet' : variant} />
+            {desktopActions}
+          </div>
         </div>
 
-        {/* Mobile Menu Container */}
-        <div className="md:hidden relative">
-          {/* Hamburger Button */}
+        {/* Mobile Menu Hamburger */}
+        <div style={{ display: 'block' }} className="mobile-hamburger">
           <button
             className={`text-inherit ${finalAccentColor} focus:outline-none focus:ring-2 rounded-lg p-2 hover:bg-opacity-10 transition-colors`}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
@@ -160,29 +161,43 @@ export function Navbar({
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
+        </div>
+      </nav>
 
-          {/* Backdrop */}
-          {menuOpen && (
-            <button
-              type="button"
-              aria-label="Close menu"
-              className="fixed inset-0 bg-black bg-opacity-50 z-40"
-              onClick={closeMenu}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') closeMenu();
-              }}
-            />
-          )}
+      {/* Responsive styles */}
+      <style>{`
+        @media (min-width: 768px) {
+          .desktop-nav {
+            display: flex !important;
+          }
+          .mobile-hamburger {
+            display: none !important;
+          }
+        }
+      `}</style>
 
-          {/* Mobile Menu - Dropdown */}
-          {menuOpen && (
-            <div
-              ref={menuRef}
-              className={`absolute right-0 top-full mt-2 w-56 rounded-lg shadow-2xl ${finalBgColor} ${finalTextColor} border-2 ${finalBorderColor} animate-in fade-in slide-in-from-top-2 duration-300 z-[9999]`}
-              role="dialog"
-              aria-modal="true"
-              aria-label="Mobile navigation"
-            >
+      {/* Backdrop - Rendered outside nav */}
+      {menuOpen && (
+        <button
+          type="button"
+          aria-label="Close menu"
+          className="fixed inset-0 bg-black bg-opacity-50 z-50"
+          onClick={closeMenu}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') closeMenu();
+          }}
+        />
+      )}
+
+      {/* Mobile Menu - Fixed position overlay */}
+      {menuOpen && (
+        <div
+          ref={menuRef}
+          className={`fixed right-4 top-20 w-72 rounded-lg shadow-2xl ${finalBgColor} ${finalTextColor} border-2 ${finalBorderColor} transition-all duration-200 ease-in-out z-[60]`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation"
+        >
               {/* Mobile Actions */}
               {mobileActions && (
                 <div className={`p-4 border-b ${finalBorderColor}`}>{mobileActions}</div>
@@ -203,14 +218,12 @@ export function Navbar({
                 <div className={`p-4 border-t ${finalBorderColor}`}>{desktopActions}</div>
               )}
 
-              {/* Footer */}
-              {mobileFooter && (
-                <div className={`p-4 border-t ${finalBorderColor}`}>{mobileFooter}</div>
-              )}
-            </div>
+          {/* Footer */}
+          {mobileFooter && (
+            <div className={`p-4 border-t ${finalBorderColor}`}>{mobileFooter}</div>
           )}
         </div>
-      </nav>
+      )}
     </>
   );
 }
