@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+/* Base styles only - colors come from ThemeProvider JavaScript */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
+}
+
+a {
+  color: var(--color-brand-primary);
+}
