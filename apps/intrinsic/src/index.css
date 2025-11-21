@@ -5,3 +5,49 @@
 @source "../../packages/web-foundation/src";
 
 @import "./styles/navbar-mobile-fix.css";
+
+@theme {
+  /* Light mode (default) */
+  --color-brand-primary: #96A77A;
+  --color-brand-accent: #CFB53B;
+  --color-surface-base: #F8F6F1;
+  --color-surface-raised: #FFFFFF;
+  --color-surface-border: #4A574A;
+  --color-surface-hover: #E8E6E1;
+  --color-text-primary: #303F33;
+  --color-text-muted: #4A574A;
+  --color-text-accent: #CFB53B;
+  --color-text-inverse: #F8F6F1;
+  --color-interactive-default: #96A77A;
+  --color-interactive-hover: #7A8A62;
+  --color-interactive-active: #CFB53B;
+  --color-interactive-focus: #CFB53B;
+  --color-interactive-disabled: #D9D7CF;
+  --color-status-success: #96A77A;
+  --color-status-warning: #CFB53B;
+  --color-status-error: #B85450;
+  --color-status-info: #5B7A8F;
+}
+
+@theme dark {
+  /* Dark mode overrides */
+  --color-brand-primary: #A8BA8E;
+  --color-brand-accent: #E0C84F;
+  --color-surface-base: #1A1F1C;
+  --color-surface-raised: #242B27;
+  --color-surface-border: #96A77A;
+  --color-surface-hover: #2F3830;
+  --color-text-primary: #E8EDE4;
+  --color-text-muted: #A8BA8E;
+  --color-text-accent: #E0C84F;
+  --color-text-inverse: #1A1F1C;
+  --color-interactive-default: #A8BA8E;
+  --color-interactive-hover: #96A77A;
+  --color-interactive-active: #E0C84F;
+  --color-interactive-focus: #E0C84F;
+  --color-interactive-disabled: #3F4940;
+  --color-status-success: #A8BA8E;
+  --color-status-warning: #E0C84F;
+  --color-status-error: #CF6B67;
+  --color-status-info: #7A9AAF;
+}
