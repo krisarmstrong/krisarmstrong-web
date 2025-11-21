@@ -25,6 +25,7 @@ export { PageShell } from './components/PageShell';
 export { PrimaryNav } from './components/PrimaryNav';
 export { Navbar } from './components/Navbar';
 export { ThemeToggle } from './components/ThemeToggle';
+export type { ThemeToggleProps } from './components/ThemeToggle';
 export { SiteSearch } from './components/SiteSearch';
 export type { SearchResult } from './components/SiteSearch';
 export { InlineSearch } from './components/InlineSearch';
