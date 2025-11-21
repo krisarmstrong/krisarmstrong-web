@@ -216,6 +216,134 @@ export const intrinsicDarkTheme: ThemeConfig = {
   },
 };
 
+export const wifiVigilanteTheme: ThemeConfig = {
+  brand: {
+    primary: '#2563eb', // Vibrant blue
+    accent: '#3b82f6',   // Medium blue
+  },
+  surface: {
+    base: '#ffffff',
+    raised: '#f8fafc',
+    border: '#e2e8f0',
+    hover: '#eff6ff', // Blue-tinted hover
+  },
+  text: {
+    primary: '#0f172a',
+    muted: '#64748b',
+    accent: '#2563eb',  // Vibrant blue to match header
+    inverse: '#ffffff',
+  },
+  interactive: {
+    default: '#2563eb',
+    hover: '#1d4ed8',
+    active: '#1e40af',  // Much darker blue for strong contrast on light background
+    focus: '#1e40af',
+    disabled: '#cbd5e1',
+  },
+  status: {
+    success: '#10b981',
+    warning: '#f59e0b',
+    error: '#ef4444',
+    info: '#2563eb',
+  },
+};
+
+export const wifiVigilanteDarkTheme: ThemeConfig = {
+  brand: {
+    primary: '#60a5fa',  // Bright blue
+    accent: '#3b82f6',    // Medium blue
+  },
+  surface: {
+    base: '#0f172a',      // Deep navy
+    raised: '#1e293b',    // Lighter navy
+    border: '#334155',    // Subtle slate border
+    hover: '#1e3a5f',     // Blue-tinted hover
+  },
+  text: {
+    primary: '#f1f5f9',
+    muted: '#94a3b8',
+    accent: '#60a5fa',    // Bright blue to match header
+    inverse: '#ffffff',   // White text on active elements
+  },
+  interactive: {
+    default: '#60a5fa',
+    hover: '#3b82f6',
+    active: '#2563eb',    // Vibrant saturated blue for maximum visibility
+    focus: '#2563eb',
+    disabled: '#475569',
+  },
+  status: {
+    success: '#10b981',
+    warning: '#f59e0b',
+    error: '#ef4444',
+    info: '#60a5fa',
+  },
+};
+
+export const krisArmstrongTheme: ThemeConfig = {
+  brand: {
+    primary: '#8b5cf6',  // Violet
+    accent: '#7c3aed',
+  },
+  surface: {
+    base: '#f8f9fb',      // Slightly off-white for less glare
+    raised: '#eef1f7',    // More substantial gray with slight blue tint
+    border: '#cbd5e1',    // Visible border color
+    hover: '#e1e7ef',     // Clear hover state
+  },
+  text: {
+    primary: '#0f172a',
+    muted: '#475569',     // Darker muted text for better readability
+    accent: '#7c3aed',
+    inverse: '#ffffff',
+  },
+  interactive: {
+    default: '#8b5cf6',
+    hover: '#7c3aed',
+    active: '#c084fc',
+    focus: '#c084fc',
+    disabled: '#94a3b8',
+  },
+  status: {
+    success: '#10b981',
+    warning: '#f59e0b',
+    error: '#ef4444',
+    info: '#3b82f6',
+  },
+};
+
+export const krisArmstrongDarkTheme: ThemeConfig = {
+  brand: {
+    primary: '#8b5cf6',  // Violet
+    accent: '#c084fc',
+  },
+  surface: {
+    base: '#0f172a',
+    raised: '#1e293b',
+    border: '#334155',
+    hover: '#1e293b',
+  },
+  text: {
+    primary: '#f1f5f9',
+    muted: '#94a3b8',
+    accent: '#c084fc',
+    inverse: '#0f172a',
+  },
+  interactive: {
+    default: '#8b5cf6',
+    hover: '#7c3aed',
+    active: '#c084fc',
+    focus: '#c084fc',
+    disabled: '#64748b',
+  },
+  status: {
+    success: '#10b981',
+    warning: '#f59e0b',
+    error: '#ef4444',
+    info: '#3b82f6',
+  },
+};
+
 export interface ThemeProviderProps {
   /** Child components */
   children: ReactNode;
@@ -250,7 +378,7 @@ export function ThemeProvider({
     const stored = localStorage.getItem('theme-config');
     if (stored) {
       try {
-        return JSON.parse(stored);
+        return JSON.parse(stored) as ThemeConfig;
       } catch {
         return initialTheme;
       }
@@ -270,10 +398,7 @@ export function ThemeProvider({
     [allowThemeUpdates]
   );
 
-  const setMode = useMemo(
-    () => (allowThemeUpdates ? setModeState : () => {}),
-    [allowThemeUpdates]
-  );
+  const setMode = useMemo(() => (allowThemeUpdates ? setModeState : () => {}), [allowThemeUpdates]);
 
   // Persist theme to localStorage
   useEffect(() => {
@@ -289,34 +414,30 @@ export function ThemeProvider({
     }
   }, [mode, allowThemeUpdates]);
 
-  // Apply CSS variables to document root
+  // Apply theme colors and mode to CSS custom properties
   useEffect(() => {
     const root = document.documentElement;
 
-    // Brand colors
+    // Apply theme colors
     if (theme.brand?.primary) root.style.setProperty('--color-brand-primary', theme.brand.primary);
     if (theme.brand?.accent) root.style.setProperty('--color-brand-accent', theme.brand.accent);
 
-    // Surface colors
     if (theme.surface?.base) root.style.setProperty('--color-surface-base', theme.surface.base);
     if (theme.surface?.raised) root.style.setProperty('--color-surface-raised', theme.surface.raised);
     if (theme.surface?.border) root.style.setProperty('--color-surface-border', theme.surface.border);
     if (theme.surface?.hover) root.style.setProperty('--color-surface-hover', theme.surface.hover);
 
-    // Text colors
     if (theme.text?.primary) root.style.setProperty('--color-text-primary', theme.text.primary);
     if (theme.text?.muted) root.style.setProperty('--color-text-muted', theme.text.muted);
     if (theme.text?.accent) root.style.setProperty('--color-text-accent', theme.text.accent);
     if (theme.text?.inverse) root.style.setProperty('--color-text-inverse', theme.text.inverse);
 
-    // Interactive colors
     if (theme.interactive?.default) root.style.setProperty('--color-interactive-default', theme.interactive.default);
     if (theme.interactive?.hover) root.style.setProperty('--color-interactive-hover', theme.interactive.hover);
     if (theme.interactive?.active) root.style.setProperty('--color-interactive-active', theme.interactive.active);
     if (theme.interactive?.focus) root.style.setProperty('--color-interactive-focus', theme.interactive.focus);
     if (theme.interactive?.disabled) root.style.setProperty('--color-interactive-disabled', theme.interactive.disabled);
 
-    // Status colors
     if (theme.status?.success) root.style.setProperty('--color-status-success', theme.status.success);
     if (theme.status?.warning) root.style.setProperty('--color-status-warning', theme.status.warning);
     if (theme.status?.error) root.style.setProperty('--color-status-error', theme.status.error);

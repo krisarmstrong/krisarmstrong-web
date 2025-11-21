@@ -8,6 +8,10 @@ export {
   defaultLightTheme,
   intrinsicTheme,
   intrinsicDarkTheme,
+  wifiVigilanteTheme,
+  wifiVigilanteDarkTheme,
+  krisArmstrongTheme,
+  krisArmstrongDarkTheme,
 } from './context/ThemeContext';
 export type {
   ThemeConfig,
@@ -23,6 +27,8 @@ export { Navbar } from './components/Navbar';
 export { ThemeToggle } from './components/ThemeToggle';
 export { SiteSearch } from './components/SiteSearch';
 export type { SearchResult } from './components/SiteSearch';
+export { InlineSearch } from './components/InlineSearch';
+export type { SearchResult as InlineSearchResult } from './components/InlineSearch';
 export { Avatar } from './components/Avatar';
 export { Button } from './components/ui/Button';
 export type { ButtonProps } from './components/ui/Button';
@@ -105,3 +111,6 @@ export type {
   ContactFormTone,
   ContactFormSurface,
 } from './components/ContactForm';
+export { ThemeCanary } from './components/ThemeCanary';
+export { ThemeDiagnostics } from './components/ThemeDiagnostics';
+export { ThemeTokenProbe } from './components/ThemeTokenProbe';
