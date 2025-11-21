@@ -1,5 +1,6 @@
 @import "./shared-tokens.css";
 @import "tailwindcss";
+@import "@krisarmstrong/web-foundation/src/base.css";
 
 @source "../../packages/web-foundation/src";
 
@@ -49,22 +50,4 @@
   --color-status-warning: #E0C84F;
   --color-status-error: #CF6B67;
   --color-status-info: #7A9AAF;
-}
-
-/* Base styles */
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background-color: var(--color-surface-base);
-  color: var(--color-text-primary);
-}
-
-a {
-  color: var(--color-brand-primary);
 }
