@@ -9,7 +9,7 @@ import noSecrets from 'eslint-plugin-no-secrets';
 
 export default [
   {
-    ignores: ['dist/**', 'node_modules/**', '.github/**', 'coverage/**'],
+    ignores: ['dist/**', 'node_modules/**', '.github/**', 'coverage/**', 'scripts/**'],
   },
   js.configs.recommended,
   security.configs.recommended,

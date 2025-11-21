@@ -190,6 +190,31 @@ export interface ThemeProviderProps {
 }
 
 /**
+ * Validates if a string is a safe CSS color value
+ * Prevents CSS injection attacks by checking for invalid characters
+ * @param color - The color string to validate
+ * @returns true if valid CSS color, false otherwise
+ */
+function isValidCSSColor(color: string): boolean {
+  if (!color || typeof color !== 'string') return false;
+
+  // Reject colors containing semicolons or other injection vectors
+  if (color.includes(';') || color.includes('{') || color.includes('}')) {
+    return false;
+  }
+
+  // Use CSS.supports to validate the color if available
+  if (typeof CSS !== 'undefined' && CSS.supports) {
+    return CSS.supports('color', color);
+  }
+
+  // Fallback: test by applying to a temporary element
+  const testElement = new Option().style;
+  testElement.color = color;
+  return testElement.color !== '';
+}
+
+/**
  * ThemeProvider - Provides theme configuration to all child components
  *
  * @example
@@ -213,33 +238,42 @@ export function ThemeProvider({
     [allowThemeUpdates]
   );
 
-  const setMode = useMemo(
-    () => (allowThemeUpdates ? setModeState : () => {}),
-    [allowThemeUpdates]
-  );
+  const setMode = useMemo(() => (allowThemeUpdates ? setModeState : () => {}), [allowThemeUpdates]);
 
   // Apply CSS variables to document root
   useEffect(() => {
     const root = document.documentElement;
 
+    // Helper function to safely set CSS property
+    const setSafeProperty = (name: string, value: string) => {
+      if (isValidCSSColor(value)) {
+        root.style.setProperty(name, value);
+      } else {
+        console.warn(`[ThemeProvider] Invalid CSS color value for ${name}:`, value);
+      }
+    };
+
     // Brand colors
-    if (theme.brand?.primary) root.style.setProperty('--theme-brand-primary', theme.brand.primary);
-    if (theme.brand?.accent) root.style.setProperty('--theme-brand-accent', theme.brand.accent);
+    if (theme.brand?.primary) setSafeProperty('--theme-brand-primary', theme.brand.primary);
+    if (theme.brand?.accent) setSafeProperty('--theme-brand-accent', theme.brand.accent);
 
     // Surface colors
-    if (theme.surface?.base) root.style.setProperty('--theme-surface-base', theme.surface.base);
-    if (theme.surface?.raised) root.style.setProperty('--theme-surface-raised', theme.surface.raised);
-    if (theme.surface?.border) root.style.setProperty('--theme-surface-border', theme.surface.border);
+    if (theme.surface?.base) setSafeProperty('--theme-surface-base', theme.surface.base);
+    if (theme.surface?.raised) setSafeProperty('--theme-surface-raised', theme.surface.raised);
+    if (theme.surface?.border) setSafeProperty('--theme-surface-border', theme.surface.border);
 
     // Text colors
-    if (theme.text?.primary) root.style.setProperty('--theme-text-primary', theme.text.primary);
-    if (theme.text?.muted) root.style.setProperty('--theme-text-muted', theme.text.muted);
-    if (theme.text?.accent) root.style.setProperty('--theme-text-accent', theme.text.accent);
+    if (theme.text?.primary) setSafeProperty('--theme-text-primary', theme.text.primary);
+    if (theme.text?.muted) setSafeProperty('--theme-text-muted', theme.text.muted);
+    if (theme.text?.accent) setSafeProperty('--theme-text-accent', theme.text.accent);
 
     // Interactive colors
-    if (theme.interactive?.hover) root.style.setProperty('--theme-interactive-hover', theme.interactive.hover);
-    if (theme.interactive?.active) root.style.setProperty('--theme-interactive-active', theme.interactive.active);
-    if (theme.interactive?.focus) root.style.setProperty('--theme-interactive-focus', theme.interactive.focus);
+    if (theme.interactive?.hover)
+      setSafeProperty('--theme-interactive-hover', theme.interactive.hover);
+    if (theme.interactive?.active)
+      setSafeProperty('--theme-interactive-active', theme.interactive.active);
+    if (theme.interactive?.focus)
+      setSafeProperty('--theme-interactive-focus', theme.interactive.focus);
 
     // Apply color mode class
     root.classList.remove('light', 'dark');

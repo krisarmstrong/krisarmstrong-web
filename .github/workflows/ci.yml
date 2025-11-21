@@ -19,6 +19,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install
         run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Build
+        run: npm run build
       - name: Test
         run: npm test --silent
       - name: Token Usage Test
