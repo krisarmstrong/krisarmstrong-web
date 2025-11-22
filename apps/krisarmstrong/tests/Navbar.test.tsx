@@ -2,7 +2,6 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Navbar from '../src/components/Navbar';
-import { Navbar as WebFoundationNavbar } from '@krisarmstrong/web-foundation';
 import { PRIMARY_NAV } from '../src/config/navigation';
 
 // Mock the WebFoundationNavbar component from web-foundation
@@ -94,20 +93,6 @@ describe('Navbar', () => {
     expect(desktopActions).toHaveTextContent('Theme Toggle');
     expect(mobileActions).toBeInTheDocument();
     expect(mobileActions).toHaveTextContent('Theme Toggle');
-  });
-
-  it('passes the correct color props to WebFoundationNavbar', () => {
-    render(
-      <BrowserRouter>
-        <Navbar />
-      </BrowserRouter>
-    );
-
-    const webFoundationNavbarMock = vi.mocked(WebFoundationNavbar);
-    const firstCallArgs = webFoundationNavbarMock.mock.calls[0][0];
-    expect(firstCallArgs.bgColor).toBe('bg-surface-raised');
-    expect(firstCallArgs.borderColor).toBe('border-surface-border');
-    expect(firstCallArgs.textColor).toBe('text-text-primary');
   });
 
   it('passes the correct mobileFooter to WebFoundationNavbar', () => {

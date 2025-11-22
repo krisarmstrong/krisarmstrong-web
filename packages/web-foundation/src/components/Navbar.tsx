@@ -124,7 +124,7 @@ export function Navbar({
   return (
     <>
       <nav
-        className={`relative w-full ${finalBgColor} ${finalTextColor} shadow-md px-4 sm:px-6 py-4 flex items-center justify-between z-40 sticky top-0 backdrop-blur-sm bg-opacity-95 border-b ${finalBorderColor}`}
+        className={`relative w-full min-h-[72px] ${finalBgColor} ${finalTextColor} shadow-md px-4 sm:px-6 py-4 flex items-center justify-between z-40 sticky top-0 backdrop-blur-sm bg-opacity-95 border-b ${finalBorderColor}`}
         style={{}}
         role="navigation"
         aria-label="Main navigation"
