@@ -81,6 +81,11 @@ storybook-static/
 secrets.json
 credentials.json
 
+# Conversation/Debug files (may contain tokens/secrets)
+*claudconvo*.txt
+*conversation*.txt
+*.convo
+
 # Database
 *.db
 *.sqlite
