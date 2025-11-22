@@ -237,7 +237,7 @@ export const wifiVigilanteTheme: ThemeConfig = {
     default: '#2563eb',
     hover: '#1d4ed8',
     active: '#1e40af', // Much darker blue for strong contrast on light background
-    focus: '#1e40af',
+    focus: '#3b82f6',
     disabled: '#cbd5e1',
   },
   status: {
