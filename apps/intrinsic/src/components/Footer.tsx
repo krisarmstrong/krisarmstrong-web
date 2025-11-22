@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <SharedFooter
       social={SOCIAL_LINKS}
-      legalLinks={FOOTER_LINKS.legal.map((link) => ({ label: link.label, path: link.to }))}
+      legalLinks={FOOTER_LINKS.legal.map((link) => ({ label: link.label, path: link.path }))}
       copyright={<span>&copy; {currentYear} Intrinsic Momentum Mindset. All rights reserved.</span>}
     />
   );
