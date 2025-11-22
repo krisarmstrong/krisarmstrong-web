@@ -15,6 +15,7 @@ vi.mock('@krisarmstrong/web-foundation', async (importOriginal) => {
       return (
         <nav data-testid="mock-webfoundation-navbar">
           <div data-testid="navbar-logo">{props.logo}</div>
+          <div data-testid="navbar-title">{props.title}</div>
           <div data-testid="navbar-nav-items">
             {props.navItems?.map((item: { path: string; label: string }) => (
               <a key={item.path} href={item.path}>
@@ -50,14 +51,16 @@ describe('Navbar', () => {
     expect(screen.getByTestId('mock-webfoundation-navbar')).toBeInTheDocument();
   });
 
-  it('passes the correct logo to WebFoundationNavbar', () => {
+  it('passes the correct logo and title to WebFoundationNavbar', () => {
     renderWithProviders(<Navbar />);
 
     const navbarLogo = screen.getByTestId('navbar-logo');
     expect(navbarLogo).toBeInTheDocument();
-    expect(navbarLogo).toHaveTextContent('Intrinsic Momentum Mindset');
-    expect(navbarLogo).toHaveTextContent('Coaching for leaders & creators');
-    // Further checks could involve snapshot testing the logo or checking for img src
+
+    const navbarTitle = screen.getByTestId('navbar-title');
+    expect(navbarTitle).toBeInTheDocument();
+    expect(navbarTitle).toHaveTextContent('Intrinsic Momentum Mindset');
+    expect(navbarTitle).toHaveTextContent('Coaching for leaders & creators');
   });
 
   it('passes the correct navItems to WebFoundationNavbar', () => {
@@ -70,16 +73,16 @@ describe('Navbar', () => {
     });
   });
 
-  it('passes the Button component to desktopActions and mobileActions', () => {
+  it('passes the ThemeToggle component to desktopActions and mobileActions', () => {
     renderWithProviders(<Navbar />);
 
     const desktopActions = screen.getByTestId('navbar-desktop-actions');
     const mobileActions = screen.getByTestId('navbar-mobile-actions');
 
     expect(desktopActions).toBeInTheDocument();
-    expect(desktopActions).toHaveTextContent('Book a Consult');
+    expect(desktopActions).toHaveTextContent('Theme Toggle');
     expect(mobileActions).toBeInTheDocument();
-    expect(mobileActions).toHaveTextContent('Book a Consult');
+    expect(mobileActions).toHaveTextContent('Theme Toggle');
   });
 
   it('passes the correct variant to WebFoundationNavbar', () => {
