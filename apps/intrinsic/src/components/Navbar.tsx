@@ -18,7 +18,7 @@ export default function Navbar() {
           <span className="text-lg sm:text-xl font-bold tracking-tight text-text-primary whitespace-nowrap">
             Intrinsic Momentum Mindset
           </span>
-          <span className="text-xs font-normal text-text-muted hidden sm:block whitespace-nowrap">
+          <span className="text-xs text-text-muted font-normal hidden sm:block whitespace-nowrap">
             Coaching for leaders & creators
           </span>
         </div>
@@ -29,9 +29,9 @@ export default function Navbar() {
       desktopActions={<ThemeToggle />}
       mobileActions={<ThemeToggle />}
       mobileFooter={
-        <div className="text-xs text-text-muted text-center">
+        <p className="text-xs text-text-muted text-center">
           © {currentYear} Intrinsic Momentum Mindset
-        </div>
+        </p>
       }
     />
   );
