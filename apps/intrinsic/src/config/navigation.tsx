@@ -1,8 +1,11 @@
-export const PRIMARY_NAV = [
-  { label: 'Home', path: '/' },
-  { label: 'About', path: '/about' },
-  { label: 'Services', path: '/services' },
-  { label: 'Contact', path: '/contact' },
+import { Home, Info, Briefcase, Mail } from 'lucide-react';
+import type { NavItem } from '@krisarmstrong/web-foundation';
+
+export const PRIMARY_NAV: NavItem[] = [
+  { label: 'Home', path: '/', icon: <Home size={18} /> },
+  { label: 'About', path: '/about', icon: <Info size={18} /> },
+  { label: 'Services', path: '/services', icon: <Briefcase size={18} /> },
+  { label: 'Contact', path: '/contact', icon: <Mail size={18} /> },
 ];
 
 export const FOOTER_LINKS = {

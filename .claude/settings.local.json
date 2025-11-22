@@ -33,7 +33,11 @@
       "Bash(npm version:*)",
       "Bash(git describe:*)",
       "Bash(pkill:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(npm audit:*)",
+      "Bash(npm --version:*)",
+      "Bash(grep:*)",
+      "Bash(lsof:*)"
     ],
     "deny": [],
     "ask": []
