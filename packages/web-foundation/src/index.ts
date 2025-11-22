@@ -115,3 +115,4 @@ export type {
 export { ThemeCanary } from './components/ThemeCanary';
 export { ThemeDiagnostics } from './components/ThemeDiagnostics';
 export { ThemeTokenProbe } from './components/ThemeTokenProbe';
+export * from './utils/validation';
