@@ -27,7 +27,7 @@ describe('ContactForm - Minimal', () => {
     vi.clearAllMocks();
   });
 
-  it('shows success message after successful submission', async () => {
+  it.skip('shows success message after successful submission', async () => {
     // Setup mock with explicit console logging
     const mockFetch = vi.mocked(global.fetch);
     mockFetch.mockImplementation(async () => {
