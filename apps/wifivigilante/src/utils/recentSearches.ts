@@ -25,10 +25,10 @@ export function getRecentSearches(): RecentSearch[] {
 }
 
 /**
- * Add a search to recent searches
+ * Add a search to recent searches and return the updated list
  */
-export function addRecentSearch(query: string): void {
-  if (!query || query.trim().length === 0) return;
+export function addRecentSearch(query: string): RecentSearch[] {
+  if (!query || query.trim().length === 0) return getRecentSearches();
 
   try {
     const searches = getRecentSearches();
@@ -43,8 +43,10 @@ export function addRecentSearch(query: string): void {
     ].slice(0, MAX_RECENT_SEARCHES);
 
     localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(updated));
+    return updated;
   } catch (error) {
     console.warn('Failed to save recent search:', error);
+    return getRecentSearches();
   }
 }
 
@@ -60,14 +62,16 @@ export function clearRecentSearches(): void {
 }
 
 /**
- * Remove a specific search from recent searches
+ * Remove a specific search from recent searches and return the updated list
  */
-export function removeRecentSearch(query: string): void {
+export function removeRecentSearch(query: string): RecentSearch[] {
   try {
     const searches = getRecentSearches();
     const filtered = searches.filter(s => s.query !== query);
     localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(filtered));
+    return filtered;
   } catch (error) {
     console.warn('Failed to remove recent search:', error);
+    return getRecentSearches();
   }
 }

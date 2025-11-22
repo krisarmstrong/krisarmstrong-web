@@ -101,8 +101,6 @@ const CaseFilters = memo(function CaseFilters({
   // Fetch subsectors when selectedSectorName changes
   useEffect(() => {
     if (!selectedSectorName) {
-      setSubsectors([]);
-      setSelectedSubsectorName("");
       return;
     }
     const sector = sectors.find(s => s.name === selectedSectorName);
@@ -118,11 +116,19 @@ const CaseFilters = memo(function CaseFilters({
           setSubsectors([]);
         })
         .finally(() => setIsLoadingSubsectors(false));
-    } else {
-      setSubsectors([]);
-      setSelectedSubsectorName("");
     }
   }, [selectedSectorName, sectors]);
+
+  // Derive subsectors and reset subsector selection when sector changes
+  const derivedSubsectors = useMemo(() => {
+    if (!selectedSectorName) return [];
+    return subsectors;
+  }, [selectedSectorName, subsectors]);
+
+  const derivedSelectedSubsector = useMemo(() => {
+    if (!selectedSectorName) return "";
+    return selectedSubsectorName;
+  }, [selectedSectorName, selectedSubsectorName]);
 
   // Apply filters and call onFiltersApplied
   useEffect(() => {
@@ -132,7 +138,7 @@ const CaseFilters = memo(function CaseFilters({
     }
     const filtered = casesToFilter.filter((c) => {
       const sectorMatch = !selectedSectorName || c.sector === selectedSectorName;
-      const subsectorMatch = !selectedSubsectorName || c.subsector === selectedSubsectorName;
+      const subsectorMatch = !derivedSelectedSubsector || c.subsector === derivedSelectedSubsector;
 
       // Extract base tool name for comparison (remove app details)
       const baseTool = c.tool?.match(/^([^(]+)/)?.[1]?.trim() || c.tool;
@@ -145,7 +151,7 @@ const CaseFilters = memo(function CaseFilters({
   }, [
     casesToFilter,
     selectedSectorName,
-    selectedSubsectorName,
+    derivedSelectedSubsector,
     selectedTool,
     selectedTag,
     onFiltersApplied,
@@ -176,9 +182,9 @@ const CaseFilters = memo(function CaseFilters({
         <FilterSelect
           id="subsector-filter"
           label="Filter by Subsector"
-          value={selectedSubsectorName}
-          options={subsectors}
-          disabled={isLoading || !selectedSectorName || isLoadingSubsectors || subsectors.length === 0}
+          value={derivedSelectedSubsector}
+          options={derivedSubsectors}
+          disabled={isLoading || !selectedSectorName || isLoadingSubsectors || derivedSubsectors.length === 0}
           onChange={(val) => { setSelectedSubsectorName(val); }}
           placeholder="All Subsectors"
         />

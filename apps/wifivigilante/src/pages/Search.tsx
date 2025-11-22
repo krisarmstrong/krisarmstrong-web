@@ -36,19 +36,15 @@ export default function Search(): React.ReactElement {
     error,
   } = useCaseSearch();
 
-  const [recentSearches, setRecentSearches] = useState<RecentSearch[]>([]);
+  // Use lazy initialization to load recent searches from localStorage
+  const [recentSearches, setRecentSearches] = useState<RecentSearch[]>(() => getRecentSearches());
   const searchAttempted = query.trim() !== "";
-
-  // Load recent searches on mount
-  useEffect(() => {
-    setRecentSearches(getRecentSearches());
-  }, []);
 
   // Save search query when user searches
   useEffect(() => {
     if (searchAttempted && !isLoading && searchResults.length > 0) {
-      addRecentSearch(query);
-      setRecentSearches(getRecentSearches());
+      const updated = addRecentSearch(query);
+      setRecentSearches(updated);
     }
   }, [query, searchAttempted, isLoading, searchResults.length]);
 
@@ -58,8 +54,8 @@ export default function Search(): React.ReactElement {
 
   const handleRemoveRecentSearch = (searchQuery: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    removeRecentSearch(searchQuery);
-    setRecentSearches(getRecentSearches());
+    const updated = removeRecentSearch(searchQuery);
+    setRecentSearches(updated);
   };
 
   const handleClearRecentSearches = () => {
