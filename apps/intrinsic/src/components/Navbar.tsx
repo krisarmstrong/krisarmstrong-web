@@ -2,6 +2,8 @@ import { Navbar as SharedNavbar, ThemeToggle } from '@krisarmstrong/web-foundati
 import { PRIMARY_NAV } from '../config/navigation';
 
 export default function Navbar() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <SharedNavbar
       logo={
@@ -13,10 +15,10 @@ export default function Navbar() {
       }
       title={
         <div className="flex flex-col">
-          <span className="text-lg font-semibold tracking-tight text-text-primary whitespace-nowrap">
+          <span className="text-lg sm:text-xl font-bold tracking-tight text-text-primary whitespace-nowrap">
             Intrinsic Momentum Mindset
           </span>
-          <span className="text-sm text-text-muted hidden sm:block whitespace-nowrap">
+          <span className="text-xs font-normal text-text-muted hidden sm:block whitespace-nowrap">
             Coaching for leaders & creators
           </span>
         </div>
@@ -28,7 +30,7 @@ export default function Navbar() {
       mobileActions={<ThemeToggle />}
       mobileFooter={
         <div className="text-xs text-text-muted text-center">
-          © {new Date().getFullYear()} Intrinsic Momentum Mindset
+          © {currentYear} Intrinsic Momentum Mindset
         </div>
       }
     />

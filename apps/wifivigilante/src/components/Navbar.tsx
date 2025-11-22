@@ -3,6 +3,8 @@ import { Navbar as SharedNavbar, ThemeToggle } from '@krisarmstrong/web-foundati
 import { PRIMARY_NAV } from '../config/navigation';
 
 export default function Navbar() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <SharedNavbar
       logo={
@@ -22,9 +24,7 @@ export default function Navbar() {
       desktopActions={<ThemeToggle />}
       mobileActions={<ThemeToggle />}
       mobileFooter={
-        <p className="text-xs text-text-muted text-center">
-          © {new Date().getFullYear()} Wi-Fi Vigilante
-        </p>
+        <p className="text-xs text-text-muted text-center">© {currentYear} Wi-Fi Vigilante</p>
       }
     />
   );
