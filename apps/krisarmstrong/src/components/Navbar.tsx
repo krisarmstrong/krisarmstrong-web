@@ -16,7 +16,7 @@ export default function Navbar() {
       }
       title={
         <div className="flex flex-col">
-          <span className="text-lg sm:text-xl font-bold tracking-wide text-text-primary whitespace-nowrap">
+          <span className="text-lg sm:text-xl font-bold tracking-tight text-text-primary whitespace-nowrap">
             Kris Armstrong
           </span>
           <span className="text-xs text-text-muted font-normal hidden sm:block whitespace-nowrap">
