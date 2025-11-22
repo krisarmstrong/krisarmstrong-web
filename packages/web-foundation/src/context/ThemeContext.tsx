@@ -149,7 +149,7 @@ export const intrinsicTheme: ThemeConfig = {
     base: '#F8F6F1',
     raised: '#FFFFFF',
     border: '#4A574A',
-    hover: '#E8E6E1',
+    hover: '#dddbd4', // Distinct earth-toned hover (more visible)
   },
   text: {
     primary: '#303F33',
@@ -187,7 +187,7 @@ export const intrinsicDarkTheme: ThemeConfig = {
     base: '#1A1F1C',
     raised: '#242B27',
     border: '#96A77A',
-    hover: '#2F3830',
+    hover: '#3a4838', // Distinct green-tinted hover (more visible)
   },
   text: {
     primary: '#E8EDE4',
@@ -219,24 +219,24 @@ export const intrinsicDarkTheme: ThemeConfig = {
 export const wifiVigilanteTheme: ThemeConfig = {
   brand: {
     primary: '#2563eb', // Vibrant blue
-    accent: '#3b82f6',   // Medium blue
+    accent: '#3b82f6', // Medium blue
   },
   surface: {
     base: '#ffffff',
     raised: '#f8fafc',
     border: '#e2e8f0',
-    hover: '#eff6ff', // Blue-tinted hover
+    hover: '#dbeafe', // Distinct blue-tinted hover (more visible)
   },
   text: {
     primary: '#0f172a',
     muted: '#64748b',
-    accent: '#2563eb',  // Vibrant blue to match header
+    accent: '#2563eb', // Vibrant blue to match header
     inverse: '#ffffff',
   },
   interactive: {
     default: '#2563eb',
     hover: '#1d4ed8',
-    active: '#1e40af',  // Much darker blue for strong contrast on light background
+    active: '#1e40af', // Much darker blue for strong contrast on light background
     focus: '#1e40af',
     disabled: '#cbd5e1',
   },
@@ -256,25 +256,25 @@ export const wifiVigilanteTheme: ThemeConfig = {
 
 export const wifiVigilanteDarkTheme: ThemeConfig = {
   brand: {
-    primary: '#60a5fa',  // Bright blue
-    accent: '#3b82f6',    // Medium blue
+    primary: '#60a5fa', // Bright blue
+    accent: '#3b82f6', // Medium blue
   },
   surface: {
-    base: '#0f172a',      // Deep navy
-    raised: '#1e293b',    // Lighter navy
-    border: '#334155',    // Subtle slate border
-    hover: '#1e3a5f',     // Blue-tinted hover
+    base: '#0f172a', // Deep navy
+    raised: '#1e293b', // Lighter navy
+    border: '#334155', // Subtle slate border
+    hover: '#2d4a6f', // Distinct blue-tinted hover (more visible)
   },
   text: {
     primary: '#f1f5f9',
     muted: '#94a3b8',
-    accent: '#60a5fa',    // Bright blue to match header
-    inverse: '#ffffff',   // White text on active elements
+    accent: '#60a5fa', // Bright blue to match header
+    inverse: '#ffffff', // White text on active elements
   },
   interactive: {
     default: '#60a5fa',
     hover: '#3b82f6',
-    active: '#2563eb',    // Vibrant saturated blue for maximum visibility
+    active: '#2563eb', // Vibrant saturated blue for maximum visibility
     focus: '#2563eb',
     disabled: '#475569',
   },
@@ -294,33 +294,33 @@ export const wifiVigilanteDarkTheme: ThemeConfig = {
 
 export const krisArmstrongTheme: ThemeConfig = {
   brand: {
-    primary: '#0d9488',  // Modern Teal - tech-forward and professional
-    accent: '#14b8a6',   // Bright Teal accent
+    primary: '#0d9488', // Modern Teal - tech-forward and professional
+    accent: '#14b8a6', // Bright Teal accent
   },
   surface: {
-    base: '#ffffff',      // Pure white for maximum clarity
-    raised: '#f8fafc',    // Subtle slate tint
-    border: '#e2e8f0',    // Light slate border
-    hover: '#f1f5f9',     // Light hover state
+    base: '#ffffff', // Pure white for maximum clarity
+    raised: '#f8fafc', // Subtle slate tint
+    border: '#e2e8f0', // Light slate border
+    hover: '#f1f5f9', // Light hover state
   },
   text: {
-    primary: '#0f172a',   // Deep slate for excellent readability
-    muted: '#64748b',     // Slate for secondary text
-    accent: '#0d9488',    // Teal accent text
+    primary: '#0f172a', // Deep slate for excellent readability
+    muted: '#64748b', // Slate for secondary text
+    accent: '#0d9488', // Teal accent text
     inverse: '#ffffff',
   },
   interactive: {
-    default: '#0d9488',   // Teal
-    hover: '#0f766e',     // Darker teal on hover
-    active: '#14b8a6',    // Bright teal for active state
-    focus: '#14b8a6',     // Bright teal for focus
+    default: '#0d9488', // Teal
+    hover: '#0f766e', // Darker teal on hover
+    active: '#14b8a6', // Bright teal for active state
+    focus: '#14b8a6', // Bright teal for focus
     disabled: '#cbd5e1',
   },
   status: {
     success: '#10b981',
     warning: '#f59e0b',
     error: '#ef4444',
-    info: '#0ea5e9',      // Updated to cyan
+    info: '#0ea5e9', // Updated to cyan
   },
   typography: {
     fontFamily: {
@@ -332,33 +332,33 @@ export const krisArmstrongTheme: ThemeConfig = {
 
 export const krisArmstrongDarkTheme: ThemeConfig = {
   brand: {
-    primary: '#2dd4bf',  // Bright Teal - vibrant in dark mode
-    accent: '#5eead4',   // Lighter teal accent
+    primary: '#2dd4bf', // Bright Teal - vibrant in dark mode
+    accent: '#5eead4', // Lighter teal accent
   },
   surface: {
-    base: '#0f172a',      // Deep slate background
-    raised: '#1e293b',    // Slate raised surface
-    border: '#2dd4bf',    // Teal border for strong contrast
-    hover: '#334155',     // Distinct hover state
+    base: '#0f172a', // Deep slate background
+    raised: '#1e293b', // Slate raised surface
+    border: '#2dd4bf', // Teal border for strong contrast
+    hover: '#334155', // Distinct hover state
   },
   text: {
-    primary: '#f1f5f9',   // Bright text
-    muted: '#94a3b8',     // Muted slate
-    accent: '#5eead4',    // Light teal accent
+    primary: '#f1f5f9', // Bright text
+    muted: '#94a3b8', // Muted slate
+    accent: '#5eead4', // Light teal accent
     inverse: '#0f172a',
   },
   interactive: {
-    default: '#2dd4bf',   // Bright teal
-    hover: '#14b8a6',     // Medium teal on hover
-    active: '#5eead4',    // Light teal for active state
-    focus: '#5eead4',     // Light teal for focus
+    default: '#2dd4bf', // Bright teal
+    hover: '#14b8a6', // Medium teal on hover
+    active: '#5eead4', // Light teal for active state
+    focus: '#5eead4', // Light teal for focus
     disabled: '#475569',
   },
   status: {
-    success: '#34d399',   // Brighter green for dark mode
-    warning: '#fbbf24',   // Brighter yellow for dark mode
-    error: '#f87171',     // Brighter red for dark mode
-    info: '#38bdf8',      // Bright cyan
+    success: '#34d399', // Brighter green for dark mode
+    warning: '#fbbf24', // Brighter yellow for dark mode
+    error: '#f87171', // Brighter red for dark mode
+    info: '#38bdf8', // Bright cyan
   },
   typography: {
     fontFamily: {
@@ -447,8 +447,10 @@ export function ThemeProvider({
     if (theme.brand?.accent) root.style.setProperty('--color-brand-accent', theme.brand.accent);
 
     if (theme.surface?.base) root.style.setProperty('--color-surface-base', theme.surface.base);
-    if (theme.surface?.raised) root.style.setProperty('--color-surface-raised', theme.surface.raised);
-    if (theme.surface?.border) root.style.setProperty('--color-surface-border', theme.surface.border);
+    if (theme.surface?.raised)
+      root.style.setProperty('--color-surface-raised', theme.surface.raised);
+    if (theme.surface?.border)
+      root.style.setProperty('--color-surface-border', theme.surface.border);
     if (theme.surface?.hover) root.style.setProperty('--color-surface-hover', theme.surface.hover);
 
     if (theme.text?.primary) root.style.setProperty('--color-text-primary', theme.text.primary);
@@ -456,14 +458,21 @@ export function ThemeProvider({
     if (theme.text?.accent) root.style.setProperty('--color-text-accent', theme.text.accent);
     if (theme.text?.inverse) root.style.setProperty('--color-text-inverse', theme.text.inverse);
 
-    if (theme.interactive?.default) root.style.setProperty('--color-interactive-default', theme.interactive.default);
-    if (theme.interactive?.hover) root.style.setProperty('--color-interactive-hover', theme.interactive.hover);
-    if (theme.interactive?.active) root.style.setProperty('--color-interactive-active', theme.interactive.active);
-    if (theme.interactive?.focus) root.style.setProperty('--color-interactive-focus', theme.interactive.focus);
-    if (theme.interactive?.disabled) root.style.setProperty('--color-interactive-disabled', theme.interactive.disabled);
+    if (theme.interactive?.default)
+      root.style.setProperty('--color-interactive-default', theme.interactive.default);
+    if (theme.interactive?.hover)
+      root.style.setProperty('--color-interactive-hover', theme.interactive.hover);
+    if (theme.interactive?.active)
+      root.style.setProperty('--color-interactive-active', theme.interactive.active);
+    if (theme.interactive?.focus)
+      root.style.setProperty('--color-interactive-focus', theme.interactive.focus);
+    if (theme.interactive?.disabled)
+      root.style.setProperty('--color-interactive-disabled', theme.interactive.disabled);
 
-    if (theme.status?.success) root.style.setProperty('--color-status-success', theme.status.success);
-    if (theme.status?.warning) root.style.setProperty('--color-status-warning', theme.status.warning);
+    if (theme.status?.success)
+      root.style.setProperty('--color-status-success', theme.status.success);
+    if (theme.status?.warning)
+      root.style.setProperty('--color-status-warning', theme.status.warning);
     if (theme.status?.error) root.style.setProperty('--color-status-error', theme.status.error);
     if (theme.status?.info) root.style.setProperty('--color-status-info', theme.status.info);
 
