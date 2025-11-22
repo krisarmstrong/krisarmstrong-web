@@ -1,5 +1,5 @@
 // src/hooks/useCaseSearch.ts
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { searchCases } from '../api'; // Your API function
 import { transformApiData } from '../utils/caseUtils'; // The utility we just defined
 import type { TransformedCase } from '@/types';
@@ -18,11 +18,11 @@ export function useCaseSearch(): UseCaseSearchReturn {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Derive whether we should show empty state
+  const hasEmptyQuery = useMemo(() => query.trim() === "", [query]);
+
   useEffect(() => {
-    if (query.trim() === "") {
-      setSearchResults([]);
-      setIsLoading(false);
-      setError(null);
+    if (hasEmptyQuery) {
       return;
     }
 
@@ -66,18 +66,23 @@ export function useCaseSearch(): UseCaseSearchReturn {
       cancelled = true;
       clearTimeout(handler);
     };
-  }, [query]); // Effect depends on query
+  }, [query, hasEmptyQuery]); // Effect depends on query
 
   // useCallback for setQuery to stabilize its identity if passed down
   const handleSetQuery = useCallback((newQuery: string) => {
     setQuery(newQuery);
   }, []);
 
+  // Derive final values based on query state
+  const derivedSearchResults = useMemo(() => hasEmptyQuery ? [] : searchResults, [hasEmptyQuery, searchResults]);
+  const derivedIsLoading = useMemo(() => hasEmptyQuery ? false : isLoading, [hasEmptyQuery, isLoading]);
+  const derivedError = useMemo(() => hasEmptyQuery ? null : error, [hasEmptyQuery, error]);
+
   return {
     query,
     setQuery: handleSetQuery, // Expose a stable setQuery
-    searchResults,
-    isLoading,
-    error,
+    searchResults: derivedSearchResults,
+    isLoading: derivedIsLoading,
+    error: derivedError,
   };
 }
