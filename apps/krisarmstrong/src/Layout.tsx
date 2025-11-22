@@ -1,16 +1,15 @@
-import { Suspense } from "react";
-import { Outlet } from "react-router-dom";
-import { PageShell, ThemeCanary, ThemeDiagnostics } from "@krisarmstrong/web-foundation";
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
-import { PageLoadingFallback } from "./components/PageLoadingFallback";
+import { Suspense } from 'react';
+import { Outlet } from 'react-router-dom';
+import { PageShell, ThemeCanary } from '@krisarmstrong/web-foundation';
+import Footer from './components/Footer';
+import Navbar from './components/Navbar';
+import { PageLoadingFallback } from './components/PageLoadingFallback';
 
 export default function Layout() {
   return (
     <>
       <Navbar />
       <ThemeCanary />
-      <ThemeDiagnostics />
       <PageShell>
         <Suspense fallback={<PageLoadingFallback message="Loading page..." />}>
           <Outlet />
