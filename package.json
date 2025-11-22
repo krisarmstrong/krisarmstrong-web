@@ -36,6 +36,7 @@
     "audit-ci": "^7.1.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.11",
+    "npm": "^11.6.3",
     "prettier": "^3.4.2",
     "semantic-release": "^21.1.2",
     "terser": "^5.44.1",
