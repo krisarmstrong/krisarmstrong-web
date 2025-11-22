@@ -27,7 +27,7 @@
     "@krisarmstrong/web-foundation": "*",
     "@radix-ui/react-icons": "^1.3.2",
     "@sentry/react": "^10.25.0",
-    "@supabase/supabase-js": "^2.81.1",
+    "@supabase/supabase-js": "^2.84.0",
     "clsx": "^2.1.1",
     "jspdf": "^3.0.3",
     "lucide-react": "^0.553.0",
