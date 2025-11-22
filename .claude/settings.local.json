@@ -32,7 +32,18 @@
       "Bash(gh issue create:*)",
       "Bash(npm run release:dry:*)",
       "Bash(npm run lint:fix:*)",
-      "Bash(npm run lint:*)"
+      "Bash(npm run lint:*)",
+      "Bash(git branch:*)",
+      "Bash(gh repo edit:*)",
+      "Bash(git describe:*)",
+      "Bash(git tag:*)",
+      "Bash(npm ls:*)",
+      "Bash(gh api:*)",
+      "Bash(npm run test:*)",
+      "Bash(npx tsup:*)",
+      "Bash(git restore:*)",
+      "Bash(git push:*)",
+      "Bash(npm test)"
     ],
     "deny": [],
     "ask": []
