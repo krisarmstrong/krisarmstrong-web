@@ -12,8 +12,8 @@ export default function Navbar() {
     <BaseNavbar
       logo={
         <>
-          <Shield size={28} className="text-brand-primary group-hover:text-brand-accent transition-colors flex-shrink-0" />
-          <span className="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight whitespace-nowrap text-text-primary">
+          <Shield size={24} className="text-brand-primary group-hover:text-brand-accent transition-colors flex-shrink-0" />
+          <span className="text-lg sm:text-xl font-bold tracking-tight whitespace-nowrap text-text-primary">
             Wi-Fi Vigilante
           </span>
         </>

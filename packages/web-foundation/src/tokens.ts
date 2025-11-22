@@ -34,33 +34,33 @@ export const layoutTokens = {
 // Color tokens - comprehensive theme colors
 export const colorTokens = {
   brand: {
-    primary: 'var(--theme-brand-primary, var(--color-brand-primary, #3b82f6))',
-    accent: 'var(--theme-brand-accent, var(--color-brand-accent, #8b5cf6))',
+    primary: 'var(--theme-brand-primary, var(--color-brand-primary, #2563eb))',
+    accent: 'var(--theme-brand-accent, var(--color-brand-accent, #3b82f6))',
   },
   surface: {
-    base: 'var(--theme-surface-base, var(--color-surface-base, #0f172a))',
-    raised: 'var(--theme-surface-raised, var(--color-surface-raised, #1e293b))',
-    border: 'var(--theme-surface-border, var(--color-surface-border, #334155))',
-    hover: 'var(--theme-surface-hover, var(--color-surface-hover, #1e293b))',
+    base: 'var(--theme-surface-base, var(--color-surface-base, #ffffff))',
+    raised: 'var(--theme-surface-raised, var(--color-surface-raised, #f8fafc))',
+    border: 'var(--theme-surface-border, var(--color-surface-border, #e2e8f0))',
+    hover: 'var(--theme-surface-hover, var(--color-surface-hover, #dbeafe))',
   },
   text: {
-    primary: 'var(--theme-text-primary, var(--color-text-primary, #f1f5f9))',
-    muted: 'var(--theme-text-muted, var(--color-text-muted, #94a3b8))',
-    accent: 'var(--theme-text-accent, var(--color-text-accent, #8b5cf6))',
-    inverse: 'var(--theme-text-inverse, var(--color-text-inverse, #0f172a))',
+    primary: 'var(--theme-text-primary, var(--color-text-primary, #0f172a))',
+    muted: 'var(--theme-text-muted, var(--color-text-muted, #64748b))',
+    accent: 'var(--theme-text-accent, var(--color-text-accent, #2563eb))',
+    inverse: 'var(--theme-text-inverse, var(--color-text-inverse, #ffffff))',
   },
   interactive: {
-    default: 'var(--theme-interactive-default, var(--color-interactive-default, #3b82f6))',
-    hover: 'var(--theme-interactive-hover, var(--color-interactive-hover, #2563eb))',
-    active: 'var(--theme-interactive-active, var(--color-interactive-active, #8b5cf6))',
-    focus: 'var(--theme-interactive-focus, var(--color-interactive-focus, #8b5cf6))',
-    disabled: 'var(--theme-interactive-disabled, var(--color-interactive-disabled, #64748b))',
+    default: 'var(--theme-interactive-default, var(--color-interactive-default, #2563eb))',
+    hover: 'var(--theme-interactive-hover, var(--color-interactive-hover, #1d4ed8))',
+    active: 'var(--theme-interactive-active, var(--color-interactive-active, #1e40af))',
+    focus: 'var(--theme-interactive-focus, var(--color-interactive-focus, #3b82f6))',
+    disabled: 'var(--theme-interactive-disabled, var(--color-interactive-disabled, #cbd5e1))',
   },
   status: {
     success: 'var(--theme-status-success, var(--color-status-success, #10b981))',
     warning: 'var(--theme-status-warning, var(--color-status-warning, #f59e0b))',
     error: 'var(--theme-status-error, var(--color-status-error, #ef4444))',
-    info: 'var(--theme-status-info, var(--color-status-info, #3b82f6))',
+    info: 'var(--theme-status-info, var(--color-status-info, #2563eb))',
   },
 };
 

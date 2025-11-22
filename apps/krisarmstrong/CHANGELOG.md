@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Verified
+- CSS theme values already synchronized across all layers ✅
+- Professional teal theme consistent across both modes
+- Unique teal border in dark mode for strong contrast
+
+### Added
+- E2E smoke tests with Playwright
+  - Homepage verification
+  - Blog navigation and post loading
+  - Projects page navigation
+  - Resume page accessibility
+  - Theme toggle functionality
+  - Contact form verification
+
+### Quality
+- All 42 unit tests passing
+- Comprehensive blog functionality testing
+- Resume component thoroughly tested
+
 ## [0.8.2] - 2025-01-14
 
 ## [0.8.3] - 2025-11-15

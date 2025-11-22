@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+- Synchronized CSS theme values across all layers (@theme, ThemeContext, tokens.ts)
+- Updated dark theme focus color: #93c5fd → #2563eb for consistency
+- Updated light theme focus color: #1e40af → #3b82f6 for consistency
+- Reduced navbar height: Shield icon 28px → 24px, removed lg:text-2xl text scaling
+- Fixed main.tsx to use wifiVigilanteDarkTheme instead of defaultDarkTheme
+
+### Added
+- E2E smoke tests with Playwright
+  - Homepage load verification
+  - Case navigation tests
+  - Theme toggle functionality
+  - Contact form accessibility
+  - Case detail page loading
+
+### Fixed
+- CSS theme synchronization between build-time and runtime
+- Navbar hover states consistency
+- Blue icon colors preserved across theme switches
+
 ## [1.1.1] - 2025-01-14
 
 ## [1.2.0] - 2025-11-15
