@@ -26,7 +26,10 @@ interface ServiceCardProps {
   icon?: ReactNode;
 }
 
-const variantColors: Record<ServiceCardVariant, { border: string; accent: string; button: string }> = {
+const variantColors: Record<
+  ServiceCardVariant,
+  { border: string; accent: string; button: string }
+> = {
   violet: {
     border: 'border-violet-400/30 hover:border-violet-400',
     accent: 'bg-violet-400',
@@ -84,7 +87,9 @@ export function ServiceCard({
       {/* Highlights */}
       {highlights.length > 0 && (
         <>
-          <p className={`text-sm font-semibold ${colors.accent === 'bg-violet-400' ? 'text-violet-400' : colors.accent === 'bg-blue-400' ? 'text-blue-400' : 'text-green-400'} mb-3`}>
+          <p
+            className={`text-sm font-semibold ${colors.accent === 'bg-violet-400' ? 'text-violet-400' : colors.accent === 'bg-blue-400' ? 'text-blue-400' : 'text-green-400'} mb-3`}
+          >
             Highlights:
           </p>
           <ul className="space-y-2 text-text-muted mb-4 text-sm">
@@ -98,7 +103,7 @@ export function ServiceCard({
       {/* Quote */}
       {quote && (
         <p className={`text-sm italic text-text-muted mb-6 border-l-4 ${colors.accent} pl-4`}>
-          "{quote}"
+          &quot;{quote}&quot;
         </p>
       )}
 

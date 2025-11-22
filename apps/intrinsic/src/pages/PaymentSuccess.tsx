@@ -56,7 +56,8 @@ export default function PaymentSuccess() {
               <div>
                 <h3 className="font-semibold text-text-primary mb-2">Check Your Email</h3>
                 <p className="text-text-muted text-sm">
-                  You'll receive a confirmation email within the next few minutes with your payment receipt and program details.
+                  You'll receive a confirmation email within the next few minutes with your payment
+                  receipt and program details.
                 </p>
               </div>
             </div>
@@ -70,7 +71,8 @@ export default function PaymentSuccess() {
               <div>
                 <h3 className="font-semibold text-text-primary mb-2">Welcome Call</h3>
                 <p className="text-text-muted text-sm">
-                  I'll reach out within 24-48 hours to schedule your onboarding call and answer any questions you may have.
+                  I'll reach out within 24-48 hours to schedule your onboarding call and answer any
+                  questions you may have.
                 </p>
               </div>
             </div>
@@ -84,7 +86,8 @@ export default function PaymentSuccess() {
               <div>
                 <h3 className="font-semibold text-text-primary mb-2">Program Start</h3>
                 <p className="text-text-muted text-sm">
-                  You'll receive the cohort schedule, access to materials, and details about your first session.
+                  You'll receive the cohort schedule, access to materials, and details about your
+                  first session.
                 </p>
               </div>
             </div>
@@ -96,8 +99,13 @@ export default function PaymentSuccess() {
           <h3 className="font-semibold text-text-primary mb-3">Important Information</h3>
           <ul className="space-y-2 text-text-muted text-sm">
             <li>• Keep your confirmation email for your records</li>
-            <li>• Add contact@intrinsicmomentummindset.com to your contacts to ensure you receive all communications</li>
-            <li>• If you don't receive a confirmation email within 1 hour, check your spam folder</li>
+            <li>
+              • Add contact@intrinsicmomentummindset.com to your contacts to ensure you receive all
+              communications
+            </li>
+            <li>
+              • If you don't receive a confirmation email within 1 hour, check your spam folder
+            </li>
           </ul>
         </div>
 

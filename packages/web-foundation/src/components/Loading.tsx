@@ -40,7 +40,7 @@ export function LoadingSpinner({
   trackSlowLoadingAfter = 5000,
   loadingContext = 'unknown',
 }: LoadingSpinnerProps) {
-  const startTimeRef = useRef<number>(Date.now());
+  const startTimeRef = useRef<number>(0);
   const trackedRef = useRef<boolean>(false);
 
   useEffect(() => {

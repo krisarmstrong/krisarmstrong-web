@@ -1,0 +1,129 @@
+# Security Policy
+
+## Supported Versions
+
+We actively maintain and provide security updates for the following versions:
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 1.x.x   | :white_check_mark: |
+| < 1.0   | :x:                |
+
+## Reporting a Vulnerability
+
+We take the security of our monorepo seriously. If you discover a security vulnerability, please follow these steps:
+
+### 1. **DO NOT** Disclose Publicly
+
+Please do not create public GitHub issues for security vulnerabilities. This helps protect users while we work on a fix.
+
+### 2. Report Privately
+
+Send your vulnerability report to: **security@krisarmstrong.com**
+
+Include the following information:
+- Description of the vulnerability
+- Steps to reproduce the issue
+- Potential impact
+- Any suggested fixes (if available)
+- Your contact information
+
+### 3. Response Timeline
+
+- **Initial Response**: Within 48 hours
+- **Status Update**: Within 7 days
+- **Fix Timeline**: Varies by severity
+  - Critical: 1-3 days
+  - High: 7-14 days
+  - Medium: 14-30 days
+  - Low: 30-60 days
+
+### 4. Disclosure Process
+
+1. We will acknowledge receipt of your vulnerability report
+2. We will confirm the vulnerability and determine its severity
+3. We will develop and test a fix
+4. We will release the fix and credit you (if desired)
+5. We will publicly disclose the vulnerability after users have had time to update
+
+## Security Best Practices for Contributors
+
+### Code Security
+- Never commit secrets, API keys, or credentials
+- Use environment variables for sensitive data
+- Follow the principle of least privilege
+- Validate and sanitize all user inputs
+- Use parameterized queries to prevent SQL injection
+- Implement proper authentication and authorization
+
+### Dependency Security
+- Keep dependencies up to date
+- Review security advisories regularly
+- Use `npm audit` before committing
+- Avoid dependencies with known vulnerabilities
+
+### CI/CD Security
+- All PRs must pass security checks
+- Automated security scans run on every commit
+- Pre-commit hooks enforce security linting
+- Secrets are managed via GitHub Secrets
+
+## Automated Security Tools
+
+This project uses several automated security tools:
+
+- **npm audit**: Scans for vulnerable dependencies
+- **audit-ci**: Fails CI builds on moderate+ vulnerabilities
+- **eslint-plugin-security**: Detects security anti-patterns
+- **eslint-plugin-no-secrets**: Prevents secret leakage
+- **Dependabot**: Automated dependency updates
+- **CodeQL**: Static code analysis (GitHub Security)
+
+## Security-Related NPM Scripts
+
+```bash
+# Run security audit
+npm run audit:security
+
+# Run audit with CI-friendly output
+npm run audit:ci
+
+# Fix automatically patchable vulnerabilities
+npm audit fix
+```
+
+## Vulnerability Severity Levels
+
+### Critical
+- Remote code execution
+- Authentication bypass
+- Data exposure of sensitive information
+
+### High
+- SQL injection
+- Cross-site scripting (XSS)
+- Privilege escalation
+
+### Medium
+- Denial of service
+- Information disclosure
+- Cross-site request forgery (CSRF)
+
+### Low
+- Minor information leakage
+- Issues requiring user interaction
+
+## Security Updates
+
+Security updates will be released as patch versions (x.x.X) and will be communicated via:
+- GitHub Security Advisories
+- Release notes
+- Email to security contacts (if registered)
+
+## Questions?
+
+If you have questions about this security policy, please contact: **security@krisarmstrong.com**
+
+---
+
+**Last Updated**: November 2025

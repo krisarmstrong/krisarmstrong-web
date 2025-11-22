@@ -25,6 +25,7 @@ This project uses [Conventional Commits](https://www.conventionalcommits.org/) f
 **Format:** `type(scope): subject`
 
 **Types:**
+
 - `feat`: New feature (minor version bump)
 - `fix`: Bug fix (patch version bump)
 - `docs`: Documentation changes
@@ -37,6 +38,7 @@ This project uses [Conventional Commits](https://www.conventionalcommits.org/) f
 - `chore`: Other changes
 
 **Examples:**
+
 ```bash
 git commit -m "feat(navbar): add dark mode toggle"
 git commit -m "fix(button): resolve click handler issue"
@@ -44,6 +46,7 @@ git commit -m "docs: update README with new examples"
 ```
 
 **Breaking Changes:**
+
 ```bash
 git commit -m "feat(api)!: redesign authentication flow
 
@@ -55,16 +58,19 @@ BREAKING CHANGE: Auth tokens now require bearer prefix"
 This project uses Husky for automated Git hooks:
 
 #### Pre-commit
+
 - Runs `lint-staged` to:
   - Lint and format TypeScript/JavaScript files
   - Format JSON, Markdown, YAML files
   - Run security audit on package.json changes
 
 #### Commit-msg
+
 - Validates commit message format
 - Ensures conventional commit compliance
 
 #### Pre-push
+
 - Runs full build
 - Runs all tests
 - Ensures code quality before pushing
@@ -80,6 +86,7 @@ This project uses Husky for automated Git hooks:
 ### Pull Request Process
 
 1. **Create a branch**
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -90,11 +97,13 @@ This project uses Husky for automated Git hooks:
    - Update documentation
 
 3. **Commit with conventional commits**
+
    ```bash
    git commit -m "feat: add new feature"
    ```
 
 4. **Push your branch**
+
    ```bash
    git push origin feature/your-feature-name
    ```
@@ -107,6 +116,7 @@ This project uses Husky for automated Git hooks:
 ### Code Quality Standards
 
 #### Linting
+
 ```bash
 # Check linting
 npm run lint
@@ -116,6 +126,7 @@ npm run lint:fix
 ```
 
 #### Formatting
+
 ```bash
 # Check formatting
 npm run format:check
@@ -125,6 +136,7 @@ npm run format
 ```
 
 #### Testing
+
 ```bash
 # Run all tests
 npm test
@@ -137,6 +149,7 @@ npm run test:coverage --workspace=<workspace>
 ```
 
 #### Security
+
 ```bash
 # Run security audit
 npm run audit:security
@@ -150,6 +163,7 @@ npm run audit:ci
 This project uses [semantic-release](https://github.com/semantic-release/semantic-release) for automated versioning and releases.
 
 **How it works:**
+
 1. Merge to `main/master` triggers release workflow
 2. Analyzes commit messages since last release
 3. Determines version bump (major.minor.patch)
@@ -158,6 +172,7 @@ This project uses [semantic-release](https://github.com/semantic-release/semanti
 6. Publishes GitHub release
 
 **Version Bumps:**
+
 - `fix:` → Patch (1.0.0 → 1.0.1)
 - `feat:` → Minor (1.0.0 → 1.1.0)
 - `BREAKING CHANGE:` → Major (1.0.0 → 2.0.0)
@@ -165,6 +180,7 @@ This project uses [semantic-release](https://github.com/semantic-release/semanti
 ### CI/CD Pipeline
 
 #### On Push/PR
+
 - Linting
 - Tests (Node 18.x, 20.x, 22.x)
 - Build verification
@@ -172,6 +188,7 @@ This project uses [semantic-release](https://github.com/semantic-release/semanti
 - Commit message validation (PRs only)
 
 #### On Merge to Main
+
 - Full test suite
 - Production build
 - Automated release
@@ -179,6 +196,7 @@ This project uses [semantic-release](https://github.com/semantic-release/semanti
 - GitHub release creation
 
 #### Weekly
+
 - CodeQL security scanning
 - Dependency vulnerability checks
 

@@ -23,34 +23,34 @@ export interface EmptyStateProps {
 
 const accentColors = {
   violet: {
-    icon: 'text-violet-400',
-    title: 'text-violet-300',
-    button: 'bg-violet-600 hover:bg-violet-700',
+    icon: 'text-brand-accent',
+    title: 'text-text-accent',
+    button: 'bg-interactive-active hover:bg-interactive-hover',
   },
   emerald: {
-    icon: 'text-emerald-400',
-    title: 'text-emerald-300',
-    button: 'bg-emerald-600 hover:bg-emerald-700',
+    icon: 'text-brand-accent',
+    title: 'text-text-accent',
+    button: 'bg-interactive-active hover:bg-interactive-hover',
   },
   blue: {
-    icon: 'text-blue-400',
-    title: 'text-blue-300',
-    button: 'bg-blue-600 hover:bg-blue-700',
+    icon: 'text-brand-accent',
+    title: 'text-text-accent',
+    button: 'bg-interactive-active hover:bg-interactive-hover',
   },
   amber: {
-    icon: 'text-amber-400',
-    title: 'text-amber-300',
-    button: 'bg-amber-600 hover:bg-amber-700',
+    icon: 'text-brand-accent',
+    title: 'text-text-accent',
+    button: 'bg-interactive-active hover:bg-interactive-hover',
   },
   rose: {
-    icon: 'text-rose-400',
-    title: 'text-rose-300',
-    button: 'bg-rose-600 hover:bg-rose-700',
+    icon: 'text-brand-accent',
+    title: 'text-text-accent',
+    button: 'bg-interactive-active hover:bg-interactive-hover',
   },
   gray: {
-    icon: 'text-gray-500',
-    title: 'text-gray-400',
-    button: 'bg-gray-700 hover:bg-gray-600',
+    icon: 'text-text-muted',
+    title: 'text-text-primary',
+    button: 'bg-interactive-default hover:bg-interactive-hover',
   },
 };
 
@@ -97,21 +97,13 @@ export function EmptyState({
       style={{ minHeight }}
     >
       {/* Icon */}
-      <div className={`mb-4 ${colors.icon}`}>
-        {icon || defaultIcon}
-      </div>
+      <div className={`mb-4 ${colors.icon}`}>{icon || defaultIcon}</div>
 
       {/* Title */}
-      <h3 className={`text-xl font-semibold mb-2 ${colors.title}`}>
-        {title}
-      </h3>
+      <h3 className={`text-xl font-semibold mb-2 ${colors.title}`}>{title}</h3>
 
       {/* Description */}
-      {description && (
-        <p className="text-gray-400 text-sm max-w-md mb-4">
-          {description}
-        </p>
-      )}
+      {description && <p className="text-text-muted text-sm max-w-md mb-4">{description}</p>}
 
       {/* Action Button */}
       {action && (
@@ -122,7 +114,7 @@ export function EmptyState({
             ${colors.button}
             text-white rounded-lg
             transition-colors
-            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900
+            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-interactive-focus
           `}
         >
           {action.label}

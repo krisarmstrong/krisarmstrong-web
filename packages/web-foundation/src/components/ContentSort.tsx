@@ -66,9 +66,7 @@ export function ContentSort<T extends string = string>({
 
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      {showIcon && (
-        <ArrowUpDown size={16} className="text-gray-400" />
-      )}
+      {showIcon && <ArrowUpDown size={16} className="text-gray-400" />}
       <label htmlFor="content-sort" className="text-sm text-gray-400 whitespace-nowrap">
         {label}
       </label>

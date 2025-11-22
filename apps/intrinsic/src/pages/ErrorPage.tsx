@@ -2,17 +2,17 @@ import { useRouteError, isRouteErrorResponse, Link } from 'react-router-dom';
 
 export default function ErrorPage(): JSX.Element {
   const error = useRouteError();
-  console.error("Routing Error:", error);
+  console.error('Routing Error:', error);
 
-  let errorMessage = "Sorry, an unexpected error has occurred.";
-  let errorStatus = "Error";
+  let errorMessage = 'Sorry, an unexpected error has occurred.';
+  let errorStatus = 'Error';
 
   if (isRouteErrorResponse(error)) {
     errorStatus = `Error ${error.status}`;
     errorMessage = error.statusText || errorMessage;
 
     if (error.status === 404) {
-      errorStatus = "404 - Page Not Found";
+      errorStatus = '404 - Page Not Found';
       errorMessage = "Oops! The page you're looking for doesn't seem to exist.";
     }
   } else if (error instanceof Error) {
@@ -33,9 +33,9 @@ export default function ErrorPage(): JSX.Element {
         </pre>
       )}
       {import.meta.env.DEV && error instanceof Error && error.stack && (
-         <details className="text-left text-xs text-text-muted mb-8 max-w-xl">
-            <summary className="cursor-pointer">Error Stack (Development)</summary>
-            <pre className="mt-2 whitespace-pre-wrap">{error.stack}</pre>
+        <details className="text-left text-xs text-text-muted mb-8 max-w-xl">
+          <summary className="cursor-pointer">Error Stack (Development)</summary>
+          <pre className="mt-2 whitespace-pre-wrap">{error.stack}</pre>
         </details>
       )}
 

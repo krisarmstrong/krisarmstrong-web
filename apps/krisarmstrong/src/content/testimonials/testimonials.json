@@ -1,0 +1,34 @@
+[
+  {
+    "id": "netally-colleague",
+    "name": "Technical Sales Team Member",
+    "quote": "Kris's ability to translate complex wireless concepts into business value is unmatched. His technical depth combined with his presentation skills makes him invaluable in enterprise deals.",
+    "avatar": "https://randomuser.me/api/portraits/men/52.jpg",
+    "company": "NetAlly",
+    "position": "Sales Engineering"
+  },
+  {
+    "id": "enterprise-client",
+    "name": "IT Director",
+    "quote": "Working with Kris on our campus-wide Wi-Fi 6E deployment was exceptional. His RF planning expertise and attention to security compliance saved us from costly mistakes.",
+    "avatar": "https://randomuser.me/api/portraits/women/68.jpg",
+    "company": "Major SLED Organization",
+    "position": "Director of IT Infrastructure"
+  },
+  {
+    "id": "healthcare-client",
+    "name": "Healthcare Network Manager",
+    "quote": "Kris designed a HIPAA-compliant wireless solution for our 15-hospital system. His Zero Trust architecture recommendations and 802.1X implementation were exactly what we needed.",
+    "avatar": "https://randomuser.me/api/portraits/men/41.jpg",
+    "company": "Healthcare System",
+    "position": "Network Operations Manager"
+  },
+  {
+    "id": "wireless-engineer-peer",
+    "name": "Wireless Network Engineer",
+    "quote": "I've learned more about Wi-Fi 6E channel planning and RF optimization from Kris than from anyone else in the industry. His practical, real-world approach to wireless design is outstanding.",
+    "avatar": "https://randomuser.me/api/portraits/women/45.jpg",
+    "company": "System Integrator",
+    "position": "Senior Wireless Engineer"
+  }
+]

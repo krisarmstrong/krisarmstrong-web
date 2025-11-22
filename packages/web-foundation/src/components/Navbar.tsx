@@ -37,28 +37,28 @@ const variantColors: Record<
   { bg: string; border: string; text: string; accent: string }
 > = {
   violet: {
-    bg: 'bg-gray-900',
-    border: 'border-gray-800',
-    text: 'text-white',
-    accent: 'focus:ring-violet-500',
+    bg: 'bg-surface-raised',
+    border: 'border-surface-border',
+    text: 'text-text-primary',
+    accent: 'focus:ring-brand-primary',
   },
   blue: {
-    bg: 'bg-gray-800',
-    border: 'border-gray-700',
-    text: 'text-white',
-    accent: 'focus:ring-blue-500',
+    bg: 'bg-surface-raised',
+    border: 'border-surface-border',
+    text: 'text-text-primary',
+    accent: 'focus:ring-brand-primary',
   },
   sage: {
-    bg: 'bg-background',
-    border: 'border-border',
-    text: 'text-text-main',
-    accent: 'focus:ring-accent',
+    bg: 'bg-surface-raised',
+    border: 'border-surface-border',
+    text: 'text-text-primary',
+    accent: 'focus:ring-brand-primary',
   },
   default: {
-    bg: 'bg-white',
-    border: 'border-gray-200',
-    text: 'text-gray-900',
-    accent: 'focus:ring-blue-500',
+    bg: 'bg-surface-raised',
+    border: 'border-surface-border',
+    text: 'text-text-primary',
+    accent: 'focus:ring-brand-primary',
   },
 };
 
@@ -205,30 +205,28 @@ export function Navbar({
           aria-modal="true"
           aria-label="Mobile navigation"
         >
-              {/* Mobile Actions */}
-              {mobileActions && (
-                <div className={`p-4 border-b ${finalBorderColor}`}>{mobileActions}</div>
-              )}
+          {/* Mobile Actions */}
+          {mobileActions && (
+            <div className={`p-4 border-b ${finalBorderColor}`}>{mobileActions}</div>
+          )}
 
-              {/* Navigation Links */}
-              <nav className="py-2">
-                <PrimaryNav
-                  items={navItems}
-                  orientation="vertical"
-                  variant={variant === 'default' ? 'violet' : variant}
-                  onNavigate={closeMenu}
-                />
-              </nav>
+          {/* Navigation Links */}
+          <nav className="py-2">
+            <PrimaryNav
+              items={navItems}
+              orientation="vertical"
+              variant={variant === 'default' ? 'violet' : variant}
+              onNavigate={closeMenu}
+            />
+          </nav>
 
-              {/* Desktop Actions in Mobile Menu */}
-              {desktopActions && (
-                <div className={`p-4 border-t ${finalBorderColor}`}>{desktopActions}</div>
-              )}
+          {/* Desktop Actions in Mobile Menu */}
+          {desktopActions && (
+            <div className={`p-4 border-t ${finalBorderColor}`}>{desktopActions}</div>
+          )}
 
           {/* Footer */}
-          {mobileFooter && (
-            <div className={`p-4 border-t ${finalBorderColor}`}>{mobileFooter}</div>
-          )}
+          {mobileFooter && <div className={`p-4 border-t ${finalBorderColor}`}>{mobileFooter}</div>}
         </div>
       )}
     </>

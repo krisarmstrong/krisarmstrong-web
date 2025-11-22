@@ -1,0 +1,44 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Vite/React build output
+dist/
+build/
+
+# Mac and Linux system files
+.DS_Store
+*.swp
+
+# Log files
+*.log
+
+# Editor folders
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Test/coverage output
+coverage/
+
+# Env files (add your own if you use them)
+.env*
+!.env.example
+
+# Miscellaneous
+*.local
+*.cache/
+.cache/
+*.tgz
+
+# Parcel-bundler cache (not for Vite, but just in case)
+.cache/
+.parcel-cache/
+
+# VS Code
+.history/
+.env

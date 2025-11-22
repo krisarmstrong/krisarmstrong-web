@@ -1,0 +1,848 @@
+[
+  {
+    "id": "wifi7-migration-strategy",
+    "title": "Wi-Fi 7 Migration Strategy for Enterprise Networks",
+    "excerpt": "Migrating enterprise networks to Wi-Fi 7 represents one of the most complex wireless infrastructure projects organizations will undertake. Unlike simp...",
+    "date": "2025-11-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 7",
+      "802.11be",
+      "Next Generation"
+    ],
+    "featured": false,
+    "contentFile": "wifi7-migration-strategy-nov2025.md"
+  },
+  {
+    "id": "wifi7-security-considerations",
+    "title": "Wi-Fi 7 Security Enhancements and Considerations",
+    "excerpt": "Wi-Fi 7 (802.11be) builds upon Wi-Fi 6's security foundation while introducing new considerations related to its advanced features. While the core sec...",
+    "date": "2025-10-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 7",
+      "802.11be",
+      "Next Generation",
+      "Security",
+      "WPA3"
+    ],
+    "featured": false,
+    "contentFile": "wifi7-security-considerations-oct2025.md"
+  },
+  {
+    "id": "wifi7-early-deployments",
+    "title": "Real-World Wi-Fi 7 Deployments: Early Adopter Case Studies",
+    "excerpt": "Wi-Fi 7 has transitioned from laboratory testing to production deployments throughout 2024 and early 2025. As an early adopter myself—having designed ...",
+    "date": "2025-09-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 7",
+      "802.11be",
+      "Next Generation",
+      "Network Design",
+      "Deployment"
+    ],
+    "featured": false,
+    "contentFile": "wifi7-early-deployments-sep2025.md"
+  },
+  {
+    "id": "wifi7-chipsets-vendors",
+    "title": "Wi-Fi 7 Chipsets: Vendor Landscape and Availability",
+    "excerpt": "The Wi-Fi 7 ecosystem's maturation depends critically on chipset availability from major silicon vendors. While the IEEE 802.11be standard was ratifie...",
+    "date": "2025-08-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 7",
+      "802.11be",
+      "Next Generation"
+    ],
+    "featured": false,
+    "contentFile": "wifi7-chipsets-vendors-aug2025.md"
+  },
+  {
+    "id": "wifi7-arvr-applications",
+    "title": "Wi-Fi 7 and the Future of AR/VR Applications",
+    "excerpt": "Extended Reality (XR)—encompassing Virtual Reality, Augmented Reality, and Mixed Reality—represents one of the most demanding wireless applications ev...",
+    "date": "2025-07-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 7",
+      "802.11be",
+      "Next Generation"
+    ],
+    "featured": false,
+    "contentFile": "wifi7-arvr-applications-jul2025.md"
+  },
+  {
+    "id": "wifi7-infrastructure-preparation",
+    "title": "Preparing Your Network Infrastructure for Wi-Fi 7",
+    "excerpt": "Wi-Fi 7's multi-gigabit wireless performance creates new demands on wired network infrastructure. When access points can deliver 5-10 Gbps aggregate t...",
+    "date": "2025-06-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 7",
+      "802.11be",
+      "Next Generation"
+    ],
+    "featured": false,
+    "contentFile": "wifi7-infrastructure-preparation-jun2025.md"
+  },
+  {
+    "id": "wifi7-vs-wifi6e-upgrade",
+    "title": "Wi-Fi 7 vs Wi-Fi 6E: When to Upgrade",
+    "excerpt": "Organizations planning wireless infrastructure deployments in 2025 face a strategic decision: deploy mature Wi-Fi 6E technology or invest in emerging ...",
+    "date": "2025-05-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6E",
+      "Enterprise",
+      "6 GHz"
+    ],
+    "featured": false,
+    "contentFile": "wifi7-vs-wifi6e-upgrade-may2025.md"
+  },
+  {
+    "id": "wifi7-4096qam-data-rates",
+    "title": "4K-QAM: Pushing Data Rates to 46 Gbps",
+    "excerpt": "4096-QAM, commonly called 4K-QAM, represents Wi-Fi 7's highest modulation scheme, encoding 12 bits per symbol compared to Wi-Fi 6's maximum 10 bits (1...",
+    "date": "2025-04-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 7",
+      "802.11be",
+      "Next Generation",
+      "Modulation",
+      "Performance"
+    ],
+    "featured": false,
+    "contentFile": "wifi7-4096qam-data-rates-apr2025.md"
+  },
+  {
+    "id": "wifi7-320mhz-channels",
+    "title": "320 MHz Channels: Ultra-High Bandwidth in Wi-Fi 7",
+    "excerpt": "Wi-Fi 7 introduces 320 MHz channel bandwidth—double Wi-Fi 6E's maximum 160 MHz channels. This massive channel width enables theoretical throughput app...",
+    "date": "2025-03-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 7",
+      "802.11be",
+      "Next Generation"
+    ],
+    "featured": false,
+    "contentFile": "wifi7-320mhz-channels-mar2025.md"
+  },
+  {
+    "id": "wifi7-mlo-multi-link",
+    "title": "Multi-Link Operation (MLO): Wi-Fi 7's Game Changer",
+    "excerpt": "Multi-Link Operation is Wi-Fi 7's most revolutionary feature. While 320 MHz channels and 4K-QAM deliver impressive throughput improvements, MLO fundam...",
+    "date": "2025-02-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 7",
+      "802.11be",
+      "Next Generation",
+      "MLO",
+      "Multi-Link Operation"
+    ],
+    "featured": false,
+    "contentFile": "wifi7-mlo-multi-link-feb2025.md"
+  },
+  {
+    "id": "wifi7-intro-802-11be",
+    "title": "Wi-Fi 7 (802.11be): The Next Generation of Wireless",
+    "excerpt": "Wi-Fi 7, officially designated as IEEE 802.11be Extremely High Throughput (EHT), represents the most ambitious evolution in Wi-Fi technology since the...",
+    "date": "2025-01-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 7",
+      "802.11be",
+      "Next Generation"
+    ],
+    "featured": true,
+    "contentFile": "wifi7-intro-802-11be-jan2025.md"
+  },
+  {
+    "id": "wifi6-roi-business-value",
+    "title": "Wi-Fi 6 ROI: Calculating Business Value",
+    "excerpt": "After completing dozens of Wi-Fi 6 deployments across enterprise environments, I've learned that technical performance improvements don't automaticall...",
+    "date": "2024-12-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6",
+      "802.11ax",
+      "Enterprise"
+    ],
+    "featured": false,
+    "contentFile": "wifi6-roi-business-value-dec2024.md"
+  },
+  {
+    "id": "wifi6-troubleshooting",
+    "title": "Troubleshooting Wi-Fi 6 Performance Issues",
+    "excerpt": "Wi-Fi 6 (802.11ax) delivers impressive performance improvements in properly configured networks, but I've also diagnosed countless Wi-Fi 6 deployments...",
+    "date": "2024-11-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6",
+      "802.11ax",
+      "Enterprise",
+      "Troubleshooting",
+      "Best Practices"
+    ],
+    "featured": false,
+    "contentFile": "wifi6-troubleshooting-nov2024.md"
+  },
+  {
+    "id": "wifi6-healthcare-deployment",
+    "title": "Wi-Fi 6 in Healthcare: Use Cases and Deployment",
+    "excerpt": "Healthcare environments present unique wireless networking challenges. Clinical staff require seamless mobility while accessing electronic health reco...",
+    "date": "2024-10-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6",
+      "802.11ax",
+      "Enterprise",
+      "Network Design",
+      "Deployment"
+    ],
+    "featured": false,
+    "contentFile": "wifi6-healthcare-deployment-oct2024.md"
+  },
+  {
+    "id": "wifi6e-channel-planning",
+    "title": "Channel Planning for Wi-Fi 6E: 6 GHz Spectrum Guide",
+    "excerpt": "The 6 GHz band represents the largest spectrum expansion in Wi-Fi history: 1200 MHz of clean, uncontested spectrum free from legacy device interferenc...",
+    "date": "2024-09-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6E",
+      "Enterprise",
+      "6 GHz"
+    ],
+    "featured": false,
+    "contentFile": "wifi6e-channel-planning-sep2024.md"
+  },
+  {
+    "id": "wifi6-security-wpa3",
+    "title": "Wi-Fi 6 Security: WPA3 and Enhanced Open",
+    "excerpt": "Security has always been a challenge in wireless networks. The broadcast nature of radio transmission means anyone within range can intercept traffic,...",
+    "date": "2024-08-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6",
+      "802.11ax",
+      "Enterprise",
+      "Security",
+      "WPA3"
+    ],
+    "featured": false,
+    "contentFile": "wifi6-security-wpa3-aug2024.md"
+  },
+  {
+    "id": "wifi6e-enterprise-design",
+    "title": "Designing Enterprise Wi-Fi 6E Networks: Best Practices",
+    "excerpt": "Wi-Fi 6E fundamentally changes wireless network design by adding 1200 MHz of pristine spectrum in the 6 GHz band. After completing multiple enterprise...",
+    "date": "2024-07-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6E",
+      "Enterprise",
+      "6 GHz",
+      "Network Design",
+      "Deployment"
+    ],
+    "featured": false,
+    "contentFile": "wifi6e-enterprise-design-jul2024.md"
+  },
+  {
+    "id": "wifi6-vs-wifi5-comparison",
+    "title": "Wi-Fi 6 vs Wi-Fi 5: Real-World Performance Comparison",
+    "excerpt": "After deploying both Wi-Fi 5 (802.11ac) and Wi-Fi 6 (802.11ax) networks across dozens of enterprise environments over the past several years, I've acc...",
+    "date": "2024-06-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6",
+      "802.11ax",
+      "Enterprise"
+    ],
+    "featured": false,
+    "contentFile": "wifi6-vs-wifi5-comparison-jun2024.md"
+  },
+  {
+    "id": "wifi6-1024qam",
+    "title": "1024-QAM: Higher Throughput in Wi-Fi 6 Networks",
+    "excerpt": "When Wi-Fi 6 (802.11ax) specifications promised theoretical maximum rates of 9.6 Gbps—a 37% increase over Wi-Fi 5's 6.9 Gbps—much of that improvement ...",
+    "date": "2024-05-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6",
+      "802.11ax",
+      "Enterprise",
+      "Modulation",
+      "Performance"
+    ],
+    "featured": false,
+    "contentFile": "wifi6-1024qam-may2024.md"
+  },
+  {
+    "id": "wifi6-bss-coloring",
+    "title": "BSS Coloring: Solving Co-Channel Interference in Wi-Fi 6",
+    "excerpt": "Co-channel interference has plagued Wi-Fi networks since the beginning. In dense deployments—office buildings, apartment complexes, conference centers...",
+    "date": "2024-04-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6",
+      "802.11ax",
+      "Enterprise"
+    ],
+    "featured": false,
+    "contentFile": "wifi6-bss-coloring-apr2024.md"
+  },
+  {
+    "id": "wifi6-twt-iot",
+    "title": "Target Wake Time (TWT): Extending IoT Device Battery Life",
+    "excerpt": "The explosive growth of IoT devices in enterprise networks has created an unexpected challenge: power management. While smartphones and laptops have s...",
+    "date": "2024-03-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6",
+      "802.11ax",
+      "Enterprise"
+    ],
+    "featured": false,
+    "contentFile": "wifi6-twt-iot-mar2024.md"
+  },
+  {
+    "id": "wifi6e-6ghz-advantage",
+    "title": "Wi-Fi 6E: The 6 GHz Advantage for Enterprise Networks",
+    "excerpt": "When the FCC opened 1200 MHz of spectrum in the 6 GHz band for unlicensed use in April 2020, it represented the most significant expansion of Wi-Fi sp...",
+    "date": "2024-02-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6E",
+      "Enterprise",
+      "6 GHz"
+    ],
+    "featured": false,
+    "contentFile": "wifi6e-6ghz-advantage-feb2024.md"
+  },
+  {
+    "id": "wifi6-ofdma-mumimo",
+    "title": "Understanding Wi-Fi 6: OFDMA and MU-MIMO Explained",
+    "excerpt": "After two decades of designing and deploying wireless networks, I've witnessed every major evolution in Wi-Fi technology. But Wi-Fi 6 (802.11ax) repre...",
+    "date": "2024-01-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6",
+      "802.11ax",
+      "Enterprise",
+      "OFDMA",
+      "MU-MIMO"
+    ],
+    "featured": true,
+    "contentFile": "wifi6-ofdma-mumimo-jan2024.md"
+  },
+  {
+    "id": "2023-wireless-retrospective-wifi7-horizon",
+    "title": "2023 Wireless Retrospective: Wi-Fi 6E Dominance and Wi-Fi 7 on the Horizon",
+    "excerpt": "As 2023 closes, I'm reflecting on a transformative year for enterprise wireless. Wi-Fi 6E has evolved from emerging technology to dominant standard, 6...",
+    "date": "2023-12-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 7",
+      "802.11be",
+      "Next Generation"
+    ],
+    "featured": false,
+    "contentFile": "2023-wireless-retrospective-wifi7-horizon-dec2023.md"
+  },
+  {
+    "id": "advanced-6ghz-troubleshooting",
+    "title": "Advanced 6 GHz Troubleshooting: Lessons from Three Years of Deployments",
+    "excerpt": "Three years since the FCC opened 6 GHz spectrum, I've accumulated extensive troubleshooting experience across hundreds of Wi-Fi 6E deployments. The 6 ...",
+    "date": "2023-11-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Troubleshooting",
+      "Best Practices",
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "advanced-6ghz-troubleshooting-nov2023.md"
+  },
+  {
+    "id": "wifi7-preview-next-generation-wireless",
+    "title": "Wi-Fi 7 Preview: Understanding Next-Generation Wireless Technology",
+    "excerpt": "October 2023 marks an exciting inflection point in wireless networking. While Wi-Fi 6E deployments dominate enterprise networks, Wi-Fi 7 (802.11be) ha...",
+    "date": "2023-10-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 7",
+      "802.11be",
+      "Next Generation"
+    ],
+    "featured": false,
+    "contentFile": "wifi7-preview-next-generation-wireless-oct2023.md"
+  },
+  {
+    "id": "converged-wireless-architecture",
+    "title": "Converged Wireless Architecture: Wi-Fi, Private 5G, and IoT Integration",
+    "excerpt": "The era of siloed wireless networks is ending. In 2023, I'm designing and deploying converged wireless architectures that seamlessly integrate Wi-Fi 6...",
+    "date": "2023-09-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "converged-wireless-architecture-sep2023.md"
+  },
+  {
+    "id": "multi-vendor-wifi6e-interoperability",
+    "title": "Multi-Vendor Wi-Fi 6E Interoperability: 2023 Lab and Field Results",
+    "excerpt": "The promise of Wi-Fi standards is universal interoperability, but reality has always been more complex. With Wi-Fi 6E's maturity in 2023, I've conduct...",
+    "date": "2023-08-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6E",
+      "Enterprise",
+      "6 GHz"
+    ],
+    "featured": false,
+    "contentFile": "multi-vendor-wifi6e-interoperability-aug2023.md"
+  },
+  {
+    "id": "network-automation-infrastructure-code",
+    "title": "Network Automation and Infrastructure as Code: Enterprise Wireless at Scale",
+    "excerpt": "Infrastructure as Code (IaC) has revolutionized enterprise wireless management. What started as configuration templates has evolved into GitOps-driven...",
+    "date": "2023-07-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "network-automation-infrastructure-code-jul2023.md"
+  },
+  {
+    "id": "wpa3-enterprise-deployment-maturity",
+    "title": "WPA3-Enterprise Deployment: Mature Strategies for 2023",
+    "excerpt": "WPA3-Enterprise has reached critical mass. With 90% of corporate devices now supporting WPA3 and mandatory adoption in 6 GHz deployments, the protocol...",
+    "date": "2023-06-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Security",
+      "WPA3",
+      "Network Design",
+      "Deployment"
+    ],
+    "featured": false,
+    "contentFile": "wpa3-enterprise-deployment-maturity-jun2023.md"
+  },
+  {
+    "id": "6ghz-channel-width-optimization",
+    "title": "6 GHz Channel Width Optimization: 160 MHz vs 320 MHz in Production",
+    "excerpt": "The 6 GHz spectrum's 1,200 MHz of contiguous bandwidth enables channel widths that seemed impossible just three years ago. But after 18 months of prod...",
+    "date": "2023-05-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "6ghz-channel-width-optimization-may2023.md"
+  },
+  {
+    "id": "ai-driven-network-optimization-reality",
+    "title": "AI-Driven Network Optimization: 2023 Real-World Performance",
+    "excerpt": "Three years ago, AI in networking was mostly marketing hype and vendor promises. Today, in 2023, I can definitively measure its impact. After deployin...",
+    "date": "2023-04-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "ai-driven-network-optimization-reality-apr2023.md"
+  },
+  {
+    "id": "zero-trust-wireless-architecture-evolution",
+    "title": "Zero Trust Wireless Architecture: 2023 Evolution and Best Practices",
+    "excerpt": "Zero Trust has completed its journey from security buzzword to operational necessity. In 2023, it's no longer about whether to implement Zero Trust, b...",
+    "date": "2023-03-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "zero-trust-wireless-architecture-evolution-mar2023.md"
+  },
+  {
+    "id": "afc-standard-power-deployment-guide",
+    "title": "AFC and Standard Power 6 GHz: Complete Deployment Guide",
+    "excerpt": "The game-changer we've been waiting for has arrived. Automated Frequency Coordination (AFC) systems went live in late 2022, and my first standard powe...",
+    "date": "2023-02-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Network Design",
+      "Deployment",
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "afc-standard-power-deployment-guide-feb2023.md"
+  },
+  {
+    "id": "wifi6e-maturity-enterprise-reality",
+    "title": "Wi-Fi 6E Maturity: From Early Adoption to Enterprise Reality",
+    "excerpt": "The transformation is complete. What began as an experimental technology when the FCC opened 6 GHz spectrum in April 2020 has evolved into the enterpr...",
+    "date": "2023-01-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6E",
+      "Enterprise",
+      "6 GHz"
+    ],
+    "featured": false,
+    "contentFile": "wifi6e-maturity-enterprise-reality-jan2023.md"
+  },
+  {
+    "id": "2022-wireless-networking-retrospective",
+    "title": "2022 Wireless Networking Retrospective: The Year of Wi-Fi 6E",
+    "excerpt": "2022 marked Wi-Fi 6E's transition from future technology to deployed reality, while Wi-Fi 6 reached full maturity. As the year closes, it's clear that...",
+    "date": "2022-12-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "2022-wireless-networking-retrospective-dec2022.md"
+  },
+  {
+    "id": "wifi6e-client-ecosystem-2022",
+    "title": "Wi-Fi 6E Client Ecosystem: 2022 State of Adoption",
+    "excerpt": "Wi-Fi 6E's value depends entirely on client device support. My 2022 client tracking reveals 6E adoption accelerating faster than Wi-Fi 6 did—but with ...",
+    "date": "2022-11-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6E",
+      "Enterprise",
+      "6 GHz"
+    ],
+    "featured": false,
+    "contentFile": "wifi6e-client-ecosystem-2022-nov2022.md"
+  },
+  {
+    "id": "advanced-wpa3-security",
+    "title": "Advanced WPA3 Security Features: SAE, OWE, and Enhanced Open",
+    "excerpt": "WPA3 provides more than just stronger encryption—it introduces fundamentally new security paradigms. My 2022 implementations of SAE, OWE, and Enhanced...",
+    "date": "2022-10-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Security",
+      "WPA3",
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "advanced-wpa3-security-oct2022.md"
+  },
+  {
+    "id": "private-5g-wifi-convergence",
+    "title": "Private 5G and Wi-Fi Convergence: Enterprise Wireless Strategy",
+    "excerpt": "Private 5G networks are emerging as enterprise wireless options alongside Wi-Fi. Rather than competing technologies, my 2022 evaluations suggest they'...",
+    "date": "2022-09-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "private-5g-wifi-convergence-sep2022.md"
+  },
+  {
+    "id": "network-automation-orchestration",
+    "title": "Network Automation and Orchestration: Modern Enterprise Approaches",
+    "excerpt": "Manual network configuration and management can't scale to meet modern enterprise demands. My 2022 automation implementations demonstrate how infrastr...",
+    "date": "2022-08-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "network-automation-orchestration-aug2022.md"
+  },
+  {
+    "id": "wifi6-two-year-retrospective",
+    "title": "Wi-Fi 6 Two-Year Retrospective: Mature Deployment Insights",
+    "excerpt": "Two years into enterprise Wi-Fi 6 deployments, 802.11ax has evolved from cutting-edge technology to stable, proven infrastructure. My experience acros...",
+    "date": "2022-07-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6",
+      "802.11ax",
+      "Enterprise"
+    ],
+    "featured": false,
+    "contentFile": "wifi6-two-year-retrospective-jul2022.md"
+  },
+  {
+    "id": "multi-gigabit-ethernet-deployment",
+    "title": "Multi-Gigabit Ethernet Deployment: 2.5/5/10GBASE-T in Practice",
+    "excerpt": "Wi-Fi 6 and 6E's aggregate throughput capabilities make multi-gigabit Ethernet no longer optional—it's essential infrastructure. My 2022 deployments a...",
+    "date": "2022-06-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Network Design",
+      "Deployment",
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "multi-gigabit-ethernet-deployment-jun2022.md"
+  },
+  {
+    "id": "ai-ml-network-management",
+    "title": "AI and ML in Network Management: Beyond the Marketing Hype",
+    "excerpt": "Every vendor now touts AI/ML capabilities in their wireless management platforms. Having evaluated and deployed multiple AI-driven solutions throughou...",
+    "date": "2022-05-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "ai-ml-network-management-may2022.md"
+  },
+  {
+    "id": "zero-trust-implementation-roadmap",
+    "title": "Zero Trust Implementation Roadmap: From Concept to Reality",
+    "excerpt": "Zero Trust architecture has moved from buzzword to business requirement. After implementing Zero Trust frameworks across multiple enterprises in 2021-...",
+    "date": "2022-04-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "zero-trust-implementation-roadmap-apr2022.md"
+  },
+  {
+    "id": "6ghz-channel-planning-design",
+    "title": "6 GHz Channel Planning and Design: Lessons from Early Deployments",
+    "excerpt": "The 6 GHz band's 1200 MHz of clean spectrum fundamentally changes wireless channel planning. My 2022 deployments reveal that traditional 5 GHz design ...",
+    "date": "2022-03-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Network Design",
+      "Deployment",
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "6ghz-channel-planning-design-mar2022.md"
+  },
+  {
+    "id": "wpa3-transition-mode-best-practices",
+    "title": "WPA3 Transition Mode: Best Practices for Enterprise Networks",
+    "excerpt": "As WPA3 becomes standard in enterprise wireless, transition mode has emerged as the practical migration path. After implementing WPA3 across diverse c...",
+    "date": "2022-02-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Security",
+      "WPA3",
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "wpa3-transition-mode-best-practices-feb2022.md"
+  },
+  {
+    "id": "wifi6e-deployment-experiences",
+    "title": "Wi-Fi 6E First Deployment Experiences: Real-World 6 GHz Performance",
+    "excerpt": "After a year of preparation, Wi-Fi 6E devices finally reached critical mass in late 2021, enabling real production deployments. My first large-scale 6...",
+    "date": "2022-01-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6E",
+      "Enterprise",
+      "6 GHz",
+      "Network Design",
+      "Deployment"
+    ],
+    "featured": false,
+    "contentFile": "wifi6e-deployment-experiences-jan2022.md"
+  },
+  {
+    "id": "2021-wireless-networking-retrospective",
+    "title": "2021 Wireless Networking Retrospective: A Year of Maturation",
+    "excerpt": "As 2021 draws to a close, it's an appropriate time to reflect on the year in enterprise wireless networking. While 2020 was defined by pandemic-driven...",
+    "date": "2021-12-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "2021-wireless-networking-retrospective-dec2021.md"
+  },
+  {
+    "id": "multi-gigabit-network-infrastructure",
+    "title": "Multi-Gigabit Network Infrastructure: Preparing for Wi-Fi 6 and Beyond",
+    "excerpt": "Wi-Fi 6's efficiency improvements and higher modulation schemes enable aggregate access point throughput that easily exceeds traditional gigabit Ether...",
+    "date": "2021-11-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "multi-gigabit-network-infrastructure-nov2021.md"
+  },
+  {
+    "id": "wifi6-client-device-ecosystem",
+    "title": "Wi-Fi 6 Client Device Ecosystem: 2021 State of Adoption",
+    "excerpt": "Wi-Fi 6 infrastructure deployment accelerated dramatically through 2020 and 2021, with enterprise access points reaching market maturity and competiti...",
+    "date": "2021-10-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6",
+      "802.11ax",
+      "Enterprise"
+    ],
+    "featured": false,
+    "contentFile": "wifi6-client-device-ecosystem-oct2021.md"
+  },
+  {
+    "id": "network-visibility-analytics",
+    "title": "Network Visibility and Analytics: Modern Wireless Network Intelligence",
+    "excerpt": "The evolution from traditional controller-based wireless management to cloud-managed platforms has fundamentally transformed network visibility and an...",
+    "date": "2021-09-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "network-visibility-analytics-sep2021.md"
+  },
+  {
+    "id": "enterprise-iot-security-wifi6",
+    "title": "Enterprise IoT Security with Wi-Fi 6: Strategies and Best Practices",
+    "excerpt": "The Internet of Things has transformed from futuristic concept to operational reality. Enterprise environments now support hundreds or thousands of Io...",
+    "date": "2021-08-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6",
+      "802.11ax",
+      "Enterprise",
+      "Security",
+      "WPA3"
+    ],
+    "featured": false,
+    "contentFile": "enterprise-iot-security-wifi6-aug2021.md"
+  },
+  {
+    "id": "zero-trust-network-access-intro",
+    "title": "Zero Trust Network Access: Introduction and Implementation",
+    "excerpt": "Zero Trust has evolved from an abstract security concept to a practical framework reshaping enterprise network architecture. The principle is simple: ...",
+    "date": "2021-07-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "zero-trust-network-access-intro-jul2021.md"
+  },
+  {
+    "id": "wifi6-performance-optimization",
+    "title": "Wi-Fi 6 Performance Optimization: Real-World Tuning Strategies",
+    "excerpt": "Six months into 2021, Wi-Fi 6 (802.11ax) deployments have matured significantly from the early implementations of 2019-2020. Access point firmware has...",
+    "date": "2021-06-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6",
+      "802.11ax",
+      "Enterprise"
+    ],
+    "featured": false,
+    "contentFile": "wifi6-performance-optimization-jun2021.md"
+  },
+  {
+    "id": "cloud-managed-networks-evolution",
+    "title": "Cloud-Managed Networks: The Evolution of Enterprise Wireless Management",
+    "excerpt": "The enterprise wireless network management landscape is undergoing a fundamental transformation. Traditional on-premises controller architectures that...",
+    "date": "2021-05-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "cloud-managed-networks-evolution-may2021.md"
+  },
+  {
+    "id": "hybrid-work-network-security",
+    "title": "Hybrid Work Network Security: Securing the Distributed Enterprise",
+    "excerpt": "The COVID-19 pandemic accelerated a workplace transformation that was already underway: the shift to hybrid work models where employees work from mult...",
+    "date": "2021-04-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Security",
+      "WPA3",
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "hybrid-work-network-security-apr2021.md"
+  },
+  {
+    "id": "wpa3-migration-strategy",
+    "title": "WPA3 Migration Strategy: Enterprise Wireless Security Evolution",
+    "excerpt": "WPA3, the latest Wi-Fi security protocol ratified by Wi-Fi Alliance in 2018, addresses fundamental vulnerabilities in WPA2 that have existed for over ...",
+    "date": "2021-03-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Security",
+      "WPA3",
+      "Wireless",
+      "Enterprise Networking"
+    ],
+    "featured": false,
+    "contentFile": "wpa3-migration-strategy-mar2021.md"
+  },
+  {
+    "id": "wifi6e-planning-readiness",
+    "title": "Wi-Fi 6E Planning and Readiness: Preparing for 6 GHz",
+    "excerpt": "The FCC's April 2020 decision to open 1200 MHz of spectrum in the 6 GHz band (5.925-7.125 GHz) for unlicensed use represents the most significant expa...",
+    "date": "2021-02-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6E",
+      "Enterprise",
+      "6 GHz"
+    ],
+    "featured": false,
+    "contentFile": "wifi6e-planning-readiness-feb2021.md"
+  },
+  {
+    "id": "wifi6-deployment-best-practices",
+    "title": "Wi-Fi 6 Deployment Best Practices for Enterprise Networks",
+    "excerpt": "After spending 2020 deploying Wi-Fi 6 (802.11ax) networks across various enterprise environments, I've developed a comprehensive understanding of what...",
+    "date": "2021-01-15",
+    "author": "Kris Armstrong",
+    "tags": [
+      "Wi-Fi 6",
+      "802.11ax",
+      "Enterprise",
+      "Network Design",
+      "Deployment"
+    ],
+    "featured": false,
+    "contentFile": "wifi6-deployment-best-practices-jan2021.md"
+  }
+]

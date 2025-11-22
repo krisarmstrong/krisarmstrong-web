@@ -9,7 +9,8 @@ export default function Services() {
             How We <span className="text-text-accent">Work Together</span>
           </h1>
           <p className="text-xl text-text-muted max-w-3xl mx-auto">
-            Choose the coaching path that aligns with your goals—whether you're seeking personalized 1:1 support, the energy of group learning, or organizational transformation.
+            Choose the coaching path that aligns with your goals—whether you're seeking personalized
+            1:1 support, the energy of group learning, or organizational transformation.
           </p>
         </div>
 
@@ -18,9 +19,13 @@ export default function Services() {
           <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent transition-colors bg-surface-raised shadow-sm flex flex-col">
             <div className="h-2 w-16 bg-brand-accent rounded mb-6"></div>
             <h2 className="text-2xl font-heading mb-4">1:1 Coaching</h2>
-            <h3 className="text-lg font-semibold text-text-primary mb-3">Deep, personalized transformation. Just you and me.</h3>
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Deep, personalized transformation. Just you and me.
+            </h3>
             <p className="text-text-muted mb-4 leading-relaxed">
-              Personalized coaching for individuals, professionals, and executives. Deep work on mindset, leadership, and strategic growth tailored to your unique goals and challenges.
+              Personalized coaching for individuals, professionals, and executives. Deep work on
+              mindset, leadership, and strategic growth tailored to your unique goals and
+              challenges.
             </p>
             <p className="text-sm font-semibold text-text-accent mb-3">Highlights:</p>
             <ul className="space-y-2 text-text-muted mb-4 text-sm">
@@ -44,9 +49,13 @@ export default function Services() {
           <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent transition-colors bg-surface-raised shadow-sm flex flex-col">
             <div className="h-2 w-16 bg-brand-accent rounded mb-6"></div>
             <h2 className="text-2xl font-heading mb-4">Intrinsic Foundations — Group Coaching</h2>
-            <h3 className="text-lg font-semibold text-text-primary mb-3">Release the labels. Reclaim who you actually are.</h3>
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Release the labels. Reclaim who you actually are.
+            </h3>
             <p className="text-text-muted mb-4 leading-relaxed">
-              This program is all about stripping off the identities that were handed to you — by family, culture, trauma, old roles, or your own outdated beliefs. People start here when they're ready to stop performing versions of themselves that no longer fit.
+              This program is all about stripping off the identities that were handed to you — by
+              family, culture, trauma, old roles, or your own outdated beliefs. People start here
+              when they're ready to stop performing versions of themselves that no longer fit.
             </p>
             <p className="text-sm font-semibold text-text-accent mb-3">Highlights:</p>
             <ul className="space-y-2 text-text-muted mb-4 text-sm">
@@ -71,9 +80,13 @@ export default function Services() {
           <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent transition-colors bg-surface-raised shadow-sm flex flex-col">
             <div className="h-2 w-16 bg-brand-accent rounded mb-6"></div>
             <h2 className="text-2xl font-heading mb-4">Intrinsic Momentum — Group Coaching</h2>
-            <h3 className="text-lg font-semibold text-text-primary mb-3">You've cleared out the noise. Now it's time to build the engine.</h3>
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              You've cleared out the noise. Now it's time to build the engine.
+            </h3>
             <p className="text-text-muted mb-4 leading-relaxed">
-              This tier combines the identity clarity of Intrinsic Foundations with the forward-drive of Momentum frameworks. It's where people stop thinking about change and start producing it — reliably.
+              This tier combines the identity clarity of Intrinsic Foundations with the
+              forward-drive of Momentum frameworks. It's where people stop thinking about change and
+              start producing it — reliably.
             </p>
             <p className="text-sm font-semibold text-text-accent mb-3">Highlights:</p>
             <ul className="space-y-2 text-text-muted mb-4 text-sm">
@@ -99,9 +112,13 @@ export default function Services() {
           <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent transition-colors bg-surface-raised shadow-sm flex flex-col">
             <div className="h-2 w-16 bg-brand-accent rounded mb-6"></div>
             <h2 className="text-2xl font-heading mb-4">Mindset Immersion — Group Coaching</h2>
-            <h3 className="text-lg font-semibold text-text-primary mb-3">The full transformation chamber. Not for dabblers.</h3>
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              The full transformation chamber. Not for dabblers.
+            </h3>
             <p className="text-text-muted mb-4 leading-relaxed">
-              This is where you combine Intrinsic, Momentum, and deep Mindset work into one elite, comprehensive experience. Think: pattern rewiring, identity shifts, and leadership embodiment.
+              This is where you combine Intrinsic, Momentum, and deep Mindset work into one elite,
+              comprehensive experience. Think: pattern rewiring, identity shifts, and leadership
+              embodiment.
             </p>
             <p className="text-sm font-semibold text-text-accent mb-3">Highlights:</p>
             <ul className="space-y-2 text-text-muted mb-4 text-sm">
@@ -126,9 +143,12 @@ export default function Services() {
           <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent transition-colors bg-surface-raised shadow-sm flex flex-col">
             <div className="h-2 w-16 bg-brand-accent rounded mb-6"></div>
             <h2 className="text-2xl font-heading mb-4">Corporate Leadership</h2>
-            <h3 className="text-lg font-semibold text-text-primary mb-3">Build leaders who inspire movement, not just management.</h3>
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Build leaders who inspire movement, not just management.
+            </h3>
             <p className="text-text-muted mb-4 leading-relaxed">
-              Workshops, leadership training, and keynote speaking for organizations committed to developing exceptional leaders who drive real cultural transformation.
+              Workshops, leadership training, and keynote speaking for organizations committed to
+              developing exceptional leaders who drive real cultural transformation.
             </p>
             <p className="text-sm font-semibold text-text-accent mb-3">Highlights:</p>
             <ul className="space-y-2 text-text-muted mb-4 text-sm">

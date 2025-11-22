@@ -8,12 +8,15 @@ export default function Home() {
       <section className="bg-gradient-to-br from-surface-base via-primary/5 to-brand-accent/10 py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-text-primary mb-6">
-            Lead From Within.<br />
-            <span className="text-text-primary">Build Momentum.</span><br />
+            Lead From Within.
+            <br />
+            <span className="text-text-primary">Build Momentum.</span>
+            <br />
             <span className="text-text-accent">Transform Your Mind.</span>
           </h1>
           <p className="text-xl md:text-2xl text-text-muted mb-10 max-w-3xl mx-auto">
-            Grounded, intelligent coaching for individuals, professionals, and executives ready to move beyond surface-level change.
+            Grounded, intelligent coaching for individuals, professionals, and executives ready to
+            move beyond surface-level change.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -45,7 +48,8 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-heading mb-4">Intrinsic</h3>
               <p className="text-text-muted leading-relaxed">
-                True transformation starts from within. We focus on uncovering your core values, authentic motivations, and internal drivers.
+                True transformation starts from within. We focus on uncovering your core values,
+                authentic motivations, and internal drivers.
               </p>
             </div>
             <div className="text-center">
@@ -54,7 +58,8 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-heading mb-4">Momentum</h3>
               <p className="text-text-muted leading-relaxed">
-                Clarity without action is just theory. We build sustainable forward motion through intentional practices and strategic implementation.
+                Clarity without action is just theory. We build sustainable forward motion through
+                intentional practices and strategic implementation.
               </p>
             </div>
             <div className="text-center">
@@ -63,7 +68,8 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-heading mb-4">Mindset</h3>
               <p className="text-text-muted leading-relaxed">
-                Your mental frameworks determine your reality. We rewire limiting beliefs and develop the emotional intelligence necessary for lasting change.
+                Your mental frameworks determine your reality. We rewire limiting beliefs and
+                develop the emotional intelligence necessary for lasting change.
               </p>
             </div>
           </div>
@@ -73,11 +79,10 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-20 bg-brand-accent/10 border-y-2 border-brand-accent">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-heading mb-6">
-            Ready to Start Your Journey?
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-heading mb-6">Ready to Start Your Journey?</h2>
           <p className="text-xl text-text-muted mb-8">
-            Whether you're an individual seeking personal growth or a professional looking to elevate your leadership, we're here to guide you.
+            Whether you're an individual seeking personal growth or a professional looking to
+            elevate your leadership, we're here to guide you.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

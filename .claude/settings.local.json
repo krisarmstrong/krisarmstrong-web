@@ -18,7 +18,21 @@
       "Bash(chmod:*)",
       "Bash(git config:*)",
       "Bash(cat:*)",
-      "Bash(npx commitlint --help:*)"
+      "Bash(npx commitlint --help:*)",
+      "Bash(find:*)",
+      "Bash(rm:*)",
+      "Bash(npm audit:*)",
+      "Bash(npm run lint)",
+      "Bash(lsof:*)",
+      "Bash(git checkout:*)",
+      "Bash(npx vite --force)",
+      "Bash(git push)",
+      "Bash(for:*)",
+      "Bash(git revert:*)",
+      "Bash(gh issue create:*)",
+      "Bash(npm run release:dry:*)",
+      "Bash(npm run lint:fix:*)",
+      "Bash(npm run lint:*)"
     ],
     "deny": [],
     "ask": []

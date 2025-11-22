@@ -77,7 +77,7 @@ describe('ThemeContext', () => {
       );
 
       const root = document.documentElement;
-      const primaryColor = root.style.getPropertyValue('--theme-brand-primary');
+      const primaryColor = root.style.getPropertyValue('--color-brand-primary');
       expect(primaryColor).toBe('#ff0000');
     });
 
@@ -230,7 +230,7 @@ describe('ThemeContext', () => {
       );
 
       const root = document.documentElement;
-      expect(root.style.getPropertyValue('--theme-brand-primary')).toBe('#ff0000');
+      expect(root.style.getPropertyValue('--color-brand-primary')).toBe('#ff0000');
     });
 
     it('accepts CSS variables', () => {
@@ -245,7 +245,7 @@ describe('ThemeContext', () => {
       );
 
       const root = document.documentElement;
-      expect(root.style.getPropertyValue('--theme-brand-primary')).toBe('var(--my-color)');
+      expect(root.style.getPropertyValue('--color-brand-primary')).toBe('var(--my-color)');
     });
   });
 
@@ -273,8 +273,8 @@ describe('ThemeContext', () => {
       });
 
       const root = document.documentElement;
-      expect(root.style.getPropertyValue('--theme-brand-primary')).toBe('#00ff00');
-      expect(root.style.getPropertyValue('--theme-brand-accent')).toBe('#0000ff');
+      expect(root.style.getPropertyValue('--color-brand-primary')).toBe('#00ff00');
+      expect(root.style.getPropertyValue('--color-brand-accent')).toBe('#0000ff');
     });
 
     it('removes old mode class when mode changes', () => {

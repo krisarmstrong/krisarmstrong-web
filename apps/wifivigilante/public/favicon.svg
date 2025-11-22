@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Shield background -->
+  <path d="M50 5 L90 20 L90 50 C90 70, 75 85, 50 95 C25 85, 10 70, 10 50 L10 20 Z"
+        fill="#2563eb" stroke="#1d4ed8" stroke-width="2"/>
+
+  <!-- Wi-Fi signal waves -->
+  <g fill="#ffffff" opacity="0.95">
+    <!-- Outer wave -->
+    <path d="M50 45 Q35 35, 25 45" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M50 45 Q65 35, 75 45" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- Middle wave -->
+    <path d="M50 50 Q40 43, 33 50" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M50 50 Q60 43, 67 50" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- Inner wave -->
+    <path d="M50 55 Q45 51, 41 55" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M50 55 Q55 51, 59 55" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- Center dot -->
+    <circle cx="50" cy="60" r="4" fill="#ffffff"/>
+  </g>
+</svg>

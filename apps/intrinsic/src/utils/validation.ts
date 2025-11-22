@@ -71,7 +71,10 @@ export function validateName(name: string): ValidationResult {
 
   const nameRegex = /^[a-zA-Z\s'-]+$/;
   if (!nameRegex.test(name)) {
-    return { isValid: false, error: 'Name can only contain letters, spaces, hyphens, and apostrophes' };
+    return {
+      isValid: false,
+      error: 'Name can only contain letters, spaces, hyphens, and apostrophes',
+    };
   }
 
   return { isValid: true };
@@ -191,6 +194,7 @@ export function validateZipCode(zip: string): ValidationResult {
     return { isValid: false, error: 'ZIP code is required' };
   }
 
+  // eslint-disable-next-line security/detect-unsafe-regex
   const zipRegex = /^\d{5}(-\d{4})?$/;
   if (!zipRegex.test(zip)) {
     return { isValid: false, error: 'Please enter a valid ZIP code (e.g., 12345 or 12345-6789)' };
@@ -213,7 +217,7 @@ export function validatePayPalUrl(url: string): ValidationResult {
     const parsedUrl = new URL(url);
     const validPayPalDomains = ['paypal.com', 'www.paypal.com'];
 
-    if (!validPayPalDomains.some(domain => parsedUrl.hostname.endsWith(domain))) {
+    if (!validPayPalDomains.some((domain) => parsedUrl.hostname.endsWith(domain))) {
       return { isValid: false, error: 'Invalid payment URL. Please contact support.' };
     }
 

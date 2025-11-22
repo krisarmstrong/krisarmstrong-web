@@ -7,13 +7,24 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './src/__tests__/setup.ts', // Assuming a setup file will be created here
+    setupFiles: './src/__tests__/setup.ts',
     css: true,
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      exclude: [
+        'node_modules/',
+        'dist/',
+        '**/*.d.ts',
+        '**/*.config.*',
+        '**/vitest.setup.ts',
+        'src/__tests__/setup.ts',
+      ],
+    },
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      'react-router-dom': path.resolve(__dirname, './node_modules/react-router-dom'),
     },
   },
 });

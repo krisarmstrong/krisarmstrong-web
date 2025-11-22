@@ -30,24 +30,22 @@ export function PageHeader({
   title,
   description,
   className = '',
-  variant = 'violet'
+  variant = 'violet',
 }: PageHeaderProps) {
   const styles = variantStyles[variant];
 
   return (
     <div className={`mb-8 transition duration-300 ease-out ${className}`}>
       <div className="flex items-center gap-3 mb-3">
-        <div className={`p-3 bg-gradient-to-br ${styles.gradient} rounded-lg shadow-lg ring-2 ${styles.ring}`}>
+        <div
+          className={`p-3 bg-gradient-to-br ${styles.gradient} rounded-lg shadow-lg ring-2 ${styles.ring}`}
+        >
           <Icon className="w-6 h-6 text-white" />
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold text-text-main">
-          {title}
-        </h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-text-main">{title}</h1>
       </div>
       {description && (
-        <p className="text-sm sm:text-base ml-[60px] text-text-muted">
-          {description}
-        </p>
+        <p className="text-sm sm:text-base ml-[60px] text-text-muted">{description}</p>
       )}
     </div>
   );

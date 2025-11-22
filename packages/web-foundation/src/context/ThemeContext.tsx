@@ -172,8 +172,8 @@ export const intrinsicTheme: ThemeConfig = {
   },
   typography: {
     fontFamily: {
-      heading: 'Poppins, sans-serif',
-      body: 'Inter, sans-serif',
+      heading: 'Space Grotesk, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
     },
   },
 };
@@ -210,8 +210,8 @@ export const intrinsicDarkTheme: ThemeConfig = {
   },
   typography: {
     fontFamily: {
-      heading: 'Poppins, sans-serif',
-      body: 'Inter, sans-serif',
+      heading: 'Space Grotesk, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
     },
   },
 };
@@ -246,6 +246,12 @@ export const wifiVigilanteTheme: ThemeConfig = {
     error: '#ef4444',
     info: '#2563eb',
   },
+  typography: {
+    fontFamily: {
+      heading: 'Space Grotesk, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+  },
 };
 
 export const wifiVigilanteDarkTheme: ThemeConfig = {
@@ -278,69 +284,87 @@ export const wifiVigilanteDarkTheme: ThemeConfig = {
     error: '#ef4444',
     info: '#60a5fa',
   },
+  typography: {
+    fontFamily: {
+      heading: 'Space Grotesk, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+  },
 };
 
 export const krisArmstrongTheme: ThemeConfig = {
   brand: {
-    primary: '#8b5cf6',  // Violet
-    accent: '#7c3aed',
+    primary: '#0d9488',  // Modern Teal - tech-forward and professional
+    accent: '#14b8a6',   // Bright Teal accent
   },
   surface: {
-    base: '#f8f9fb',      // Slightly off-white for less glare
-    raised: '#eef1f7',    // More substantial gray with slight blue tint
-    border: '#cbd5e1',    // Visible border color
-    hover: '#e1e7ef',     // Clear hover state
+    base: '#ffffff',      // Pure white for maximum clarity
+    raised: '#f8fafc',    // Subtle slate tint
+    border: '#e2e8f0',    // Light slate border
+    hover: '#f1f5f9',     // Light hover state
   },
   text: {
-    primary: '#0f172a',
-    muted: '#475569',     // Darker muted text for better readability
-    accent: '#7c3aed',
+    primary: '#0f172a',   // Deep slate for excellent readability
+    muted: '#64748b',     // Slate for secondary text
+    accent: '#0d9488',    // Teal accent text
     inverse: '#ffffff',
   },
   interactive: {
-    default: '#8b5cf6',
-    hover: '#7c3aed',
-    active: '#c084fc',
-    focus: '#c084fc',
-    disabled: '#94a3b8',
+    default: '#0d9488',   // Teal
+    hover: '#0f766e',     // Darker teal on hover
+    active: '#14b8a6',    // Bright teal for active state
+    focus: '#14b8a6',     // Bright teal for focus
+    disabled: '#cbd5e1',
   },
   status: {
     success: '#10b981',
     warning: '#f59e0b',
     error: '#ef4444',
-    info: '#3b82f6',
+    info: '#0ea5e9',      // Updated to cyan
+  },
+  typography: {
+    fontFamily: {
+      heading: 'Space Grotesk, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
   },
 };
 
 export const krisArmstrongDarkTheme: ThemeConfig = {
   brand: {
-    primary: '#8b5cf6',  // Violet
-    accent: '#c084fc',
+    primary: '#2dd4bf',  // Bright Teal - vibrant in dark mode
+    accent: '#5eead4',   // Lighter teal accent
   },
   surface: {
-    base: '#0f172a',
-    raised: '#1e293b',
-    border: '#334155',
-    hover: '#1e293b',
+    base: '#0f172a',      // Deep slate background
+    raised: '#1e293b',    // Slate raised surface
+    border: '#2dd4bf',    // Teal border for strong contrast
+    hover: '#334155',     // Distinct hover state
   },
   text: {
-    primary: '#f1f5f9',
-    muted: '#94a3b8',
-    accent: '#c084fc',
+    primary: '#f1f5f9',   // Bright text
+    muted: '#94a3b8',     // Muted slate
+    accent: '#5eead4',    // Light teal accent
     inverse: '#0f172a',
   },
   interactive: {
-    default: '#8b5cf6',
-    hover: '#7c3aed',
-    active: '#c084fc',
-    focus: '#c084fc',
-    disabled: '#64748b',
+    default: '#2dd4bf',   // Bright teal
+    hover: '#14b8a6',     // Medium teal on hover
+    active: '#5eead4',    // Light teal for active state
+    focus: '#5eead4',     // Light teal for focus
+    disabled: '#475569',
   },
   status: {
-    success: '#10b981',
-    warning: '#f59e0b',
-    error: '#ef4444',
-    info: '#3b82f6',
+    success: '#34d399',   // Brighter green for dark mode
+    warning: '#fbbf24',   // Brighter yellow for dark mode
+    error: '#f87171',     // Brighter red for dark mode
+    info: '#38bdf8',      // Bright cyan
+  },
+  typography: {
+    fontFamily: {
+      heading: 'Space Grotesk, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
   },
 };
 

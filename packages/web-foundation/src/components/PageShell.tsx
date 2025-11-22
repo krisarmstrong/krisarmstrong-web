@@ -22,7 +22,7 @@ export function PageShell({ breadcrumbs, children, className = '' }: PageShellPr
           width: '100%',
           margin: '0 auto',
           paddingTop: '2rem',
-          paddingBottom: '8rem'
+          paddingBottom: '8rem',
         }}
       >
         {breadcrumbs && breadcrumbs.length > 0 && (

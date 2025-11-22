@@ -3,6 +3,7 @@
 ## What Changed
 
 ### 1. **Color Hierarchy Fix**
+
 - **Gold (#CFB53B)** is now PRIMARY → Use for CTAs, important buttons, highlights
 - **Sage Green (#96A77A)** is now ACCENT → Use for supporting elements, icons
 - All buttons (including contact form) now use gold as primary color
@@ -13,45 +14,52 @@
 Add these classes to your components for instant visual improvements:
 
 #### **Enhanced Cards**
+
 ```tsx
-<div className="enhanced-card p-6 rounded-xl">
-  {/* Your content */}
-</div>
+<div className="enhanced-card p-6 rounded-xl">{/* Your content */}</div>
 ```
+
 - Adds subtle gradients, shadows, and hover effects
 
 #### **Hero Sections**
+
 ```tsx
 <section className="hero-gradient py-20 relative">
   <div className="dot-pattern"></div>
   {/* Your hero content */}
 </section>
 ```
+
 - Adds animated gradient background with subtle dot pattern
 
 #### **Accent Borders**
+
 ```tsx
-<div className="accent-border-top p-6">
-  {/* Your content */}
-</div>
+<div className="accent-border-top p-6">{/* Your content */}</div>
 ```
+
 - Adds a gradient gold/sage border at the top
 
 #### **Section Dividers**
+
 ```tsx
 <div className="accent-divider"></div>
 ```
+
 - Adds a centered gradient line divider
 
 #### **Callouts/Quotes**
+
 ```tsx
 <div className="callout">
   <p>Important message or quote</p>
 </div>
 ```
+
 - Adds styled callout boxes with gold accent
 
 #### **Animated Lists**
+
 ```tsx
 <ul>
   <li className="stagger-item">Item 1</li>
@@ -59,18 +67,20 @@ Add these classes to your components for instant visual improvements:
   <li className="stagger-item">Item 3</li>
 </ul>
 ```
+
 - Items fade in with staggered timing
 
 ## Quick Implementation Examples
 
 ### Home Page Hero
+
 ```tsx
 <section className="hero-gradient py-20 relative">
   <div className="dot-pattern"></div>
   <div className="max-w-5xl mx-auto px-4 text-center relative z-10">
     <h1 className="text-5xl md:text-6xl font-heading mb-6 fade-in-up">
-      Lead From Within. <br/>
-      <span className="text-text-accent">Build Momentum.</span> <br/>
+      Lead From Within. <br />
+      <span className="text-text-accent">Build Momentum.</span> <br />
       Transform Your Mind.
     </h1>
     <p className="text-xl text-text-muted mb-8">
@@ -81,6 +91,7 @@ Add these classes to your components for instant visual improvements:
 ```
 
 ### Services Cards
+
 ```tsx
 <div className="grid md:grid-cols-3 gap-6">
   <div className="enhanced-card accent-border-top p-6 stagger-item">
@@ -94,6 +105,7 @@ Add these classes to your components for instant visual improvements:
 ```
 
 ### About Page Quote
+
 ```tsx
 <div className="callout my-12 fade-in-up">
   <p className="text-lg italic">
@@ -132,6 +144,7 @@ Add these classes to your components for instant visual improvements:
 ## Color Usage Examples
 
 ### Text Hierarchy
+
 ```tsx
 <h1>Main Heading</h1>                           {/* Gradient gold */}
 <h2>Section Title</h2>                          {/* Dark forest green */}
@@ -140,6 +153,7 @@ Add these classes to your components for instant visual improvements:
 ```
 
 ### Buttons
+
 ```tsx
 <Button tone="sage">Primary CTA</Button>        {/* Gold button */}
 <button className="btn-primary">Send</button>   {/* Gold with glow */}

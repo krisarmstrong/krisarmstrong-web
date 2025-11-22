@@ -9,6 +9,7 @@ Regular secret rotation is a critical security practice that limits the window o
 ## Secrets Inventory
 
 ### Web Foundation
+
 - **NPM Token** (`NPM_TOKEN`)
   - Purpose: Publishing packages to npm registry
   - Rotation Frequency: Every 90 days
@@ -16,6 +17,7 @@ Regular secret rotation is a critical security practice that limits the window o
   - Impact: Publishing workflow will fail
 
 ### Consuming Projects
+
 - **Formspree Endpoint** (`VITE_FORMSPREE_ENDPOINT`)
   - Purpose: Contact form submissions
   - Rotation Frequency: As needed (security incident)
@@ -33,11 +35,14 @@ Regular secret rotation is a critical security practice that limits the window o
 ### NPM Token
 
 #### Prerequisites
+
 - Access to npm account
 - Repository admin access for GitHub secrets
 
 #### Steps
+
 1. **Generate New Token**
+
    ```bash
    npm login
    npm token create --type=publish
@@ -52,6 +57,7 @@ Regular secret rotation is a critical security practice that limits the window o
    - Verify successful publication
 
 4. **Revoke Old Token**
+
    ```bash
    npm token list
    npm token revoke <old-token-id>
@@ -64,10 +70,12 @@ Regular secret rotation is a critical security practice that limits the window o
 ### Formspree Endpoint
 
 #### Prerequisites
+
 - Access to Formspree account
 - Access to project environment variables
 
 #### Steps
+
 1. **Create New Formspree Form**
    - Log in to Formspree dashboard
    - Create new form or regenerate endpoint
@@ -75,6 +83,7 @@ Regular secret rotation is a critical security practice that limits the window o
 
 2. **Update Environment Variables**
    For each project (krisarmstrong-org, wifivigilante-com):
+
    ```bash
    # Update .env file
    VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/new-endpoint
@@ -97,6 +106,7 @@ Regular secret rotation is a critical security practice that limits the window o
 ### Analytics Keys
 
 #### Google Analytics
+
 1. Go to Google Analytics Admin
 2. Data Streams → Select stream → Configure measurement ID
 3. Generate new measurement ID if needed
@@ -104,6 +114,7 @@ Regular secret rotation is a critical security practice that limits the window o
 5. Deploy and test tracking
 
 #### Plausible Analytics
+
 1. Log in to Plausible dashboard
 2. Site Settings → rotate API key if needed
 3. Update environment variables
@@ -112,11 +123,13 @@ Regular secret rotation is a critical security practice that limits the window o
 ## Automated Monitoring
 
 ### Secret Scanning
+
 - **Gitleaks** runs on every push and PR
 - Scans for accidentally committed secrets
 - Blocks merges if secrets detected
 
 ### Rotation Reminders
+
 - Quarterly reminders via GitHub Actions
 - Creates issues for upcoming rotations
 - Tracks last rotation dates
@@ -149,6 +162,7 @@ If a secret is compromised:
 ## Best Practices
 
 ### Storage
+
 - ✅ **DO**: Store secrets in GitHub Secrets
 - ✅ **DO**: Use environment variables
 - ✅ **DO**: Use `.env` files (add to `.gitignore`)
@@ -157,11 +171,13 @@ If a secret is compromised:
 - ❌ **DON'T**: Hard-code secrets in source code
 
 ### Access Control
+
 - Limit secret access to necessary team members
 - Use separate secrets for dev/staging/production
 - Implement least-privilege access
 
 ### Audit Trail
+
 - Document all rotations with date and operator
 - Maintain log of rotation history
 - Review access patterns periodically
@@ -169,17 +185,20 @@ If a secret is compromised:
 ## Tools & Resources
 
 ### Secret Management Tools
+
 - **GitHub Secrets**: Built-in encrypted storage
 - **Doppler**: Secret management platform
 - **AWS Secrets Manager**: Cloud-based secret storage
 - **HashiCorp Vault**: Self-hosted secret management
 
 ### Scanning Tools
+
 - **Gitleaks**: Secret scanning (currently implemented)
 - **TruffleHog**: Git history secret scanner
 - **git-secrets**: Pre-commit hook for secrets
 
 ### Automation
+
 - **Dependabot**: Automated dependency updates
 - **GitHub Actions**: Rotation reminders and workflows
 - **Renovate**: Alternative to Dependabot
@@ -187,17 +206,20 @@ If a secret is compromised:
 ## Troubleshooting
 
 ### Publishing Fails After Rotation
+
 - Verify new NPM token has publish permissions
 - Check token hasn't expired
 - Ensure GitHub secret name is exactly `NPM_TOKEN`
 
 ### Contact Forms Not Working
+
 - Verify Formspree endpoint in `.env` file
 - Check deployment platform has updated env vars
 - Test endpoint directly with curl
 - Review Formspree dashboard for errors
 
 ### Analytics Not Tracking
+
 - Verify measurement ID is correct
 - Check browser console for errors
 - Ensure analytics script is loaded
@@ -205,15 +227,16 @@ If a secret is compromised:
 
 ## Rotation Schedule
 
-| Secret | Frequency | Last Rotated | Next Due | Owner |
-|--------|-----------|--------------|----------|-------|
-| NPM_TOKEN | 90 days | - | - | Project Admin |
-| Formspree Endpoints | As needed | - | - | Site Owners |
-| GA Measurement IDs | 365 days | - | - | Analytics Admin |
+| Secret              | Frequency | Last Rotated | Next Due | Owner           |
+| ------------------- | --------- | ------------ | -------- | --------------- |
+| NPM_TOKEN           | 90 days   | -            | -        | Project Admin   |
+| Formspree Endpoints | As needed | -            | -        | Site Owners     |
+| GA Measurement IDs  | 365 days  | -            | -        | Analytics Admin |
 
 ## Contact
 
 For questions about secret rotation:
+
 - Open an issue with label `security`
 - Contact repository administrators
 - Review GitHub Security documentation

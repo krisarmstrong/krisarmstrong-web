@@ -1,0 +1,18 @@
+[
+  {
+    "id": "wifi-vigilante",
+    "title": "Wi-Fi Vigilante",
+    "description": "Case-driven network investigation platform.",
+    "link": "https://wifivigilante.com",
+    "featured": true,
+    "tags": ["React", "Supabase", "Networking", "Security"]
+  },
+  {
+    "id": "linkrunner-recovery",
+    "title": "LinkRunner Recovery",
+    "description": "Open-source tool for NetAlly device management.",
+    "link": "https://github.com/krisarmstrong/linkrunner-recovery",
+    "featured": true,
+    "tags": ["Open Source", "Device Management", "Python"]
+  }
+]

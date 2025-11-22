@@ -31,7 +31,9 @@ export default function Navbar() {
       }
       logoHref="/"
       navItems={PRIMARY_NAV}
-      variant="violet"
+      bgColor="bg-surface-raised"
+      borderColor="border-surface-border"
+      textColor="text-text-primary"
       desktopActions={
         <ThemeToggle
           lightTheme={krisArmstrongTheme}

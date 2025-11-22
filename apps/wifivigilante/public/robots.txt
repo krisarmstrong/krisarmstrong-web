@@ -1,0 +1,11 @@
+# Robots.txt for Wi-Fi Vigilante
+# Allow all crawlers to access all content
+
+User-agent: *
+Allow: /
+
+# Sitemap location (will be generated)
+Sitemap: https://wifi-vigilante.com/sitemap.xml
+
+# Crawl delay (optional - helps prevent overwhelming server)
+# Crawl-delay: 1

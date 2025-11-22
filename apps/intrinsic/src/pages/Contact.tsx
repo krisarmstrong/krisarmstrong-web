@@ -7,7 +7,8 @@ export default function Contact() {
             Let's <span className="text-text-accent">Connect</span>
           </h1>
           <p className="text-xl text-text-muted">
-            Ready to begin your transformation? Fill out the form below and I'll get back to you within 24 hours.
+            Ready to begin your transformation? Fill out the form below and I'll get back to you
+            within 24 hours.
           </p>
         </div>
 
@@ -15,7 +16,10 @@ export default function Contact() {
           <form className="space-y-6">
             {/* Full Name */}
             <div>
-              <label htmlFor="fullName" className="block text-sm font-semibold text-primary-dark mb-2">
+              <label
+                htmlFor="fullName"
+                className="block text-sm font-semibold text-primary-dark mb-2"
+              >
                 Full Name *
               </label>
               <input
@@ -74,7 +78,10 @@ export default function Contact() {
 
             {/* Gender */}
             <div>
-              <label htmlFor="gender" className="block text-sm font-semibold text-primary-dark mb-2">
+              <label
+                htmlFor="gender"
+                className="block text-sm font-semibold text-primary-dark mb-2"
+              >
                 Gender *
               </label>
               <select
@@ -93,7 +100,10 @@ export default function Contact() {
 
             {/* Message */}
             <div>
-              <label htmlFor="message" className="block text-sm font-semibold text-primary-dark mb-2">
+              <label
+                htmlFor="message"
+                className="block text-sm font-semibold text-primary-dark mb-2"
+              >
                 Message *
               </label>
               <textarea

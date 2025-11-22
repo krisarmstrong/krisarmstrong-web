@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generate Wi-Fi Vigilante Icons</title>
+</head>
+<body>
+    <h1>Icon Generator</h1>
+    <p>This will generate icons in your Downloads folder. Check the console.</p>
+    <canvas id="canvas" style="border: 1px solid black;"></canvas>
+
+    <script>
+        // Function to draw the Wi-Fi Vigilante shield icon
+        function drawIcon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+            canvas.width = size;
+            canvas.height = size;
+
+            // Clear canvas
+            ctx.clearRect(0, 0, size, size);
+
+            // Scale factor
+            const scale = size / 100;
+
+            // Draw shield background
+            ctx.fillStyle = '#2563eb';
+            ctx.strokeStyle = '#1d4ed8';
+            ctx.lineWidth = 2 * scale;
+
+            ctx.beginPath();
+            ctx.moveTo(50 * scale, 5 * scale);
+            ctx.lineTo(90 * scale, 20 * scale);
+            ctx.lineTo(90 * scale, 50 * scale);
+            ctx.quadraticCurveTo(90 * scale, 70 * scale, 50 * scale, 95 * scale);
+            ctx.quadraticCurveTo(10 * scale, 70 * scale, 10 * scale, 50 * scale);
+            ctx.lineTo(10 * scale, 20 * scale);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Draw Wi-Fi waves
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineCap = 'round';
+            ctx.globalAlpha = 0.95;
+
+            // Outer wave
+            ctx.lineWidth = 3 * scale;
+            ctx.beginPath();
+            ctx.moveTo(25 * scale, 45 * scale);
+            ctx.quadraticCurveTo(35 * scale, 35 * scale, 50 * scale, 45 * scale);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(50 * scale, 45 * scale);
+            ctx.quadraticCurveTo(65 * scale, 35 * scale, 75 * scale, 45 * scale);
+            ctx.stroke();
+
+            // Middle wave
+            ctx.beginPath();
+            ctx.moveTo(33 * scale, 50 * scale);
+            ctx.quadraticCurveTo(40 * scale, 43 * scale, 50 * scale, 50 * scale);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(50 * scale, 50 * scale);
+            ctx.quadraticCurveTo(60 * scale, 43 * scale, 67 * scale, 50 * scale);
+            ctx.stroke();
+
+            // Inner wave
+            ctx.beginPath();
+            ctx.moveTo(41 * scale, 55 * scale);
+            ctx.quadraticCurveTo(45 * scale, 51 * scale, 50 * scale, 55 * scale);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(50 * scale, 55 * scale);
+            ctx.quadraticCurveTo(55 * scale, 51 * scale, 59 * scale, 55 * scale);
+            ctx.stroke();
+
+            // Center dot
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(50 * scale, 60 * scale, 4 * scale, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Generate icons
+        const canvas = document.getElementById('canvas');
+        const sizes = [16, 32, 180, 192, 512];
+
+        sizes.forEach(size => {
+            drawIcon(canvas, size);
+
+            canvas.toBlob(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+
+                if (size === 180) {
+                    a.download = 'apple-touch-icon.png';
+                } else if (size === 16) {
+                    a.download = 'favicon-16x16.png';
+                } else if (size === 32) {
+                    a.download = 'favicon-32x32.png';
+                } else {
+                    a.download = `icon-${size}x${size}.png`;
+                }
+
+                a.click();
+                URL.revokeObjectURL(url);
+                console.log(`Generated: ${a.download}`);
+            });
+        });
+
+        // Show the largest icon
+        drawIcon(canvas, 512);
+
+        console.log('All icons generated! Check your Downloads folder.');
+        console.log('Move them to the public/ directory of your project.');
+    </script>
+</body>
+</html>
