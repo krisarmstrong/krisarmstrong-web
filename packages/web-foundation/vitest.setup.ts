@@ -1,40 +1,8 @@
-import { afterEach, beforeEach } from 'vitest';
-import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
+import { createLocalStorageMock, setupTestCleanup } from './src/test-utils';
 
-// Mock localStorage
-const localStorageMock = (() => {
-  let store: Record<string, string> = {};
+// Setup localStorage mock
+globalThis.localStorage = createLocalStorageMock();
 
-  return {
-    getItem: (key: string) => store[key] || null,
-    setItem: (key: string, value: string) => {
-      store[key] = value.toString();
-    },
-    removeItem: (key: string) => {
-      delete store[key];
-    },
-    clear: () => {
-      store = {};
-    },
-    get length() {
-      return Object.keys(store).length;
-    },
-    key: (index: number) => {
-      const keys = Object.keys(store);
-      return keys[index] || null;
-    },
-  };
-})();
-
-global.localStorage = localStorageMock as Storage;
-
-// Clear localStorage before each test
-beforeEach(() => {
-  localStorageMock.clear();
-});
-
-// Cleanup after each test
-afterEach(() => {
-  cleanup();
-});
+// Setup automatic cleanup after each test
+setupTestCleanup();
