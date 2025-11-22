@@ -14,14 +14,9 @@ export default function Navbar() {
         />
       }
       title={
-        <div className="flex flex-col">
-          <span className="text-lg sm:text-xl font-bold tracking-tight text-text-primary whitespace-nowrap">
-            Intrinsic Momentum Mindset
-          </span>
-          <span className="text-xs text-text-muted font-normal hidden sm:block whitespace-nowrap">
-            Coaching for leaders & creators
-          </span>
-        </div>
+        <span className="text-lg sm:text-xl font-bold tracking-tight whitespace-nowrap text-text-primary">
+          Intrinsic Momentum Mindset
+        </span>
       }
       logoHref="/"
       navItems={PRIMARY_NAV}

@@ -65,7 +65,6 @@ describe('Navbar', () => {
     const navbarTitle = screen.getByTestId('navbar-title');
     expect(navbarTitle).toBeInTheDocument();
     expect(navbarTitle).toHaveTextContent('Kris Armstrong');
-    expect(navbarTitle).toHaveTextContent('CISSP | CWSP | CWDP | CWNA');
   });
 
   it('passes the correct navItems to WebFoundationNavbar', () => {

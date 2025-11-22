@@ -60,7 +60,6 @@ describe('Navbar', () => {
     const navbarTitle = screen.getByTestId('navbar-title');
     expect(navbarTitle).toBeInTheDocument();
     expect(navbarTitle).toHaveTextContent('Intrinsic Momentum Mindset');
-    expect(navbarTitle).toHaveTextContent('Coaching for leaders & creators');
   });
 
   it('passes the correct navItems to WebFoundationNavbar', () => {

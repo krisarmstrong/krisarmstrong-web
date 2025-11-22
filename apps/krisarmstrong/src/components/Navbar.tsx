@@ -15,14 +15,9 @@ export default function Navbar() {
         />
       }
       title={
-        <div className="flex flex-col">
-          <span className="text-lg sm:text-xl font-bold tracking-tight text-text-primary whitespace-nowrap">
-            Kris Armstrong
-          </span>
-          <span className="text-xs text-text-muted font-normal hidden sm:block whitespace-nowrap">
-            CISSP | CWSP | CWDP | CWNA
-          </span>
-        </div>
+        <span className="text-lg sm:text-xl font-bold tracking-tight whitespace-nowrap text-text-primary">
+          Kris Armstrong
+        </span>
       }
       logoHref="/"
       navItems={PRIMARY_NAV}
