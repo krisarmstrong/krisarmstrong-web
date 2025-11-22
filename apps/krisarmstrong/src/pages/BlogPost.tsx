@@ -1,0 +1,110 @@
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import rehypeSanitize from "rehype-sanitize";
+import { ArrowLeft } from "lucide-react";
+import { StarRating, LoadingPage, ErrorPage } from "@krisarmstrong/web-foundation";
+import { getBlogPostBySlug, type BlogPost as BlogPostType } from "../lib/supabase";
+
+export default function BlogPost() {
+  const { id } = useParams<{ id: string }>();
+  const [post, setPost] = useState<BlogPostType | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      if (!id) {
+        setError("Blog post ID not provided");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        setLoading(true);
+        const fetchedPost = await getBlogPostBySlug(id);
+
+        if (!fetchedPost) {
+          setError("Blog post not found");
+          setLoading(false);
+          return;
+        }
+
+        setPost(fetchedPost);
+        setError(null);
+      } catch (err) {
+        console.error("Error loading blog post:", err);
+        setError("Failed to load blog post. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPost();
+  }, [id]);
+
+  if (loading) {
+    return <LoadingPage message="Loading blog post..." variant="violet" />;
+  }
+
+  if (error || !post) {
+    return (
+      <ErrorPage
+        error={error || "Blog post not found"}
+        onRetry={() => window.location.reload()}
+        variant="violet"
+      />
+    );
+  }
+
+  return (
+    <div className="max-w-3xl mx-auto py-10 px-4">
+      <Link to="/blog" className="inline-flex items-center gap-2 text-text-accent hover:text-interactive-hover mb-6 transition-colors">
+        <ArrowLeft className="w-4 h-4" />
+        Back to Blog
+      </Link>
+
+      <article>
+        <header className="mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{post.title}</h1>
+          <div className="flex flex-wrap items-center gap-4 text-text-muted">
+            <time dateTime={post.date}>
+              {new Date(post.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </time>
+            <div className="flex gap-2">
+              {post.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 bg-brand-accent/10 text-text-accent rounded-full text-sm"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </header>
+
+        <div className="prose dark:prose-invert prose-violet max-w-none bg-surface-raised p-6 md:p-8 rounded-2xl shadow-lg">
+          <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{post.content}</ReactMarkdown>
+        </div>
+
+        {/* Rating Section */}
+        <div className="mt-8 p-6 bg-surface-raised rounded-2xl border border-surface-border">
+          <h3 className="text-lg font-semibold mb-4">Rate this post</h3>
+          <StarRating
+            itemId={post.slug}
+            storagePrefix="blog"
+            starColor="violet-400"
+            onRate={(rating) => {
+              console.log(`User rated post ${post.slug}: ${rating} stars`);
+            }}
+          />
+        </div>
+      </article>
+    </div>
+  );
+}

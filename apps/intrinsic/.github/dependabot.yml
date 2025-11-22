@@ -4,68 +4,68 @@
 version: 2
 updates:
   # Enable version updates for npm dependencies
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
-      timezone: "America/Los_Angeles"
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+      timezone: 'America/Los_Angeles'
     # Limit number of open pull requests for version updates
     open-pull-requests-limit: 10
     # Add reviewers and assignees
     reviewers:
-      - "krisarmstrong"
+      - 'krisarmstrong'
     assignees:
-      - "krisarmstrong"
+      - 'krisarmstrong'
     # Automatically rebase PRs when conflicts are detected
-    rebase-strategy: "auto"
+    rebase-strategy: 'auto'
     # Group minor and patch updates together
     groups:
       development-dependencies:
-        dependency-type: "development"
+        dependency-type: 'development'
         update-types:
-          - "minor"
-          - "patch"
+          - 'minor'
+          - 'patch'
       production-dependencies:
-        dependency-type: "production"
+        dependency-type: 'production'
         update-types:
-          - "minor"
-          - "patch"
+          - 'minor'
+          - 'patch'
     # Labels to add to pull requests
     labels:
-      - "dependencies"
-      - "automated"
+      - 'dependencies'
+      - 'automated'
     # Commit message prefix
     commit-message:
-      prefix: "chore"
-      prefix-development: "chore"
-      include: "scope"
+      prefix: 'chore'
+      prefix-development: 'chore'
+      include: 'scope'
     # Allow dependabot to update indirect dependencies
     versioning-strategy: increase
     # Ignore specific dependencies or versions
     ignore:
       # Ignore major version updates for stable dependencies
-      - dependency-name: "react"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "react-dom"
-        update-types: ["version-update:semver-major"]
+      - dependency-name: 'react'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'react-dom'
+        update-types: ['version-update:semver-major']
       # Keep web-foundation on manual updates since it's a local dependency
-      - dependency-name: "@krisarmstrong/web-foundation"
+      - dependency-name: '@krisarmstrong/web-foundation'
 
   # Enable version updates for GitHub Actions
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
-      timezone: "America/Los_Angeles"
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+      timezone: 'America/Los_Angeles'
     open-pull-requests-limit: 5
     reviewers:
-      - "krisarmstrong"
+      - 'krisarmstrong'
     labels:
-      - "github-actions"
-      - "dependencies"
+      - 'github-actions'
+      - 'dependencies'
     commit-message:
-      prefix: "ci"
+      prefix: 'ci'

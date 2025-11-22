@@ -1,7 +1,11 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { ThemeProvider, intrinsicTheme, intrinsicDarkTheme, ErrorBoundary } from '@krisarmstrong/web-foundation';
+import {
+  ThemeProvider,
+  intrinsicTheme,
+  ErrorBoundary,
+} from '@krisarmstrong/web-foundation';
 import Layout from './Layout.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import { PageLoadingFallback } from './components/PageLoadingFallback.tsx';
@@ -26,8 +30,6 @@ if (import.meta.env.VITE_SENTRY_DSN && !import.meta.env.DEV) {
   });
 }
 
-
-
 // Lazy load pages
 const Home = React.lazy(() => import('./pages/Home.tsx'));
 const About = React.lazy(() => import('./pages/About.tsx'));
@@ -49,7 +51,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <Home />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'about',
@@ -57,7 +59,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <About />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'services',
@@ -65,7 +67,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <Services />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'contact',
@@ -73,7 +75,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <Contact />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'privacy-policy',
@@ -81,7 +83,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <PrivacyPolicy />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'terms-of-service',
@@ -89,7 +91,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <TermsOfService />
           </Suspense>
-        )
+        ),
       },
       {
         path: '*',
@@ -97,7 +99,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <NotFound />
           </Suspense>
-        )
+        ),
       },
     ],
   },

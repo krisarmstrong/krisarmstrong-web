@@ -1,0 +1,111 @@
+<!--
+  index.html
+
+  Main HTML entry point for the Wi-Fi Vigilante website.
+
+  Features:
+  - Sets up the HTML5 document structure and language.
+  - Includes meta tags for character encoding, viewport, description, Open Graph, and theme color.
+  - Preconnects and prefetches Google Fonts for performance optimization.
+  - Loads the Inter font from Google Fonts.
+  - Includes favicon and Apple touch icon for branding.
+  - Loads Tailwind CSS from CDN for utility-first styling.
+  - Sets up a root div for mounting the frontend application (likely React).
+  - Loads the main JavaScript module (main.jsx) as the application entry point.
+  - Applies a dark background and white text using Tailwind utility classes.
+
+  Usage:
+  - Place this file at the root of your web project.
+  - Ensure referenced assets (icons, cover.png, main.jsx) exist at specified paths.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Add your Google Fonts stylesheet below if needed -->
+  <!-- Example: <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> -->
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <!-- Removed Tailwind CDN - using PostCSS build instead -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary Meta Tags -->
+  <meta name="description" content="Real-world Wi-Fi security investigations and network troubleshooting case database. Learn from actual wireless security incidents." />
+  <meta name="keywords" content="wifi security, network troubleshooting, cybersecurity, wi-fi diagnostics, wireless security, network forensics" />
+  <meta name="author" content="Kris Armstrong" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content="Wi-Fi Vigilante - Wireless Security Case Database" />
+  <meta property="og:description" content="Real-world Wi-Fi security investigations and network troubleshooting case database" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://wifi-vigilante.com/" />
+  <meta property="og:image" content="https://wifi-vigilante.com/cover.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Wi-Fi Vigilante - Wireless Security Case Database" />
+  <meta name="twitter:description" content="Real-world Wi-Fi security investigations and network troubleshooting" />
+  <meta name="twitter:image" content="https://wifi-vigilante.com/cover.png" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://wifi-vigilante.com/" />
+
+  <meta name="theme-color" content="#111827" />
+  <title>Wi-Fi Vigilante - Wireless Security Case Database</title>
+
+  <!-- Structured Data (JSON-LD) for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Wi-Fi Vigilante",
+    "description": "Real-world Wi-Fi security investigations and network troubleshooting case database. Learn from actual wireless security incidents and network forensics.",
+    "url": "https://wifi-vigilante.com/",
+    "author": {
+      "@type": "Person",
+      "name": "Kris Armstrong",
+      "jobTitle": "Cybersecurity Professional",
+      "url": "https://www.linkedin.com/in/kris-armstrong-cissp/",
+      "sameAs": [
+        "https://github.com/krisarmstrong",
+        "https://www.linkedin.com/in/kris-armstrong-cissp/"
+      ]
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Wi-Fi Vigilante",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://wifi-vigilante.com/icon-512x512.png"
+      }
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://wifi-vigilante.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    },
+    "inLanguage": "en-US",
+    "copyrightYear": 2025,
+    "copyrightHolder": {
+      "@type": "Person",
+      "name": "Kris Armstrong"
+    }
+  }
+  </script>
+</head>
+
+<body class="bg-gray-900 text-white font-sans">
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>

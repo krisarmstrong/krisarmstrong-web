@@ -1,28 +1,69 @@
 # @krisarmstrong/web-foundation
 
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green) ![Version](https://img.shields.io/badge/Version-0.9.0-blue) ![npm](https://img.shields.io/badge/npm-package-CB3837?logo=npm)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green) ![Version](https://img.shields.io/badge/Version-0.9.0-blue) ![npm](https://img.shields.io/badge/npm-package-CB3837?logo=npm)
 
-Shared layout primitives (PageShell, Footer, Breadcrumbs, PrimaryNav, UI tokens) for Wi-Fi Vigilante, krisarmstrong-portfolio, and future sites. It now includes the base UI kit (Button, Card, Typography, PageHeader) so every property gets identical navigation, hero headings, and call-to-action styling out of the box. The package is framework-agnostic outside of React + React Router and ships compiled ESM/CJS bundles plus TypeScript definitions out of `dist/`.
+Shared UI component library for the krisarmstrong-web monorepo. Provides layout primitives (PageShell, Footer, Breadcrumbs, PrimaryNav), UI components (Button, Card, Typography, PageHeader), and theming utilities for consistent design across all applications.
 
-## Local development workflow
+## Overview
 
-1. Make edits inside `src/`.
-2. (Optional during development) run `npm run dev` here to watch/build into `dist/` with `tsup`.
-3. Point each consuming project at the local folder: `npm install ../web-foundation` (already done via `file:../web-foundation`).
+This package provides:
 
-Both Wi-Fi Vigilante and the portfolio currently reference the package via `file:../web-foundation`, which means your CI/CD job must place the shared package next to each repo (monorepo checkout, git submodule, or npm registry publish).
+- **Layout Components** - PageShell, Navbar, Footer, Breadcrumbs
+- **UI Primitives** - Button, Card, Input, Typography
+- **Theming System** - ThemeProvider with dark/light mode support
+- **Utilities** - Error boundaries, hooks, type utilities
+- **Tokens** - Design tokens for spacing, colors, and typography
 
-## Publishing
+Built for monorepo use with React 18, TypeScript, and Tailwind CSS v4.
 
-When you’re ready to cut a release:
+## Monorepo Development
+
+This package is designed to be used within the krisarmstrong-web monorepo via npm workspaces.
+
+### Making Changes
+
+1. Edit files in `src/`
+2. Build the package:
+   ```bash
+   npm run build
+   ```
+3. Consuming apps will automatically pick up changes via workspace linking
+
+### Build Output
+
+The build process generates:
+
+- ESM and CJS bundles
+- TypeScript type definitions
+- Source maps for debugging
 
 ```bash
-npm install            # installs dev deps for the build tooling
-npm version patch
+packages/web-foundation/
+├── dist/
+│   ├── index.js          # ESM bundle
+│   ├── index.cjs         # CommonJS bundle
+│   ├── index.d.ts        # TypeScript definitions
+│   └── *.map             # Source maps
+```
+
+## Publishing (Optional)
+
+To publish to npm registry for use outside the monorepo:
+
+```bash
+# Ensure you're logged in to npm
+npm login
+
+# Update version and publish
+npm version patch       # or minor/major
 npm publish --access public
 ```
 
-After publishing, update each consumer’s `package.json` to reference the semantic version instead of the local `file:` path, then reinstall dependencies. This guarantees production builds (Netlify, Vercel, etc.) can resolve the shared UI without needing the monorepo structure.
+After publishing, external projects can install via:
+
+```bash
+npm install @krisarmstrong/web-foundation
+```
 
 ## Available components
 
@@ -49,7 +90,13 @@ Every layout primitive now accepts an optional `theme` prop (`'dark' | 'light'`)
     title="Intrinsic Momentum Mindset"
     description="Guided coaching with sage & gold accents."
   />
-  <NavCard theme="light" to="/services" title="Services" description="Grounded, intentional coaching." icon={<Star />} />
+  <NavCard
+    theme="light"
+    to="/services"
+    title="Services"
+    description="Grounded, intentional coaching."
+    icon={<Star />}
+  />
 </PageShell>
 ```
 

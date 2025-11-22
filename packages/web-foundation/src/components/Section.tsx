@@ -49,14 +49,13 @@ export function Section({
   accentColor = 'violet',
 }: SectionProps) {
   const spacingClass = spacingClasses[spacing];
-  const variantClass = variant === 'gradient' ? gradientClasses[accentColor] : variantClasses[variant];
+  const variantClass =
+    variant === 'gradient' ? gradientClasses[accentColor] : variantClasses[variant];
   const bgClass = background || variantClass;
 
   return (
     <section className={`${spacingClass} ${bgClass} ${className}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {children}
-      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">{children}</div>
     </section>
   );
 }
@@ -74,21 +73,16 @@ export function SectionHeader({ title, description, className = '' }: SectionHea
   return (
     <div className={`text-center mb-12 ${className}`}>
       {typeof title === 'string' ? (
-        <h2 className="text-3xl md:text-4xl font-heading text-text-main mb-4">
-          {title}
-        </h2>
+        <h2 className="text-3xl md:text-4xl font-heading text-text-main mb-4">{title}</h2>
       ) : (
         title
       )}
-      {description && (
-        typeof description === 'string' ? (
-          <p className="text-xl text-text-muted max-w-3xl mx-auto">
-            {description}
-          </p>
+      {description &&
+        (typeof description === 'string' ? (
+          <p className="text-xl text-text-muted max-w-3xl mx-auto">{description}</p>
         ) : (
           description
-        )
-      )}
+        ))}
     </div>
   );
 }

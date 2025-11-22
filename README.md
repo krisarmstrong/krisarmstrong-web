@@ -27,14 +27,20 @@ krisarmstrong-web/
 
 ---
 
+## Documentation
+
+- **[SETUP.md](./SETUP.md)** - Complete setup guide for local development and Vercel deployment
+- **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Contribution guidelines, commit conventions, and workflow
+- **[apps/intrinsic/README.md](./apps/intrinsic/README.md)** - Intrinsic app documentation
+- **[packages/web-foundation/README.md](./packages/web-foundation/README.md)** - Component library documentation
+
+---
+
 ## Getting Started
 
-### Prerequisites
+See [SETUP.md](./SETUP.md) for complete setup instructions.
 
-- Node.js >= 22.0.0
-- npm >= 10.0.0
-
-### Installation
+### Quick Start
 
 ```bash
 # Clone the repository
@@ -54,6 +60,11 @@ npm run build
 npm test
 ```
 
+### Prerequisites
+
+- Node.js >= 22.0.0
+- npm >= 10.0.0
+
 ---
 
 ## Project Structure
@@ -65,6 +76,7 @@ npm test
 The Intrinsic Momentum Mindset coaching website. This demonstrates how to build an app using the shared component library.
 
 **Key Features:**
+
 - Sage/earth tone theme (light & dark modes)
 - Responsive navigation with mobile menu
 - Contact form with validation
@@ -72,6 +84,7 @@ The Intrinsic Momentum Mindset coaching website. This demonstrates how to build 
 - Lazy-loaded routes
 
 **Scripts:**
+
 ```bash
 cd apps/intrinsic
 npm run dev          # Start dev server (port 3001)
@@ -88,11 +101,13 @@ npm run lint         # Lint code
 Reusable UI component library following professional React patterns.
 
 **Components:**
+
 - **Primitives:** Button, Card, Input, Typography
 - **Composed:** Navbar, Footer, ContactForm
 - **Utilities:** ThemeProvider, ErrorBoundary, hooks
 
 **Key Principles:**
+
 - ✅ Theme-aware (uses CSS variables)
 - ✅ Fully typed with TypeScript
 - ✅ Accessible (ARIA attributes)
@@ -117,6 +132,7 @@ The theming system uses a hybrid approach combining React Context for state mana
 ### Theme Structure
 
 Themes define colors for:
+
 - **Brand**: Primary and accent colors
 - **Surface**: Backgrounds, borders, hover states
 - **Text**: Primary, muted, accent, inverse
@@ -182,11 +198,13 @@ function ThemeToggle() {
 ```
 
 **Modes:**
+
 - `light` - Always light theme
 - `dark` - Always dark theme
 - `auto` - Follows system preference (default)
 
 **Persistence:**
+
 - Mode and theme are automatically saved to localStorage
 - Restored on page reload
 - Survives browser restarts
@@ -261,7 +279,7 @@ import { Card } from '@krisarmstrong/web-foundation';
   <Card.Footer>
     <Button>Action</Button>
   </Card.Footer>
-</Card>
+</Card>;
 ```
 
 ### Forms
@@ -351,7 +369,7 @@ export default function App() {
 
 ```css
 /* src/index.css */
-@import "tailwindcss";
+@import 'tailwindcss';
 
 body {
   background-color: var(--color-surface-base);
@@ -414,6 +432,7 @@ ls -lh apps/intrinsic/dist/assets/
 ```
 
 **Bundle Breakdown:**
+
 - `vendor-react.js` - React, ReactDOM, React Router (~60KB gzipped)
 - `vendor-ui.js` - Lucide icons, web-foundation (~30KB gzipped)
 - `vendor-sentry.js` - Error tracking (~20KB gzipped, lazy loaded)
@@ -433,6 +452,7 @@ VITE_API_URL=http://localhost:3000
 ```
 
 Access in code:
+
 ```typescript
 const apiUrl = import.meta.env.VITE_API_URL;
 const isDev = import.meta.env.DEV;
@@ -483,6 +503,7 @@ docker run -p 80:80 my-app
 ### Build Errors
 
 **Error:** `Cannot find module '@krisarmstrong/web-foundation'`
+
 ```bash
 # Solution: Build the package first
 cd packages/web-foundation
@@ -491,6 +512,7 @@ cd ../..
 ```
 
 **Error:** `Dependency version mismatch`
+
 ```bash
 # Solution: Clean install
 rm -rf node_modules package-lock.json
@@ -511,6 +533,7 @@ npm install
 ### TypeScript Errors
 
 **Error:** Property 'foo' does not exist
+
 ```bash
 # Solution: Rebuild types
 cd packages/web-foundation
@@ -578,6 +601,7 @@ MIT - See LICENSE file
 ## Support
 
 For issues, questions, or contributions:
+
 - Open an issue on GitHub
 - Contact: [your-email@example.com]
 

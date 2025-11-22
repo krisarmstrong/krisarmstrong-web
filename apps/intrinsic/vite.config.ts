@@ -4,7 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
+const dirname =
+  typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 const workspaceRoot = path.resolve(dirname, '..', '..');
 const sharedUiPath = path.resolve(workspaceRoot, 'packages', 'web-foundation');
 
@@ -14,6 +15,11 @@ export default defineConfig({
     alias: {
       '@': path.resolve(dirname, 'src'),
     },
+    dedupe: ['react', 'react-dom', 'react-router-dom'],
+  },
+  optimizeDeps: {
+    include: ['@krisarmstrong/web-foundation'],
+    exclude: [],
   },
   build: {
     // Optimize chunk size for better caching

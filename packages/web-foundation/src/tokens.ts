@@ -67,7 +67,8 @@ export const colorTokens = {
 // Typography tokens
 export const typographyTokens = {
   fontFamily: {
-    heading: 'var(--theme-font-heading, var(--font-family-heading, ui-sans-serif, system-ui, sans-serif))',
+    heading:
+      'var(--theme-font-heading, var(--font-family-heading, ui-sans-serif, system-ui, sans-serif))',
     body: 'var(--theme-font-body, var(--font-family-body, ui-sans-serif, system-ui, sans-serif))',
     mono: 'var(--theme-font-mono, var(--font-family-mono, ui-monospace, monospace))',
   },

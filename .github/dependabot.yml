@@ -1,0 +1,148 @@
+version: 2
+updates:
+  # Root package.json - monorepo dependencies
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/Los_Angeles"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "krisarmstrong"
+    labels:
+      - "dependencies"
+      - "automated"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    versioning-strategy: increase
+    groups:
+      # Group all dev dependencies together
+      dev-dependencies:
+        dependency-type: "development"
+        patterns:
+          - "*"
+      # Group production dependencies by category
+      react-ecosystem:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "react-router-dom"
+          - "@vitejs/plugin-react"
+      build-tools:
+        patterns:
+          - "vite"
+          - "typescript"
+          - "tailwindcss"
+          - "@tailwindcss/*"
+      testing:
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+          - "@testing-library/*"
+          - "jsdom"
+      linting:
+        patterns:
+          - "eslint"
+          - "eslint-plugin-*"
+          - "prettier"
+      sentry:
+        patterns:
+          - "@sentry/*"
+
+  # Web Foundation Package
+  - package-ecosystem: "npm"
+    directory: "/packages/web-foundation"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "10:00"
+      timezone: "America/Los_Angeles"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "krisarmstrong"
+    labels:
+      - "dependencies"
+      - "web-foundation"
+      - "automated"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+
+  # Intrinsic App
+  - package-ecosystem: "npm"
+    directory: "/apps/intrinsic"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "09:00"
+      timezone: "America/Los_Angeles"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "krisarmstrong"
+    labels:
+      - "dependencies"
+      - "intrinsic"
+      - "automated"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+
+  # Krisarmstrong App
+  - package-ecosystem: "npm"
+    directory: "/apps/krisarmstrong"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "10:00"
+      timezone: "America/Los_Angeles"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "krisarmstrong"
+    labels:
+      - "dependencies"
+      - "krisarmstrong"
+      - "automated"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+
+  # WiFi Vigilante App
+  - package-ecosystem: "npm"
+    directory: "/apps/wifivigilante"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "11:00"
+      timezone: "America/Los_Angeles"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "krisarmstrong"
+    labels:
+      - "dependencies"
+      - "wifivigilante"
+      - "automated"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "wednesday"
+      time: "09:00"
+      timezone: "America/Los_Angeles"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "krisarmstrong"
+    labels:
+      - "dependencies"
+      - "github-actions"
+      - "automated"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"

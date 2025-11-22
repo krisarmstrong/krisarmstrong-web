@@ -1,0 +1,232 @@
+[
+  {
+    "id": "wifi6-ofdma-mumimo",
+    "title": "Understanding Wi-Fi 6: OFDMA and MU-MIMO Explained",
+    "excerpt": "A technical deep dive into the key technologies that make Wi-Fi 6 faster and more efficient than its predecessors.",
+    "date": "2024-01-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 6", "OFDMA", "MU-MIMO", "Technical Deep Dive"],
+    "featured": true,
+    "contentFile": "wifi6-ofdma-mumimo-jan2024.md"
+  },
+  {
+    "id": "wifi6e-6ghz-advantage",
+    "title": "Wi-Fi 6E: The 6 GHz Advantage for Enterprise Networks",
+    "excerpt": "Exploring the benefits of 1200 MHz of clean spectrum and how Wi-Fi 6E transforms enterprise wireless deployments.",
+    "date": "2024-02-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 6E", "6 GHz", "Enterprise Networks", "Spectrum"],
+    "featured": false,
+    "contentFile": "wifi6e-6ghz-advantage-feb2024.md"
+  },
+  {
+    "id": "wifi6-twt-iot",
+    "title": "Target Wake Time (TWT): Extending IoT Device Battery Life",
+    "excerpt": "How Wi-Fi 6's Target Wake Time feature delivers 3-7x battery life improvements for IoT devices in enterprise networks.",
+    "date": "2024-03-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 6", "TWT", "IoT", "Power Management"],
+    "featured": false,
+    "contentFile": "wifi6-twt-iot-mar2024.md"
+  },
+  {
+    "id": "wifi6-bss-coloring",
+    "title": "BSS Coloring: Solving Co-Channel Interference in Wi-Fi 6",
+    "excerpt": "An in-depth look at how BSS Coloring enables spatial reuse and delivers 20-30% capacity improvements in dense deployments.",
+    "date": "2024-04-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 6", "BSS Coloring", "Interference Management", "Capacity"],
+    "featured": false,
+    "contentFile": "wifi6-bss-coloring-apr2024.md"
+  },
+  {
+    "id": "wifi6-1024qam",
+    "title": "1024-QAM: Higher Throughput in Wi-Fi 6 Networks",
+    "excerpt": "Understanding the benefits and limitations of 1024-QAM modulation in real-world enterprise Wi-Fi 6 deployments.",
+    "date": "2024-05-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 6", "1024-QAM", "Modulation", "Performance"],
+    "featured": false,
+    "contentFile": "wifi6-1024qam-may2024.md"
+  },
+  {
+    "id": "wifi6-vs-wifi5-comparison",
+    "title": "Wi-Fi 6 vs Wi-Fi 5: Real-World Performance Comparison",
+    "excerpt": "Data-driven comparison of Wi-Fi 6 and Wi-Fi 5 performance across throughput, latency, capacity, and efficiency metrics.",
+    "date": "2024-06-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 6", "Wi-Fi 5", "Performance Comparison", "Benchmarks"],
+    "featured": false,
+    "contentFile": "wifi6-vs-wifi5-comparison-jun2024.md"
+  },
+  {
+    "id": "wifi6e-enterprise-design",
+    "title": "Designing Enterprise Wi-Fi 6E Networks: Best Practices",
+    "excerpt": "Comprehensive guide to Wi-Fi 6E network design covering spectrum strategy, channel planning, coverage, and security.",
+    "date": "2024-07-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 6E", "Network Design", "Best Practices", "Enterprise"],
+    "featured": false,
+    "contentFile": "wifi6e-enterprise-design-jul2024.md"
+  },
+  {
+    "id": "wifi6-security-wpa3",
+    "title": "Wi-Fi 6 Security: WPA3 and Enhanced Open",
+    "excerpt": "Examining Wi-Fi 6's security improvements through WPA3, Enhanced Open, and Protected Management Frames.",
+    "date": "2024-08-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 6", "WPA3", "Security", "Enhanced Open"],
+    "featured": false,
+    "contentFile": "wifi6-security-wpa3-aug2024.md"
+  },
+  {
+    "id": "wifi6e-channel-planning",
+    "title": "Channel Planning for Wi-Fi 6E: 6 GHz Spectrum Guide",
+    "excerpt": "Strategic approaches to 6 GHz channel planning with 14 non-overlapping 80 MHz channels and no DFS requirements.",
+    "date": "2024-09-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 6E", "Channel Planning", "6 GHz", "RF Design"],
+    "featured": false,
+    "contentFile": "wifi6e-channel-planning-sep2024.md"
+  },
+  {
+    "id": "wifi6-healthcare-deployment",
+    "title": "Wi-Fi 6 in Healthcare: Use Cases and Deployment",
+    "excerpt": "Real-world insights from Wi-Fi 6 healthcare deployments supporting clinical mobility, medical devices, and telemedicine.",
+    "date": "2024-10-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 6", "Healthcare", "Use Cases", "Clinical Networks"],
+    "featured": false,
+    "contentFile": "wifi6-healthcare-deployment-oct2024.md"
+  },
+  {
+    "id": "wifi6-troubleshooting",
+    "title": "Troubleshooting Wi-Fi 6 Performance Issues",
+    "excerpt": "Systematic diagnostic approaches for identifying and resolving common Wi-Fi 6 performance problems.",
+    "date": "2024-11-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 6", "Troubleshooting", "Performance", "Diagnostics"],
+    "featured": false,
+    "contentFile": "wifi6-troubleshooting-nov2024.md"
+  },
+  {
+    "id": "wifi6-roi-business-value",
+    "title": "Wi-Fi 6 ROI: Calculating Business Value",
+    "excerpt": "Framework for quantifying Wi-Fi 6 ROI through hard cost savings, productivity improvements, and strategic enablement.",
+    "date": "2024-12-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 6", "ROI", "Business Case", "TCO"],
+    "featured": false,
+    "contentFile": "wifi6-roi-business-value-dec2024.md"
+  },
+  {
+    "id": "wifi7-intro-802-11be",
+    "title": "Wi-Fi 7 (802.11be): The Next Generation of Wireless",
+    "excerpt": "Introduction to Wi-Fi 7's revolutionary capabilities including MLO, 320 MHz channels, and 46 Gbps throughput.",
+    "date": "2025-01-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 7", "802.11be", "Next Generation", "MLO"],
+    "featured": true,
+    "contentFile": "wifi7-intro-802-11be-jan2025.md"
+  },
+  {
+    "id": "wifi7-mlo-multi-link",
+    "title": "Multi-Link Operation (MLO): Wi-Fi 7's Game Changer",
+    "excerpt": "Deep dive into MLO's simultaneous multi-band connectivity enabling ultra-low latency and bandwidth aggregation.",
+    "date": "2025-02-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 7", "MLO", "Multi-Link", "Low Latency"],
+    "featured": false,
+    "contentFile": "wifi7-mlo-multi-link-feb2025.md"
+  },
+  {
+    "id": "wifi7-320mhz-channels",
+    "title": "320 MHz Channels: Ultra-High Bandwidth in Wi-Fi 7",
+    "excerpt": "Examining 320 MHz channel capabilities, planning strategies, and use cases requiring ultra-wide bandwidth.",
+    "date": "2025-03-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 7", "320 MHz", "Channels", "Bandwidth"],
+    "featured": false,
+    "contentFile": "wifi7-320mhz-channels-mar2025.md"
+  },
+  {
+    "id": "wifi7-4096qam-data-rates",
+    "title": "4K-QAM: Pushing Data Rates to 46 Gbps",
+    "excerpt": "Analysis of 4096-QAM modulation's 20% spectral efficiency improvement and real-world performance expectations.",
+    "date": "2025-04-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 7", "4K-QAM", "Modulation", "Data Rates"],
+    "featured": false,
+    "contentFile": "wifi7-4096qam-data-rates-apr2025.md"
+  },
+  {
+    "id": "wifi7-vs-wifi6e-upgrade",
+    "title": "Wi-Fi 7 vs Wi-Fi 6E: When to Upgrade",
+    "excerpt": "Strategic framework comparing Wi-Fi 7 and Wi-Fi 6E to inform upgrade decisions based on use cases and timing.",
+    "date": "2025-05-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 7", "Wi-Fi 6E", "Upgrade Strategy", "Comparison"],
+    "featured": false,
+    "contentFile": "wifi7-vs-wifi6e-upgrade-may2025.md"
+  },
+  {
+    "id": "wifi7-infrastructure-preparation",
+    "title": "Preparing Your Network Infrastructure for Wi-Fi 7",
+    "excerpt": "Comprehensive guide to infrastructure requirements including multi-gigabit switching, PoE++, and network capacity.",
+    "date": "2025-06-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 7", "Infrastructure", "Multi-Gigabit", "PoE++"],
+    "featured": false,
+    "contentFile": "wifi7-infrastructure-preparation-jun2025.md"
+  },
+  {
+    "id": "wifi7-arvr-applications",
+    "title": "Wi-Fi 7 and the Future of AR/VR Applications",
+    "excerpt": "How Wi-Fi 7's ultra-low latency and massive bandwidth enable enterprise XR deployments at scale.",
+    "date": "2025-07-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 7", "AR", "VR", "XR", "Extended Reality"],
+    "featured": false,
+    "contentFile": "wifi7-arvr-applications-jul2025.md"
+  },
+  {
+    "id": "wifi7-chipsets-vendors",
+    "title": "Wi-Fi 7 Chipsets: Vendor Landscape and Availability",
+    "excerpt": "Analysis of Wi-Fi 7 chipset vendors including Broadcom, Qualcomm, Intel, and MediaTek with availability timelines.",
+    "date": "2025-08-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 7", "Chipsets", "Vendors", "Hardware"],
+    "featured": false,
+    "contentFile": "wifi7-chipsets-vendors-aug2025.md"
+  },
+  {
+    "id": "wifi7-early-deployments",
+    "title": "Real-World Wi-Fi 7 Deployments: Early Adopter Case Studies",
+    "excerpt": "Lessons learned from production Wi-Fi 7 deployments across technology, media, education, and healthcare sectors.",
+    "date": "2025-09-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 7", "Case Studies", "Deployments", "Best Practices"],
+    "featured": false,
+    "contentFile": "wifi7-early-deployments-sep2025.md"
+  },
+  {
+    "id": "wifi7-security-considerations",
+    "title": "Wi-Fi 7 Security Enhancements and Considerations",
+    "excerpt": "Security architecture for Wi-Fi 7 networks covering WPA3, MLO security implications, and threat detection.",
+    "date": "2025-10-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 7", "Security", "WPA3", "Threat Detection"],
+    "featured": false,
+    "contentFile": "wifi7-security-considerations-oct2025.md"
+  },
+  {
+    "id": "wifi7-migration-strategy",
+    "title": "Wi-Fi 7 Migration Strategy for Enterprise Networks",
+    "excerpt": "Comprehensive migration framework covering phasing, infrastructure dependencies, testing, and risk mitigation.",
+    "date": "2025-11-15",
+    "author": "Kris Armstrong",
+    "tags": ["Wi-Fi 7", "Migration", "Strategy", "Enterprise"],
+    "featured": false,
+    "contentFile": "wifi7-migration-strategy-nov2025.md"
+  }
+]

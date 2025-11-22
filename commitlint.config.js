@@ -1,8 +1,14 @@
 /**
  * Commitlint configuration
- * Enforces conventional commits: type(scope): message
  *
- * Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
+ * Enforces conventional commit message format:
+ * type(scope?): subject
+ *
+ * Examples:
+ * - feat(ui): add new Button component
+ * - fix(navbar): resolve mobile menu toggle issue
+ * - docs: update README with setup instructions
+ * - chore(deps): upgrade React to v18.3.1
  */
 export default {
   extends: ['@commitlint/config-conventional'],
@@ -11,20 +17,23 @@ export default {
       2,
       'always',
       [
-        'feat',     // New feature
-        'fix',      // Bug fix
-        'docs',     // Documentation only
-        'style',    // Formatting, missing semicolons, etc
-        'refactor', // Code change that neither fixes a bug nor adds a feature
-        'perf',     // Performance improvement
-        'test',     // Adding tests
-        'build',    // Build system or external dependencies
-        'ci',       // CI configuration files and scripts
-        'chore',    // Other changes that don't modify src or test files
-        'revert',   // Reverts a previous commit
+        'feat', // New feature
+        'fix', // Bug fix
+        'docs', // Documentation changes
+        'style', // Code style changes (formatting, etc)
+        'refactor', // Code refactoring
+        'perf', // Performance improvements
+        'test', // Adding or updating tests
+        'chore', // Maintenance tasks, dependency updates
+        'ci', // CI/CD changes
+        'build', // Build system changes
+        'revert', // Revert a previous commit
       ],
     ],
-    'subject-case': [0], // Allow any case
-    'body-max-line-length': [0], // No limit on body line length
+    'subject-case': [2, 'always', 'sentence-case'],
+    'subject-empty': [2, 'never'],
+    'subject-full-stop': [2, 'never', '.'],
+    'type-case': [2, 'always', 'lower-case'],
+    'type-empty': [2, 'never'],
   },
 };

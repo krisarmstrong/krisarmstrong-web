@@ -2,7 +2,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@krisarmstrong/web-foundation/*": ["/Users/krisarmstrong/Developer/projects/web-foundation/src/*"]
+      "@krisarmstrong/web-foundation/*": [
+        "/Users/krisarmstrong/Developer/projects/web-foundation/src/*"
+      ]
     }
   }
 }

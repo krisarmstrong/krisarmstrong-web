@@ -44,10 +44,7 @@ export function TextInput({
   return (
     <div className="w-full">
       {label && (
-        <label
-          htmlFor={inputId}
-          className="block text-sm font-medium text-gray-300 mb-2"
-        >
+        <label htmlFor={inputId} className="block text-sm font-medium text-gray-300 mb-2">
           {label}
         </label>
       )}
@@ -66,9 +63,7 @@ export function TextInput({
         `}
         {...props}
       />
-      {error && (
-        <p className="mt-1 text-sm text-red-400">{error}</p>
-      )}
+      {error && <p className="mt-1 text-sm text-red-400">{error}</p>}
     </div>
   );
 }
@@ -106,10 +101,7 @@ export function SearchInput({
   return (
     <div className="w-full">
       {label && (
-        <label
-          htmlFor={inputId}
-          className="block text-sm font-medium text-gray-300 mb-2"
-        >
+        <label htmlFor={inputId} className="block text-sm font-medium text-gray-300 mb-2">
           {label}
         </label>
       )}

@@ -1,0 +1,35 @@
+name: Keep Supabase Active
+
+# Runs on the 1st and 15th of every month to prevent 90-day pause
+on:
+  schedule:
+    - cron: '0 3 1 * *'   # 1st of month at 3 AM UTC
+    - cron: '0 3 15 * *'  # 15th of month at 3 AM UTC
+  workflow_dispatch:      # Allow manual trigger
+
+jobs:
+  ping-database:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping Supabase Database
+        run: |
+          echo "Pinging Supabase to keep project active..."
+
+          # Simple health check - fetch one case to keep DB active
+          response=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/case_files?limit=1")
+
+          if [ "$response" = "200" ]; then
+            echo "✅ Supabase database pinged successfully (HTTP $response)"
+          else
+            echo "⚠️ Unexpected response code: HTTP $response"
+            exit 1
+          fi
+
+      - name: Log Activity
+        run: |
+          echo "Keep-alive ping completed at $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          echo "Next scheduled run: 1st and 15th of each month"

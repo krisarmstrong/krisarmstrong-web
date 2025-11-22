@@ -25,29 +25,30 @@ Complete API reference for all exported components, hooks, and utilities.
 Polymorphic button component with multiple variants and states.
 
 **Import:**
+
 ```tsx
 import { Button } from '@krisarmstrong/web-foundation';
 ```
 
 **Props:**
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `as` | `'button' \| 'Link' \| 'a'` | `'button'` | Element type to render |
-| `variant` | `'primary' \| 'secondary' \| 'danger' \| 'warning' \| 'outline' \| 'ghost'` | `'primary'` | Visual variant |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Button size |
-| `tone` | `'blue' \| 'violet' \| 'sage' \| 'emerald'` | `'blue'` | Color tone (primary variant only) |
-| `isLoading` | `boolean` | `false` | Shows loading spinner |
-| `disabled` | `boolean` | `false` | Disables interaction |
-| `leftIcon` | `ReactNode` | - | Icon before content |
-| `rightIcon` | `ReactNode` | - | Icon after content |
-| `className` | `string` | - | Additional CSS classes |
-| `onClick` | `function` | - | Click handler |
-| `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Button type (when `as='button'`) |
-| `to` | `string` | - | Destination (when `as='Link'`) |
-| `href` | `string` | - | URL (when `as='a'`) |
-| `target` | `string` | - | Target attribute (when `as='a'`) |
-| `rel` | `string` | - | Rel attribute (when `as='a'`) |
+| Prop        | Type                                                                        | Default     | Description                       |
+| ----------- | --------------------------------------------------------------------------- | ----------- | --------------------------------- |
+| `as`        | `'button' \| 'Link' \| 'a'`                                                 | `'button'`  | Element type to render            |
+| `variant`   | `'primary' \| 'secondary' \| 'danger' \| 'warning' \| 'outline' \| 'ghost'` | `'primary'` | Visual variant                    |
+| `size`      | `'sm' \| 'md' \| 'lg'`                                                      | `'md'`      | Button size                       |
+| `tone`      | `'blue' \| 'violet' \| 'sage' \| 'emerald'`                                 | `'blue'`    | Color tone (primary variant only) |
+| `isLoading` | `boolean`                                                                   | `false`     | Shows loading spinner             |
+| `disabled`  | `boolean`                                                                   | `false`     | Disables interaction              |
+| `leftIcon`  | `ReactNode`                                                                 | -           | Icon before content               |
+| `rightIcon` | `ReactNode`                                                                 | -           | Icon after content                |
+| `className` | `string`                                                                    | -           | Additional CSS classes            |
+| `onClick`   | `function`                                                                  | -           | Click handler                     |
+| `type`      | `'button' \| 'submit' \| 'reset'`                                           | `'button'`  | Button type (when `as='button'`)  |
+| `to`        | `string`                                                                    | -           | Destination (when `as='Link'`)    |
+| `href`      | `string`                                                                    | -           | URL (when `as='a'`)               |
+| `target`    | `string`                                                                    | -           | Target attribute (when `as='a'`)  |
+| `rel`       | `string`                                                                    | -           | Rel attribute (when `as='a'`)     |
 
 **Examples:**
 
@@ -83,16 +84,17 @@ import { Button } from '@krisarmstrong/web-foundation';
 Container components for grouped content.
 
 **Import:**
+
 ```tsx
 import { Card, CardContent, CardTitle } from '@krisarmstrong/web-foundation';
 ```
 
 **Card Props:**
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | - | Card content |
-| `className` | `string` | - | Additional CSS classes |
+| Prop        | Type        | Default | Description            |
+| ----------- | ----------- | ------- | ---------------------- |
+| `children`  | `ReactNode` | -       | Card content           |
+| `className` | `string`    | -       | Additional CSS classes |
 
 **Example:**
 
@@ -112,16 +114,17 @@ import { Card, CardContent, CardTitle } from '@krisarmstrong/web-foundation';
 H1, H2, H3, P, MutedText, SmallText, Tag, Badge components for consistent typography.
 
 **Import:**
+
 ```tsx
 import { H1, H2, P, MutedText, Tag } from '@krisarmstrong/web-foundation';
 ```
 
 **Common Props:**
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | - | Text content |
-| `className` | `string` | - | Additional CSS classes |
+| Prop        | Type        | Default | Description            |
+| ----------- | ----------- | ------- | ---------------------- |
+| `children`  | `ReactNode` | -       | Text content           |
+| `className` | `string`    | -       | Additional CSS classes |
 
 **Examples:**
 
@@ -143,16 +146,17 @@ import { H1, H2, P, MutedText, Tag } from '@krisarmstrong/web-foundation';
 Main page container with consistent padding and max-width.
 
 **Import:**
+
 ```tsx
 import { PageShell } from '@krisarmstrong/web-foundation';
 ```
 
 **Props:**
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | - | Page content |
-| `className` | `string` | - | Additional CSS classes |
+| Prop        | Type        | Default | Description            |
+| ----------- | ----------- | ------- | ---------------------- |
+| `children`  | `ReactNode` | -       | Page content           |
+| `className` | `string`    | -       | Additional CSS classes |
 
 **Example:**
 
@@ -172,22 +176,23 @@ import { PageShell } from '@krisarmstrong/web-foundation';
 Full-featured contact form with validation and submission handling.
 
 **Import:**
+
 ```tsx
 import { ContactForm } from '@krisarmstrong/web-foundation';
 ```
 
 **Props:**
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `endpoint` | `string` | **Required** | Form submission URL |
-| `surface` | `'base' \| 'raised'` | `'base'` | Background surface |
-| `tone` | `'blue' \| 'violet' \| 'sage'` | `'blue'` | Color tone |
-| `labels` | `object` | Default labels | Custom field labels |
-| `placeholders` | `object` | Default placeholders | Custom placeholders |
-| `messages` | `object` | Default messages | Custom UI messages |
-| `onSuccess` | `function` | - | Success callback |
-| `onError` | `function` | - | Error callback |
+| Prop           | Type                           | Default              | Description         |
+| -------------- | ------------------------------ | -------------------- | ------------------- |
+| `endpoint`     | `string`                       | **Required**         | Form submission URL |
+| `surface`      | `'base' \| 'raised'`           | `'base'`             | Background surface  |
+| `tone`         | `'blue' \| 'violet' \| 'sage'` | `'blue'`             | Color tone          |
+| `labels`       | `object`                       | Default labels       | Custom field labels |
+| `placeholders` | `object`                       | Default placeholders | Custom placeholders |
+| `messages`     | `object`                       | Default messages     | Custom UI messages  |
+| `onSuccess`    | `function`                     | -                    | Success callback    |
+| `onError`      | `function`                     | -                    | Error callback      |
 
 **Example:**
 
@@ -212,19 +217,20 @@ import { ContactForm } from '@krisarmstrong/web-foundation';
 Responsive navigation bar with mobile menu support.
 
 **Import:**
+
 ```tsx
 import { Navbar } from '@krisarmstrong/web-foundation';
 ```
 
 **Props:**
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `navItems` | `NavItem[]` | **Required** | Navigation links |
-| `variant` | `'blue' \| 'violet' \| 'sage'` | `'blue'` | Color variant |
-| `desktopActions` | `ReactNode` | - | Actions shown on desktop |
-| `mobileActions` | `ReactNode` | - | Actions shown on mobile |
-| `mobileFooter` | `ReactNode` | - | Footer in mobile menu |
+| Prop             | Type                           | Default      | Description              |
+| ---------------- | ------------------------------ | ------------ | ------------------------ |
+| `navItems`       | `NavItem[]`                    | **Required** | Navigation links         |
+| `variant`        | `'blue' \| 'violet' \| 'sage'` | `'blue'`     | Color variant            |
+| `desktopActions` | `ReactNode`                    | -            | Actions shown on desktop |
+| `mobileActions`  | `ReactNode`                    | -            | Actions shown on mobile  |
+| `mobileFooter`   | `ReactNode`                    | -            | Footer in mobile menu    |
 
 **NavItem Type:**
 
@@ -245,11 +251,7 @@ const navItems = [
   { label: 'Contact', path: '/contact' },
 ];
 
-<Navbar
-  navItems={navItems}
-  variant="sage"
-  desktopActions={<Button>Login</Button>}
-/>
+<Navbar navItems={navItems} variant="sage" desktopActions={<Button>Login</Button>} />;
 ```
 
 ---
@@ -261,6 +263,7 @@ const navItems = [
 Access and modify the current theme.
 
 **Import:**
+
 ```tsx
 import { useTheme } from '@krisarmstrong/web-foundation';
 ```
@@ -282,11 +285,7 @@ import { useTheme } from '@krisarmstrong/web-foundation';
 function ThemeToggle() {
   const { mode, setMode } = useTheme();
 
-  return (
-    <button onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}>
-      Toggle Theme
-    </button>
-  );
+  return <button onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}>Toggle Theme</button>;
 }
 ```
 
@@ -297,6 +296,7 @@ function ThemeToggle() {
 Hook for progressive/lazy loading of items (pagination, "load more" pattern).
 
 **Import:**
+
 ```tsx
 import { useProgressiveLoad } from '@krisarmstrong/web-foundation';
 ```
@@ -326,12 +326,14 @@ useProgressiveLoad<T>(
 function PostList({ posts }) {
   const { visibleItems, loadMore, hasMore } = useProgressiveLoad(posts, {
     initialCount: 12,
-    itemsPerLoad: 12
+    itemsPerLoad: 12,
   });
 
   return (
     <>
-      {visibleItems.map(post => <Post key={post.id} {...post} />)}
+      {visibleItems.map((post) => (
+        <Post key={post.id} {...post} />
+      ))}
       {hasMore && <button onClick={loadMore}>Load More</button>}
     </>
   );
@@ -345,6 +347,7 @@ function PostList({ posts }) {
 Detects clicks outside a referenced element.
 
 **Import:**
+
 ```tsx
 import { useClickOutside } from '@krisarmstrong/web-foundation';
 ```
@@ -381,6 +384,7 @@ function Dropdown() {
 Handles Escape key press events.
 
 **Import:**
+
 ```tsx
 import { useEscapeKey } from '@krisarmstrong/web-foundation';
 ```
@@ -408,6 +412,7 @@ function Modal({ onClose }) {
 Analytics and error tracking abstraction.
 
 **Import:**
+
 ```tsx
 import { useTelemetry } from '@krisarmstrong/web-foundation';
 ```
@@ -436,7 +441,7 @@ function Analytics() {
   const handlePurchase = () => {
     trackEvent('purchase_completed', {
       amount: 99.99,
-      currency: 'USD'
+      currency: 'USD',
     });
   };
 
@@ -453,18 +458,19 @@ function Analytics() {
 Provides theme configuration and color mode to the component tree.
 
 **Import:**
+
 ```tsx
 import { ThemeProvider } from '@krisarmstrong/web-foundation';
 ```
 
 **Props:**
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | **Required** | App content |
-| `initialTheme` | `ThemeConfig` | `defaultDarkTheme` | Initial theme configuration |
-| `initialMode` | `'light' \| 'dark' \| 'auto'` | `'dark'` | Initial color mode |
-| `allowThemeUpdates` | `boolean` | `true` | Allow runtime theme changes |
+| Prop                | Type                          | Default            | Description                 |
+| ------------------- | ----------------------------- | ------------------ | --------------------------- |
+| `children`          | `ReactNode`                   | **Required**       | App content                 |
+| `initialTheme`      | `ThemeConfig`                 | `defaultDarkTheme` | Initial theme configuration |
+| `initialMode`       | `'light' \| 'dark' \| 'auto'` | `'dark'`           | Initial color mode          |
+| `allowThemeUpdates` | `boolean`                     | `true`             | Allow runtime theme changes |
 
 **Example:**
 
@@ -495,7 +501,7 @@ import {
   krisarmstrongTheme,
   wifivigilanteTheme,
   intrinsicTheme,
-  intrinsicMomentumMindsetTheme
+  intrinsicMomentumMindsetTheme,
 } from '@krisarmstrong/web-foundation';
 ```
 
@@ -600,11 +606,7 @@ Returns Sentry instance if available, otherwise `null`.
 Import design tokens for Tailwind configuration.
 
 ```tsx
-import {
-  colorTokens,
-  layoutTokens,
-  typographyTokens
-} from '@krisarmstrong/web-foundation/tokens';
+import { colorTokens, layoutTokens, typographyTokens } from '@krisarmstrong/web-foundation/tokens';
 ```
 
 ### Color Tokens
@@ -649,16 +651,17 @@ typographyTokens = {
 React error boundary component.
 
 **Import:**
+
 ```tsx
 import { ErrorBoundary } from '@krisarmstrong/web-foundation';
 ```
 
 **Props:**
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | **Required** | Protected content |
-| `fallback` | `ReactNode` | Default error UI | Custom error UI |
+| Prop       | Type        | Default          | Description       |
+| ---------- | ----------- | ---------------- | ----------------- |
+| `children` | `ReactNode` | **Required**     | Protected content |
+| `fallback` | `ReactNode` | Default error UI | Custom error UI   |
 
 **Example:**
 
@@ -675,11 +678,13 @@ import { ErrorBoundary } from '@krisarmstrong/web-foundation';
 ### Theme Usage
 
 ✅ **Do:**
+
 ```tsx
 <div className="bg-surface-raised text-text-primary" />
 ```
 
 ❌ **Don't:**
+
 ```tsx
 <div className="bg-gray-800 text-gray-100" />
 ```
@@ -687,6 +692,7 @@ import { ErrorBoundary } from '@krisarmstrong/web-foundation';
 ### Component Composition
 
 ✅ **Do:**
+
 ```tsx
 <Card>
   <CardTitle>Title</CardTitle>
@@ -697,11 +703,13 @@ import { ErrorBoundary } from '@krisarmstrong/web-foundation';
 ### Hook Usage
 
 ✅ **Do:**
+
 ```tsx
 const ref = useClickOutside(() => handleClose(), isOpen);
 ```
 
 ❌ **Don't:**
+
 ```tsx
 useClickOutside(() => handleClose()); // Missing isActive parameter
 ```
@@ -712,6 +720,7 @@ useClickOutside(() => handleClose()); // Missing isActive parameter
 **Last Updated:** 2025-11-18
 
 For more information, see:
+
 - [THEMING.md](./THEMING.md) - Theming guide
 - [ARCHITECTURE.md](./ARCHITECTURE.md) - Architecture documentation
 - [README.md](./README.md) - Package overview

@@ -8,7 +8,9 @@ import Services from '../Services';
 
 // Mock React Router
 vi.mock('react-router-dom', () => ({
-  Link: ({ children, to }: any) => <a href={to}>{children}</a>,
+  Link: ({ children, to }: { children: React.ReactNode; to: string }) => (
+    <a href={to}>{children}</a>
+  ),
 }));
 
 describe('Services', () => {

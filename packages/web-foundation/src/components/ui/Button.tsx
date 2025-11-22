@@ -12,13 +12,20 @@ const sizeClasses = {
 
 // Theme-aware variants using CSS variables
 const variantClasses = {
-  primary: 'bg-[var(--color-interactive-default)] hover:bg-[var(--color-interactive-hover)] text-[var(--color-text-inverse)] focus:ring-[var(--color-interactive-focus)]',
-  secondary: 'bg-[var(--color-surface-raised)] hover:bg-[var(--color-surface-hover)] text-[var(--color-text-primary)] border border-[var(--color-surface-border)] focus:ring-[var(--color-interactive-focus)]',
-  danger: 'bg-[var(--color-status-error)] hover:bg-[var(--color-status-error)]/90 text-white focus:ring-[var(--color-status-error)]',
-  warning: 'bg-[var(--color-status-warning)] hover:bg-[var(--color-status-warning)]/90 text-[var(--color-text-primary)] focus:ring-[var(--color-status-warning)]',
-  success: 'bg-[var(--color-status-success)] hover:bg-[var(--color-status-success)]/90 text-white focus:ring-[var(--color-status-success)]',
-  outline: 'border border-[var(--color-surface-border)] bg-transparent hover:bg-[var(--color-surface-hover)] text-[var(--color-text-primary)] focus:ring-[var(--color-interactive-focus)]',
-  ghost: 'bg-transparent hover:bg-[var(--color-surface-hover)] text-[var(--color-text-primary)] focus:ring-[var(--color-interactive-focus)]',
+  primary:
+    'bg-[var(--color-interactive-default)] hover:bg-[var(--color-interactive-hover)] text-[var(--color-text-inverse)] focus:ring-[var(--color-interactive-focus)]',
+  secondary:
+    'bg-[var(--color-surface-raised)] hover:bg-[var(--color-surface-hover)] text-[var(--color-text-primary)] border border-[var(--color-surface-border)] focus:ring-[var(--color-interactive-focus)]',
+  danger:
+    'bg-[var(--color-status-error)] hover:bg-[var(--color-status-error)]/90 text-white focus:ring-[var(--color-status-error)]',
+  warning:
+    'bg-[var(--color-status-warning)] hover:bg-[var(--color-status-warning)]/90 text-[var(--color-text-primary)] focus:ring-[var(--color-status-warning)]',
+  success:
+    'bg-[var(--color-status-success)] hover:bg-[var(--color-status-success)]/90 text-white focus:ring-[var(--color-status-success)]',
+  outline:
+    'border border-[var(--color-surface-border)] bg-transparent hover:bg-[var(--color-surface-hover)] text-[var(--color-text-primary)] focus:ring-[var(--color-interactive-focus)]',
+  ghost:
+    'bg-transparent hover:bg-[var(--color-surface-hover)] text-[var(--color-text-primary)] focus:ring-[var(--color-interactive-focus)]',
 } as const;
 
 type Size = keyof typeof sizeClasses;
@@ -80,19 +87,8 @@ const Spinner = ({ className = '' }: { className?: string }) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <circle
-      className="opacity-25"
-      cx="12"
-      cy="12"
-      r="10"
-      stroke="currentColor"
-      strokeWidth="4"
-    />
-    <path
-      className="opacity-75"
-      fill="currentColor"
-      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-    />
+    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
   </svg>
 );
 
@@ -101,7 +97,7 @@ export function Button({
   to,
   variant = 'primary',
   size = 'md',
-  tone, // Deprecated, keeping for backwards compatibility
+  tone: _tone, // Deprecated, keeping for backwards compatibility
   isLoading = false,
   disabled = false,
   leftIcon,

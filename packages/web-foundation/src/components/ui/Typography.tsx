@@ -71,10 +71,7 @@ export function ArticleTitle({
   ...props
 }: PolymorphicComponentProp<'h2', SimpleHeadingProps>) {
   return (
-    <h2
-      className={`text-2xl lg:text-3xl font-bold text-text-primary mb-3 ${className}`}
-      {...props}
-    >
+    <h2 className={`text-2xl lg:text-3xl font-bold text-text-primary mb-3 ${className}`} {...props}>
       {children}
     </h2>
   );
@@ -103,10 +100,7 @@ export function CardTitle({
   ...props
 }: PolymorphicComponentProp<'h3', SimpleHeadingProps>) {
   return (
-    <h3
-      className={`text-lg font-semibold text-text-primary mb-1 ${className}`}
-      {...props}
-    >
+    <h3 className={`text-lg font-semibold text-text-primary mb-1 ${className}`} {...props}>
       {children}
     </h3>
   );
@@ -197,10 +191,7 @@ export function MutedText({
   ...props
 }: PolymorphicComponentProp<'p', MutedTextProps>) {
   return (
-    <p
-      className={`text-sm text-text-muted ${className}`}
-      {...props}
-    >
+    <p className={`text-sm text-text-muted ${className}`} {...props}>
       {children}
     </p>
   );
@@ -243,16 +234,22 @@ interface TagProps {
 
 export function Tag({ children, className = '', colorScheme = 'primary' }: TagProps) {
   const colorClasses: Record<string, string> = {
-    primary: 'bg-[var(--color-brand-primary)]/20 text-[var(--color-brand-primary)] border border-[var(--color-brand-primary)]/30',
-    success: 'bg-[var(--color-status-success)]/20 text-[var(--color-status-success)] border border-[var(--color-status-success)]/30',
-    warning: 'bg-[var(--color-status-warning)]/20 text-[var(--color-status-warning)] border border-[var(--color-status-warning)]/30',
-    error: 'bg-[var(--color-status-error)]/20 text-[var(--color-status-error)] border border-[var(--color-status-error)]/30',
+    primary:
+      'bg-[var(--color-brand-primary)]/20 text-[var(--color-brand-primary)] border border-[var(--color-brand-primary)]/30',
+    success:
+      'bg-[var(--color-status-success)]/20 text-[var(--color-status-success)] border border-[var(--color-status-success)]/30',
+    warning:
+      'bg-[var(--color-status-warning)]/20 text-[var(--color-status-warning)] border border-[var(--color-status-warning)]/30',
+    error:
+      'bg-[var(--color-status-error)]/20 text-[var(--color-status-error)] border border-[var(--color-status-error)]/30',
     info: 'bg-[var(--color-status-info)]/20 text-[var(--color-status-info)] border border-[var(--color-status-info)]/30',
   };
   const baseStyles = 'inline-flex items-center text-xs rounded-full font-medium px-2.5 py-0.5';
 
   return (
-    <span className={`${baseStyles} ${colorClasses[colorScheme] || colorClasses.primary} ${className}`}>
+    <span
+      className={`${baseStyles} ${colorClasses[colorScheme] || colorClasses.primary} ${className}`}
+    >
       {children}
     </span>
   );
@@ -267,7 +264,8 @@ interface BadgeProps {
 export function Badge({ children, className = '', variant = 'default' }: BadgeProps) {
   const variantClasses: Record<string, string> = {
     default: 'bg-[var(--color-brand-primary)] text-[var(--color-text-inverse)]',
-    secondary: 'bg-[var(--color-surface-raised)] text-[var(--color-text-primary)] border border-[var(--color-surface-border)]',
+    secondary:
+      'bg-[var(--color-surface-raised)] text-[var(--color-text-primary)] border border-[var(--color-surface-border)]',
     success: 'bg-[var(--color-status-success)] text-white',
     warning: 'bg-[var(--color-status-warning)] text-[var(--color-text-primary)]',
     danger: 'bg-[var(--color-status-error)] text-white',
@@ -276,7 +274,9 @@ export function Badge({ children, className = '', variant = 'default' }: BadgePr
   const baseStyles = 'inline-flex items-center text-xs font-semibold px-2.5 py-0.5 rounded-full';
 
   return (
-    <span className={`${baseStyles} ${variantClasses[variant] || variantClasses.default} ${className}`}>
+    <span
+      className={`${baseStyles} ${variantClasses[variant] || variantClasses.default} ${className}`}
+    >
       {children}
     </span>
   );

@@ -30,7 +30,7 @@ export interface ContentCardProps {
   /** Optional status */
   status?: string;
   /** Accent color for hover effects (defaults to violet) */
-  accentColor?: 'violet' | 'blue' | 'green' | 'red' | 'yellow';
+  accentColor?: 'violet' | 'blue' | 'green' | 'red' | 'yellow' | 'teal';
   /** Animation delay for stagger effect */
   animationDelay?: number;
   /** Custom className */
@@ -70,6 +70,7 @@ const accentColors = {
   green: 'hover:border-green-500/50 hover:shadow-green-500/10',
   red: 'hover:border-red-500/50 hover:shadow-red-500/10',
   yellow: 'hover:border-yellow-500/50 hover:shadow-yellow-500/10',
+  teal: 'hover:border-teal-500/50 hover:shadow-teal-500/10',
 };
 
 const accentTextColors = {
@@ -78,6 +79,7 @@ const accentTextColors = {
   green: 'group-hover:text-green-400',
   red: 'group-hover:text-red-400',
   yellow: 'group-hover:text-yellow-400',
+  teal: 'group-hover:text-teal-400',
 };
 
 const tagHoverColors = {
@@ -86,6 +88,7 @@ const tagHoverColors = {
   green: 'hover:bg-green-500',
   red: 'hover:bg-red-500',
   yellow: 'hover:bg-yellow-500',
+  teal: 'hover:bg-teal-500',
 };
 
 const bookmarkActiveColors = {
@@ -94,6 +97,7 @@ const bookmarkActiveColors = {
   green: 'bg-green-500/20 text-green-400',
   red: 'bg-red-500/20 text-red-400',
   yellow: 'bg-yellow-500/20 text-yellow-400',
+  teal: 'bg-teal-500/20 text-teal-400',
 };
 
 const progressBarColors = {
@@ -102,6 +106,7 @@ const progressBarColors = {
   green: 'bg-green-500',
   red: 'bg-red-500',
   yellow: 'bg-yellow-500',
+  teal: 'bg-teal-500',
 };
 
 /**
@@ -168,18 +173,18 @@ export function ContentCard({
   if (isLoading) {
     return (
       <article
-        className={`flex flex-col bg-gray-900 rounded-2xl p-6 border border-gray-800 ${className}`}
+        className={`flex flex-col bg-surface-raised rounded-2xl p-6 border border-surface-border ${className}`}
         aria-busy="true"
         aria-label="Loading content card"
       >
-        {image && <div className="w-full h-48 bg-gray-800 rounded-xl mb-4 animate-pulse" />}
-        <div className="h-8 bg-gray-800 rounded mb-3 animate-pulse w-3/4" />
-        <div className="h-4 bg-gray-800 rounded mb-2 animate-pulse" />
-        <div className="h-4 bg-gray-800 rounded mb-2 animate-pulse w-5/6" />
-        <div className="h-4 bg-gray-800 rounded mb-4 animate-pulse w-2/3" />
+        {image && <div className="w-full h-48 bg-surface-hover rounded-xl mb-4 animate-pulse" />}
+        <div className="h-8 bg-surface-hover rounded mb-3 animate-pulse w-3/4" />
+        <div className="h-4 bg-surface-hover rounded mb-2 animate-pulse" />
+        <div className="h-4 bg-surface-hover rounded mb-2 animate-pulse w-5/6" />
+        <div className="h-4 bg-surface-hover rounded mb-4 animate-pulse w-2/3" />
         <div className="flex gap-2">
-          <div className="h-6 bg-gray-800 rounded-full animate-pulse w-16" />
-          <div className="h-6 bg-gray-800 rounded-full animate-pulse w-16" />
+          <div className="h-6 bg-surface-hover rounded-full animate-pulse w-16" />
+          <div className="h-6 bg-surface-hover rounded-full animate-pulse w-16" />
         </div>
       </article>
     );
@@ -193,7 +198,7 @@ export function ContentCard({
 
   return (
     <article
-      className={`relative flex bg-gray-900 rounded-2xl border border-gray-800 ${accentColors[accentColor]} hover:shadow-lg transition-all duration-300 group ${variantStyles[variant]} ${variant === 'compact' ? 'flex-row' : 'flex-col'} ${className}`}
+      className={`relative flex bg-surface-raised rounded-2xl border border-surface-border shadow-lg hover:shadow-xl transition-all duration-300 group ${accentColors[accentColor]} ${variantStyles[variant]} ${variant === 'compact' ? 'flex-row' : 'flex-col'} ${className}`}
       style={{ animationDelay: `${animationDelay}ms` }}
     >
       {/* Progress Bar */}
@@ -233,7 +238,9 @@ export function ContentCard({
               </span>
             )}
             {severity && (
-              <span className={`inline-block px-3 py-1 text-sm rounded-full border ${severityColors[severity]}`}>
+              <span
+                className={`inline-block px-3 py-1 text-sm rounded-full border ${severityColors[severity]}`}
+              >
                 {severity}
               </span>
             )}
@@ -287,11 +294,7 @@ export function ContentCard({
         {author && (
           <div className="flex items-center gap-2 mb-3">
             {authorAvatar ? (
-              <img
-                src={authorAvatar}
-                alt={author}
-                className="w-8 h-8 rounded-full object-cover"
-              />
+              <img src={authorAvatar} alt={author} className="w-8 h-8 rounded-full object-cover" />
             ) : (
               <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center">
                 <User size={16} className="text-gray-400" />
@@ -310,33 +313,35 @@ export function ContentCard({
         )}
 
         {/* Excerpt */}
-        <p className={`text-gray-400 mb-4 flex-grow ${variant === 'compact' ? 'line-clamp-2' : 'line-clamp-3'}`}>
+        <p
+          className={`text-gray-400 mb-4 flex-grow ${variant === 'compact' ? 'line-clamp-2' : 'line-clamp-3'}`}
+        >
           {excerpt}
         </p>
 
-      {/* Meta Information (Date, Time, Duration) */}
-      {(date || readTime || durationMinutes) && (
-        <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-4">
-          {date && (
-            <div className="flex items-center gap-2">
-              <Calendar size={16} />
-              <span>{formatDate(date)}</span>
-            </div>
-          )}
-          {readTime && (
-            <div className="flex items-center gap-2">
-              <Clock size={16} />
-              <span>{readTime} min read</span>
-            </div>
-          )}
-          {durationMinutes && (
-            <div className="flex items-center gap-2">
-              <Clock size={16} />
-              <span>{durationMinutes} min</span>
-            </div>
-          )}
-        </div>
-      )}
+        {/* Meta Information (Date, Time, Duration) */}
+        {(date || readTime || durationMinutes) && (
+          <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-4">
+            {date && (
+              <div className="flex items-center gap-2">
+                <Calendar size={16} />
+                <span>{formatDate(date)}</span>
+              </div>
+            )}
+            {readTime && (
+              <div className="flex items-center gap-2">
+                <Clock size={16} />
+                <span>{readTime} min read</span>
+              </div>
+            )}
+            {durationMinutes && (
+              <div className="flex items-center gap-2">
+                <Clock size={16} />
+                <span>{durationMinutes} min</span>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Tags - Clickable for filtering */}
         {tags.length > 0 && (

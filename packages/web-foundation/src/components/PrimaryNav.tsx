@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { cloneElement, isValidElement } from 'react';
 import type { NavItem } from '../types';
 import { useOptionalTheme } from '../context/ThemeContext';
 
@@ -13,18 +14,21 @@ interface PrimaryNavProps {
   onNavigate?: () => void;
 }
 
-const variantClasses: Record<NavVariant, { active: string; inactive: string }> = {
+const variantClasses: Record<NavVariant, { active: string; inactive: string; icon: string }> = {
   violet: {
-    active: 'bg-violet-600 text-white shadow-lg shadow-violet-500/50',
-    inactive: 'text-gray-300 hover:bg-gray-800 hover:text-white',
+    active: 'bg-interactive-active text-text-inverse shadow-lg shadow-interactive-active/30 scale-[1.02]',
+    inactive: 'text-text-primary hover:bg-surface-hover hover:text-text-accent hover:shadow-md transition-all duration-200 ease-in-out',
+    icon: 'text-text-accent transition-colors duration-200',
   },
   blue: {
-    active: 'bg-blue-600 text-white shadow-lg shadow-blue-500/40',
-    inactive: 'text-gray-300 hover:bg-gray-700 hover:text-white',
+    active: 'bg-interactive-active text-text-inverse shadow-lg shadow-interactive-active/30 scale-[1.02]',
+    inactive: 'text-text-primary hover:bg-surface-hover hover:text-text-accent hover:shadow-md transition-all duration-200 ease-in-out',
+    icon: 'text-text-accent transition-colors duration-200',
   },
   sage: {
-    active: 'bg-interactive-active text-text-inverse shadow-md',
-    inactive: 'text-text-primary hover:bg-surface-hover hover:text-interactive-hover',
+    active: 'bg-interactive-active text-text-inverse shadow-lg shadow-interactive-active/30 scale-[1.02]',
+    inactive: 'text-text-primary hover:bg-surface-hover hover:text-text-accent hover:shadow-md transition-all duration-200 ease-in-out',
+    icon: 'text-text-accent transition-colors duration-200',
   },
 };
 
@@ -44,13 +48,15 @@ export function PrimaryNav({
 
   const themeClasses = theme
     ? {
-        active: 'bg-interactive-active text-text-inverse shadow-lg',
-        inactive: 'text-text-primary hover:bg-surface-hover hover:text-interactive-hover',
+        active: 'bg-interactive-active text-text-inverse shadow-lg shadow-interactive-active/30 scale-[1.02]',
+        inactive: 'text-text-primary hover:bg-surface-hover hover:text-text-accent hover:shadow-md transition-all duration-200 ease-in-out',
+        icon: 'text-text-accent transition-colors duration-200',
       }
     : variantClasses[variant];
 
   const activeClasses = themeClasses.active;
   const inactiveClasses = themeClasses.inactive;
+  const iconClasses = themeClasses.icon;
 
   const baseLinkClasses =
     'flex items-center gap-2 px-4 py-2 rounded-lg text-base font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
@@ -63,10 +69,18 @@ export function PrimaryNav({
     <nav className={`${wrapperBase} ${className}`.trim()} aria-label="Primary navigation">
       {items.map((item) => {
         const isExternal = Boolean(item.isExternal || /^https?:\/\//.test(item.path));
+
+        // Apply icon color class by cloning the icon element
+        const styledIcon = item.icon && isValidElement(item.icon)
+          ? cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
+              className: iconClasses,
+            })
+          : item.icon;
+
         const content = (
           <>
             <span className="flex items-center gap-2">
-              {item.icon}
+              {styledIcon}
               <span>{item.label}</span>
             </span>
             {item.badge && (

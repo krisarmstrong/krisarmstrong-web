@@ -164,7 +164,7 @@ export function ContactForm({
       onSubmitSuccess?.();
     } catch (err) {
       const errorObject = err instanceof Error ? err : new Error('Failed to submit contact form');
-      setError('We couldn\'t send your message. Please try again or email me directly.');
+      setError("We couldn't send your message. Please try again or email me directly.");
       telemetryHook.trackError({
         message: errorObject.message,
         stack: errorObject.stack,
@@ -204,7 +204,9 @@ export function ContactForm({
         </div>
       ) : (
         <form
-          onSubmit={handleSubmit}
+          onSubmit={(e) => {
+            void handleSubmit(e);
+          }}
           className={`space-y-6 rounded-2xl px-6 py-8 ${surface.card} ${cardClassName}`}
         >
           <div className="sr-only" aria-hidden="true">
@@ -221,7 +223,10 @@ export function ContactForm({
           </div>
 
           <div>
-            <label className={`mb-2 block text-sm font-semibold ${surface.label}`} htmlFor="contact-name">
+            <label
+              className={`mb-2 block text-sm font-semibold ${surface.label}`}
+              htmlFor="contact-name"
+            >
               {nameLabel}
             </label>
             <input
@@ -235,7 +240,10 @@ export function ContactForm({
           </div>
 
           <div>
-            <label className={`mb-2 block text-sm font-semibold ${surface.label}`} htmlFor="contact-email">
+            <label
+              className={`mb-2 block text-sm font-semibold ${surface.label}`}
+              htmlFor="contact-email"
+            >
               {emailLabel}
             </label>
             <input
@@ -249,7 +257,10 @@ export function ContactForm({
           </div>
 
           <div>
-            <label className={`mb-2 block text-sm font-semibold ${surface.label}`} htmlFor="contact-message">
+            <label
+              className={`mb-2 block text-sm font-semibold ${surface.label}`}
+              htmlFor="contact-message"
+            >
               {messageLabel}
             </label>
             <textarea
@@ -272,11 +283,7 @@ export function ContactForm({
             {submitLabel}
           </Button>
 
-          {privacyNotice && (
-            <p className={`text-xs ${surface.helper}`}>
-              {privacyNotice}
-            </p>
-          )}
+          {privacyNotice && <p className={`text-xs ${surface.helper}`}>{privacyNotice}</p>}
 
           {error && (
             <p className={`text-sm ${surface.error}`} role="alert">

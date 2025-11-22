@@ -54,6 +54,15 @@ lerna-debug.log*
 
 # OS files
 Thumbs.db
+.DS_Store
+**/.DS_Store
+
+# Backup files
+*.bak
+*.backup
+*.old
+*~
+.*.swp
 
 # Storybook
 storybook-static/
@@ -63,6 +72,28 @@ storybook-static/
 
 # Sentry
 .sentryclirc
+
+# Security & Secrets
+*.pem
+*.key
+*.cert
+*.crt
+secrets.json
+credentials.json
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Package manager lock files (keep package-lock.json)
+# yarn.lock
+# pnpm-lock.yaml
+
+# IDE
+.vscode/settings.json.local
+.fleet/
+*.code-workspace
 
 # Screenshots (keep in project for now based on file listing)
 # *.png

@@ -1,0 +1,7 @@
+- Always use best practicies for git including CI/CL lint secutiy test code tests etc
+- Always use best practiciess with regards to the latest versio n of react currently 19.2 and tailwinds CSS currently 4.x
+- Allways put issues / enhancments in github issues once fixed close them
+- always used best practicies for cCSS consistency
+- Reduce duplicate code anywwhere possible
+- always perform high quality code as a senior principal engineer
+- always rebuild and restart all sites when changes occur

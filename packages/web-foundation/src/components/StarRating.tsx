@@ -117,8 +117,7 @@ export function StarRating({
     onRate?.(rating);
   };
 
-  const filledClasses =
-    filledStarClassMap[starColor] ?? filledStarClassMap['yellow-400'];
+  const filledClasses = filledStarClassMap[starColor] ?? filledStarClassMap['yellow-400'];
 
   return (
     <div className="flex flex-col gap-2">
@@ -146,27 +145,19 @@ export function StarRating({
             );
           })}
         </div>
-        {userRating > 0 && (
-          <span className="text-sm text-gray-400">
-            You rated: {userRating}/5
-          </span>
-        )}
+        {userRating > 0 && <span className="text-sm text-gray-400">You rated: {userRating}/5</span>}
       </div>
 
       {/* Rating stats */}
       {totalRatings > 0 && (
         <div className="text-sm text-gray-500">
-          Average: {averageRating.toFixed(1)}/5 ({totalRatings}{" "}
-          {totalRatings === 1 ? "rating" : "ratings"})
+          Average: {averageRating.toFixed(1)}/5 ({totalRatings}{' '}
+          {totalRatings === 1 ? 'rating' : 'ratings'})
         </div>
       )}
 
       {/* Instructions */}
-      {userRating === 0 && (
-        <p className="text-xs text-gray-500">
-          Click to rate
-        </p>
-      )}
+      {userRating === 0 && <p className="text-xs text-gray-500">Click to rate</p>}
     </div>
   );
 }

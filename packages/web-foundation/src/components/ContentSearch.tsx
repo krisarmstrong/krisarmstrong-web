@@ -125,8 +125,17 @@ export function ContentSearch<T extends SearchableItem>({
             return value.join(' ');
           }
 
+          // Handle objects (convert to empty string to avoid [object Object])
+          if (typeof value === 'object' && value !== null) {
+            return '';
+          }
+
           // Handle strings and numbers
-          return String(value || '');
+          // At this point, value can only be a primitive (string, number, boolean, etc.)
+          if (value === undefined || value === null) {
+            return '';
+          }
+          return String(value as string | number | boolean);
         })
         .join(' ')
         .toLowerCase();
@@ -187,7 +196,7 @@ export function ContentSearch<T extends SearchableItem>({
           </span>
           {filteredItems.length > 0 && <span className="text-gray-600">•</span>}
           {filteredItems.length > 0 && (
-            <span className={`${colors.text} font-medium`}>"{debouncedQuery}"</span>
+            <span className={`${colors.text} font-medium`}>&quot;{debouncedQuery}&quot;</span>
           )}
         </div>
       )}
@@ -197,7 +206,7 @@ export function ContentSearch<T extends SearchableItem>({
         <div className={`p-4 rounded-lg ${colors.bg} border border-gray-700`}>
           <p className="text-sm text-gray-400 text-center">
             No results found for{' '}
-            <span className={`${colors.text} font-medium`}>"{debouncedQuery}"</span>
+            <span className={`${colors.text} font-medium`}>&quot;{debouncedQuery}&quot;</span>
           </p>
           <p className="text-xs text-gray-500 text-center mt-1">
             Try different keywords or{' '}

@@ -28,9 +28,18 @@ describe('validateEmail', () => {
 
   it('should reject invalid email addresses', () => {
     expect(validateEmail('')).toEqual({ isValid: false, error: 'Email is required' });
-    expect(validateEmail('invalid')).toEqual({ isValid: false, error: 'Please enter a valid email address' });
-    expect(validateEmail('invalid@')).toEqual({ isValid: false, error: 'Please enter a valid email address' });
-    expect(validateEmail('@example.com')).toEqual({ isValid: false, error: 'Please enter a valid email address' });
+    expect(validateEmail('invalid')).toEqual({
+      isValid: false,
+      error: 'Please enter a valid email address',
+    });
+    expect(validateEmail('invalid@')).toEqual({
+      isValid: false,
+      error: 'Please enter a valid email address',
+    });
+    expect(validateEmail('@example.com')).toEqual({
+      isValid: false,
+      error: 'Please enter a valid email address',
+    });
   });
 });
 
@@ -44,8 +53,14 @@ describe('validatePhone', () => {
 
   it('should reject invalid phone numbers', () => {
     expect(validatePhone('')).toEqual({ isValid: false, error: 'Phone number is required' });
-    expect(validatePhone('123')).toEqual({ isValid: false, error: 'Phone number must be at least 10 digits' });
-    expect(validatePhone('12345678901234567890')).toEqual({ isValid: false, error: 'Phone number is too long' });
+    expect(validatePhone('123')).toEqual({
+      isValid: false,
+      error: 'Phone number must be at least 10 digits',
+    });
+    expect(validatePhone('12345678901234567890')).toEqual({
+      isValid: false,
+      error: 'Phone number is too long',
+    });
   });
 });
 
@@ -58,9 +73,18 @@ describe('validateName', () => {
 
   it('should reject invalid names', () => {
     expect(validateName('')).toEqual({ isValid: false, error: 'Name is required' });
-    expect(validateName('A')).toEqual({ isValid: false, error: 'Name must be at least 2 characters' });
-    expect(validateName('A'.repeat(101))).toEqual({ isValid: false, error: 'Name must not exceed 100 characters' });
-    expect(validateName('John123')).toEqual({ isValid: false, error: 'Name can only contain letters, spaces, hyphens, and apostrophes' });
+    expect(validateName('A')).toEqual({
+      isValid: false,
+      error: 'Name must be at least 2 characters',
+    });
+    expect(validateName('A'.repeat(101))).toEqual({
+      isValid: false,
+      error: 'Name must not exceed 100 characters',
+    });
+    expect(validateName('John123')).toEqual({
+      isValid: false,
+      error: 'Name can only contain letters, spaces, hyphens, and apostrophes',
+    });
   });
 });
 
@@ -100,8 +124,14 @@ describe('validateAddress', () => {
 
   it('should reject invalid addresses', () => {
     expect(validateAddress('')).toEqual({ isValid: false, error: 'Address is required' });
-    expect(validateAddress('123')).toEqual({ isValid: false, error: 'Address must be at least 5 characters' });
-    expect(validateAddress('A'.repeat(201))).toEqual({ isValid: false, error: 'Address must not exceed 200 characters' });
+    expect(validateAddress('123')).toEqual({
+      isValid: false,
+      error: 'Address must be at least 5 characters',
+    });
+    expect(validateAddress('A'.repeat(201))).toEqual({
+      isValid: false,
+      error: 'Address must not exceed 200 characters',
+    });
   });
 });
 
@@ -113,8 +143,14 @@ describe('validateCity', () => {
 
   it('should reject invalid city names', () => {
     expect(validateCity('')).toEqual({ isValid: false, error: 'City is required' });
-    expect(validateCity('A')).toEqual({ isValid: false, error: 'City must be at least 2 characters' });
-    expect(validateCity('A'.repeat(51))).toEqual({ isValid: false, error: 'City must not exceed 50 characters' });
+    expect(validateCity('A')).toEqual({
+      isValid: false,
+      error: 'City must be at least 2 characters',
+    });
+    expect(validateCity('A'.repeat(51))).toEqual({
+      isValid: false,
+      error: 'City must not exceed 50 characters',
+    });
   });
 });
 
@@ -126,9 +162,18 @@ describe('validateState', () => {
 
   it('should reject invalid state codes', () => {
     expect(validateState('')).toEqual({ isValid: false, error: 'State is required' });
-    expect(validateState('C')).toEqual({ isValid: false, error: 'State must be 2 letters (e.g., CA, NY)' });
-    expect(validateState('CAL')).toEqual({ isValid: false, error: 'State must be 2 letters (e.g., CA, NY)' });
-    expect(validateState('C1')).toEqual({ isValid: false, error: 'Please enter a valid 2-letter state code' });
+    expect(validateState('C')).toEqual({
+      isValid: false,
+      error: 'State must be 2 letters (e.g., CA, NY)',
+    });
+    expect(validateState('CAL')).toEqual({
+      isValid: false,
+      error: 'State must be 2 letters (e.g., CA, NY)',
+    });
+    expect(validateState('C1')).toEqual({
+      isValid: false,
+      error: 'Please enter a valid 2-letter state code',
+    });
   });
 });
 
@@ -140,8 +185,14 @@ describe('validateZipCode', () => {
 
   it('should reject invalid ZIP codes', () => {
     expect(validateZipCode('')).toEqual({ isValid: false, error: 'ZIP code is required' });
-    expect(validateZipCode('1234')).toEqual({ isValid: false, error: 'Please enter a valid ZIP code (e.g., 12345 or 12345-6789)' });
-    expect(validateZipCode('ABCDE')).toEqual({ isValid: false, error: 'Please enter a valid ZIP code (e.g., 12345 or 12345-6789)' });
+    expect(validateZipCode('1234')).toEqual({
+      isValid: false,
+      error: 'Please enter a valid ZIP code (e.g., 12345 or 12345-6789)',
+    });
+    expect(validateZipCode('ABCDE')).toEqual({
+      isValid: false,
+      error: 'Please enter a valid ZIP code (e.g., 12345 or 12345-6789)',
+    });
   });
 });
 
@@ -152,9 +203,18 @@ describe('validatePayPalUrl', () => {
   });
 
   it('should reject invalid PayPal URLs', () => {
-    expect(validatePayPalUrl('')).toEqual({ isValid: false, error: 'Payment URL is not configured' });
-    expect(validatePayPalUrl('https://malicious.com/fake')).toEqual({ isValid: false, error: 'Invalid payment URL. Please contact support.' });
-    expect(validatePayPalUrl('not-a-url')).toEqual({ isValid: false, error: 'Invalid payment URL format' });
+    expect(validatePayPalUrl('')).toEqual({
+      isValid: false,
+      error: 'Payment URL is not configured',
+    });
+    expect(validatePayPalUrl('https://malicious.com/fake')).toEqual({
+      isValid: false,
+      error: 'Invalid payment URL. Please contact support.',
+    });
+    expect(validatePayPalUrl('not-a-url')).toEqual({
+      isValid: false,
+      error: 'Invalid payment URL format',
+    });
   });
 });
 
@@ -165,32 +225,54 @@ describe('validateFormEndpoint', () => {
   });
 
   it('should reject invalid endpoints', () => {
-    expect(validateFormEndpoint('')).toEqual({ isValid: false, error: 'Form endpoint is not configured' });
-    expect(validateFormEndpoint('ftp://invalid.com')).toEqual({ isValid: false, error: 'Invalid form endpoint protocol' });
-    expect(validateFormEndpoint('not-a-url')).toEqual({ isValid: false, error: 'Invalid form endpoint format' });
+    expect(validateFormEndpoint('')).toEqual({
+      isValid: false,
+      error: 'Form endpoint is not configured',
+    });
+    expect(validateFormEndpoint('ftp://invalid.com')).toEqual({
+      isValid: false,
+      error: 'Invalid form endpoint protocol',
+    });
+    expect(validateFormEndpoint('not-a-url')).toEqual({
+      isValid: false,
+      error: 'Invalid form endpoint format',
+    });
   });
 });
 
 describe('validateMessage', () => {
   it('should accept valid messages', () => {
-    expect(validateMessage('This is a valid message with enough characters.')).toEqual({ isValid: true });
+    expect(validateMessage('This is a valid message with enough characters.')).toEqual({
+      isValid: true,
+    });
   });
 
   it('should reject invalid messages', () => {
     expect(validateMessage('')).toEqual({ isValid: false, error: 'Message is required' });
-    expect(validateMessage('Short')).toEqual({ isValid: false, error: 'Message must be at least 10 characters' });
-    expect(validateMessage('A'.repeat(5001))).toEqual({ isValid: false, error: 'Message must not exceed 5000 characters' });
+    expect(validateMessage('Short')).toEqual({
+      isValid: false,
+      error: 'Message must be at least 10 characters',
+    });
+    expect(validateMessage('A'.repeat(5001))).toEqual({
+      isValid: false,
+      error: 'Message must not exceed 5000 characters',
+    });
   });
 
   it('should respect custom length parameters', () => {
     expect(validateMessage('Hello', 5, 100)).toEqual({ isValid: true });
-    expect(validateMessage('Hi', 5, 100)).toEqual({ isValid: false, error: 'Message must be at least 5 characters' });
+    expect(validateMessage('Hi', 5, 100)).toEqual({
+      isValid: false,
+      error: 'Message must be at least 5 characters',
+    });
   });
 });
 
 describe('sanitizeInput', () => {
   it('should escape HTML special characters', () => {
-    expect(sanitizeInput('<script>alert("xss")</script>')).toBe('&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;');
+    expect(sanitizeInput('<script>alert("xss")</script>')).toBe(
+      '&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;'
+    );
     expect(sanitizeInput('Test & Demo')).toBe('Test &amp; Demo');
     expect(sanitizeInput("It's a test")).toBe('It&#039;s a test');
   });

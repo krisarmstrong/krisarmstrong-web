@@ -33,7 +33,7 @@ const errorBgColors = {
   green: 'bg-green-900/20',
   red: 'bg-red-900/20',
   yellow: 'bg-yellow-900/20',
-  gray: 'bg-gray-900/20',
+  gray: 'bg-surface-raised/80',
 };
 
 const errorTextColors = {
@@ -42,7 +42,7 @@ const errorTextColors = {
   green: 'text-green-400',
   red: 'text-red-400',
   yellow: 'text-yellow-400',
-  gray: 'text-gray-400',
+  gray: 'text-text-muted',
 };
 
 const errorButtonColors = {
@@ -51,7 +51,7 @@ const errorButtonColors = {
   green: 'bg-green-600 hover:bg-green-700',
   red: 'bg-red-600 hover:bg-red-700',
   yellow: 'bg-yellow-600 hover:bg-yellow-700',
-  gray: 'bg-gray-600 hover:bg-gray-700',
+  gray: 'bg-interactive-default hover:bg-interactive-hover',
 };
 
 /**
@@ -129,7 +129,7 @@ export function ErrorCard({ error, onRetry, variant = 'red' }: ErrorCardProps) {
   const sanitizedErrorMessage = { __html: DOMPurify.sanitize(errorMessage || '') };
 
   return (
-    <div className="bg-gray-800 rounded-lg p-8 text-center">
+    <div className="bg-surface-raised rounded-lg p-8 text-center border border-surface-border">
       <div
         className={`mx-auto w-16 h-16 ${errorBgColors[variant]} rounded-full flex items-center justify-center mb-4`}
       >
@@ -138,7 +138,7 @@ export function ErrorCard({ error, onRetry, variant = 'red' }: ErrorCardProps) {
       <h3 className={`text-xl font-semibold ${errorTextColors[variant]} mb-2`}>
         Something went wrong
       </h3>
-      <p className="text-gray-300 mb-4">
+      <p className="text-text-muted mb-4">
         {sanitizedErrorMessage.__html && sanitizedErrorMessage.__html.length > 0 ? (
           <span dangerouslySetInnerHTML={sanitizedErrorMessage} />
         ) : (
@@ -302,16 +302,16 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       const buttonClasses = errorButtonColors[variant];
 
       return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4">
+        <div className="min-h-screen flex items-center justify-center bg-surface-base px-4">
           <div className="max-w-md w-full text-center">
             <div className="text-6xl mb-6">⚠️</div>
-            <h1 className="text-3xl font-bold mb-4 text-white">Something went wrong</h1>
-            <p className="text-gray-400 mb-6">
-              We're sorry, but something unexpected happened. The error has been logged.
+            <h1 className="text-3xl font-bold mb-4 text-text-primary">Something went wrong</h1>
+            <p className="text-text-muted mb-6">
+              We&apos;re sorry, but something unexpected happened. The error has been logged.
             </p>
 
             {isDevelopmentEnvironment && showDevDetails && this.state.error && (
-              <details className="mb-6 text-left bg-gray-900 p-4 rounded-lg">
+              <details className="mb-6 text-left bg-surface-raised p-4 rounded-lg border border-surface-border">
                 <summary
                   className={`cursor-pointer ${errorTextColors[variant]} font-semibold mb-2`}
                 >
@@ -333,7 +333,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
               </button>
               <a
                 href={homePath}
-                className="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg transition"
+                className="px-6 py-3 bg-surface-raised hover:bg-surface-hover text-text-primary border border-surface-border font-semibold rounded-lg transition"
               >
                 Go to Home
               </a>

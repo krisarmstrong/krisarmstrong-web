@@ -1,0 +1,24 @@
+# CODEOWNERS file
+# These owners will be automatically requested for review when someone opens a pull request.
+# More info: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global owners - will be requested for all changes unless a more specific owner is defined below
+* @krisarmstrong
+
+# Web Foundation Package - critical shared code
+/packages/web-foundation/ @krisarmstrong
+
+# Individual Apps
+/apps/intrinsic/ @krisarmstrong
+/apps/krisarmstrong/ @krisarmstrong
+/apps/wifivigilante/ @krisarmstrong
+
+# CI/CD and GitHub configuration
+/.github/ @krisarmstrong
+/.husky/ @krisarmstrong
+
+# Configuration files
+*.config.js @krisarmstrong
+*.config.ts @krisarmstrong
+package.json @krisarmstrong
+tsconfig.json @krisarmstrong

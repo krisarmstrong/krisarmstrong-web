@@ -112,7 +112,7 @@ export default function Register() {
     ];
 
     // Find first validation error
-    const firstError = validations.find(v => !v.isValid);
+    const firstError = validations.find((v) => !v.isValid);
     if (firstError) {
       setError(firstError.error || 'Please check your form inputs');
       setSubmitting(false);
@@ -167,7 +167,8 @@ export default function Register() {
             {program.duration} • Group Coaching Program
           </p>
           <p className="text-text-muted">
-            Complete the form below to reserve your spot. You'll be redirected to PayPal to complete payment.
+            Complete the form below to reserve your spot. You'll be redirected to PayPal to complete
+            payment.
           </p>
         </div>
 
@@ -199,7 +200,10 @@ export default function Register() {
 
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-semibold text-brand-primary mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-semibold text-brand-primary mb-2"
+              >
                 Email Address *
               </label>
               <input
@@ -214,7 +218,10 @@ export default function Register() {
 
             {/* Phone */}
             <div>
-              <label htmlFor="phone" className="block text-sm font-semibold text-brand-primary mb-2">
+              <label
+                htmlFor="phone"
+                className="block text-sm font-semibold text-brand-primary mb-2"
+              >
                 Phone Number *
               </label>
               <input
@@ -243,7 +250,10 @@ export default function Register() {
 
             {/* Address */}
             <div>
-              <label htmlFor="address" className="block text-sm font-semibold text-brand-primary mb-2">
+              <label
+                htmlFor="address"
+                className="block text-sm font-semibold text-brand-primary mb-2"
+              >
                 Street Address *
               </label>
               <input
@@ -262,7 +272,10 @@ export default function Register() {
             {/* City, State, Zip in a row */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="md:col-span-1">
-                <label htmlFor="city" className="block text-sm font-semibold text-brand-primary mb-2">
+                <label
+                  htmlFor="city"
+                  className="block text-sm font-semibold text-brand-primary mb-2"
+                >
                   City *
                 </label>
                 <input
@@ -278,7 +291,10 @@ export default function Register() {
                 />
               </div>
               <div className="md:col-span-1">
-                <label htmlFor="state" className="block text-sm font-semibold text-brand-primary mb-2">
+                <label
+                  htmlFor="state"
+                  className="block text-sm font-semibold text-brand-primary mb-2"
+                >
                   State *
                 </label>
                 <input
@@ -296,7 +312,10 @@ export default function Register() {
                 />
               </div>
               <div className="md:col-span-1">
-                <label htmlFor="zip" className="block text-sm font-semibold text-brand-primary mb-2">
+                <label
+                  htmlFor="zip"
+                  className="block text-sm font-semibold text-brand-primary mb-2"
+                >
                   Zip Code *
                 </label>
                 <input

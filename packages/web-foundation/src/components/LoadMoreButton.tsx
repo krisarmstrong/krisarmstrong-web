@@ -20,23 +20,23 @@ export interface LoadMoreButtonProps {
 const accentColors = {
   violet: {
     primary: 'bg-violet-600 hover:bg-violet-700',
-    secondary: 'bg-gray-700 hover:bg-gray-600 border border-violet-500/30',
+    secondary: 'bg-surface-raised hover:bg-surface-hover border border-violet-500/30',
   },
   emerald: {
     primary: 'bg-emerald-600 hover:bg-emerald-700',
-    secondary: 'bg-gray-700 hover:bg-gray-600 border border-emerald-500/30',
+    secondary: 'bg-surface-raised hover:bg-surface-hover border border-emerald-500/30',
   },
   blue: {
     primary: 'bg-blue-600 hover:bg-blue-700',
-    secondary: 'bg-gray-700 hover:bg-gray-600 border border-blue-500/30',
+    secondary: 'bg-surface-raised hover:bg-surface-hover border border-blue-500/30',
   },
   amber: {
     primary: 'bg-amber-600 hover:bg-amber-700',
-    secondary: 'bg-gray-700 hover:bg-gray-600 border border-amber-500/30',
+    secondary: 'bg-surface-raised hover:bg-surface-hover border border-amber-500/30',
   },
   rose: {
     primary: 'bg-rose-600 hover:bg-rose-700',
-    secondary: 'bg-gray-700 hover:bg-gray-600 border border-rose-500/30',
+    secondary: 'bg-surface-raised hover:bg-surface-hover border border-rose-500/30',
   },
 };
 
@@ -84,16 +84,14 @@ export function LoadMoreButton({
           ${colors}
           text-white font-semibold rounded-lg
           transition-colors
-          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900
+          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-interactive-focus
         `}
         aria-label={`Load ${loadCount} more ${displayLabel}`}
       >
         Load {loadCount} More {displayLabel.charAt(0).toUpperCase() + displayLabel.slice(1)}
         <ChevronDown size={20} />
       </button>
-      <p className="text-sm text-gray-500 mt-2">
-        {remainingCount} remaining
-      </p>
+      <p className="text-sm text-text-muted mt-2">{remainingCount} remaining</p>
     </div>
   );
 }

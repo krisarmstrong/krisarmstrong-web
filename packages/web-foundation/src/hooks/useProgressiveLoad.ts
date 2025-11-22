@@ -53,10 +53,7 @@ export function useProgressiveLoad<T>(
   items: T[],
   options: UseProgressiveLoadOptions = {}
 ): UseProgressiveLoadReturn<T> {
-  const {
-    itemsPerLoad = 12,
-    initialCount = itemsPerLoad,
-  } = options;
+  const { itemsPerLoad = 12, initialCount = itemsPerLoad } = options;
 
   const [displayCount, setDisplayCount] = useState(initialCount);
 
@@ -80,7 +77,7 @@ export function useProgressiveLoad<T>(
 
   // Load more function
   const loadMore = useCallback(() => {
-    setDisplayCount(prev => prev + itemsPerLoad);
+    setDisplayCount((prev) => prev + itemsPerLoad);
   }, [itemsPerLoad]);
 
   // Reset function
