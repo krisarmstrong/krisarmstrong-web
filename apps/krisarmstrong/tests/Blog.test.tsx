@@ -61,8 +61,10 @@ describe('Blog', () => {
 
   it('displays initial 12 blog posts', async () => {
     await renderBlog();
-    const articles = screen.getAllByRole('article');
-    expect(articles.length).toBeLessThanOrEqual(12);
+    // Count blog post titles (h2 elements within links)
+    const postTitles = screen.getAllByRole('heading', { level: 2 });
+    expect(postTitles.length).toBeGreaterThan(0);
+    expect(postTitles.length).toBeLessThanOrEqual(12);
   });
 
   it('shows sort dropdown', async () => {
@@ -174,14 +176,14 @@ describe('Blog', () => {
     const loadMoreButton = screen.queryByText(/Load .* More Posts/);
 
     if (loadMoreButton) {
-      const initialArticles = screen.getAllByRole('article');
-      const initialCount = initialArticles.length;
+      const initialTitles = screen.getAllByRole('heading', { level: 2 });
+      const initialCount = initialTitles.length;
 
       fireEvent.click(loadMoreButton);
 
       await waitFor(() => {
-        const newArticles = screen.getAllByRole('article');
-        expect(newArticles.length).toBeGreaterThan(initialCount);
+        const newTitles = screen.getAllByRole('heading', { level: 2 });
+        expect(newTitles.length).toBeGreaterThan(initialCount);
       });
     }
   });

@@ -80,7 +80,7 @@ describe('Navbar', () => {
     });
   });
 
-  it('passes the Search component to desktopActions and mobileActions', () => {
+  it('passes the ThemeToggle component to desktopActions and mobileActions', () => {
     render(
       <BrowserRouter>
         <Navbar />
@@ -91,12 +91,12 @@ describe('Navbar', () => {
     const mobileActions = screen.getByTestId('navbar-mobile-actions');
 
     expect(desktopActions).toBeInTheDocument();
-    expect(desktopActions).toHaveTextContent('Search skills, projects, certifications...'); // Expecting the actual placeholder text
+    expect(desktopActions).toHaveTextContent('Theme Toggle');
     expect(mobileActions).toBeInTheDocument();
-    expect(mobileActions).toHaveTextContent('Search skills, projects, certifications...'); // Expecting the actual placeholder text
+    expect(mobileActions).toHaveTextContent('Theme Toggle');
   });
 
-  it('passes the correct variant to WebFoundationNavbar', () => {
+  it('passes the correct color props to WebFoundationNavbar', () => {
     render(
       <BrowserRouter>
         <Navbar />
@@ -105,7 +105,9 @@ describe('Navbar', () => {
 
     const webFoundationNavbarMock = vi.mocked(WebFoundationNavbar);
     const firstCallArgs = webFoundationNavbarMock.mock.calls[0][0];
-    expect(firstCallArgs.variant).toBe('violet');
+    expect(firstCallArgs.bgColor).toBe('bg-surface-raised');
+    expect(firstCallArgs.borderColor).toBe('border-surface-border');
+    expect(firstCallArgs.textColor).toBe('text-text-primary');
   });
 
   it('passes the correct mobileFooter to WebFoundationNavbar', () => {
