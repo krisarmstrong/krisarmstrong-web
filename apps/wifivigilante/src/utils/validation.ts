@@ -1,8 +1,18 @@
 /**
  * Validation utilities for form inputs and user data
+ * Re-exports shared validators and provides app-specific validation
  */
 
-import type { ValidationResult, CaseFile } from '@/types';
+import type { CaseFile } from '@/types';
+
+// Re-export shared validation utilities from web-foundation
+export type { ValidationResult } from '@krisarmstrong/web-foundation';
+export { sanitizeInput } from '@krisarmstrong/web-foundation';
+
+// Import ValidationResult type for internal use
+import type { ValidationResult } from '@krisarmstrong/web-foundation';
+
+// App-specific validation functions
 
 /**
  * Validates a search query string
@@ -42,7 +52,7 @@ export const validateSearchQuery = (query: string): ValidationResult => {
     }
   }
 
-  return { isValid: true, error: null };
+  return { isValid: true };
 };
 
 /**
@@ -72,7 +82,7 @@ export const validatePublicId = (publicId: string): ValidationResult => {
     return { isValid: false, error: 'Invalid Case ID format' };
   }
 
-  return { isValid: true, error: null };
+  return { isValid: true };
 };
 
 /**
@@ -132,23 +142,4 @@ export const validateCaseData = (caseData: Partial<CaseFile>): ValidationResult 
     isValid: !hasErrors,
     errors: hasErrors ? errors : {},
   };
-};
-
-/**
- * Sanitizes user input to prevent XSS
- * @param input - The input to sanitize
- * @returns Sanitized input string
- */
-export const sanitizeInput = (input: string): string => {
-  if (typeof input !== 'string') {
-    return '';
-  }
-
-  return input
-    .trim()
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#x27;')
-    .replace(/\//g, '&#x2F;');
 };
