@@ -1,10 +1,10 @@
 /**
  * Shared base styles for all apps
  * Colors are set dynamically by ThemeProvider via CSS variables
+ *
+ * Note: Font imports should be at the top of each app's index.css to ensure
+ * they remain at the top of the bundled CSS output
  */
-
-/* Modern professional fonts from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 * {
   box-sizing: border-box;

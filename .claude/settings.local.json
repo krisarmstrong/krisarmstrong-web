@@ -29,7 +29,11 @@
       "Bash(git merge:*)",
       "Bash(npm audit fix:*)",
       "Bash(git tag:*)",
-      "Bash(gh issue view:*)"
+      "Bash(gh issue view:*)",
+      "Bash(npm version:*)",
+      "Bash(git describe:*)",
+      "Bash(pkill:*)",
+      "Bash(git restore:*)"
     ],
     "deny": [],
     "ask": []
