@@ -5,7 +5,13 @@
       "Bash(npm test:*)",
       "Bash(npm run build:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(gh issue close:*)",
+      "Bash(gh issue list:*)",
+      "Bash(for issue in 23 24 25 28 29)",
+      "Bash(do)",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []
