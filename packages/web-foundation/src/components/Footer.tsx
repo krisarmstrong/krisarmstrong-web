@@ -1,6 +1,4 @@
 import type { FooterProps } from '../types';
-import { themeTokens } from '../tokens';
-import { useOptionalTheme } from '../context/ThemeContext';
 
 const defaultSocial = [
   {
@@ -14,40 +12,9 @@ const defaultSocial = [
   },
 ];
 
-export function Footer({
-  social = defaultSocial,
-  legalLinks,
-  copyright,
-  theme = 'dark',
-}: FooterProps) {
-  // Use theme context if available, otherwise fall back to theme prop
-  const themeContext = useOptionalTheme();
-  const contextTheme = themeContext?.theme;
-
-  // If ThemeProvider is available, use its colors; otherwise use themeTokens
-  const palette = contextTheme
-    ? {
-        surfaceRaised: contextTheme.surface?.raised || themeTokens[theme].surfaceRaised,
-        textPrimary: contextTheme.text?.primary || themeTokens[theme].textPrimary,
-        textMuted: contextTheme.text?.muted || themeTokens[theme].textMuted,
-        border: contextTheme.surface?.border || themeTokens[theme].border,
-      }
-    : themeTokens[theme] || themeTokens.dark;
-
+export function Footer({ social = defaultSocial, legalLinks, copyright }: FooterProps) {
   return (
-    <footer
-      className="transition-colors duration-200"
-      style={{
-        backgroundColor: palette.surfaceRaised,
-        color: palette.textMuted,
-        borderTop: `1px solid ${palette.border}`,
-        marginTop: '8rem',
-        paddingTop: '4rem',
-        paddingBottom: '4rem',
-        paddingLeft: '1rem',
-        paddingRight: '1rem',
-      }}
-    >
+    <footer className="bg-surface-raised text-text-muted border-t border-surface-border transition-colors duration-200 mt-32 pt-16 pb-16 px-4">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 text-center">
         {social.length > 0 && (
           <div className="flex justify-center gap-6">
@@ -58,8 +25,7 @@ export function Footer({
                 aria-label={item.label}
                 rel="noopener noreferrer"
                 target="_blank"
-                className="transition-colors"
-                style={{ color: palette.textMuted }}
+                className="text-text-muted transition-colors hover:text-text-primary"
               >
                 {item.icon}
               </a>
@@ -72,14 +38,13 @@ export function Footer({
             {legalLinks.map((link, index) => (
               <span key={link.path} className="flex items-center gap-4">
                 {index > 0 && (
-                  <span aria-hidden="true" style={{ color: palette.textMuted }}>
+                  <span aria-hidden="true" className="text-text-muted">
                     |
                   </span>
                 )}
                 <a
                   href={link.path}
-                  className="transition-colors hover:underline"
-                  style={{ color: palette.textPrimary }}
+                  className="text-text-primary transition-colors hover:underline hover:text-text-accent"
                 >
                   {link.label}
                 </a>
@@ -88,9 +53,7 @@ export function Footer({
           </div>
         )}
 
-        <div className="text-sm" style={{ color: palette.textMuted }}>
-          {copyright}
-        </div>
+        <div className="text-sm text-text-muted">{copyright}</div>
       </div>
     </footer>
   );

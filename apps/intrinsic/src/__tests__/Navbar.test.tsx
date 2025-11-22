@@ -2,11 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import {
-  Navbar as WebFoundationNavbar,
-  ThemeProvider,
-  intrinsicTheme,
-} from '@krisarmstrong/web-foundation';
+import { Navbar as WebFoundationNavbar } from '@krisarmstrong/web-foundation';
 import { PRIMARY_NAV } from '../config/navigation';
 
 // Mock the WebFoundationNavbar component from web-foundation
@@ -43,11 +39,7 @@ vi.mock('@krisarmstrong/web-foundation', async (importOriginal) => {
 
 // Helper function to wrap component with providers
 const renderWithProviders = (component: React.ReactElement) => {
-  return render(
-    <ThemeProvider initialTheme={intrinsicTheme} initialMode="light">
-      <BrowserRouter>{component}</BrowserRouter>
-    </ThemeProvider>
-  );
+  return render(<BrowserRouter>{component}</BrowserRouter>);
 };
 
 describe('Navbar', () => {

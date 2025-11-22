@@ -37,42 +37,52 @@
   --color-teal-800: #115e59;
   --color-teal-900: #134e4a;
   --color-teal-950: #042f2e;
+
+  /* Typography - Professional Fonts */
+  --font-family-heading: Space Grotesk, system-ui, sans-serif;
+  --font-family-body: Inter, system-ui, sans-serif;
 }
 
-@theme dark {
-  /* Dark Mode - KrisArmstrong Modern Teal Theme */
-  --color-brand-primary: #2dd4bf;
-  --color-brand-accent: #5eead4;
-  --color-surface-base: #0f172a;
-  --color-surface-raised: #1e293b;
-  --color-surface-border: #2dd4bf;
-  --color-surface-hover: #334155;
-  --color-text-primary: #f1f5f9;
-  --color-text-muted: #94a3b8;
-  --color-text-accent: #5eead4;
-  --color-text-inverse: #0f172a;
-  --color-interactive-default: #2dd4bf;
-  --color-interactive-hover: #14b8a6;
-  --color-interactive-active: #5eead4;
-  --color-interactive-focus: #5eead4;
-  --color-interactive-disabled: #475569;
-  --color-status-success: #34d399;
-  --color-status-warning: #fbbf24;
-  --color-status-error: #f87171;
-  --color-status-info: #38bdf8;
+@layer theme {
+  .dark {
+    /* Dark Mode - KrisArmstrong Modern Teal Theme */
+    --color-brand-primary: #2dd4bf;
+    --color-brand-accent: #5eead4;
+    --color-surface-base: #0f172a;
+    --color-surface-raised: #1e293b;
+    --color-surface-border: #2dd4bf;
+    --color-surface-hover: #334155;
+    --color-text-primary: #f1f5f9;
+    --color-text-muted: #94a3b8;
+    --color-text-accent: #5eead4;
+    --color-text-inverse: #0f172a;
+    --color-interactive-default: #2dd4bf;
+    --color-interactive-hover: #14b8a6;
+    --color-interactive-active: #5eead4;
+    --color-interactive-focus: #5eead4;
+    --color-interactive-disabled: #475569;
+    --color-status-success: #34d399;
+    --color-status-warning: #fbbf24;
+    --color-status-error: #f87171;
+    --color-status-info: #38bdf8;
 
-  /* Override Tailwind teal palette with our custom teal for dark mode */
-  --color-teal-50: #042f2e;
-  --color-teal-100: #134e4a;
-  --color-teal-200: #115e59;
-  --color-teal-300: #0f766e;
-  --color-teal-400: #14b8a6;
-  --color-teal-500: #2dd4bf;
-  --color-teal-600: #5eead4;
-  --color-teal-700: #99f6e4;
-  --color-teal-800: #ccfbf1;
-  --color-teal-900: #f0fdfa;
-  --color-teal-950: #ffffff;
+    /* Override Tailwind teal palette with our custom teal for dark mode */
+    --color-teal-50: #042f2e;
+    --color-teal-100: #134e4a;
+    --color-teal-200: #115e59;
+    --color-teal-300: #0f766e;
+    --color-teal-400: #14b8a6;
+    --color-teal-500: #2dd4bf;
+    --color-teal-600: #5eead4;
+    --color-teal-700: #99f6e4;
+    --color-teal-800: #ccfbf1;
+    --color-teal-900: #f0fdfa;
+    --color-teal-950: #ffffff;
+
+    /* Typography - Professional Fonts (same in dark mode) */
+    --font-family-heading: Space Grotesk, system-ui, sans-serif;
+    --font-family-body: Inter, system-ui, sans-serif;
+  }
 }
 
 /* Professional Resume Styling - Ultra Compact */

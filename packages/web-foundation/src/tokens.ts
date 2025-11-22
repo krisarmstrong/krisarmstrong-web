@@ -31,46 +31,46 @@ export const layoutTokens = {
   },
 };
 
-// Color tokens - comprehensive theme colors
+// Color tokens - reference @theme CSS variables
+// These tokens reference the CSS variables defined in each app's @theme block
 export const colorTokens = {
   brand: {
-    primary: 'var(--theme-brand-primary, var(--color-brand-primary, #2563eb))',
-    accent: 'var(--theme-brand-accent, var(--color-brand-accent, #3b82f6))',
+    primary: 'var(--color-brand-primary)',
+    accent: 'var(--color-brand-accent)',
   },
   surface: {
-    base: 'var(--theme-surface-base, var(--color-surface-base, #ffffff))',
-    raised: 'var(--theme-surface-raised, var(--color-surface-raised, #f8fafc))',
-    border: 'var(--theme-surface-border, var(--color-surface-border, #e2e8f0))',
-    hover: 'var(--theme-surface-hover, var(--color-surface-hover, #dbeafe))',
+    base: 'var(--color-surface-base)',
+    raised: 'var(--color-surface-raised)',
+    border: 'var(--color-surface-border)',
+    hover: 'var(--color-surface-hover)',
   },
   text: {
-    primary: 'var(--theme-text-primary, var(--color-text-primary, #0f172a))',
-    muted: 'var(--theme-text-muted, var(--color-text-muted, #64748b))',
-    accent: 'var(--theme-text-accent, var(--color-text-accent, #2563eb))',
-    inverse: 'var(--theme-text-inverse, var(--color-text-inverse, #ffffff))',
+    primary: 'var(--color-text-primary)',
+    muted: 'var(--color-text-muted)',
+    accent: 'var(--color-text-accent)',
+    inverse: 'var(--color-text-inverse)',
   },
   interactive: {
-    default: 'var(--theme-interactive-default, var(--color-interactive-default, #2563eb))',
-    hover: 'var(--theme-interactive-hover, var(--color-interactive-hover, #1d4ed8))',
-    active: 'var(--theme-interactive-active, var(--color-interactive-active, #1e40af))',
-    focus: 'var(--theme-interactive-focus, var(--color-interactive-focus, #3b82f6))',
-    disabled: 'var(--theme-interactive-disabled, var(--color-interactive-disabled, #cbd5e1))',
+    default: 'var(--color-interactive-default)',
+    hover: 'var(--color-interactive-hover)',
+    active: 'var(--color-interactive-active)',
+    focus: 'var(--color-interactive-focus)',
+    disabled: 'var(--color-interactive-disabled)',
   },
   status: {
-    success: 'var(--theme-status-success, var(--color-status-success, #10b981))',
-    warning: 'var(--theme-status-warning, var(--color-status-warning, #f59e0b))',
-    error: 'var(--theme-status-error, var(--color-status-error, #ef4444))',
-    info: 'var(--theme-status-info, var(--color-status-info, #2563eb))',
+    success: 'var(--color-status-success)',
+    warning: 'var(--color-status-warning)',
+    error: 'var(--color-status-error)',
+    info: 'var(--color-status-info)',
   },
 };
 
-// Typography tokens
+// Typography tokens - reference @theme CSS variables and standard scales
 export const typographyTokens = {
   fontFamily: {
-    heading:
-      'var(--theme-font-heading, var(--font-family-heading, ui-sans-serif, system-ui, sans-serif))',
-    body: 'var(--theme-font-body, var(--font-family-body, ui-sans-serif, system-ui, sans-serif))',
-    mono: 'var(--theme-font-mono, var(--font-family-mono, ui-monospace, monospace))',
+    heading: 'var(--font-family-heading)',
+    body: 'var(--font-family-body)',
+    mono: 'var(--font-family-mono, ui-monospace, monospace)',
   },
   fontSize: {
     xs: '0.75rem',

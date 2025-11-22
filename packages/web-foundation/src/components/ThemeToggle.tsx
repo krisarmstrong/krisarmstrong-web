@@ -1,24 +1,15 @@
 import { Moon, Sun } from 'lucide-react';
-import { useTheme, type ThemeConfig } from '../context/ThemeContext';
+import { useSimpleTheme } from '../index';
 
 export interface ThemeToggleProps {
-  lightTheme: ThemeConfig;
-  darkTheme: ThemeConfig;
+  // Props no longer needed with CSS-first approach, but kept for backwards compatibility
+  lightTheme?: unknown;
+  darkTheme?: unknown;
 }
 
-export function ThemeToggle({ lightTheme, darkTheme }: ThemeToggleProps) {
-  const { mode, setMode, setTheme } = useTheme();
-  const isDark = mode === 'dark';
-
-  const toggleTheme = () => {
-    if (isDark) {
-      setMode('light');
-      setTheme(lightTheme);
-    } else {
-      setMode('dark');
-      setTheme(darkTheme);
-    }
-  };
+export function ThemeToggle(_props: ThemeToggleProps) {
+  const { theme, toggleTheme } = useSimpleTheme();
+  const isDark = theme === 'dark';
 
   return (
     <button

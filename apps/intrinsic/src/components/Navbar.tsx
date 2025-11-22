@@ -1,10 +1,4 @@
-import {
-  Navbar as SharedNavbar,
-  Button,
-  ThemeToggle,
-  intrinsicTheme,
-  intrinsicDarkTheme,
-} from '@krisarmstrong/web-foundation';
+import { Navbar as SharedNavbar, Button, ThemeToggle } from '@krisarmstrong/web-foundation';
 import { PRIMARY_NAV } from '../config/navigation';
 
 export default function Navbar() {
@@ -30,10 +24,7 @@ export default function Navbar() {
         textColor="text-text-primary"
         desktopActions={
           <div className="flex items-center gap-3">
-            <ThemeToggle
-              lightTheme={intrinsicTheme}
-              darkTheme={intrinsicDarkTheme}
-            />
+            <ThemeToggle />
             <Button variant="primary" as="a" href="/contact">
               Book a Consult
             </Button>

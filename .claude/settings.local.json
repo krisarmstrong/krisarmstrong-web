@@ -26,7 +26,10 @@
       "Bash(npm install:*)",
       "Bash(npx playwright install chromium)",
       "Bash(npm run test:*)",
-      "Bash(git merge:*)"
+      "Bash(git merge:*)",
+      "Bash(npm audit fix:*)",
+      "Bash(git tag:*)",
+      "Bash(gh issue view:*)"
     ],
     "deny": [],
     "ask": []
