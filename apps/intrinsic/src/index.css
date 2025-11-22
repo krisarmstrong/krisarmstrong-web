@@ -1,7 +1,6 @@
 @import "./shared-tokens.css";
 @import "tailwindcss";
 @import "@krisarmstrong/web-foundation/src/base.css";
-@import "./styles/navbar-mobile-fix.css";
 
 @source "../../packages/web-foundation/src";
 

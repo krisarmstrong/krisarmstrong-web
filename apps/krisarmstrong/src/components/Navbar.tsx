@@ -26,9 +26,6 @@ export default function Navbar() {
       }
       logoHref="/"
       navItems={PRIMARY_NAV}
-      bgColor="bg-surface-raised"
-      borderColor="border-surface-border"
-      textColor="text-text-primary"
       desktopActions={<ThemeToggle />}
       mobileActions={<ThemeToggle />}
       mobileFooter={
