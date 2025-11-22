@@ -18,7 +18,8 @@
     "test:ui": "vitest --ui --pool=threads",
     "test:coverage": "vitest --coverage --pool=threads",
     "version": "node scripts/update-version.mjs",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint . && tsc --noEmit",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "generate-icons": "node scripts/generate-icons.ts"
   },

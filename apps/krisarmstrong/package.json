@@ -17,7 +17,8 @@
     "version": "node scripts/update-version.mjs",
     "blog:metadata": "node scripts/generate-blog-metadata.js",
     "sitemap": "node scripts/generate-sitemap.js",
-    "lint": "eslint . --ext .ts,.tsx && tsc --noEmit"
+    "lint": "eslint . && tsc --noEmit",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@krisarmstrong/web-foundation": "*",
