@@ -9,6 +9,8 @@ type NavVariant = 'violet' | 'blue' | 'sage' | 'default';
 interface NavbarProps {
   /** Logo element - can be text, image, or custom component */
   logo: ReactNode;
+  /** Optional title text/component displayed next to logo */
+  title?: ReactNode;
   /** URL for logo link (usually '/') */
   logoHref?: string;
   /** Navigation items */
@@ -63,6 +65,7 @@ const variantColors: Record<
 
 export function Navbar({
   logo,
+  title,
   logoHref = '/',
   navItems,
   variant = 'violet',
@@ -129,47 +132,34 @@ export function Navbar({
         role="navigation"
         aria-label="Main navigation"
       >
-        {/* Logo */}
-        <Link
-          to={logoHref}
-          className={`flex items-center gap-3 hover:opacity-90 transition-opacity ${finalAccentColor} focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg px-2 py-1`}
-          onClick={closeMenu}
-        >
-          {logo}
-        </Link>
+        {/* Logo and Title */}
+        <div className="flex items-center gap-3 flex-shrink-0">
+          <Link
+            to={logoHref}
+            className={`flex items-center flex-shrink-0 hover:opacity-90 transition-opacity ${finalAccentColor} focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg px-2 py-1`}
+            onClick={closeMenu}
+          >
+            {logo}
+          </Link>
+          {title && <div className="flex items-center">{title}</div>}
+        </div>
 
         {/* Desktop Navigation */}
-        <div style={{ display: 'none' }} className="desktop-nav">
-          <div className="flex items-center gap-4">
-            <PrimaryNav items={navItems} variant={variant === 'default' ? 'violet' : variant} />
-            {desktopActions}
-          </div>
+        <div className="hidden md:flex items-center gap-4">
+          <PrimaryNav items={navItems} variant={variant === 'default' ? 'violet' : variant} />
+          {desktopActions}
         </div>
 
         {/* Mobile Menu Hamburger */}
-        <div style={{ display: 'block' }} className="mobile-hamburger">
-          <button
-            className={`text-inherit ${finalAccentColor} focus:outline-none focus:ring-2 rounded-lg p-2 hover:bg-opacity-10 transition-colors`}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+        <button
+          className={`flex md:hidden text-inherit ${finalAccentColor} focus:outline-none focus:ring-2 rounded-lg p-2 hover:bg-opacity-10 transition-colors`}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </nav>
-
-      {/* Responsive styles */}
-      <style>{`
-        @media (min-width: 768px) {
-          .desktop-nav {
-            display: flex !important;
-          }
-          .mobile-hamburger {
-            display: none !important;
-          }
-        }
-      `}</style>
 
       {/* Backdrop - Rendered outside nav */}
       {menuOpen && (
