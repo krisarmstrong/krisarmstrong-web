@@ -1,9 +1,9 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { MemoryRouter, Route, Routes } from "react-router-dom";
-import BlogPost from "../src/pages/BlogPost";
-import type { BlogPost as BlogPostType } from "../src/lib/supabase";
-import { getBlogPostBySlug } from "../src/lib/supabase";
+import { render, screen, waitFor } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import BlogPost from '../src/pages/BlogPost';
+import type { BlogPost as BlogPostType } from '../src/lib/supabase';
+import { getBlogPostBySlug } from '../src/lib/supabase';
 
 // Mock markdown content
 const mockPostContent = `# Wi-Fi 7 Introduction
@@ -22,16 +22,16 @@ Wi-Fi 7 is the future of wireless.`;
 global.fetch = vi.fn();
 
 // Mock framer-motion
-vi.mock("framer-motion", () => ({
+vi.mock('framer-motion', () => ({
   motion: {
     div: ({ children, ...props }: Record<string, unknown>) => <div {...props}>{children}</div>,
   },
 }));
 
 // Simplify StarRating from the shared UI to avoid hook duplication
-vi.mock("@krisarmstrong/web-foundation", async () => {
-  const actual = await vi.importActual<typeof import("@krisarmstrong/web-foundation")>(
-    "@krisarmstrong/web-foundation"
+vi.mock('@krisarmstrong/web-foundation', async () => {
+  const actual = await vi.importActual<typeof import('@krisarmstrong/web-foundation')>(
+    '@krisarmstrong/web-foundation'
   );
 
   const MockStarRating = () => (
@@ -48,7 +48,7 @@ vi.mock("@krisarmstrong/web-foundation", async () => {
   };
 });
 
-const renderBlogPost = (postId: string = "wifi7-intro-802-11be") => {
+const renderBlogPost = (postId: string = 'wifi7-intro-802-11be') => {
   return render(
     <MemoryRouter initialEntries={[`/blog/${postId}`]}>
       <Routes>
@@ -58,10 +58,7 @@ const renderBlogPost = (postId: string = "wifi7-intro-802-11be") => {
   );
 };
 
-// TODO: Fix test environment - tests fail with "Objects are not valid as a React child" error
-// This is a test configuration issue, not a code issue. The BlogPost page works fine in development.
-// Need to investigate proper Router/Provider context wrapping or mocking strategy.
-describe.skip("BlogPost", () => {
+describe('BlogPost', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(getBlogPostBySlug).mockResolvedValue(mockSupabasePost);
@@ -71,27 +68,27 @@ describe.skip("BlogPost", () => {
     });
   });
 
-it("shows loading indicator while fetching content", async () => {
-  renderBlogPost();
-
-  expect(screen.getByText(/Loading blog post/i)).toBeInTheDocument();
-
-  await waitFor(() => {
-    expect(screen.queryByText(/Loading blog post/i)).not.toBeInTheDocument();
-  });
-});
-
-  it("displays blog post title and metadata", async () => {
+  it('shows loading indicator while fetching content', async () => {
     renderBlogPost();
 
-    const heading = await screen.findByRole("heading", {
+    expect(screen.getByText(/Loading blog post/i)).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.queryByText(/Loading blog post/i)).not.toBeInTheDocument();
+    });
+  });
+
+  it('displays blog post title and metadata', async () => {
+    renderBlogPost();
+
+    const heading = await screen.findByRole('heading', {
       level: 1,
       name: /Introduction to Wi-Fi 7/i,
     });
     expect(heading).toBeInTheDocument();
   });
 
-  it("loads and renders markdown content", async () => {
+  it('loads and renders markdown content', async () => {
     renderBlogPost();
 
     await waitFor(() => {
@@ -101,38 +98,44 @@ it("shows loading indicator while fetching content", async () => {
     });
   });
 
-  it("displays back to blog button", async () => {
+  it('displays back to blog button', async () => {
     renderBlogPost();
 
     await waitFor(() => {
       const backButton = screen.getByText(/Back to Blog/i);
       expect(backButton).toBeInTheDocument();
-      expect(backButton.closest("a")).toHaveAttribute("href", "/blog");
+      expect(backButton.closest('a')).toHaveAttribute('href', '/blog');
     });
   });
 
-  it("displays star rating component", async () => {
+  it('displays star rating component', async () => {
     renderBlogPost();
 
-    await waitFor(() => {
-      // Should have 5 rating stars
-      const ratingButtons = screen.getAllByLabelText(/Rate \d stars/);
-      expect(ratingButtons).toHaveLength(5);
-    }, { timeout: 3000 });
+    await waitFor(
+      () => {
+        // Should have 5 rating stars
+        const ratingButtons = screen.getAllByLabelText(/Rate \d stars/);
+        expect(ratingButtons).toHaveLength(5);
+      },
+      { timeout: 3000 }
+    );
   });
 
-  it("displays post date", async () => {
+  it('displays post date', async () => {
     renderBlogPost();
 
-    await waitFor(() => {
-      // Should show formatted date as a time element
-      const timeElement = document.querySelector('time[datetime="2025-01-15"]');
-      expect(timeElement).toBeInTheDocument();
-      expect(timeElement?.textContent).toMatch(/January.*2025/i);
-    }, { timeout: 3000 });
+    await waitFor(
+      () => {
+        // Should show formatted date as a time element
+        const timeElement = document.querySelector('time[datetime="2025-01-15"]');
+        expect(timeElement).toBeInTheDocument();
+        expect(timeElement?.textContent).toMatch(/January.*2025/i);
+      },
+      { timeout: 3000 }
+    );
   });
 
-  it("displays post tags", async () => {
+  it('displays post tags', async () => {
     renderBlogPost();
 
     await waitFor(() => {
@@ -142,21 +145,19 @@ it("shows loading indicator while fetching content", async () => {
     });
   });
 
-  it("shows error state when post not found", async () => {
+  it('shows error state when post not found', async () => {
     vi.mocked(getBlogPostBySlug).mockResolvedValueOnce(null);
-    renderBlogPost("nonexistent-post");
+    renderBlogPost('nonexistent-post');
 
     const errorMessage = await screen.findByText(/blog post not found/i, undefined, {
       timeout: 3000,
     });
     expect(errorMessage).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: /Try Again/i })
-    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Try Again/i })).toBeInTheDocument();
   });
 
-  it("shows error state when content fetch fails", async () => {
-    vi.mocked(getBlogPostBySlug).mockRejectedValueOnce(new Error("Network error"));
+  it('shows error state when content fetch fails', async () => {
+    vi.mocked(getBlogPostBySlug).mockRejectedValueOnce(new Error('Network error'));
 
     renderBlogPost();
 
@@ -164,14 +165,12 @@ it("shows loading indicator while fetching content", async () => {
       timeout: 3000,
     });
     expect(errorMessage).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: /Try Again/i })
-    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Try Again/i })).toBeInTheDocument();
   });
 
-  it("displays featured badge for featured posts", async () => {
+  it('displays featured badge for featured posts', async () => {
     // wifi7-intro-802-11be is marked as featured in blog-posts.json
-    renderBlogPost("wifi7-intro-802-11be");
+    renderBlogPost('wifi7-intro-802-11be');
 
     await waitFor(() => {
       // Check if featured badge might be present (depends on data)
@@ -183,20 +182,20 @@ it("shows loading indicator while fetching content", async () => {
   });
 });
 const mockSupabasePost: BlogPostType = {
-  id: "wifi7-intro-802-11be",
-  slug: "wifi7-intro-802-11be",
-  title: "Introduction to Wi-Fi 7",
-  excerpt: "What Wi-Fi 7 brings to the table",
+  id: 'wifi7-intro-802-11be',
+  slug: 'wifi7-intro-802-11be',
+  title: 'Introduction to Wi-Fi 7',
+  excerpt: 'What Wi-Fi 7 brings to the table',
   content: mockPostContent,
-  author: "Kris Armstrong",
-  date: "2025-01-15",
+  author: 'Kris Armstrong',
+  date: '2025-01-15',
   published: true,
   featured: true,
   read_time: 5,
-  tags: ["Wi-Fi 7", "802.11be", "Wireless"],
-  meta_title: "",
-  meta_description: "",
-  og_image: "",
+  tags: ['Wi-Fi 7', '802.11be', 'Wireless'],
+  meta_title: '',
+  meta_description: '',
+  og_image: '',
   view_count: 0,
   created_at: new Date().toISOString(),
   updated_at: new Date().toISOString(),

@@ -20,7 +20,7 @@ vi.mock('@krisarmstrong/web-foundation', async (importOriginal) => {
         <nav data-testid="mock-webfoundation-navbar">
           <div data-testid="navbar-logo">{props.logo}</div>
           <div data-testid="navbar-nav-items">
-            {props.navItems.map((item: { path: string; label: string }) => (
+            {props.navItems?.map((item: { path: string; label: string }) => (
               <a key={item.path} href={item.path}>
                 {item.label}
               </a>
@@ -37,6 +37,7 @@ vi.mock('@krisarmstrong/web-foundation', async (importOriginal) => {
         {props.children}
       </button>
     )),
+    ThemeToggle: vi.fn(() => <div data-testid="mock-theme-toggle">Theme Toggle</div>),
   };
 });
 
@@ -49,10 +50,7 @@ const renderWithProviders = (component: React.ReactElement) => {
   );
 };
 
-// TODO: Fix test environment - tests fail with "Objects are not valid as a React child" error
-// This is a test configuration issue, not a code issue. The Navbar component works fine in development.
-// Need to investigate proper Router/Provider context wrapping or mocking strategy.
-describe.skip('Navbar', () => {
+describe('Navbar', () => {
   it('renders the WebFoundationNavbar component', () => {
     renderWithProviders(<Navbar />);
 

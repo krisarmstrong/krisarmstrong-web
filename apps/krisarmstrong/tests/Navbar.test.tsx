@@ -16,8 +16,10 @@ vi.mock('@krisarmstrong/web-foundation', async (importOriginal) => {
         <nav data-testid="mock-webfoundation-navbar">
           <div data-testid="navbar-logo">{props.logo}</div>
           <div data-testid="navbar-nav-items">
-            {props.navItems.map((item: { path: string; label: string }) => (
-              <a key={item.path} href={item.path}>{item.label}</a>
+            {props.navItems?.map((item: { path: string; label: string }) => (
+              <a key={item.path} href={item.path}>
+                {item.label}
+              </a>
             ))}
           </div>
           <div data-testid="navbar-desktop-actions">{props.desktopActions}</div>
@@ -26,7 +28,10 @@ vi.mock('@krisarmstrong/web-foundation', async (importOriginal) => {
         </nav>
       );
     }),
-    SiteSearch: vi.fn((props) => <div data-testid="mock-sitesearch">{props.placeholder || 'Mock SiteSearch'}</div>),
+    SiteSearch: vi.fn((props) => (
+      <div data-testid="mock-sitesearch">{props.placeholder || 'Mock SiteSearch'}</div>
+    )),
+    ThemeToggle: vi.fn(() => <div data-testid="mock-theme-toggle">Theme Toggle</div>),
   };
 });
 
@@ -35,10 +40,7 @@ vi.mock('@krisarmstrong/web-foundation', async (importOriginal) => {
 //   default: () => <div data-testid="mock-search">Mock Search</div>,
 // }));
 
-// TODO: Fix test environment - tests fail with "Objects are not valid as a React child" error
-// This is a test configuration issue, not a code issue. The Navbar component works fine in development.
-// Need to investigate proper Router/Provider context wrapping or mocking strategy.
-describe.skip('Navbar', () => {
+describe('Navbar', () => {
   it('renders the WebFoundationNavbar component', () => {
     render(
       <BrowserRouter>
@@ -73,7 +75,7 @@ describe.skip('Navbar', () => {
 
     const navbarNavItems = screen.getByTestId('navbar-nav-items');
     expect(navbarNavItems).toBeInTheDocument();
-    PRIMARY_NAV.forEach(item => {
+    PRIMARY_NAV.forEach((item) => {
       expect(navbarNavItems).toHaveTextContent(item.label);
     });
   });

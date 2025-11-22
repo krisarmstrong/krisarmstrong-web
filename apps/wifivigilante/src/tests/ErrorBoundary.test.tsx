@@ -15,10 +15,7 @@ const ThrowError = ({ shouldThrow }: ThrowErrorProps) => {
   return <div>No error</div>;
 };
 
-// TODO: Fix test environment - tests fail with "Objects are not valid as a React child" error
-// This is a test configuration issue, not a code issue. The ErrorBoundary component works fine in development.
-// Need to investigate proper Router/Provider context wrapping or mocking strategy.
-describe.skip('ErrorBoundary', () => {
+describe('ErrorBoundary', () => {
   // Suppress console.error for these tests
   const originalError = console.error;
   beforeAll(() => {

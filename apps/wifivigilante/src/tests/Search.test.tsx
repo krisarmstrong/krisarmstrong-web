@@ -7,10 +7,7 @@ vi.mock('@krisarmstrong/web-foundation', () => ({
   SiteSearch: vi.fn(({ placeholder }) => <div data-testid="site-search">{placeholder}</div>),
 }));
 
-// TODO: Fix test environment - tests fail with "Objects are not valid as a React child" error
-// This is a test configuration issue, not a code issue. The Search component works fine in development.
-// Need to investigate proper Router/Provider context wrapping or mocking strategy.
-describe.skip('Search', () => {
+describe('Search', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
