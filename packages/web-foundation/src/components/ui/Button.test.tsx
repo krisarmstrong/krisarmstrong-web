@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Button } from './Button';
 
@@ -115,7 +115,7 @@ describe('Button', () => {
     });
 
     it('hides left icon when loading', () => {
-      const { container } = render(
+      render(
         <Button isLoading leftIcon={<span>Icon</span>}>
           Text
         </Button>
@@ -125,7 +125,7 @@ describe('Button', () => {
     });
 
     it('hides right icon when loading', () => {
-      const { container } = render(
+      render(
         <Button isLoading rightIcon={<span>Icon</span>}>
           Text
         </Button>
@@ -196,7 +196,7 @@ describe('Button', () => {
     });
 
     it('applies margin to left icon when there is text', () => {
-      const { container } = render(
+      render(
         <Button leftIcon={<span>LeftIcon</span>}>Text</Button>
       );
       const iconSpan = screen.getByText('LeftIcon').parentElement;
@@ -204,13 +204,13 @@ describe('Button', () => {
     });
 
     it('does not apply margin to left icon when there is no text', () => {
-      const { container } = render(<Button leftIcon={<span>LeftIcon</span>} />);
+      render(<Button leftIcon={<span>LeftIcon</span>} />);
       const iconSpan = screen.getByText('LeftIcon').parentElement;
       expect(iconSpan).not.toHaveClass('mr-1.5');
     });
 
     it('applies margin to right icon when there is text', () => {
-      const { container } = render(
+      render(
         <Button rightIcon={<span>RightIcon</span>}>Text</Button>
       );
       const iconSpan = screen.getByText('RightIcon').parentElement;
@@ -218,7 +218,7 @@ describe('Button', () => {
     });
 
     it('does not apply margin to right icon when there is no text', () => {
-      const { container } = render(<Button rightIcon={<span>RightIcon</span>} />);
+      render(<Button rightIcon={<span>RightIcon</span>} />);
       const iconSpan = screen.getByText('RightIcon').parentElement;
       expect(iconSpan).not.toHaveClass('ml-1.5');
     });
@@ -294,7 +294,7 @@ describe('Button', () => {
             </Button>
           </BrowserRouter>
         );
-        const link = screen.getByRole('link');
+        const link = screen.getByRole('link') as HTMLAnchorElement;
         expect(link.href).toContain('/destination');
       });
 
@@ -456,7 +456,7 @@ describe('Button', () => {
             Link
           </Button>
         );
-        const link = screen.getByRole('link');
+        const link = screen.getByRole('link') as HTMLAnchorElement;
         expect(link.href).toBe('https://example.com/');
       });
 
@@ -466,7 +466,7 @@ describe('Button', () => {
             Link
           </Button>
         );
-        const link = screen.getByRole('link');
+        const link = screen.getByRole('link') as HTMLAnchorElement;
         expect(link.href).toContain('/path');
       });
 
@@ -476,7 +476,7 @@ describe('Button', () => {
             Link
           </Button>
         );
-        const link = screen.getByRole('link');
+        const link = screen.getByRole('link') as HTMLAnchorElement;
         expect(link.href).toBe('https://example.com/');
       });
 
@@ -687,7 +687,7 @@ describe('Button', () => {
 
   describe('Edge cases', () => {
     it('renders without children', () => {
-      const { container } = render(<Button />);
+      render(<Button />);
       const button = screen.getByRole('button');
       expect(button).toBeInTheDocument();
     });

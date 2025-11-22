@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/require-await */
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { ContactForm } from './ContactForm';
 import type { ReactElement } from 'react';
@@ -149,7 +150,7 @@ describe('ContactForm', () => {
     it('allows user to type in name field', async () => {
       renderWithRouter(<ContactForm endpoint="/api/contact" />);
 
-      const nameInput = screen.getByLabelText(/name/i);
+      const nameInput = screen.getByLabelText(/name/i) as HTMLInputElement;
       await user.type(nameInput, 'John Doe');
 
       expect(nameInput.value).toBe('John Doe');
@@ -158,7 +159,7 @@ describe('ContactForm', () => {
     it('allows user to type in email field', async () => {
       renderWithRouter(<ContactForm endpoint="/api/contact" />);
 
-      const emailInput = screen.getByLabelText(/email/i);
+      const emailInput = screen.getByLabelText(/email/i) as HTMLInputElement;
       await user.type(emailInput, 'john@example.com');
 
       expect(emailInput.value).toBe('john@example.com');
@@ -169,7 +170,7 @@ describe('ContactForm', () => {
 
       const messageInput = screen.getByRole('textbox', {
         name: /message/i,
-      });
+      }) as HTMLTextAreaElement;
       await user.type(messageInput, 'This is my message');
 
       expect(messageInput.value).toBe('This is my message');
@@ -222,7 +223,7 @@ describe('ContactForm', () => {
 
       // Check FormData contents
       const fetchCall = vi.mocked(global.fetch).mock.calls[0];
-      const formData = fetchCall[1].body as FormData;
+      const formData = fetchCall[1]?.body as FormData;
       expect(formData.get('name')).toBe('John Doe');
       expect(formData.get('email')).toBe('john@example.com');
       expect(formData.get('message')).toBe('Test message');
@@ -429,8 +430,8 @@ describe('ContactForm', () => {
 
   describe('Loading State', () => {
     it('shows loading state during submission', async () => {
-      let resolvePromise: (value: unknown) => void;
-      const fetchPromise = new Promise((resolve) => {
+      let resolvePromise: (value: Response) => void;
+      const fetchPromise = new Promise<Response>((resolve) => {
         resolvePromise = resolve;
       });
 
@@ -452,7 +453,7 @@ describe('ContactForm', () => {
       });
 
       // Resolve the promise
-      resolvePromise!({ ok: true, json: async () => ({ success: true }) });
+      resolvePromise!({ ok: true, json: async () => ({ success: true }) } as Response);
 
       // Wait for loading to finish
       await waitFor(() => {
@@ -461,8 +462,8 @@ describe('ContactForm', () => {
     });
 
     it('disables button during submission', async () => {
-      let resolvePromise: (value: unknown) => void;
-      const fetchPromise = new Promise((resolve) => {
+      let resolvePromise: (value: Response) => void;
+      const fetchPromise = new Promise<Response>((resolve) => {
         resolvePromise = resolve;
       });
 
@@ -480,7 +481,7 @@ describe('ContactForm', () => {
       expect(submitButton).toBeDisabled();
 
       // Resolve the promise
-      resolvePromise!({ ok: true, json: async () => ({ success: true }) });
+      resolvePromise!({ ok: true, json: async () => ({ success: true }) } as Response);
 
       await waitFor(() => {
         expect(screen.getByText('Thank you!')).toBeInTheDocument();
@@ -729,8 +730,8 @@ describe('ContactForm', () => {
     });
 
     it('has proper ARIA attributes during loading', async () => {
-      let resolvePromise: (value: unknown) => void;
-      const fetchPromise = new Promise((resolve) => {
+      let resolvePromise: (value: Response) => void;
+      const fetchPromise = new Promise<Response>((resolve) => {
         resolvePromise = resolve;
       });
 
@@ -749,7 +750,7 @@ describe('ContactForm', () => {
         expect(submitButton).toHaveAttribute('aria-busy', 'true');
       });
 
-      resolvePromise!({ ok: true, json: async () => ({ success: true }) });
+      resolvePromise!({ ok: true, json: async () => ({ success: true }) } as Response);
 
       await waitFor(() => {
         expect(screen.getByText('Thank you!')).toBeInTheDocument();
