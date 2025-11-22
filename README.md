@@ -615,6 +615,157 @@ npm run build
 
 ---
 
+## Versioning & Releases
+
+This project uses **[semantic-release](https://semantic-release.gitbook.io/)** for automated versioning and releases. Version numbers are determined automatically based on commit messages using the **[Conventional Commits](https://www.conventionalcommits.org/)** specification.
+
+### Semantic Versioning
+
+We follow [SemVer](https://semver.org/) strictly:
+
+- **MAJOR** version (1.0.0 → 2.0.0): Breaking changes
+- **MINOR** version (1.3.0 → 1.4.0): New features (backwards compatible)
+- **PATCH** version (1.3.1 → 1.3.2): Bug fixes
+
+### Conventional Commits Format
+
+All commits must follow this format:
+
+```
+<type>(<scope>): <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+**Common Types:**
+
+| Type                           | Version Bump              | Use Case         | Example                              |
+| ------------------------------ | ------------------------- | ---------------- | ------------------------------------ |
+| `fix:`                         | **PATCH** (1.3.1 → 1.3.2) | Bug fixes        | `fix: resolve PostCSS import errors` |
+| `feat:`                        | **MINOR** (1.3.0 → 1.4.0) | New features     | `feat: add dark mode toggle`         |
+| `feat!:` or `BREAKING CHANGE:` | **MAJOR** (1.0.0 → 2.0.0) | Breaking changes | `feat!: migrate to React 19`         |
+| `chore:`                       | No bump                   | Maintenance      | `chore: update dependencies`         |
+| `docs:`                        | No bump                   | Documentation    | `docs: update README`                |
+| `style:`                       | No bump                   | Code style       | `style: fix linting issues`          |
+| `refactor:`                    | No bump                   | Code refactoring | `refactor: simplify theme logic`     |
+| `test:`                        | No bump                   | Tests            | `test: add ContactForm tests`        |
+| `perf:`                        | **PATCH**                 | Performance      | `perf: optimize bundle size`         |
+
+**Examples:**
+
+```bash
+# Bug fix (patch: 1.3.1 → 1.3.2)
+git commit -m "fix: resolve font loading issue in Safari"
+
+# New feature (minor: 1.3.0 → 1.4.0)
+git commit -m "feat: add export to Excel functionality"
+
+# Breaking change (major: 1.0.0 → 2.0.0)
+git commit -m "feat!: migrate to Tailwind v4
+
+BREAKING CHANGE: Requires Tailwind CSS v4. Update config files."
+
+# With scope
+git commit -m "fix(theme): correct dark mode color contrast"
+
+# No version bump
+git commit -m "chore: update npm dependencies"
+git commit -m "docs: improve setup instructions"
+```
+
+### Release Process
+
+#### Automated Release (Recommended)
+
+Simply push commits following conventional format:
+
+```bash
+# 1. Make changes and commit with conventional format
+git commit -m "feat: add user preferences panel"
+
+# 2. Push to main
+git push origin main
+
+# 3. Semantic-release automatically:
+#    - Analyzes commits
+#    - Determines version bump
+#    - Updates package.json
+#    - Generates CHANGELOG.md
+#    - Creates git tag
+#    - Pushes changes
+#    - Creates GitHub release
+```
+
+#### Manual Release
+
+For manual control or testing:
+
+```bash
+# Test what would be released (dry run - no changes made)
+npm run release:dry
+
+# Manually trigger release
+npm run release
+```
+
+### What Semantic-Release Does
+
+When you run `npm run release`, it automatically:
+
+1. ✅ **Analyzes** all commits since last release
+2. ✅ **Determines** version bump (patch/minor/major)
+3. ✅ **Updates** `package.json` version
+4. ✅ **Generates** `CHANGELOG.md` with all changes
+5. ✅ **Creates** git tag (e.g., `v1.3.2`)
+6. ✅ **Commits** the version changes
+7. ✅ **Pushes** to GitHub
+8. ✅ **Creates** GitHub Release with notes
+
+### Commit Message Best Practices
+
+**DO:**
+
+- ✅ Use lowercase for type (`feat:` not `Feat:`)
+- ✅ Be concise but descriptive (max 72 chars for subject)
+- ✅ Use imperative mood ("add" not "added" or "adds")
+- ✅ Include scope when relevant: `fix(theme):`, `feat(ui):`
+- ✅ Add body for context on complex changes
+
+**DON'T:**
+
+- ❌ Mix multiple changes in one commit
+- ❌ Use vague messages ("fixes", "updates")
+- ❌ Skip the type prefix
+- ❌ Include issue numbers in subject (put in body/footer)
+
+**Good Examples:**
+
+```bash
+feat(auth): add OAuth login support
+fix(navbar): resolve mobile menu z-index issue
+perf(images): implement lazy loading for blog images
+```
+
+**Bad Examples:**
+
+```bash
+Fixed stuff                           # Missing type, too vague
+feat: Added new feature and fixed bug # Multiple changes
+Update dependencies                   # Missing type
+```
+
+### Version History
+
+Version history is automatically maintained in `CHANGELOG.md`. Each release includes:
+
+- Version number and date
+- Grouped changes by type (Features, Bug Fixes, etc.)
+- Commit links to GitHub
+
+---
+
 ## Architecture Decisions
 
 ### Why Monorepo?
