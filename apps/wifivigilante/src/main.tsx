@@ -1,11 +1,7 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import {
-  ThemeProvider,
-  defaultDarkTheme,
-  ErrorBoundary,
-} from '@krisarmstrong/web-foundation';
+import { ErrorBoundary } from '@krisarmstrong/web-foundation';
 import Layout from './Layout.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import { PageLoadingFallback } from './components/PageLoadingFallback.tsx';
@@ -35,37 +31,37 @@ const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
-      { 
-        index: true, 
+      {
+        index: true,
         element: (
           <Suspense fallback={<PageLoadingFallback />}>
             <Home />
           </Suspense>
-        ) 
+        ),
       },
-      { 
-        path: 'cases', 
+      {
+        path: 'cases',
         element: (
           <Suspense fallback={<PageLoadingFallback />}>
             <CaseOverview />
           </Suspense>
-        ) 
+        ),
       },
-      { 
-        path: 'cases/:id', 
+      {
+        path: 'cases/:id',
         element: (
           <Suspense fallback={<PageLoadingFallback />}>
             <CaseDetail />
           </Suspense>
-        ) 
-      }, 
-      { 
-        path: 'case-of-the-day', 
+        ),
+      },
+      {
+        path: 'case-of-the-day',
         element: (
           <Suspense fallback={<PageLoadingFallback />}>
             <CaseOfTheDay />
           </Suspense>
-        ) 
+        ),
       },
       {
         path: 'about',
@@ -73,7 +69,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <About />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'contact',
@@ -81,7 +77,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <Contact />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'privacy-policy',
@@ -89,7 +85,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <PrivacyPolicy />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'terms-of-service',
@@ -97,7 +93,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <TermsOfService />
           </Suspense>
-        )
+        ),
       },
     ],
   },
@@ -106,9 +102,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ErrorBoundary>
-      <ThemeProvider initialTheme={defaultDarkTheme} initialMode="auto">
-        <RouterProvider router={router} />
-      </ThemeProvider>
+      <RouterProvider router={router} />
     </ErrorBoundary>
   </React.StrictMode>
 );

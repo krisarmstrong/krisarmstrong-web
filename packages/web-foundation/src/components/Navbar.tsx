@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { PrimaryNav } from './PrimaryNav';
 import type { NavItem } from '../types';
-import { useOptionalTheme } from '../context/ThemeContext';
 
 type NavVariant = 'violet' | 'blue' | 'sage' | 'default';
 
@@ -78,14 +77,10 @@ export function Navbar({
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // Use theme context if available, otherwise fall back to variants
-  const themeContext = useOptionalTheme();
-  const theme = themeContext?.theme;
-
   const colors = variantColors[variant];
-  const finalBgColor = theme ? 'bg-surface-raised' : bgColor || colors.bg;
-  const finalBorderColor = theme ? 'border-surface-border' : borderColor || colors.border;
-  const finalTextColor = theme ? 'text-text-primary' : textColor || colors.text;
+  const finalBgColor = bgColor || colors.bg;
+  const finalBorderColor = borderColor || colors.border;
+  const finalTextColor = textColor || colors.text;
   const finalAccentColor = accentColor || colors.accent;
 
   const closeMenu = () => setMenuOpen(false);

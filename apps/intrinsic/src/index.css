@@ -27,27 +27,37 @@
   --color-status-warning: #CFB53B;
   --color-status-error: #B85450;
   --color-status-info: #5B7A8F;
+
+  /* Typography - Professional Fonts */
+  --font-family-heading: Space Grotesk, system-ui, sans-serif;
+  --font-family-body: Inter, system-ui, sans-serif;
 }
 
-@theme dark {
-  /* Dark mode overrides */
-  --color-brand-primary: #A8BA8E;
-  --color-brand-accent: #E0C84F;
-  --color-surface-base: #1A1F1C;
-  --color-surface-raised: #242B27;
-  --color-surface-border: #96A77A;
-  --color-surface-hover: #3a4838;
-  --color-text-primary: #E8EDE4;
-  --color-text-muted: #A8BA8E;
-  --color-text-accent: #E0C84F;
-  --color-text-inverse: #1A1F1C;
-  --color-interactive-default: #A8BA8E;
-  --color-interactive-hover: #96A77A;
-  --color-interactive-active: #E0C84F;
-  --color-interactive-focus: #E0C84F;
-  --color-interactive-disabled: #3F4940;
-  --color-status-success: #A8BA8E;
-  --color-status-warning: #E0C84F;
-  --color-status-error: #CF6B67;
-  --color-status-info: #7A9AAF;
+@layer theme {
+  .dark {
+    /* Dark mode overrides */
+    --color-brand-primary: #A8BA8E;
+    --color-brand-accent: #E0C84F;
+    --color-surface-base: #1A1F1C;
+    --color-surface-raised: #242B27;
+    --color-surface-border: #96A77A;
+    --color-surface-hover: #3a4838;
+    --color-text-primary: #E8EDE4;
+    --color-text-muted: #A8BA8E;
+    --color-text-accent: #E0C84F;
+    --color-text-inverse: #1A1F1C;
+    --color-interactive-default: #A8BA8E;
+    --color-interactive-hover: #96A77A;
+    --color-interactive-active: #E0C84F;
+    --color-interactive-focus: #E0C84F;
+    --color-interactive-disabled: #3F4940;
+    --color-status-success: #A8BA8E;
+    --color-status-warning: #E0C84F;
+    --color-status-error: #CF6B67;
+    --color-status-info: #7A9AAF;
+
+    /* Typography - Professional Fonts (same in dark mode) */
+    --font-family-heading: Space Grotesk, system-ui, sans-serif;
+    --font-family-body: Inter, system-ui, sans-serif;
+  }
 }

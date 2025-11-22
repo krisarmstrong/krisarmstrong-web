@@ -1,24 +1,5 @@
 export * from './types';
 export * from './tokens';
-export {
-  ThemeProvider,
-  useTheme,
-  useOptionalTheme,
-  defaultDarkTheme,
-  defaultLightTheme,
-  intrinsicTheme,
-  intrinsicDarkTheme,
-  wifiVigilanteTheme,
-  wifiVigilanteDarkTheme,
-  krisArmstrongTheme,
-  krisArmstrongDarkTheme,
-} from './context/ThemeContext';
-export type {
-  ThemeConfig,
-  ColorMode,
-  ThemeContextValue,
-  ThemeProviderProps,
-} from './context/ThemeContext';
 export { Footer } from './components/Footer';
 export { Breadcrumbs } from './components/Breadcrumbs';
 export { PageShell } from './components/PageShell';
@@ -86,6 +67,7 @@ export type {
 export { SOCIAL_ICONS, createSocialLinks } from './constants/socialIcons';
 export type { SocialIcon } from './constants/socialIcons';
 export { useClickOutside, useEscapeKey, useBodyScrollLock } from './hooks';
+export { useTheme as useSimpleTheme } from './hooks/useTheme'; // New simple theme hook (Phase 2)
 export { ActiveFilterBadges } from './components/ActiveFilterBadges';
 export type { ActiveFilterBadgesProps, ActiveFilter } from './components/ActiveFilterBadges';
 export { LoadMoreButton } from './components/LoadMoreButton';

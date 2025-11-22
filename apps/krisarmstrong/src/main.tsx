@@ -1,11 +1,7 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import {
-  ThemeProvider,
-  krisArmstrongTheme,
-  ErrorBoundary,
-} from '@krisarmstrong/web-foundation';
+import { ErrorBoundary } from '@krisarmstrong/web-foundation';
 import Layout from './Layout.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import { PageLoadingFallback } from './components/PageLoadingFallback.tsx';
@@ -40,7 +36,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <Home />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'about',
@@ -48,7 +44,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <About />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'skills',
@@ -56,7 +52,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <Skills />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'projects',
@@ -64,7 +60,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <Projects />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'blog',
@@ -72,7 +68,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <Blog />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'blog/:id',
@@ -80,7 +76,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <BlogPost />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'resume',
@@ -88,7 +84,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <Resume />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'contact',
@@ -96,7 +92,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <Contact />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'privacy-policy',
@@ -104,7 +100,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <PrivacyPolicy />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'terms-of-service',
@@ -112,7 +108,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <TermsOfService />
           </Suspense>
-        )
+        ),
       },
       {
         path: 'certifications',
@@ -120,7 +116,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <Skills />
           </Suspense>
-        )
+        ),
       },
       {
         path: '*',
@@ -128,7 +124,7 @@ const router = createBrowserRouter([
           <Suspense fallback={<PageLoadingFallback />}>
             <NotFound />
           </Suspense>
-        )
+        ),
       },
     ],
   },
@@ -137,9 +133,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ErrorBoundary>
-      <ThemeProvider initialTheme={krisArmstrongTheme} initialMode="auto">
-        <RouterProvider router={router} />
-      </ThemeProvider>
+      <RouterProvider router={router} />
     </ErrorBoundary>
   </React.StrictMode>
 );

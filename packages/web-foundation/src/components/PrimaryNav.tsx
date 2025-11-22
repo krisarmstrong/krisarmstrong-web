@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { cloneElement, isValidElement } from 'react';
 import type { NavItem } from '../types';
-import { useOptionalTheme } from '../context/ThemeContext';
 
 type NavVariant = 'violet' | 'blue' | 'sage';
 type Orientation = 'horizontal' | 'vertical';
@@ -16,18 +15,24 @@ interface PrimaryNavProps {
 
 const variantClasses: Record<NavVariant, { active: string; inactive: string; icon: string }> = {
   violet: {
-    active: 'bg-interactive-active text-text-inverse shadow-lg shadow-interactive-active/30 scale-[1.02]',
-    inactive: 'text-text-primary hover:bg-surface-hover hover:text-text-accent hover:shadow-md transition-all duration-200 ease-in-out',
+    active:
+      'bg-interactive-active text-text-inverse shadow-lg shadow-interactive-active/30 scale-[1.02]',
+    inactive:
+      'text-text-primary hover:bg-surface-hover hover:text-text-accent hover:shadow-md transition-all duration-200 ease-in-out',
     icon: 'text-text-accent transition-colors duration-200',
   },
   blue: {
-    active: 'bg-interactive-active text-text-inverse shadow-lg shadow-interactive-active/30 scale-[1.02]',
-    inactive: 'text-text-primary hover:bg-surface-hover hover:text-text-accent hover:shadow-md transition-all duration-200 ease-in-out',
+    active:
+      'bg-interactive-active text-text-inverse shadow-lg shadow-interactive-active/30 scale-[1.02]',
+    inactive:
+      'text-text-primary hover:bg-surface-hover hover:text-text-accent hover:shadow-md transition-all duration-200 ease-in-out',
     icon: 'text-text-accent transition-colors duration-200',
   },
   sage: {
-    active: 'bg-interactive-active text-text-inverse shadow-lg shadow-interactive-active/30 scale-[1.02]',
-    inactive: 'text-text-primary hover:bg-surface-hover hover:text-text-accent hover:shadow-md transition-all duration-200 ease-in-out',
+    active:
+      'bg-interactive-active text-text-inverse shadow-lg shadow-interactive-active/30 scale-[1.02]',
+    inactive:
+      'text-text-primary hover:bg-surface-hover hover:text-text-accent hover:shadow-md transition-all duration-200 ease-in-out',
     icon: 'text-text-accent transition-colors duration-200',
   },
 };
@@ -39,20 +44,12 @@ export function PrimaryNav({
   className = '',
   onNavigate,
 }: PrimaryNavProps) {
-  const theme = useOptionalTheme();
-
   const wrapperBase =
     orientation === 'horizontal'
       ? 'flex items-center gap-2 lg:gap-3'
       : 'flex flex-col gap-2 w-full';
 
-  const themeClasses = theme
-    ? {
-        active: 'bg-interactive-active text-text-inverse shadow-lg shadow-interactive-active/30 scale-[1.02]',
-        inactive: 'text-text-primary hover:bg-surface-hover hover:text-text-accent hover:shadow-md transition-all duration-200 ease-in-out',
-        icon: 'text-text-accent transition-colors duration-200',
-      }
-    : variantClasses[variant];
+  const themeClasses = variantClasses[variant];
 
   const activeClasses = themeClasses.active;
   const inactiveClasses = themeClasses.inactive;
@@ -71,11 +68,12 @@ export function PrimaryNav({
         const isExternal = Boolean(item.isExternal || /^https?:\/\//.test(item.path));
 
         // Apply icon color class by cloning the icon element
-        const styledIcon = item.icon && isValidElement(item.icon)
-          ? cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
-              className: iconClasses,
-            })
-          : item.icon;
+        const styledIcon =
+          item.icon && isValidElement(item.icon)
+            ? cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
+                className: iconClasses,
+              })
+            : item.icon;
 
         const content = (
           <>

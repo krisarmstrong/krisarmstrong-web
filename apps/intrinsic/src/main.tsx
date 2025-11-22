@@ -1,11 +1,7 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import {
-  ThemeProvider,
-  intrinsicTheme,
-  ErrorBoundary,
-} from '@krisarmstrong/web-foundation';
+import { ErrorBoundary } from '@krisarmstrong/web-foundation';
 import Layout from './Layout.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import { PageLoadingFallback } from './components/PageLoadingFallback.tsx';
@@ -108,9 +104,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ErrorBoundary>
-      <ThemeProvider initialTheme={intrinsicTheme} initialMode="auto">
-        <RouterProvider router={router} />
-      </ThemeProvider>
+      <RouterProvider router={router} />
     </ErrorBoundary>
   </React.StrictMode>
 );

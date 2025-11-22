@@ -1,10 +1,5 @@
-import {
-  Navbar as SharedNavbar,
-  ThemeToggle,
-  krisArmstrongTheme,
-  krisArmstrongDarkTheme,
-} from "@krisarmstrong/web-foundation";
-import { PRIMARY_NAV } from "../config/navigation.tsx";
+import { Navbar as SharedNavbar, ThemeToggle } from '@krisarmstrong/web-foundation';
+import { PRIMARY_NAV } from '../config/navigation.tsx';
 
 export default function Navbar() {
   const currentYear = new Date().getFullYear();
@@ -34,22 +29,10 @@ export default function Navbar() {
       bgColor="bg-surface-raised"
       borderColor="border-surface-border"
       textColor="text-text-primary"
-      desktopActions={
-        <ThemeToggle
-          lightTheme={krisArmstrongTheme}
-          darkTheme={krisArmstrongDarkTheme}
-        />
-      }
-      mobileActions={
-        <ThemeToggle
-          lightTheme={krisArmstrongTheme}
-          darkTheme={krisArmstrongDarkTheme}
-        />
-      }
+      desktopActions={<ThemeToggle />}
+      mobileActions={<ThemeToggle />}
       mobileFooter={
-        <p className="text-xs text-text-muted text-center">
-          © {currentYear} Kris Armstrong
-        </p>
+        <p className="text-xs text-text-muted text-center">© {currentYear} Kris Armstrong</p>
       }
     />
   );
