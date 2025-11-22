@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@krisarmstrong/web-foundation": "*",
-    "@sentry/react": "^10.25.0",
+    "@sentry/react": "^10.26.0",
     "@supabase/supabase-js": "^2.81.1",
     "clsx": "^2.1.1",
     "docx": "^9.5.1",
