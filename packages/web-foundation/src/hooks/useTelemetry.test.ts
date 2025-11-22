@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/require-await */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { renderHook, waitFor } from '@testing-library/react';
 import { useTelemetry } from './useTelemetry';
@@ -1070,7 +1071,7 @@ describe('useTelemetry', () => {
       // Switch to auto-detect
       plausibleMock = vi.fn();
       (window as any).plausible = plausibleMock;
-      rerender({ provider: undefined });
+      rerender({ provider: undefined as unknown as TelemetryProvider });
 
       await waitFor(() => {
         result.current.trackEvent('plausible_event');
