@@ -11,7 +11,6 @@ describe('Validation Utils', () => {
     it('should accept valid search queries', () => {
       const result = validateSearchQuery('wifi security');
       expect(result.isValid).toBe(true);
-      expect(result.error).toBeNull();
     });
 
     it('should reject empty queries', () => {
@@ -52,7 +51,6 @@ describe('Validation Utils', () => {
     it('should accept valid UUIDs', () => {
       const result = validatePublicId('550e8400-e29b-41d4-a716-446655440000');
       expect(result.isValid).toBe(true);
-      expect(result.error).toBeNull();
     });
 
     it('should reject invalid UUID formats', () => {

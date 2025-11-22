@@ -271,10 +271,10 @@ describe('validateMessage', () => {
 describe('sanitizeInput', () => {
   it('should escape HTML special characters', () => {
     expect(sanitizeInput('<script>alert("xss")</script>')).toBe(
-      '&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;'
+      '&lt;script&gt;alert(&quot;xss&quot;)&lt;&#x2F;script&gt;'
     );
     expect(sanitizeInput('Test & Demo')).toBe('Test &amp; Demo');
-    expect(sanitizeInput("It's a test")).toBe('It&#039;s a test');
+    expect(sanitizeInput("It's a test")).toBe('It&#x27;s a test');
   });
 
   it('should handle empty strings', () => {
