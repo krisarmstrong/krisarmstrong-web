@@ -9,7 +9,9 @@ This project uses a monorepo structure to share code between multiple applicatio
 ```
 krisarmstrong-web/
 ├── apps/
-│   └── intrinsic/              # Intrinsic Momentum Mindset website
+│   ├── intrinsic/              # Intrinsic Momentum Mindset website
+│   ├── krisarmstrong/          # Kris Armstrong personal portfolio
+│   └── wifivigilante/          # Wi-Fi Vigilante case library
 ├── packages/
 │   └── web-foundation/         # Shared UI component library
 └── package.json                # Workspace configuration
@@ -31,7 +33,10 @@ krisarmstrong-web/
 
 - **[SETUP.md](./SETUP.md)** - Complete setup guide for local development and Vercel deployment
 - **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Contribution guidelines, commit conventions, and workflow
+- **[TESTING.md](./TESTING.md)** - Testing patterns, best practices, and examples
 - **[apps/intrinsic/README.md](./apps/intrinsic/README.md)** - Intrinsic app documentation
+- **[apps/krisarmstrong/README.md](./apps/krisarmstrong/README.md)** - Kris Armstrong portfolio documentation
+- **[apps/wifivigilante/README.md](./apps/wifivigilante/README.md)** - Wi-Fi Vigilante documentation
 - **[packages/web-foundation/README.md](./packages/web-foundation/README.md)** - Component library documentation
 
 ---
@@ -90,7 +95,54 @@ cd apps/intrinsic
 npm run dev          # Start dev server (port 3001)
 npm run build        # Production build
 npm run preview      # Preview production build
-npm run test         # Run tests
+npm run test         # Run tests (46 tests)
+npm run lint         # Lint code
+```
+
+#### `/apps/krisarmstrong`
+
+Personal portfolio and technical blog for Kris Armstrong (CISSP | CWSP | CWDP | CWNA).
+
+**Key Features:**
+
+- Violet theme with professional styling
+- Technical blog with Supabase integration
+- Resume with multiple export formats (PDF, Word, Markdown)
+- Skills and projects showcase
+- Progressive content loading
+- Full-text search
+
+**Scripts:**
+
+```bash
+cd apps/krisarmstrong
+npm run dev          # Start dev server
+npm run build        # Production build (includes blog metadata & sitemap)
+npm run preview      # Preview production build
+npm run test         # Run tests (42 tests)
+npm run lint         # Lint code
+```
+
+#### `/apps/wifivigilante`
+
+Wi-Fi security case library showcasing real-world wireless network investigations.
+
+**Key Features:**
+
+- Blue theme with cybersecurity aesthetics
+- Case display with filtering and search
+- PDF export functionality
+- Rate limiting and security features
+- Integration with case management system
+
+**Scripts:**
+
+```bash
+cd apps/wifivigilante
+npm run dev          # Start dev server
+npm run build        # Production build
+npm run preview      # Preview production build
+npm run test         # Run tests (40 tests)
 npm run lint         # Lint code
 ```
 
