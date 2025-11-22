@@ -12,6 +12,8 @@ describe('ThemeContext', () => {
     // Clear any applied styles
     document.documentElement.className = '';
     document.documentElement.style.cssText = '';
+    // Clear localStorage to prevent theme persistence between tests
+    localStorage.clear();
   });
 
   describe('ThemeProvider', () => {
