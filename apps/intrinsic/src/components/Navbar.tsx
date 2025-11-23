@@ -11,6 +11,7 @@ export default function Navbar() {
           src="/logo-icon.png"
           alt="Intrinsic Momentum Mindset"
           className="h-12 w-12 flex-shrink-0"
+          loading="lazy"
         />
       }
       title={
