@@ -1,5 +1,12 @@
-import { Navbar as SharedNavbar, ThemeToggle } from '@krisarmstrong/web-foundation';
-import { PRIMARY_NAV } from '../config/navigation';
+import { Navbar as SharedNavbar, ThemeToggle, type NavItem } from '@krisarmstrong/web-foundation';
+import { Home, Info, Briefcase, Mail } from 'lucide-react';
+
+const PRIMARY_NAV: NavItem[] = [
+  { label: 'Home', path: '/', icon: <Home size={18} /> },
+  { label: 'About', path: '/about', icon: <Info size={18} /> },
+  { label: 'Services', path: '/services', icon: <Briefcase size={18} /> },
+  { label: 'Contact', path: '/contact', icon: <Mail size={18} /> },
+];
 
 export default function Navbar() {
   const currentYear = new Date().getFullYear();
