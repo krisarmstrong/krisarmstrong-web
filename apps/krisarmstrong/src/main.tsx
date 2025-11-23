@@ -5,7 +5,7 @@ import { ErrorBoundary, initTheme } from '@krisarmstrong/web-foundation';
 import Layout from './Layout.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import { PageLoadingFallback } from './components/PageLoadingFallback.tsx';
-import { initSentry } from './lib/sentry.ts';
+import { initSentry } from './utils/sentry.ts';
 import './index.css';
 
 // Initialize theme (system preference listening, cross-tab sync)

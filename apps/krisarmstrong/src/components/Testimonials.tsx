@@ -1,5 +1,5 @@
 import testimonialsData from '../content/testimonials/testimonials.json';
-import { Card, CardContent } from './ui/Card';
+import { Card, CardContent } from './ui/Card.tsx';
 
 interface Testimonial {
   id: string;
