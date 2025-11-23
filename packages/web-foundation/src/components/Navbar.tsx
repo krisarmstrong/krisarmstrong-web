@@ -78,7 +78,9 @@ export function Navbar({
   accentColor,
 }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [navHeight, setNavHeight] = useState(72);
   const menuRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
 
   const colors = variantColors[variant];
   const finalBgColor = bgColor || colors.bg;
@@ -124,9 +126,23 @@ export function Navbar({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [menuOpen]);
 
+  // Update navbar height for mobile menu positioning
+  useEffect(() => {
+    const updateNavHeight = () => {
+      if (navRef.current) {
+        setNavHeight(navRef.current.offsetHeight);
+      }
+    };
+
+    updateNavHeight();
+    window.addEventListener('resize', updateNavHeight);
+    return () => window.removeEventListener('resize', updateNavHeight);
+  }, []);
+
   return (
     <>
       <nav
+        ref={navRef}
         className={`relative w-full min-h-[72px] ${finalBgColor} ${finalTextColor} shadow-md px-4 sm:px-6 py-4 flex items-center justify-between z-40 sticky top-0 backdrop-blur-sm bg-opacity-95 border-b ${finalBorderColor}`}
         role="navigation"
         aria-label="Main navigation"
@@ -181,7 +197,7 @@ export function Navbar({
           style={{
             position: 'fixed',
             right: '1rem',
-            top: '5rem',
+            top: `${navHeight + 8}px`,
             width: '18rem',
             zIndex: 60,
           }}
