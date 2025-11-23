@@ -1,12 +1,15 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { ErrorBoundary } from '@krisarmstrong/web-foundation';
+import { ErrorBoundary, initTheme } from '@krisarmstrong/web-foundation';
 import Layout from './Layout.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import { PageLoadingFallback } from './components/PageLoadingFallback.tsx';
 import * as Sentry from '@sentry/react';
 import './index.css';
+
+// Initialize theme (system preference listening, cross-tab sync)
+initTheme();
 
 // Initialize Sentry for error tracking
 if (import.meta.env.VITE_SENTRY_DSN && !import.meta.env.DEV) {
