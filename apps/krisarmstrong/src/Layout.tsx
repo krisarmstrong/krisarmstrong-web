@@ -8,7 +8,9 @@ import { PageLoadingFallback } from './components/PageLoadingFallback';
 export default function Layout() {
   return (
     <>
-      <Navbar />
+      <header>
+        <Navbar />
+      </header>
       <PageShell>
         <Suspense fallback={<PageLoadingFallback message="Loading page..." />}>
           <Outlet />
