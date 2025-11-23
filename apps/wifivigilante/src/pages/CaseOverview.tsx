@@ -1,6 +1,14 @@
 // src/pages/CaseOverview.tsx
-import React, { useEffect, useState, useMemo } from "react";
-import { ListFilter, Loader2, AlertCircle, Book, Briefcase, Globe, Stethoscope } from "lucide-react";
+import React, { useEffect, useState, useMemo, useTransition } from 'react';
+import {
+  ListFilter,
+  Loader2,
+  AlertCircle,
+  Book,
+  Briefcase,
+  Globe,
+  Stethoscope,
+} from 'lucide-react';
 import { H1 } from '../components/ui/Typography.jsx';
 import {
   ContentCard,
@@ -10,7 +18,7 @@ import {
   LoadMoreButton,
   EmptyState,
   useProgressiveLoad,
-  type ActiveFilter
+  type ActiveFilter,
 } from '@krisarmstrong/web-foundation';
 import { getAllCases } from '../api';
 import { transformApiData } from '../utils/caseUtils';
@@ -22,7 +30,12 @@ export default function CaseOverview(): React.ReactElement {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchResults, setSearchResults] = useState<TransformedCase[]>([]);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const [sortBy, setSortBy] = useState<"newest" | "severity" | "duration" | "alphabetical">("newest");
+  const [sortBy, setSortBy] = useState<'newest' | 'severity' | 'duration' | 'alphabetical'>(
+    'newest'
+  );
+
+  // React 19: Show pending state during tag filtering
+  const [isPending, startTransition] = useTransition();
 
   // Fetch cases on mount
   useEffect(() => {
@@ -30,13 +43,13 @@ export default function CaseOverview(): React.ReactElement {
       try {
         setIsLoading(true);
         const casesData = await getAllCases();
-        if (!Array.isArray(casesData)) throw new Error("Cases data is not an array.");
+        if (!Array.isArray(casesData)) throw new Error('Cases data is not an array.');
         const transformed = casesData.map(transformApiData).filter(Boolean) as TransformedCase[];
         setAllCases(transformed);
         setError(null);
       } catch (err) {
-        console.error("Error fetching cases:", err);
-        setError("Failed to load cases. Please try again.");
+        console.error('Error fetching cases:', err);
+        setError('Failed to load cases. Please try again.');
       } finally {
         setIsLoading(false);
       }
@@ -50,7 +63,7 @@ export default function CaseOverview(): React.ReactElement {
     return cases.sort((a, b) => {
       switch (sortBy) {
         case 'severity': {
-          const severityOrder = { 'Critical': 0, 'High': 1, 'Medium': 2, 'Low': 3 };
+          const severityOrder = { Critical: 0, High: 1, Medium: 2, Low: 3 };
           const severityA = severityOrder[a.severity as keyof typeof severityOrder] ?? 99;
           const severityB = severityOrder[b.severity as keyof typeof severityOrder] ?? 99;
           return severityA - severityB;
@@ -77,25 +90,34 @@ export default function CaseOverview(): React.ReactElement {
   // Filter by selected tag
   const filteredCases = useMemo(() => {
     if (!selectedTag) return casesToFilter;
-    return casesToFilter.filter(c => Array.isArray(c.tags) && c.tags.includes(selectedTag));
+    return casesToFilter.filter((c) => Array.isArray(c.tags) && c.tags.includes(selectedTag));
   }, [casesToFilter, selectedTag]);
 
   // Progressive loading
-  const { visibleItems: visibleCases, remainingCount, loadMore, hasMore } = useProgressiveLoad(
-    filteredCases,
-    { itemsPerLoad: 12, initialCount: 12 }
-  );
+  const {
+    visibleItems: visibleCases,
+    remainingCount,
+    loadMore,
+    hasMore,
+  } = useProgressiveLoad(filteredCases, { itemsPerLoad: 12, initialCount: 12 });
 
   // Active filters for badge display
   const activeFilters: ActiveFilter[] = selectedTag
-    ? [{ id: 'tag', value: selectedTag, onRemove: () => setSelectedTag(null) }]
+    ? [
+        {
+          id: 'tag',
+          value: selectedTag,
+          onRemove: () => startTransition(() => setSelectedTag(null)),
+        },
+      ]
     : [];
 
   const getIndustryIcon = (sectorName: string | undefined): React.ReactNode => {
-    const lowerSector = sectorName?.toLowerCase() || "";
-    if (lowerSector.includes("healthcare")) return <Stethoscope className="inline mr-1 h-4 w-4" />;
-    if (lowerSector.includes("education")) return <Book className="inline mr-1 h-4 w-4" />;
-    if (lowerSector.includes("retail") || lowerSector.includes("commercial")) return <Briefcase className="inline mr-1 h-4 w-4" />;
+    const lowerSector = sectorName?.toLowerCase() || '';
+    if (lowerSector.includes('healthcare')) return <Stethoscope className="inline mr-1 h-4 w-4" />;
+    if (lowerSector.includes('education')) return <Book className="inline mr-1 h-4 w-4" />;
+    if (lowerSector.includes('retail') || lowerSector.includes('commercial'))
+      return <Briefcase className="inline mr-1 h-4 w-4" />;
     return <Globe className="inline mr-1 h-4 w-4" />;
   };
 
@@ -126,9 +148,7 @@ export default function CaseOverview(): React.ReactElement {
   return (
     <div className="px-4 py-8 sm:px-6 lg:px-8">
       <header className="mb-6 sm:mb-8">
-        <H1 icon={<ListFilter size={32} className="text-brand-primary" />}>
-          Case Files
-        </H1>
+        <H1 icon={<ListFilter size={32} className="text-brand-primary" />}>Case Files</H1>
       </header>
 
       {/* Search */}
@@ -151,7 +171,7 @@ export default function CaseOverview(): React.ReactElement {
           'category',
           'detectedBy',
           'impactScope',
-          'validatedBy'
+          'validatedBy',
         ]}
         placeholder="Search all case content..."
         accentColor="emerald"
@@ -189,7 +209,9 @@ export default function CaseOverview(): React.ReactElement {
       {/* Cases Grid */}
       {visibleCases.length > 0 ? (
         <>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8">
+          <div
+            className={`grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8 transition-opacity ${isPending ? 'opacity-50' : 'opacity-100'}`}
+          >
             {visibleCases.map((c: TransformedCase, idx: number) => (
               <ContentCard
                 key={c.id}
@@ -199,7 +221,7 @@ export default function CaseOverview(): React.ReactElement {
                 date={c.incidentDate}
                 durationMinutes={c.durationMinutes}
                 tags={c.tags}
-                onTagClick={(tag) => setSelectedTag(tag)}
+                onTagClick={(tag) => startTransition(() => setSelectedTag(tag))}
                 severity={c.severity}
                 status={c.status}
                 metadata={`${c.sector?.replace(/_/g, ' ') || 'N/A'}${c.subsector ? ` • ${c.subsector.replace(/_/g, ' ')}` : ''}${c.tool ? ` • ${c.tool}` : ''}`}
@@ -234,10 +256,14 @@ export default function CaseOverview(): React.ReactElement {
         <EmptyState
           title="No matching cases found"
           description="Try adjusting your search or filters"
-          action={selectedTag ? {
-            label: 'Clear Filters',
-            onClick: () => setSelectedTag(null)
-          } : undefined}
+          action={
+            selectedTag
+              ? {
+                  label: 'Clear Filters',
+                  onClick: () => startTransition(() => setSelectedTag(null)),
+                }
+              : undefined
+          }
           accentColor="gray"
           minHeight="300px"
         />
