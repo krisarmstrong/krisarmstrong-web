@@ -5,14 +5,14 @@
 @source "../src";
 
 @theme {
-  /* Light Mode - WiFi Vigilante Blue Theme */
+  /* Light Mode - WiFi Vigilante Blue Theme with softer whites */
   --color-brand-primary: #2563eb;
   --color-brand-accent: #3b82f6;
-  --color-surface-base: #ffffff;
-  --color-surface-raised: #f8fafc;
-  --color-surface-border: #e2e8f0;
+  --color-surface-base: #f0f4f8;
+  --color-surface-raised: #ffffff;
+  --color-surface-border: #93c5fd;
   --color-surface-hover: #dbeafe;
-  --color-text-primary: #0f172a;
+  --color-text-primary: #1e293b;
   --color-text-muted: #64748b;
   --color-text-accent: #2563eb;
   --color-text-inverse: #ffffff;
