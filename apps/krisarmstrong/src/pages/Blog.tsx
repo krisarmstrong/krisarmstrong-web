@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 import {
   LoadingPage,
   ErrorPage,
@@ -8,19 +8,22 @@ import {
   LoadMoreButton,
   EmptyState,
   useProgressiveLoad,
-  type ActiveFilter
+  type ActiveFilter,
 } from '@krisarmstrong/web-foundation';
-import { useState, useMemo, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { getAllBlogPosts, type BlogPost } from "../lib/supabase";
+import { useState, useMemo, useEffect, useTransition } from 'react';
+import { Link } from 'react-router-dom';
+import { getAllBlogPosts, type BlogPost } from '../lib/supabase';
 
 export default function Blog() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const [sortBy, setSortBy] = useState<"newest" | "oldest" | "popular">("newest");
+  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'popular'>('newest');
   const [searchResults, setSearchResults] = useState<BlogPost[]>([]);
+
+  // React 19: Show pending state during tag filtering
+  const [isPending, startTransition] = useTransition();
 
   // Fetch blog posts on mount
   useEffect(() => {
@@ -50,35 +53,44 @@ export default function Blog() {
       if (!a.featured && b.featured) return 1;
 
       // Then sort by selected criteria
-      if (sortBy === "popular") {
+      if (sortBy === 'popular') {
         return (b.view_count || 0) - (a.view_count || 0);
       }
 
       // Sort by date
       const dateA = new Date(a.date).getTime();
       const dateB = new Date(b.date).getTime();
-      return sortBy === "newest" ? dateB - dateA : dateA - dateB;
+      return sortBy === 'newest' ? dateB - dateA : dateA - dateB;
     });
   }, [blogPosts, sortBy]);
 
   // Use search results if searching, otherwise use sorted posts
-  const postsToFilter = searchResults.length > 0 || blogPosts.length === 0 ? searchResults : sortedPosts;
+  const postsToFilter =
+    searchResults.length > 0 || blogPosts.length === 0 ? searchResults : sortedPosts;
 
   // Filter by tag
   const filteredPosts = useMemo(() => {
     if (!selectedTag) return postsToFilter;
-    return postsToFilter.filter(post => post.tags?.includes(selectedTag));
+    return postsToFilter.filter((post) => post.tags?.includes(selectedTag));
   }, [postsToFilter, selectedTag]);
 
   // Progressive loading
-  const { visibleItems: visiblePosts, remainingCount, loadMore, hasMore } = useProgressiveLoad(
-    filteredPosts,
-    { itemsPerLoad: 12, initialCount: 12 }
-  );
+  const {
+    visibleItems: visiblePosts,
+    remainingCount,
+    loadMore,
+    hasMore,
+  } = useProgressiveLoad(filteredPosts, { itemsPerLoad: 12, initialCount: 12 });
 
   // Active filters for badge display
   const activeFilters: ActiveFilter[] = selectedTag
-    ? [{ id: 'tag', value: selectedTag, onRemove: () => setSelectedTag(null) }]
+    ? [
+        {
+          id: 'tag',
+          value: selectedTag,
+          onRemove: () => startTransition(() => setSelectedTag(null)),
+        },
+      ]
     : [];
 
   // Loading state
@@ -88,13 +100,7 @@ export default function Blog() {
 
   // Error state
   if (error) {
-    return (
-      <ErrorPage
-        error={error}
-        onRetry={() => window.location.reload()}
-        variant="violet"
-      />
-    );
+    return <ErrorPage error={error} onRetry={() => window.location.reload()} variant="violet" />;
   }
 
   return (
@@ -106,7 +112,8 @@ export default function Blog() {
       >
         <h1 className="text-4xl font-bold mb-3">Technical Blog</h1>
         <p className="text-text-muted mb-8">
-          Case studies, deep dives, and lessons learned from 20+ years in network engineering and cybersecurity.
+          Case studies, deep dives, and lessons learned from 20+ years in network engineering and
+          cybersecurity.
         </p>
 
         {/* Search */}
@@ -147,7 +154,9 @@ export default function Blog() {
         </div>
 
         {/* Blog Posts Grid - 3 columns on desktop */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8">
+        <div
+          className={`grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8 transition-opacity ${isPending ? 'opacity-50' : 'opacity-100'}`}
+        >
           {visiblePosts.map((post, index) => (
             <motion.div
               key={post.slug}
@@ -168,7 +177,13 @@ export default function Blog() {
               </Link>
               <p className="text-text-muted text-sm mb-4 line-clamp-3">{post.excerpt}</p>
               <div className="flex items-center gap-4 text-xs text-text-muted mb-3">
-                <span>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                <span>
+                  {new Date(post.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </span>
                 <span>{post.read_time || 5} min read</span>
               </div>
               {post.tags && post.tags.length > 0 && (
@@ -178,7 +193,9 @@ export default function Blog() {
                       key={tag}
                       onClick={(e) => {
                         e.preventDefault();
-                        setSelectedTag(tag);
+                        startTransition(() => {
+                          setSelectedTag(tag);
+                        });
                       }}
                       className="bg-surface-hover text-text-primary text-xs px-2 py-1 rounded-full hover:bg-brand-accent/20 hover:text-text-accent transition-colors cursor-pointer"
                     >
@@ -208,10 +225,14 @@ export default function Blog() {
           <EmptyState
             title="No posts found"
             description="Try selecting a different tag or clearing filters"
-            action={selectedTag ? {
-              label: 'Clear Filters',
-              onClick: () => setSelectedTag(null)
-            } : undefined}
+            action={
+              selectedTag
+                ? {
+                    label: 'Clear Filters',
+                    onClick: () => setSelectedTag(null),
+                  }
+                : undefined
+            }
             accentColor="violet"
           />
         )}
