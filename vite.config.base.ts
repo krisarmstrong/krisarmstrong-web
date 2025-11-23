@@ -2,6 +2,7 @@ import { defineConfig, searchForWorkspaceRoot, UserConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'node:path';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 /**
  * Configuration options for creating a Vite config
@@ -21,8 +22,23 @@ export interface AppConfig {
  * @returns Vite configuration object
  */
 export function createViteConfig(appConfig: AppConfig): UserConfig {
+  const plugins = [react(), tailwindcss()];
+
+  // Add bundle analyzer when ANALYZE env var is set
+  if (process.env.ANALYZE === 'true') {
+    plugins.push(
+      visualizer({
+        filename: `dist/stats-${appConfig.appName}.html`,
+        open: true,
+        gzipSize: true,
+        brotliSize: true,
+        template: 'treemap', // 'treemap', 'sunburst', 'network'
+      })
+    );
+  }
+
   return defineConfig({
-    plugins: [react(), tailwindcss()],
+    plugins,
 
     resolve: {
       alias: {
@@ -54,8 +70,8 @@ export function createViteConfig(appConfig: AppConfig): UserConfig {
       },
       // Target modern browsers for smaller bundles
       target: 'esnext',
-      // Increase chunk size warning limit for vendor bundles
-      chunkSizeWarningLimit: 600,
+      // Chunk size warning limit (lowered from 600KB for better bundle awareness)
+      chunkSizeWarningLimit: 400,
       // Source maps for production debugging
       sourcemap: true,
       // Minification options
