@@ -49,7 +49,10 @@
       "Bash(for file in src/components/CaseDisplay.tsx src/pages/PrivacyPolicy.tsx src/pages/Home.tsx src/pages/Contact.tsx src/pages/ErrorPage.tsx src/pages/About.tsx)",
       "Bash(do sed -i '' \"s|from [''\"\"].*ui/Typography.*[''\"\"]|from ''@krisarmstrong/web-foundation''|g\" \"$file\")",
       "Bash(VITE_SUPABASE_URL=\"https://eumqnuyqxcbcnsohpjyh.supabase.co\" VITE_SUPABASE_ANON_KEY=\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV1bXFudXlxeGNiY25zb2hwanloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwNDYwMDksImV4cCI6MjA3ODYyMjAwOX0.YEpgLAT8xG0h7mpVounLknuzmn1bWRPXJ0U9CByvqQs\" npx tsx seed-ratings.ts wifivigilante)",
-      "Bash(npx eslint:*)"
+      "Bash(npx eslint:*)",
+      "Bash(gh api:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm update:*)"
     ],
     "deny": [],
     "ask": []
