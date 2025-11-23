@@ -8,6 +8,7 @@ export { Navbar } from './components/Navbar';
 export { ThemeProvider } from './components/ThemeProvider';
 export { ThemeToggle } from './components/ThemeToggle';
 export type { ThemeToggleProps } from './components/ThemeToggle';
+export { TailwindSafelist } from './components/TailwindSafelist';
 export { SiteSearch } from './components/SiteSearch';
 export type { SearchResult } from './components/SiteSearch';
 export { InlineSearch } from './components/InlineSearch';

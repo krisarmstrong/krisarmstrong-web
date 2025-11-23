@@ -2,8 +2,15 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { Navbar as WebFoundationNavbar } from '@krisarmstrong/web-foundation';
-import { PRIMARY_NAV } from '../config/navigation';
+import { Navbar as WebFoundationNavbar, type NavItem } from '@krisarmstrong/web-foundation';
+
+// Primary navigation items (matches the component)
+const PRIMARY_NAV: NavItem[] = [
+  { label: 'Home', path: '/' },
+  { label: 'About', path: '/about' },
+  { label: 'Services', path: '/services' },
+  { label: 'Contact', path: '/contact' },
+];
 
 // Mock the WebFoundationNavbar component from web-foundation
 vi.mock('@krisarmstrong/web-foundation', async (importOriginal) => {
