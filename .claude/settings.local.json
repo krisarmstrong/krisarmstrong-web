@@ -45,7 +45,9 @@
       "Bash(tree:*)",
       "Bash(gh issue list:*)",
       "Bash(git restore:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(for file in src/components/CaseDisplay.tsx src/pages/PrivacyPolicy.tsx src/pages/Home.tsx src/pages/Contact.tsx src/pages/ErrorPage.tsx src/pages/About.tsx)",
+      "Bash(do sed -i '' \"s|from [''\"\"].*ui/Typography.*[''\"\"]|from ''@krisarmstrong/web-foundation''|g\" \"$file\")"
     ],
     "deny": [],
     "ask": []

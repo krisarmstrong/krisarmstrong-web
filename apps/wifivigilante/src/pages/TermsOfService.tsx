@@ -1,6 +1,6 @@
 // src/pages/Terms.tsx
 import { ShieldCheck } from 'lucide-react';
-import { H1, P, MutedText } from '../components/ui/Typography.jsx';
+import { H1, P, MutedText } from '@krisarmstrong/web-foundation';
 
 export default function Terms(): React.ReactElement {
   return (

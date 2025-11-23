@@ -1,21 +1,21 @@
 // src/pages/ErrorPage.tsx
 import { useRouteError, isRouteErrorResponse } from 'react-router-dom';
 import { AlertTriangle, ArrowLeft } from 'lucide-react';
-import { H1, P, AccentLink } from '../components/ui/Typography';
+import { H1, P, AccentLink } from '@krisarmstrong/web-foundation';
 
 export default function ErrorPage(): React.ReactElement {
   const error = useRouteError();
-  console.error("Routing Error:", error);
+  console.error('Routing Error:', error);
 
-  let errorMessage = "Sorry, an unexpected error has occurred.";
-  let errorStatus = "Error";
+  let errorMessage = 'Sorry, an unexpected error has occurred.';
+  let errorStatus = 'Error';
 
   if (isRouteErrorResponse(error)) {
     errorStatus = `Error ${error.status}`;
     errorMessage = error.statusText || errorMessage;
 
     if (error.status === 404) {
-      errorStatus = "404 - Page Not Found";
+      errorStatus = '404 - Page Not Found';
       errorMessage = "Oops! The page you're looking for doesn't seem to exist.";
     }
   } else if (error instanceof Error) {
@@ -37,13 +37,13 @@ export default function ErrorPage(): React.ReactElement {
         </pre>
       )}
       {import.meta.env.DEV && error instanceof Error && error.stack && (
-         <details className="text-left text-xs text-text-muted mb-8 max-w-xl">
-            <summary>Error Stack (Development)</summary>
-            <pre className="mt-2 whitespace-pre-wrap">{error.stack}</pre>
+        <details className="text-left text-xs text-text-muted mb-8 max-w-xl">
+          <summary>Error Stack (Development)</summary>
+          <pre className="mt-2 whitespace-pre-wrap">{error.stack}</pre>
         </details>
       )}
 
-      <AccentLink to="/" iconLeft={<ArrowLeft size={16}/>}>
+      <AccentLink to="/" iconLeft={<ArrowLeft size={16} />}>
         Go Back to Home
       </AccentLink>
     </div>

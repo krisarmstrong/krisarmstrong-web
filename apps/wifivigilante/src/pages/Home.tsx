@@ -1,6 +1,6 @@
 // src/pages/Home.tsx
-import { ShieldCheck, Shield, FileText, Users, TrendingUp } from "lucide-react";
-import { H1, H2, P } from "../components/ui/Typography.jsx";
+import { ShieldCheck, Shield, FileText, Users, TrendingUp } from 'lucide-react';
+import { H1, H2, P } from '@krisarmstrong/web-foundation';
 
 export default function Home(): React.ReactElement {
   return (
@@ -13,15 +13,20 @@ export default function Home(): React.ReactElement {
             Expert-Level Field Investigations
           </span>
         </div>
-        <H1 icon={<ShieldCheck size={32} className="text-brand-primary" />} className="!mb-4 !text-4xl sm:!text-5xl">
+        <H1
+          icon={<ShieldCheck size={32} className="text-brand-primary" />}
+          className="!mb-4 !text-4xl sm:!text-5xl"
+        >
           Wi-Fi Vigilante
         </H1>
         <P className="text-xl sm:text-2xl font-semibold text-text-primary mb-3">
           Real-World Security Investigations & Network Forensics
         </P>
         <P className="text-base sm:text-lg text-text-primary max-w-3xl mx-auto leading-relaxed">
-          Documenting field investigations into <strong>Wi-Fi security</strong>, <strong>cybersecurity incidents</strong>,
-          and <strong>enterprise network troubleshooting</strong> using professional-grade tools and forensic techniques.
+          Documenting field investigations into <strong>Wi-Fi security</strong>,{' '}
+          <strong>cybersecurity incidents</strong>, and{' '}
+          <strong>enterprise network troubleshooting</strong> using professional-grade tools and
+          forensic techniques.
         </P>
       </header>
 
@@ -60,7 +65,8 @@ export default function Home(): React.ReactElement {
               Security Investigations
             </H2>
             <P className="text-text-primary mb-3">
-              Rogue device detection, unauthorized access attempts, network intrusions, and cybersecurity incident response documented with professional tools.
+              Rogue device detection, unauthorized access attempts, network intrusions, and
+              cybersecurity incident response documented with professional tools.
             </P>
             <ul className="list-disc list-inside space-y-1 text-text-muted text-sm">
               <li>Rogue AP Detection & Mitigation</li>
@@ -75,7 +81,8 @@ export default function Home(): React.ReactElement {
               Performance Troubleshooting
             </H2>
             <P className="text-text-primary mb-3">
-              Layer 1-7 root cause analysis of wireless and wired network issues affecting enterprise environments, healthcare, education, and commercial sectors.
+              Layer 1-7 root cause analysis of wireless and wired network issues affecting
+              enterprise environments, healthcare, education, and commercial sectors.
             </P>
             <ul className="list-disc list-inside space-y-1 text-text-muted text-sm">
               <li>RF Interference & Channel Analysis</li>
@@ -90,7 +97,8 @@ export default function Home(): React.ReactElement {
       <section className="bg-gradient-to-br from-surface-raised/50 to-surface-base/50 border border-surface-border p-8 rounded-lg">
         <H2 className="text-center mb-4 !text-2xl">Professional-Grade Tools</H2>
         <P className="text-center text-text-primary mb-6 max-w-2xl mx-auto">
-          Every investigation leverages enterprise tools from NetAlly, Wireshark, and industry-standard analysis platforms.
+          Every investigation leverages enterprise tools from NetAlly, Wireshark, and
+          industry-standard analysis platforms.
         </P>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm text-text-muted max-w-2xl mx-auto">
           <div className="flex items-center gap-2">

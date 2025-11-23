@@ -21,7 +21,14 @@ import {
 } from 'lucide-react';
 import { generateMarkdownContent, downloadFile } from '../utils/download.js';
 import { shareToPlatform } from '../utils/share.ts';
-import { H1, ArticleTitle, SubSectionTitle, P, MutedText, Tag } from './ui/Typography.tsx';
+import {
+  H1,
+  ArticleTitle,
+  SubSectionTitle,
+  P,
+  MutedText,
+  Tag,
+} from '@krisarmstrong/web-foundation';
 import { Button } from './ui/Button.tsx';
 import { StarRating } from '@krisarmstrong/web-foundation';
 import { TransformedCase } from '@/types';
