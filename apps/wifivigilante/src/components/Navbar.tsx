@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Shield, Calendar, FileText, Home, Info, Mail } from 'lucide-react';
+import { Menu, X, Calendar, FileText, Home, Info, Mail } from 'lucide-react';
 import { ThemeToggle } from '@krisarmstrong/web-foundation';
 
 const NAV_ITEMS = [
@@ -84,9 +84,11 @@ export default function Navbar() {
             className="flex items-center flex-shrink-0 hover:opacity-90 transition-opacity focus:ring-brand-primary focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg px-2 py-1 group"
             onClick={closeMenu}
           >
-            <Shield
-              size={48}
-              className="text-brand-primary group-hover:text-brand-accent transition-colors flex-shrink-0"
+            <img
+              src="/logo-48.png"
+              srcSet="/logo-48.png 1x, /logo-56@2x.png 2x"
+              alt="Wi-Fi Vigilante Logo"
+              className="w-12 h-12 sm:w-14 sm:h-14 transition-opacity flex-shrink-0"
             />
           </Link>
           <span className="text-lg sm:text-xl font-bold tracking-tight whitespace-nowrap text-text-primary">
