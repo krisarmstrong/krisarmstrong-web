@@ -9,7 +9,7 @@ export default function Navbar() {
     <SharedNavbar
       logo={
         <Shield
-          size={24}
+          size={48}
           className="text-brand-primary group-hover:text-brand-accent transition-colors flex-shrink-0"
         />
       }

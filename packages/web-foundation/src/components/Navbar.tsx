@@ -128,7 +128,6 @@ export function Navbar({
     <>
       <nav
         className={`relative w-full min-h-[72px] ${finalBgColor} ${finalTextColor} shadow-md px-4 sm:px-6 py-4 flex items-center justify-between z-40 sticky top-0 backdrop-blur-sm bg-opacity-95 border-b ${finalBorderColor}`}
-        style={{}}
         role="navigation"
         aria-label="Main navigation"
       >
@@ -204,11 +203,6 @@ export function Navbar({
               onNavigate={closeMenu}
             />
           </nav>
-
-          {/* Desktop Actions in Mobile Menu */}
-          {desktopActions && (
-            <div className={`p-4 border-t ${finalBorderColor}`}>{desktopActions}</div>
-          )}
 
           {/* Footer */}
           {mobileFooter && <div className={`p-4 border-t ${finalBorderColor}`}>{mobileFooter}</div>}
