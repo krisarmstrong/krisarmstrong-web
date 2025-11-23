@@ -5,29 +5,14 @@ import { ErrorBoundary, initTheme } from '@krisarmstrong/web-foundation';
 import Layout from './Layout.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import { PageLoadingFallback } from './components/PageLoadingFallback.tsx';
-import * as Sentry from '@sentry/react';
+import { initSentry } from './utils/sentry.ts';
 import './index.css';
 
 // Initialize theme (system preference listening, cross-tab sync)
 initTheme();
 
-// Initialize Sentry for error tracking
-if (import.meta.env.VITE_SENTRY_DSN && !import.meta.env.DEV) {
-  Sentry.init({
-    dsn: import.meta.env.VITE_SENTRY_DSN,
-    environment: import.meta.env.VITE_APP_ENV || 'production',
-    integrations: [
-      Sentry.browserTracingIntegration(),
-      Sentry.replayIntegration({
-        maskAllText: false,
-        blockAllMedia: false,
-      }),
-    ],
-    tracesSampleRate: 0.1,
-    replaysSessionSampleRate: 0.1,
-    replaysOnErrorSampleRate: 1.0,
-  });
-}
+// Initialize error tracking
+initSentry();
 
 // Lazy load pages
 const Home = React.lazy(() => import('./pages/Home.tsx'));

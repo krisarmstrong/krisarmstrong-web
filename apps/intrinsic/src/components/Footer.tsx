@@ -1,5 +1,3 @@
-import { Footer as SharedFooter } from '@krisarmstrong/web-foundation';
-
 const FOOTER_LINKS = {
   company: [
     { label: 'About', path: '/about' },
@@ -37,10 +35,48 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <SharedFooter
-      social={SOCIAL_LINKS}
-      legalLinks={FOOTER_LINKS.legal}
-      copyright={<span>&copy; {currentYear} Intrinsic Momentum Mindset. All rights reserved.</span>}
-    />
+    <footer className="bg-surface-raised text-text-muted border-t border-surface-border transition-colors duration-200 mt-32 pt-16 pb-16 px-4">
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 text-center">
+        {/* Social Links */}
+        <div className="flex justify-center gap-6 mt-4">
+          {SOCIAL_LINKS.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              aria-label={item.label}
+              rel="noopener noreferrer"
+              target="_blank"
+              className="text-text-muted transition-colors hover:text-text-primary"
+            >
+              {item.icon}
+            </a>
+          ))}
+        </div>
+
+        {/* Legal Links */}
+        <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
+          {FOOTER_LINKS.legal.map((link, index) => (
+            <span key={link.path} className="flex items-center gap-4">
+              {index > 0 && (
+                <span aria-hidden="true" className="text-text-muted">
+                  |
+                </span>
+              )}
+              <a
+                href={link.path}
+                className="text-text-primary transition-colors hover:underline hover:text-text-accent"
+              >
+                {link.label}
+              </a>
+            </span>
+          ))}
+        </div>
+
+        {/* Copyright */}
+        <div className="text-sm text-text-muted">
+          &copy; {currentYear} Intrinsic Momentum Mindset. All rights reserved.
+        </div>
+      </div>
+    </footer>
   );
 }

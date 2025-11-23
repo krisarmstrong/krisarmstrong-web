@@ -1,7 +1,5 @@
 import { Loader2 } from 'lucide-react';
 import { useEffect, useRef } from 'react';
-import type { Theme } from '../types';
-import { themeTokens } from '../tokens';
 import { isDevelopmentEnvironment, getSentry } from '../utils/env';
 
 // ============================================================================
@@ -116,30 +114,16 @@ export interface LoadingCardProps {
   message?: string;
   /** Color variant */
   variant?: 'violet' | 'blue' | 'green' | 'red' | 'yellow' | 'gray';
-  /** Theme for surface/text colors */
-  theme?: Theme;
 }
 
 /**
  * LoadingCard - Card-style loading indicator
  */
-export function LoadingCard({
-  message = 'Loading...',
-  variant = 'blue',
-  theme = 'dark',
-}: LoadingCardProps) {
-  const palette = themeTokens[theme] || themeTokens.dark;
+export function LoadingCard({ message = 'Loading...', variant = 'blue' }: LoadingCardProps) {
   return (
-    <div
-      className="rounded-lg p-8 text-center border"
-      style={{
-        backgroundColor: palette.surfaceRaised,
-        borderColor: palette.border,
-        color: palette.textPrimary,
-      }}
-    >
+    <div className="rounded-lg p-8 text-center border bg-surface-raised border-surface-border text-text-primary">
       <LoadingSpinner size={48} className="mb-4" variant={variant} />
-      <p style={{ color: palette.textMuted }}>{message}</p>
+      <p className="text-text-muted">{message}</p>
     </div>
   );
 }
@@ -153,28 +137,16 @@ export interface LoadingPageProps {
   message?: string;
   /** Color variant */
   variant?: 'violet' | 'blue' | 'green' | 'red' | 'yellow' | 'gray';
-  /** Theme for surface/text colors */
-  theme?: Theme;
 }
 
 /**
  * LoadingPage - Full-page loading indicator
  */
-export function LoadingPage({
-  message = 'Loading...',
-  variant = 'blue',
-  theme = 'dark',
-}: LoadingPageProps) {
-  const palette = themeTokens[theme] || themeTokens.dark;
+export function LoadingPage({ message = 'Loading...', variant = 'blue' }: LoadingPageProps) {
   return (
-    <div
-      className="flex flex-col justify-center items-center min-h-[calc(100vh-200px)]"
-      style={{ color: palette.textPrimary }}
-    >
+    <div className="flex flex-col justify-center items-center min-h-[calc(100vh-200px)] text-text-primary">
       <LoadingSpinner size={64} variant={variant} />
-      <p className="mt-4 text-lg" style={{ color: palette.textMuted }}>
-        {message}
-      </p>
+      <p className="mt-4 text-lg text-text-muted">{message}</p>
     </div>
   );
 }

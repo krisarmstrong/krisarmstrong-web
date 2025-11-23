@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
-import rehypeSanitize from "rehype-sanitize";
-import { ArrowLeft } from "lucide-react";
-import { StarRating, LoadingPage, ErrorPage } from "@krisarmstrong/web-foundation";
-import { getBlogPostBySlug, type BlogPost as BlogPostType } from "../lib/supabase";
+import { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import rehypeSanitize from 'rehype-sanitize';
+import { ArrowLeft } from 'lucide-react';
+import { StarRating, LoadingPage, ErrorPage } from '@krisarmstrong/web-foundation';
+import { getBlogPostBySlug, type BlogPost as BlogPostType } from '../lib/supabase';
 
 export default function BlogPost() {
   const { id } = useParams<{ id: string }>();
@@ -15,7 +15,7 @@ export default function BlogPost() {
   useEffect(() => {
     const fetchPost = async () => {
       if (!id) {
-        setError("Blog post ID not provided");
+        setError('Blog post ID not provided');
         setLoading(false);
         return;
       }
@@ -25,7 +25,7 @@ export default function BlogPost() {
         const fetchedPost = await getBlogPostBySlug(id);
 
         if (!fetchedPost) {
-          setError("Blog post not found");
+          setError('Blog post not found');
           setLoading(false);
           return;
         }
@@ -33,8 +33,8 @@ export default function BlogPost() {
         setPost(fetchedPost);
         setError(null);
       } catch (err) {
-        console.error("Error loading blog post:", err);
-        setError("Failed to load blog post. Please try again later.");
+        console.error('Error loading blog post:', err);
+        setError('Failed to load blog post. Please try again later.');
       } finally {
         setLoading(false);
       }
@@ -50,7 +50,7 @@ export default function BlogPost() {
   if (error || !post) {
     return (
       <ErrorPage
-        error={error || "Blog post not found"}
+        error={error || 'Blog post not found'}
         onRetry={() => window.location.reload()}
         variant="violet"
       />
@@ -59,7 +59,10 @@ export default function BlogPost() {
 
   return (
     <div className="max-w-3xl mx-auto py-10 px-4">
-      <Link to="/blog" className="inline-flex items-center gap-2 text-text-accent hover:text-interactive-hover mb-6 transition-colors">
+      <Link
+        to="/blog"
+        className="inline-flex items-center gap-2 text-text-accent hover:text-interactive-hover mb-6 transition-colors"
+      >
         <ArrowLeft className="w-4 h-4" />
         Back to Blog
       </Link>
@@ -69,10 +72,10 @@ export default function BlogPost() {
           <h1 className="text-4xl md:text-5xl font-bold mb-4">{post.title}</h1>
           <div className="flex flex-wrap items-center gap-4 text-text-muted">
             <time dateTime={post.date}>
-              {new Date(post.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
+              {new Date(post.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
               })}
             </time>
             <div className="flex gap-2">
@@ -88,7 +91,7 @@ export default function BlogPost() {
           </div>
         </header>
 
-        <div className="prose dark:prose-invert prose-violet max-w-none bg-surface-raised p-6 md:p-8 rounded-2xl shadow-lg">
+        <div className="prose dark:prose-invert prose-violet prose-lg max-w-none bg-surface-raised p-6 md:p-8 rounded-2xl shadow-lg [&_p]:mb-6 [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mt-10 [&_h1]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-3 [&_ul]:mb-6 [&_ol]:mb-6 [&_li]:mb-2">
           <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{post.content}</ReactMarkdown>
         </div>
 

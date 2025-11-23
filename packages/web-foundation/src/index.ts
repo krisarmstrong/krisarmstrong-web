@@ -1,49 +1,34 @@
-export * from './types';
-export * from './tokens';
-export { Footer } from './components/Footer';
-export { Breadcrumbs } from './components/Breadcrumbs';
-export { PageShell } from './components/PageShell';
-export { PrimaryNav } from './components/PrimaryNav';
-export { Navbar } from './components/Navbar';
-export { ThemeProvider } from './components/ThemeProvider';
+// Theme system
 export { ThemeToggle } from './components/ThemeToggle';
 export type { ThemeToggleProps } from './components/ThemeToggle';
+export { useTheme as useSimpleTheme } from './hooks/useTheme';
+export { initTheme } from './utils/initTheme';
+
+// Layout
+export { PageShell } from './components/PageShell';
 export { TailwindSafelist } from './components/TailwindSafelist';
-export { SiteSearch } from './components/SiteSearch';
-export type { SearchResult } from './components/SiteSearch';
-export { InlineSearch } from './components/InlineSearch';
-export type { SearchResult as InlineSearchResult } from './components/InlineSearch';
-export { Avatar } from './components/Avatar';
+
+// UI Components
 export { Button } from './components/ui/Button';
 export type { ButtonProps } from './components/ui/Button';
-export { Card, CardContent } from './components/ui/Card';
-export { TextInput, SearchInput } from './components/ui/Input';
-export type { TextInputProps, SearchInputProps } from './components/ui/Input';
-export {
-  H1,
-  H2,
-  P,
-  ArticleTitle,
-  SubSectionTitle,
-  CardTitle,
-  SmallText,
-  MutedText,
-  AccentLink,
-  Tag,
-  Badge,
-} from './components/ui/Typography';
-export { PageHeader } from './components/PageHeader';
-export { NavCard } from './components/NavCard';
+export { H1, H2, P } from './components/ui/Typography';
+
+// Forms
+export { ContactForm } from './components/ContactForm';
+
+// Display
 export { StarRating } from './components/StarRating';
-export { ContentCard } from './components/ContentCard';
-export { ServiceCard } from './components/ServiceCard';
-export { Section, SectionHeader } from './components/Section';
-export { List, ListItem } from './components/ui/List';
-export type { ContentCardProps } from './components/ContentCard';
-export { ContentSearch } from './components/ContentSearch';
-export type { ContentSearchProps, SearchableItem } from './components/ContentSearch';
-export { ContentSort } from './components/ContentSort';
-export type { ContentSortProps, SortOption } from './components/ContentSort';
+
+// Error Handling
+export { ErrorBoundary, ErrorMessage, ErrorCard, ErrorPage } from './components/Error';
+export type {
+  ErrorMessageProps,
+  ErrorCardProps,
+  ErrorPageProps,
+  ErrorBoundaryProps,
+} from './components/Error';
+
+// Loading States
 export {
   LoadingSpinner,
   LoadingCard,
@@ -59,42 +44,21 @@ export type {
   SkeletonProps,
   SkeletonTextProps,
 } from './components/Loading';
-export { ErrorMessage, ErrorCard, ErrorPage, ErrorBoundary } from './components/Error';
-export type {
-  ErrorMessageProps,
-  ErrorCardProps,
-  ErrorPageProps,
-  ErrorBoundaryProps,
-} from './components/Error';
-export { SOCIAL_ICONS, createSocialLinks } from './constants/socialIcons';
-export type { SocialIcon } from './constants/socialIcons';
-export { useClickOutside, useEscapeKey, useBodyScrollLock } from './hooks';
-export { useTheme as useSimpleTheme } from './hooks/useTheme'; // New simple theme hook (Phase 2)
-export { initTheme } from './utils/initTheme'; // Simple JavaScript theme initialization
+
+// Content Components
+export { ContentCard } from './components/ContentCard';
+export { ContentSearch } from './components/ContentSearch';
+export { ContentSort } from './components/ContentSort';
 export { ActiveFilterBadges } from './components/ActiveFilterBadges';
-export type { ActiveFilterBadgesProps, ActiveFilter } from './components/ActiveFilterBadges';
+export type { ActiveFilter } from './components/ActiveFilterBadges';
 export { LoadMoreButton } from './components/LoadMoreButton';
-export type { LoadMoreButtonProps } from './components/LoadMoreButton';
 export { EmptyState } from './components/EmptyState';
-export type { EmptyStateProps } from './components/EmptyState';
+export { SiteSearch } from './components/SiteSearch';
+export type { SearchResult } from './components/SiteSearch';
+
+// Hooks
 export { useProgressiveLoad } from './hooks/useProgressiveLoad';
-export type {
-  UseProgressiveLoadOptions,
-  UseProgressiveLoadReturn,
-} from './hooks/useProgressiveLoad';
-export { useTelemetry } from './hooks/useTelemetry';
-export type {
-  TelemetryConfig,
-  TelemetryEventProperties,
-  TelemetryErrorContext,
-  TelemetryPageViewProperties,
-  TelemetryProvider,
-  UseTelemetryReturn,
-} from './hooks/useTelemetry';
-export { ContactForm } from './components/ContactForm';
-export type {
-  ContactFormProps,
-  ContactFormTone,
-  ContactFormSurface,
-} from './components/ContactForm';
+
+// Validation
 export * from './utils/validation';
+export type { ValidationResult } from './utils/validation';

@@ -1,5 +1,5 @@
-import { ReactNode, useState, useEffect } from 'react';
-import { Calendar, Clock, Tag as TagIcon, Bookmark, Share2, User } from 'lucide-react';
+import { ReactNode } from 'react';
+import { Tag as TagIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export interface ContentCardProps {
@@ -91,15 +91,6 @@ const tagHoverColors = {
   teal: 'hover:bg-teal-500',
 };
 
-const bookmarkActiveColors = {
-  violet: 'bg-violet-500/20 text-violet-400',
-  blue: 'bg-blue-500/20 text-blue-400',
-  green: 'bg-green-500/20 text-green-400',
-  red: 'bg-red-500/20 text-red-400',
-  yellow: 'bg-yellow-500/20 text-yellow-400',
-  teal: 'bg-teal-500/20 text-teal-400',
-};
-
 const progressBarColors = {
   violet: 'bg-violet-500',
   blue: 'bg-blue-500',
@@ -132,41 +123,16 @@ export function ContentCard({
   className = '',
   image,
   imageAlt,
-  author,
-  authorAvatar,
   variant = 'default',
   isLoading = false,
   progress,
-  isBookmarked: initialIsBookmarked = false,
-  onBookmark,
-  onShare,
 }: ContentCardProps) {
-  const [isBookmarked, setIsBookmarked] = useState(initialIsBookmarked);
-
-  // Sync bookmark state with props
-  useEffect(() => {
-    setIsBookmarked(initialIsBookmarked);
-  }, [initialIsBookmarked]);
-
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
     });
-  };
-
-  const handleBookmarkClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsBookmarked(!isBookmarked);
-    onBookmark?.();
-  };
-
-  const handleShareClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    onShare?.();
   };
 
   // Loading skeleton
@@ -228,117 +194,58 @@ export function ContentCard({
       )}
 
       <div className="flex flex-col flex-grow">
-        {/* Header with Badges and Actions */}
-        <div className="flex justify-between items-start gap-2 mb-3">
-          {/* Badges */}
-          <div className="flex gap-2 flex-wrap">
-            {featured && (
-              <span className="inline-block px-3 py-1 bg-violet-500/20 text-violet-400 text-sm rounded-full">
-                Featured
-              </span>
-            )}
-            {severity && (
-              <span
-                className={`inline-block px-3 py-1 text-sm rounded-full border ${severityColors[severity]}`}
-              >
-                {severity}
-              </span>
-            )}
-            {status && (
-              <span className="inline-block px-3 py-1 bg-gray-700 text-gray-300 text-sm rounded-full">
-                {status}
-              </span>
-            )}
-          </div>
+        {/* Featured Badge - Small and minimal */}
+        {featured && (
+          <span className="inline-block px-3 py-1 bg-violet-500/20 text-violet-400 text-xs rounded-full mb-3 self-start">
+            Featured
+          </span>
+        )}
 
-          {/* Action Buttons */}
-          {(onBookmark || onShare) && (
-            <div className="flex gap-2">
-              {onBookmark && (
-                <button
-                  onClick={handleBookmarkClick}
-                  className={`p-2 rounded-lg transition-colors ${
-                    isBookmarked
-                      ? bookmarkActiveColors[accentColor]
-                      : 'bg-gray-800 text-gray-400 hover:text-gray-300'
-                  }`}
-                  aria-label={isBookmarked ? 'Remove bookmark' : 'Add bookmark'}
-                  aria-pressed={isBookmarked}
-                >
-                  <Bookmark size={16} fill={isBookmarked ? 'currentColor' : 'none'} />
-                </button>
-              )}
-              {onShare && (
-                <button
-                  onClick={handleShareClick}
-                  className="p-2 rounded-lg bg-gray-800 text-gray-400 hover:text-gray-300 transition-colors"
-                  aria-label="Share"
-                >
-                  <Share2 size={16} />
-                </button>
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* Title - Clickable */}
+        {/* Title - Clickable and prominent */}
         <Link to={href}>
           <h2
-            className={`${variant === 'compact' ? 'text-xl' : variant === 'expanded' ? 'text-3xl' : 'text-2xl'} font-bold mb-3 transition-colors ${accentTextColors[accentColor]}`}
+            className={`${variant === 'compact' ? 'text-lg' : variant === 'expanded' ? 'text-2xl' : 'text-xl'} font-semibold mb-3 transition-colors ${accentTextColors[accentColor]}`}
           >
             {title}
           </h2>
         </Link>
 
-        {/* Author */}
-        {author && (
-          <div className="flex items-center gap-2 mb-3">
-            {authorAvatar ? (
-              <img src={authorAvatar} alt={author} className="w-8 h-8 rounded-full object-cover" />
-            ) : (
-              <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center">
-                <User size={16} className="text-gray-400" />
-              </div>
-            )}
-            <span className="text-sm text-gray-400">{author}</span>
-          </div>
-        )}
-
-        {/* Metadata (Sector, Subsector, Tool, etc.) */}
-        {metadata && (
-          <div className="flex items-center gap-1 text-xs text-gray-500 mb-3">
-            {metadataIcon}
-            <span>{metadata}</span>
-          </div>
-        )}
-
         {/* Excerpt */}
         <p
-          className={`text-gray-400 mb-4 flex-grow ${variant === 'compact' ? 'line-clamp-2' : 'line-clamp-3'}`}
+          className={`text-gray-400 text-sm mb-4 flex-grow ${variant === 'compact' ? 'line-clamp-2' : 'line-clamp-3'}`}
         >
           {excerpt}
         </p>
 
         {/* Meta Information (Date, Time, Duration) */}
         {(date || readTime || durationMinutes) && (
-          <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-4">
-            {date && (
-              <div className="flex items-center gap-2">
-                <Calendar size={16} />
-                <span>{formatDate(date)}</span>
+          <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500 mb-3">
+            {date && <span>{formatDate(date)}</span>}
+            {readTime && <span>{readTime} min read</span>}
+            {durationMinutes && <span>{durationMinutes} min</span>}
+          </div>
+        )}
+
+        {/* Metadata and Badges Row */}
+        {(metadata || severity || status) && (
+          <div className="flex items-center gap-2 flex-wrap mb-3">
+            {metadata && (
+              <div className="flex items-center gap-1 text-xs text-gray-500">
+                {metadataIcon}
+                <span>{metadata}</span>
               </div>
             )}
-            {readTime && (
-              <div className="flex items-center gap-2">
-                <Clock size={16} />
-                <span>{readTime} min read</span>
-              </div>
+            {severity && (
+              <span
+                className={`inline-block px-2 py-0.5 text-xs rounded-full border ${severityColors[severity]}`}
+              >
+                {severity}
+              </span>
             )}
-            {durationMinutes && (
-              <div className="flex items-center gap-2">
-                <Clock size={16} />
-                <span>{durationMinutes} min</span>
-              </div>
+            {status && (
+              <span className="inline-block px-2 py-0.5 bg-gray-700 text-gray-300 text-xs rounded-full">
+                {status}
+              </span>
             )}
           </div>
         )}
