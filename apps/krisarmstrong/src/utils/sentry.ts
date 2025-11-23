@@ -1,4 +1,4 @@
-import * as Sentry from "@sentry/react";
+import * as Sentry from '@sentry/react';
 
 /**
  * Initialize Sentry error tracking
@@ -11,7 +11,7 @@ export function initSentry() {
 
   // Only initialize if DSN is provided
   if (!dsn) {
-    console.info("Sentry DSN not configured - error tracking disabled");
+    console.info('Sentry DSN not configured - error tracking disabled');
     return;
   }
 
@@ -36,19 +36,19 @@ export function initSentry() {
     // Ignore expected errors
     ignoreErrors: [
       // Browser extensions
-      "top.GLOBALS",
-      "chrome-extension://",
-      "moz-extension://",
+      'top.GLOBALS',
+      'chrome-extension://',
+      'moz-extension://',
       // Network errors
-      "NetworkError",
-      "Failed to fetch",
+      'NetworkError',
+      'Failed to fetch',
       // React Router
-      "ResizeObserver loop limit exceeded",
+      'ResizeObserver loop limit exceeded',
     ],
 
     beforeSend: (event, _hint) => {
       // Filter out events from localhost in production
-      if (import.meta.env.PROD && event.request?.url?.includes("localhost")) {
+      if (import.meta.env.PROD && event.request?.url?.includes('localhost')) {
         return null;
       }
       return event;
@@ -66,7 +66,7 @@ export function captureException(error: Error, context?: Record<string, unknown>
 /**
  * Capture a message
  */
-export function captureMessage(message: string, level: Sentry.SeverityLevel = "info") {
+export function captureMessage(message: string, level: Sentry.SeverityLevel = 'info') {
   Sentry.captureMessage(message, level);
 }
 
@@ -85,6 +85,6 @@ export function addBreadcrumb(message: string, category?: string, data?: Record<
     message,
     category,
     data,
-    level: "info",
+    level: 'info',
   });
 }

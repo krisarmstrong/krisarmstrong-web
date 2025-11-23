@@ -25,8 +25,8 @@ const CaseDetail = React.lazy(() => import('./pages/CaseDetail.tsx'));
 const CaseOfTheDay = React.lazy(() => import('./pages/CaseOfTheDay.tsx'));
 const About = React.lazy(() => import('./pages/About.tsx'));
 const Contact = React.lazy(() => import('./pages/Contact.tsx'));
-const PrivacyPolicy = React.lazy(() => import('./pages/Privacy.tsx'));
-const TermsOfService = React.lazy(() => import('./pages/Terms.tsx'));
+const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy.tsx'));
+const TermsOfService = React.lazy(() => import('./pages/TermsOfService.tsx'));
 
 const router = createBrowserRouter([
   {

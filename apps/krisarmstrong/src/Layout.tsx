@@ -1,9 +1,9 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { PageShell } from '@krisarmstrong/web-foundation';
-import Footer from './components/Footer';
-import Navbar from './components/Navbar';
-import { PageLoadingFallback } from './components/PageLoadingFallback';
+import Footer from './components/Footer.tsx';
+import Navbar from './components/Navbar.tsx';
+import { PageLoadingFallback } from './components/PageLoadingFallback.tsx';
 
 export default function Layout() {
   return (
