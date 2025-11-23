@@ -84,10 +84,10 @@ export default function Navbar() {
             onClick={closeMenu}
           >
             <img
-              src="/logo-icon.png"
+              src="/logo-48.png"
+              srcSet="/logo-48.png 1x, /logo-56@2x.png 2x"
               alt="Intrinsic Momentum Mindset"
-              className="h-12 w-12 flex-shrink-0"
-              loading="lazy"
+              className="w-12 h-12 sm:w-14 sm:h-14 transition-opacity flex-shrink-0"
             />
           </Link>
           <span className="text-lg sm:text-xl font-bold tracking-tight whitespace-nowrap text-text-primary">
