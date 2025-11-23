@@ -2,6 +2,7 @@
 @import "@krisarmstrong/web-foundation/src/base.css";
 
 @source "../../packages/web-foundation/src";
+@source "../src";
 
 @theme {
   /* Light Mode - KrisArmstrong Modern Teal Theme */
