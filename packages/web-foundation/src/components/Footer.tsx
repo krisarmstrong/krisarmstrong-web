@@ -17,7 +17,7 @@ export function Footer({ social = defaultSocial, legalLinks, copyright }: Footer
     <footer className="bg-surface-raised text-text-muted border-t border-surface-border transition-colors duration-200 mt-32 pt-16 pb-16 px-4">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 text-center">
         {social.length > 0 && (
-          <div className="flex justify-center gap-6">
+          <div className="flex justify-center gap-6 mt-4">
             {social.map((item) => (
               <a
                 key={item.label}

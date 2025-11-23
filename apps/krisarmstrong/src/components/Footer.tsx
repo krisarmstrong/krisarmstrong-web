@@ -1,11 +1,11 @@
-import { Footer as SiteShellFooter } from '@krisarmstrong/web-foundation';
-import { SOCIAL_LINKS, FOOTER_LINKS } from '../config/navigation.tsx';
+import { Footer as SharedFooter } from '@krisarmstrong/web-foundation';
+import { SOCIAL_LINKS, FOOTER_LINKS } from '../config/navigation';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <SiteShellFooter
+    <SharedFooter
       social={SOCIAL_LINKS}
       legalLinks={FOOTER_LINKS.legal.map((link) => ({ label: link.label, path: link.path }))}
       copyright={<span>&copy; {currentYear} Kris Armstrong. All rights reserved.</span>}
