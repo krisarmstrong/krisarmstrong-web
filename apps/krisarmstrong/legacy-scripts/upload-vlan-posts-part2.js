@@ -69,10 +69,7 @@ async function uploadVLANPosts() {
       };
 
       // Insert into Supabase
-      const { error } = await supabase
-        .from('blog_posts')
-        .insert([blogPostData])
-        .select();
+      const { error } = await supabase.from('blog_posts').insert([blogPostData]).select();
 
       if (error) {
         console.error(`❌ Error inserting "${post.title}":`, error.message);

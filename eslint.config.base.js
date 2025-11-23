@@ -21,6 +21,7 @@ export default [
       'node_modules/**',
       '.github/**',
       'scripts/**',
+      '**/legacy-scripts/**',
       '*.config.js',
       '*.config.ts',
     ],
