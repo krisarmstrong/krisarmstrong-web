@@ -42,8 +42,8 @@ interface InfoCardProps {
 // Reusable InfoCard component
 function InfoCard({ icon, title, children }: InfoCardProps): React.ReactElement {
   return (
-    <section className="bg-surface-raised border border-surface-border p-6 rounded-lg shadow-lg">
-      <H2 icon={icon} className="!text-xl !mb-3">
+    <section className="bg-surface-raised border border-surface-border p-8 rounded-lg shadow-lg">
+      <H2 icon={icon} className="!text-xl !mb-4">
         {title}
       </H2>
       <div className="space-y-2 text-text-primary">{children}</div>
@@ -53,10 +53,10 @@ function InfoCard({ icon, title, children }: InfoCardProps): React.ReactElement 
 
 export default function About(): React.ReactElement {
   return (
-    <div className="px-4 py-8 sm:px-6 lg:px-8">
+    <div className="px-4 py-12 sm:py-16 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        <header className="mb-6 sm:mb-8">
-          <H1 icon={<ShieldCheck size={32} className="text-brand-primary" />} className="!mb-3">
+        <header className="mb-12 sm:mb-16">
+          <H1 icon={<ShieldCheck size={32} className="text-brand-primary" />} className="!mb-6">
             About Wi-Fi Vigilante
           </H1>
           <P className="text-lg text-text-primary">
@@ -67,7 +67,7 @@ export default function About(): React.ReactElement {
           </P>
         </header>
 
-        <div className="grid gap-6 md:grid-cols-2 mb-6">
+        <div className="grid gap-8 md:grid-cols-2 mb-12">
           <InfoCard icon={<Wifi size={24} className="text-brand-primary" />} title="Focus Areas">
             <ul className="list-disc list-inside space-y-1">
               <li>Enterprise Wi-Fi validation & Performance</li>
@@ -94,7 +94,7 @@ export default function About(): React.ReactElement {
           </InfoCard>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-8">
           <InfoCard icon={<Globe size={24} className="text-brand-primary" />} title="Our Audience">
             <P>
               Network Engineers, Wi-Fi Professionals, Penetration Testers, Field Technicians, IT
