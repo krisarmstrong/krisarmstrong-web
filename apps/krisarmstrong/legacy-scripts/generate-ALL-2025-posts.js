@@ -247,6 +247,6 @@ console.log('='.repeat(60));
 console.log(`✅ Generated: ${generated} posts`);
 console.log(`⏭️  Skipped: ${skipped} posts`);
 
-const allFiles = fs.readdirSync(outputDir).filter(f => f.endsWith('.md'));
+const allFiles = fs.readdirSync(outputDir).filter((f) => f.endsWith('.md'));
 console.log(`📊 Total .md files in directory: ${allFiles.length}`);
 console.log('='.repeat(60));

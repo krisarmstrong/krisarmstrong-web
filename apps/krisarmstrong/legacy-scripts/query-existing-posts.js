@@ -37,11 +37,11 @@ async function queryExistingPosts() {
 
   console.log(`\nTotal posts in database: ${allPosts.length}\n`);
 
-  const posts2024 = allPosts.filter(p => p.date.startsWith('2024'));
+  const posts2024 = allPosts.filter((p) => p.date.startsWith('2024'));
   console.log('='.repeat(80));
   console.log(`2024 POSTS (${posts2024.length} posts)`);
   console.log('='.repeat(80));
-  posts2024.forEach(post => {
+  posts2024.forEach((post) => {
     const date = new Date(post.date);
     const formattedDate = date.toISOString().split('T')[0];
     console.log(`\n📅 ${formattedDate}`);
@@ -50,11 +50,11 @@ async function queryExistingPosts() {
     console.log(`   Excerpt: ${post.excerpt.substring(0, 100)}...`);
   });
 
-  const posts2025 = allPosts.filter(p => p.date.startsWith('2025'));
+  const posts2025 = allPosts.filter((p) => p.date.startsWith('2025'));
   console.log('\n\n' + '='.repeat(80));
   console.log(`2025 POSTS (${posts2025.length} posts)`);
   console.log('='.repeat(80));
-  posts2025.forEach(post => {
+  posts2025.forEach((post) => {
     const date = new Date(post.date);
     const formattedDate = date.toISOString().split('T')[0];
     console.log(`\n📅 ${formattedDate}`);
@@ -72,13 +72,13 @@ async function queryExistingPosts() {
   console.log(`Other years: ${allPosts.length - posts2024.length - posts2025.length}`);
 
   console.log('\n2024 Post Dates:');
-  posts2024.forEach(p => {
+  posts2024.forEach((p) => {
     const date = new Date(p.date);
     console.log(`  - ${date.toISOString().split('T')[0]}`);
   });
 
   console.log('\n2025 Post Dates:');
-  posts2025.forEach(p => {
+  posts2025.forEach((p) => {
     const date = new Date(p.date);
     console.log(`  - ${date.toISOString().split('T')[0]}`);
   });

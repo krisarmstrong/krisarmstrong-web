@@ -624,7 +624,7 @@ Preamble puncturing represents intelligent spectrum efficiency innovation that w
 
 For organizations deploying Wi-Fi 7, puncturing provides future-proofing against spectrum congestion. Even if the 6 GHz band is currently clean in your area, puncturing enables graceful degradation as interference increases rather than capacity cliffs from forced channel narrowing.
 
-My testing confirms puncturing delivers measurable benefits when needed. The question isn't whether it works—it does—but when your deployment will benefit. In crowded spectrum, that time is now. In clean 6 GHz, it's insurance against future interference.`
+My testing confirms puncturing delivers measurable benefits when needed. The question isn't whether it works—it does—but when your deployment will benefit. In crowded spectrum, that time is now. In clean 6 GHz, it's insurance against future interference.`,
 };
 
 // Add the remaining 8 posts with the same pattern...
@@ -659,7 +659,7 @@ const additionalPosts = {
 
   'wifi7-global-deployment-patterns-nov2025.md': `# Global Wi-Fi 7 Deployment Patterns: Regional Adoption and Regulatory Status
 
-[1800 words about global Wi-Fi 7 adoption trends and regulatory landscape]`
+[1800 words about global Wi-Fi 7 adoption trends and regulatory landscape]`,
 };
 
 // Merge all 2025 posts
@@ -681,4 +681,6 @@ Object.entries(all2025Posts).forEach(([filename, content]) => {
 });
 
 console.log(`\n✅ Generated ${count} new 2025 posts!`);
-console.log(`📊 Total posts in directory: ${fs.readdirSync(outputDir).filter(f => f.endsWith('.md')).length}`);
+console.log(
+  `📊 Total posts in directory: ${fs.readdirSync(outputDir).filter((f) => f.endsWith('.md')).length}`
+);

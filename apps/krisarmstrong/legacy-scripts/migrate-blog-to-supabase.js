@@ -117,10 +117,7 @@ async function migrateBlogPosts() {
       };
 
       // Insert into Supabase
-      const { error } = await supabase
-        .from('blog_posts')
-        .insert([blogPostData])
-        .select();
+      const { error } = await supabase.from('blog_posts').insert([blogPostData]).select();
 
       if (error) {
         console.error(`❌ Error inserting "${post.title}":`, error.message);
@@ -151,7 +148,7 @@ async function main() {
   await createTable();
 
   console.log('\nStarting automatic migration in 2 seconds...\n');
-  await new Promise(resolve => setTimeout(resolve, 2000));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
 
   await migrateBlogPosts();
 }

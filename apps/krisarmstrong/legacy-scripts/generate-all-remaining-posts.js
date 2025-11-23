@@ -241,7 +241,7 @@ Wi-Fi 6 enables enterprise-grade roaming performance when 802.11k/r/v protocols 
 Success requires systematic optimization: enabling 802.11k neighbor reports, implementing 802.11r fast transition, configuring 802.11v BSS transition management, tuning power and RSSI parameters, and thoroughly testing with production client devices.
 
 The client-controlled nature of roaming means perfect roaming is impossible—client behaviors vary too much. But with careful optimization, you can achieve roaming performance that meets enterprise requirements and enables mobile applications that demand seamless connectivity.
-`
+`,
   },
   {
     filename: 'outdoor-wifi6e-campus-networks-sep2024.md',
@@ -423,13 +423,13 @@ Outdoor Wi-Fi 6E deployments combine the capacity benefits of 6 GHz spectrum wit
 Success requires respecting the differences between indoor and outdoor deployments: understanding outdoor propagation, selecting hardened equipment, solving power delivery challenges, and planning for environmental conditions. Organizations willing to invest in proper outdoor infrastructure can deliver wireless experiences that transform outdoor spaces into connected environments rivaling indoor performance.
 
 The 6 GHz band's pristine spectrum makes outdoor Wi-Fi 6E deployments particularly compelling—while indoor 5 GHz is often congested, outdoor 6 GHz delivers the clean spectrum necessary for high-performance wireless at scale.
-`
-  }
+`,
+  },
 ];
 
 // Generate remaining 2024 posts
 console.log('Generating remaining 2024 posts...\n');
-remainingPosts.forEach(post => {
+remainingPosts.forEach((post) => {
   const filePath = path.join(outputDir, post.filename);
   if (!fs.existsSync(filePath)) {
     fs.writeFileSync(filePath, post.content, 'utf-8');
