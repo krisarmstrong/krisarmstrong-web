@@ -1,5 +1,5 @@
 import { Navbar as SharedNavbar, ThemeToggle } from '@krisarmstrong/web-foundation';
-import { PRIMARY_NAV } from '../config/navigation.tsx';
+import { PRIMARY_NAV } from '../config/navigation';
 
 export default function Navbar() {
   const currentYear = new Date().getFullYear();
