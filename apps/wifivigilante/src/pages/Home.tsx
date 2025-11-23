@@ -32,21 +32,21 @@ export default function Home(): React.ReactElement {
 
       {/* Stats Section */}
       <section className="grid gap-6 md:grid-cols-3 mb-16">
-        <div className="bg-surface-raised/50 border border-surface-border p-6 rounded-lg text-center hover:shadow-lg transition-shadow">
+        <div className="bg-surface-raised/50 border border-surface-border p-6 rounded-lg text-center hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
           <div className="flex justify-center mb-3">
             <FileText size={32} className="text-brand-primary" />
           </div>
           <P className="text-3xl font-bold text-text-primary mb-1">200+</P>
           <P className="text-text-muted text-sm">Real-World Cases</P>
         </div>
-        <div className="bg-surface-raised/50 border border-surface-border p-6 rounded-lg text-center hover:shadow-lg transition-shadow">
+        <div className="bg-surface-raised/50 border border-surface-border p-6 rounded-lg text-center hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
           <div className="flex justify-center mb-3">
             <Shield size={32} className="text-brand-primary" />
           </div>
           <P className="text-3xl font-bold text-text-primary mb-1">Enterprise</P>
           <P className="text-text-muted text-sm">Grade Analysis</P>
         </div>
-        <div className="bg-surface-raised/50 border border-surface-border p-6 rounded-lg text-center hover:shadow-lg transition-shadow">
+        <div className="bg-surface-raised/50 border border-surface-border p-6 rounded-lg text-center hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
           <div className="flex justify-center mb-3">
             <Users size={32} className="text-brand-primary" />
           </div>
@@ -59,7 +59,7 @@ export default function Home(): React.ReactElement {
       <section className="mb-16">
         <H2 className="text-center mb-8 !text-2xl sm:!text-3xl">What You'll Find</H2>
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="bg-surface-raised border border-surface-border p-6 rounded-lg hover:shadow-lg transition-shadow">
+          <div className="bg-surface-raised border border-surface-border p-6 rounded-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
             <H2 className="!text-xl !mb-3 flex items-center gap-2">
               <ShieldCheck size={24} className="text-brand-primary" />
               Security Investigations
@@ -75,7 +75,7 @@ export default function Home(): React.ReactElement {
             </ul>
           </div>
 
-          <div className="bg-surface-raised border border-surface-border p-6 rounded-lg hover:shadow-lg transition-shadow">
+          <div className="bg-surface-raised border border-surface-border p-6 rounded-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
             <H2 className="!text-xl !mb-3 flex items-center gap-2">
               <TrendingUp size={24} className="text-brand-primary" />
               Performance Troubleshooting

@@ -1,38 +1,43 @@
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { H1, P } from "../components/ui/Typography";
-import { TrendingUp, Radio, Shield, Code2, Mail, User } from "lucide-react";
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { H1, P } from '../components/ui/Typography';
+import { TrendingUp, Radio, Shield, Code2, Mail, User } from 'lucide-react';
 
 const valueCards = [
   {
-    title: "$33M Revenue Impact",
-    to: "/resume",
-    description: "Senior member of 2-person SE team at NetAlly. Personally increased regional deal win rates by 65%, generating $12M in incremental bookings.",
+    title: '$33M Revenue Impact',
+    to: '/resume',
+    description:
+      'Senior member of 2-person SE team at NetAlly. Personally increased regional deal win rates by 65%, generating $12M in incremental bookings.',
     icon: <TrendingUp size={32} />,
   },
   {
-    title: "Wi-Fi Vigilante Platform",
-    to: "https://wi-fi-vigilante.com",
-    description: "Comprehensive network investigation and troubleshooting platform used by network professionals worldwide. Real-time packet analysis and RF visualization.",
+    title: 'Wi-Fi Vigilante Platform',
+    to: 'https://wi-fi-vigilante.com',
+    description:
+      'Comprehensive network investigation and troubleshooting platform used by network professionals worldwide. Real-time packet analysis and RF visualization.',
     icon: <Radio size={32} />,
     external: true,
   },
   {
-    title: "CISSP + Wireless Expert",
-    to: "/skills",
-    description: "Industry-leading certifications (CISSP, CWSP, CWDP, CWNA) with 20+ years of network engineering experience. Wi-Fi 6/6E/7 and Zero Trust specialist.",
+    title: 'CISSP + Wireless Expert',
+    to: '/skills',
+    description:
+      'Industry-leading certifications (CISSP, CWSP, CWDP, CWNA) with 20+ years of network engineering experience. Wi-Fi 6/6E/7 and Zero Trust specialist.',
     icon: <Shield size={32} />,
   },
   {
-    title: "Open Source Contributor",
-    to: "/projects",
-    description: "12+ active GitHub projects including network automation tools, security testing frameworks, and device simulators built with Python, Go, and TypeScript.",
+    title: 'Open Source Contributor',
+    to: '/projects',
+    description:
+      '12+ active GitHub projects including network automation tools, security testing frameworks, and device simulators built with Python, Go, and TypeScript.',
     icon: <Code2 size={32} />,
   },
   {
-    title: "Available for Consulting",
-    to: "/contact",
-    description: "Seeking opportunities in technical pre-sales, network architecture design, wireless infrastructure, and security consulting. Let's collaborate.",
+    title: 'Available for Consulting',
+    to: '/contact',
+    description:
+      "Seeking opportunities in technical pre-sales, network architecture design, wireless infrastructure, and security consulting. Let's collaborate.",
     icon: <Mail size={32} />,
   },
 ];
@@ -60,11 +65,11 @@ export default function Home() {
             Driving $33M+ Revenue Through Technical Excellence
           </P>
           <P className="text-base sm:text-lg text-text-muted max-w-3xl mx-auto">
-            20+ years engineering secure, high-performance enterprise networks. Wi-Fi 6/6E/7 specialist.
-            Helping organizations design wireless architectures that deliver business results.
+            20+ years engineering secure, high-performance enterprise networks. Wi-Fi 6/6E/7
+            specialist. Helping organizations design wireless architectures that deliver business
+            results.
           </P>
         </motion.div>
-
       </div>
 
       {/* Value Proposition Cards */}
@@ -78,7 +83,7 @@ export default function Home() {
           <Link
             key={card.title}
             to={card.to}
-            className="block bg-surface-raised p-6 rounded-2xl shadow-lg hover:shadow-xl border border-surface-border hover:border-brand-accent/50 transition-all no-underline"
+            className="block bg-surface-raised p-6 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] border border-surface-border hover:border-brand-accent/50 transition-all no-underline"
           >
             <div className="flex items-start justify-between mb-3">
               <div className="text-text-accent">{card.icon}</div>
