@@ -16,7 +16,7 @@ export default function Services() {
 
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           {/* 1:1 Coaching */}
-          <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent transition-colors bg-surface-raised shadow-sm flex flex-col">
+          <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all bg-surface-raised shadow-sm flex flex-col">
             <div className="h-2 w-16 bg-brand-accent rounded mb-6"></div>
             <h2 className="text-2xl font-heading mb-4">1:1 Coaching</h2>
             <h3 className="text-lg font-semibold text-text-primary mb-3">
@@ -46,7 +46,7 @@ export default function Services() {
           </div>
 
           {/* Intrinsic Foundations */}
-          <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent transition-colors bg-surface-raised shadow-sm flex flex-col">
+          <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all bg-surface-raised shadow-sm flex flex-col">
             <div className="h-2 w-16 bg-brand-accent rounded mb-6"></div>
             <h2 className="text-2xl font-heading mb-4">Intrinsic Foundations — Group Coaching</h2>
             <h3 className="text-lg font-semibold text-text-primary mb-3">
@@ -77,7 +77,7 @@ export default function Services() {
           </div>
 
           {/* Intrinsic Momentum */}
-          <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent transition-colors bg-surface-raised shadow-sm flex flex-col">
+          <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all bg-surface-raised shadow-sm flex flex-col">
             <div className="h-2 w-16 bg-brand-accent rounded mb-6"></div>
             <h2 className="text-2xl font-heading mb-4">Intrinsic Momentum — Group Coaching</h2>
             <h3 className="text-lg font-semibold text-text-primary mb-3">
@@ -109,7 +109,7 @@ export default function Services() {
           </div>
 
           {/* Mindset Immersion */}
-          <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent transition-colors bg-surface-raised shadow-sm flex flex-col">
+          <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all bg-surface-raised shadow-sm flex flex-col">
             <div className="h-2 w-16 bg-brand-accent rounded mb-6"></div>
             <h2 className="text-2xl font-heading mb-4">Mindset Immersion — Group Coaching</h2>
             <h3 className="text-lg font-semibold text-text-primary mb-3">
@@ -140,7 +140,7 @@ export default function Services() {
           </div>
 
           {/* Corporate Leadership */}
-          <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent transition-colors bg-surface-raised shadow-sm flex flex-col">
+          <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all bg-surface-raised shadow-sm flex flex-col">
             <div className="h-2 w-16 bg-brand-accent rounded mb-6"></div>
             <h2 className="text-2xl font-heading mb-4">Corporate Leadership</h2>
             <h3 className="text-lg font-semibold text-text-primary mb-3">
