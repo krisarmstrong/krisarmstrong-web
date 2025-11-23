@@ -1,5 +1,4 @@
 import testimonialsData from '../content/testimonials/testimonials.json';
-import { Card, CardContent } from './ui/Card.tsx';
 
 interface Testimonial {
   id: string;
@@ -16,24 +15,23 @@ export default function Testimonials() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-12">
       {testimonials.map((testimonial) => (
-        <Card key={testimonial.id}>
-          <CardContent>
-            <div className="flex items-center mb-4">
-              <img
-                src={testimonial.avatar}
-                alt={testimonial.name}
-                className="w-12 h-12 rounded-full mr-4"
-              />
-              <div>
-                <span className="font-semibold block">{testimonial.name}</span>
-                <span className="text-sm text-text-muted">{testimonial.position}</span>
-              </div>
+        <div
+          key={testimonial.id}
+          className="bg-surface-raised border border-surface-border rounded-2xl shadow-lg p-6"
+        >
+          <div className="flex items-center mb-4">
+            <img
+              src={testimonial.avatar}
+              alt={testimonial.name}
+              className="w-12 h-12 rounded-full mr-4"
+            />
+            <div>
+              <span className="font-semibold block">{testimonial.name}</span>
+              <span className="text-sm text-text-muted">{testimonial.position}</span>
             </div>
-            <blockquote className="text-lg italic text-text-accent">
-              "{testimonial.quote}"
-            </blockquote>
-          </CardContent>
-        </Card>
+          </div>
+          <blockquote className="text-lg italic text-text-accent">"{testimonial.quote}"</blockquote>
+        </div>
       ))}
     </div>
   );

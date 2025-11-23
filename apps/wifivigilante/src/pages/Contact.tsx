@@ -1,6 +1,6 @@
-import { ContactForm } from "@krisarmstrong/web-foundation";
-import { H1 } from "../components/ui/Typography";
-import { Mail } from "lucide-react";
+import { ContactForm } from '@krisarmstrong/web-foundation';
+import { H1 } from '@krisarmstrong/web-foundation';
+import { Mail } from 'lucide-react';
 
 export default function Contact() {
   const formEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT;
@@ -31,8 +31,8 @@ export default function Contact() {
                 className="text-brand-primary underline"
               >
                 LinkedIn
-              </a>
-              {' '}or open an issue on{' '}
+              </a>{' '}
+              or open an issue on{' '}
               <a
                 href="https://github.com/krisarmstrong"
                 target="_blank"
