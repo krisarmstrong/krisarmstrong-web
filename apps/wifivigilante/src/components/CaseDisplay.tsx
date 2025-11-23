@@ -30,8 +30,9 @@ import {
   Tag,
 } from '@krisarmstrong/web-foundation';
 import { Button } from './ui/Button.tsx';
-import { StarRating } from '@krisarmstrong/web-foundation';
+import { AggregateRating } from '@krisarmstrong/web-foundation';
 import { TransformedCase } from '@/types';
+import { getRatingStats, submitRating, getUserRating } from '../utils/ratings';
 
 interface CaseDisplayProps {
   pageTitle: string;
@@ -307,12 +308,17 @@ const CaseDisplay = memo(
 
             {/* Rating Section */}
             <div className="px-6 sm:px-8 pt-6 pb-4">
-              <h3 className="text-sm font-semibold text-gray-400 mb-3">Rate this Case</h3>
-              <StarRating
+              <AggregateRating
                 itemId={caseData.publicId}
-                storagePrefix="case"
-                onRate={(rating) =>
-                  console.log(`Rated case ${caseData.publicId} with ${rating} stars`)
+                itemType="case"
+                ratingAPI={{
+                  getRatingStats,
+                  submitRating,
+                  getUserRating,
+                }}
+                size="md"
+                onRate={(rating, stats) =>
+                  console.log(`Rated case ${caseData.publicId}: ${rating} stars. New average: ${stats.average_rating}`)
                 }
               />
             </div>
