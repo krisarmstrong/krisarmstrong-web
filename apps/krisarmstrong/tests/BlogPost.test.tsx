@@ -3,7 +3,6 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import BlogPost from '../src/pages/BlogPost';
 import type { BlogPost as BlogPostType } from '../src/lib/supabase';
-import { getBlogPostBySlug } from '../src/lib/supabase';
 
 // Mock markdown content
 const mockPostContent = `# Wi-Fi 7 Introduction
@@ -18,8 +17,40 @@ This is the introduction to Wi-Fi 7 technology.
 ### Conclusion
 Wi-Fi 7 is the future of wireless.`;
 
+// Mock Supabase data
+const mockSupabasePost: BlogPostType = {
+  id: 'wifi7-intro-802-11be',
+  slug: 'wifi7-intro-802-11be',
+  title: 'Introduction to Wi-Fi 7',
+  excerpt: 'What Wi-Fi 7 brings to the table',
+  content: mockPostContent,
+  author: 'Kris Armstrong',
+  date: '2025-01-15',
+  published: true,
+  featured: true,
+  read_time: 5,
+  tags: ['Wi-Fi 7', '802.11be', 'Wireless'],
+  meta_title: '',
+  meta_description: '',
+  og_image: '',
+  view_count: 0,
+  created_at: new Date().toISOString(),
+  updated_at: new Date().toISOString(),
+};
+
 // Mock fetch
 global.fetch = vi.fn();
+
+// Mock supabase module
+vi.mock('../src/lib/supabase', () => ({
+  getBlogPostBySlug: vi.fn(),
+  getRatingStats: vi.fn(),
+  submitRating: vi.fn(),
+  getUserRating: vi.fn(),
+}));
+
+// Import mocked functions after the mock declaration
+import { getBlogPostBySlug } from '../src/lib/supabase';
 
 // Mock framer-motion
 vi.mock('framer-motion', () => ({
@@ -181,22 +212,3 @@ describe('BlogPost', () => {
     });
   });
 });
-const mockSupabasePost: BlogPostType = {
-  id: 'wifi7-intro-802-11be',
-  slug: 'wifi7-intro-802-11be',
-  title: 'Introduction to Wi-Fi 7',
-  excerpt: 'What Wi-Fi 7 brings to the table',
-  content: mockPostContent,
-  author: 'Kris Armstrong',
-  date: '2025-01-15',
-  published: true,
-  featured: true,
-  read_time: 5,
-  tags: ['Wi-Fi 7', '802.11be', 'Wireless'],
-  meta_title: '',
-  meta_description: '',
-  og_image: '',
-  view_count: 0,
-  created_at: new Date().toISOString(),
-  updated_at: new Date().toISOString(),
-};

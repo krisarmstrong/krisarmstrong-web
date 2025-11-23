@@ -66,14 +66,16 @@ describe('Resume', () => {
     });
   });
 
-  it('shows loading skeleton while fetching resume', async () => {
+  it('shows loading spinner while fetching resume', async () => {
     render(<Resume />);
 
-    const skeletons = document.querySelectorAll('.animate-pulse');
-    expect(skeletons.length).toBeGreaterThan(0);
+    // Check for loading spinner with animate-spin class
+    const spinner = document.querySelector('.animate-spin');
+    expect(spinner).toBeInTheDocument();
 
     await waitFor(() => {
-      expect(document.querySelectorAll('.animate-pulse').length).toBe(0);
+      // Loading spinner should be removed once content loads
+      expect(document.querySelector('.animate-spin')).not.toBeInTheDocument();
     });
   });
 
@@ -170,9 +172,9 @@ describe('Resume', () => {
     // Should stop loading even if fetch fails
     await waitFor(
       () => {
-        const skeletons = document.querySelectorAll('.animate-pulse');
-        // After error, skeleton should be gone
-        expect(skeletons.length).toBe(0);
+        const spinner = document.querySelector('.animate-spin');
+        // After error, spinner should be gone
+        expect(spinner).not.toBeInTheDocument();
       },
       { timeout: 3000 }
     );
