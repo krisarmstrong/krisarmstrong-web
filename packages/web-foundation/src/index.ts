@@ -30,6 +30,8 @@ export { ContactForm } from './components/ContactForm';
 
 // Display
 export { StarRating } from './components/StarRating';
+export { AggregateRating } from './components/AggregateRating';
+export type { AggregateRatingProps, RatingStats, RatingAPI } from './components/AggregateRating';
 
 // Error Handling
 export { ErrorBoundary, ErrorMessage, ErrorCard, ErrorPage } from './components/Error';

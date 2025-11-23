@@ -1,0 +1,241 @@
+import React, { useState, useEffect } from 'react';
+
+export interface RatingStats {
+  average_rating: number;
+  total_ratings: number;
+}
+
+export interface RatingAPI {
+  getRatingStats: (itemId: string, itemType: 'blog' | 'case') => Promise<RatingStats | null>;
+  submitRating: (
+    itemId: string,
+    itemType: 'blog' | 'case',
+    rating: number
+  ) => Promise<{ success: boolean; stats: RatingStats } | null>;
+  getUserRating: (itemId: string, itemType: 'blog' | 'case') => Promise<number | null>;
+}
+
+export interface AggregateRatingProps {
+  /** Item ID (blog slug or case ID) */
+  itemId: string;
+  /** Item type */
+  itemType: 'blog' | 'case';
+  /** Rating API functions */
+  ratingAPI: RatingAPI;
+  /** Star color (Tailwind class) */
+  starColor?: string;
+  /** Optional callback when user rates */
+  onRate?: (rating: number, stats: RatingStats) => void;
+  /** Size of stars */
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const sizeClasses = {
+  sm: 'w-4 h-4',
+  md: 'w-6 h-6',
+  lg: 'w-8 h-8',
+};
+
+const textSizeClasses = {
+  sm: 'text-sm',
+  md: 'text-base',
+  lg: 'text-lg',
+};
+
+/**
+ * Amazon-style aggregate rating component
+ * Shows average rating, total count, and allows users to submit ratings
+ */
+export const AggregateRating: React.FC<AggregateRatingProps> = ({
+  itemId,
+  itemType,
+  ratingAPI,
+  starColor = 'yellow-400',
+  onRate,
+  size = 'md',
+}) => {
+  const [stats, setStats] = useState<RatingStats | null>(null);
+  const [userRating, setUserRating] = useState<number | null>(null);
+  const [hoveredStar, setHoveredStar] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+
+  // Fetch initial data
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const [statsData, userRatingData] = await Promise.all([
+          ratingAPI.getRatingStats(itemId, itemType),
+          ratingAPI.getUserRating(itemId, itemType),
+        ]);
+        setStats(statsData);
+        setUserRating(userRatingData);
+      } catch (error) {
+        console.error('Error fetching rating data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [itemId, itemType, ratingAPI]);
+
+  const handleStarClick = async (rating: number) => {
+    if (submitting) return;
+
+    setSubmitting(true);
+    try {
+      const result = await ratingAPI.submitRating(itemId, itemType, rating);
+      if (result && result.success) {
+        setUserRating(rating);
+        setStats(result.stats);
+        onRate?.(rating, result.stats);
+      }
+    } catch (error) {
+      console.error('Error submitting rating:', error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const renderStar = (index: number, filled: boolean) => {
+    const isHovered = hoveredStar !== null && index <= hoveredStar;
+    const isUserRated = userRating !== null && index <= userRating;
+    const fillColor = isHovered || isUserRated ? starColor : 'gray-300';
+
+    return (
+      <button
+        key={index}
+        onClick={() => handleStarClick(index)}
+        onMouseEnter={() => setHoveredStar(index)}
+        onMouseLeave={() => setHoveredStar(null)}
+        disabled={submitting}
+        className={`${sizeClasses[size]} transition-all duration-150 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${starColor}`}
+        aria-label={`Rate ${index} stars`}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className={`w-full h-full transition-colors duration-150 ${
+            filled ? `text-${fillColor} fill-current` : 'text-gray-300 fill-current'
+          }`}
+          viewBox="0 0 20 20"
+        >
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      </button>
+    );
+  };
+
+  const renderAggregateStars = (rating: number) => {
+    const stars = [];
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+
+    for (let i = 1; i <= 5; i++) {
+      if (i <= fullStars) {
+        // Full star
+        stars.push(
+          <svg
+            key={i}
+            xmlns="http://www.w3.org/2000/svg"
+            className={`${sizeClasses[size]} text-${starColor} fill-current`}
+            viewBox="0 0 20 20"
+          >
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </svg>
+        );
+      } else if (i === fullStars + 1 && hasHalfStar) {
+        // Half star
+        stars.push(
+          <div key={i} className="relative">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className={`${sizeClasses[size]} text-gray-300 fill-current`}
+              viewBox="0 0 20 20"
+            >
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+            <div className="absolute inset-0 overflow-hidden" style={{ width: '50%' }}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className={`${sizeClasses[size]} text-${starColor} fill-current`}
+                viewBox="0 0 20 20"
+              >
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            </div>
+          </div>
+        );
+      } else {
+        // Empty star
+        stars.push(
+          <svg
+            key={i}
+            xmlns="http://www.w3.org/2000/svg"
+            className={`${sizeClasses[size]} text-gray-300 fill-current`}
+            viewBox="0 0 20 20"
+          >
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </svg>
+        );
+      }
+    }
+
+    return stars;
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center gap-2 animate-pulse">
+        <div className="flex gap-1">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className={`${sizeClasses[size]} bg-gray-300 rounded`} />
+          ))}
+        </div>
+        <div className={`${textSizeClasses[size]} text-text-muted`}>Loading ratings...</div>
+      </div>
+    );
+  }
+
+  const hasRatings = stats && stats.total_ratings > 0;
+
+  return (
+    <div className="space-y-4">
+      {/* Aggregate Display */}
+      {hasRatings && (
+        <div className="flex items-center gap-3">
+          <div className="flex gap-1">{renderAggregateStars(stats.average_rating)}</div>
+          <div className={`${textSizeClasses[size]} font-semibold text-text-primary`}>
+            {stats.average_rating.toFixed(1)}
+          </div>
+          <div className={`${textSizeClasses[size]} text-text-muted`}>
+            ({stats.total_ratings} {stats.total_ratings === 1 ? 'rating' : 'ratings'})
+          </div>
+        </div>
+      )}
+
+      {/* User Rating Section */}
+      <div>
+        <h4 className={`${textSizeClasses[size]} font-semibold mb-2 text-text-primary`}>
+          {userRating ? 'Your rating' : 'Rate this ' + itemType}
+        </h4>
+        <div className="flex gap-1">
+          {[1, 2, 3, 4, 5].map((i) => renderStar(i, userRating !== null && i <= userRating))}
+        </div>
+        {userRating && (
+          <p className={`${textSizeClasses[size]} text-text-muted mt-2`}>
+            You rated this {userRating} star{userRating !== 1 ? 's' : ''}
+          </p>
+        )}
+      </div>
+
+      {/* No Ratings Yet */}
+      {!hasRatings && !userRating && (
+        <p className={`${textSizeClasses[size]} text-text-muted italic`}>
+          Be the first to rate this {itemType}!
+        </p>
+      )}
+    </div>
+  );
+};

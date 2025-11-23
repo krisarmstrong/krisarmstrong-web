@@ -3,8 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import rehypeSanitize from 'rehype-sanitize';
 import { ArrowLeft } from 'lucide-react';
-import { StarRating, LoadingPage, ErrorPage } from '@krisarmstrong/web-foundation';
-import { getBlogPostBySlug, type BlogPost as BlogPostType } from '../lib/supabase';
+import { AggregateRating, LoadingPage, ErrorPage } from '@krisarmstrong/web-foundation';
+import { getBlogPostBySlug, type BlogPost as BlogPostType, getRatingStats, submitRating, getUserRating } from '../lib/supabase';
 
 export default function BlogPost() {
   const { id } = useParams<{ id: string }>();
@@ -97,13 +97,18 @@ export default function BlogPost() {
 
         {/* Rating Section */}
         <div className="mt-8 p-6 bg-surface-raised rounded-2xl border border-surface-border">
-          <h3 className="text-lg font-semibold mb-4">Rate this post</h3>
-          <StarRating
+          <AggregateRating
             itemId={post.slug}
-            storagePrefix="blog"
+            itemType="blog"
+            ratingAPI={{
+              getRatingStats,
+              submitRating,
+              getUserRating,
+            }}
             starColor="violet-400"
-            onRate={(rating) => {
-              console.log(`User rated post ${post.slug}: ${rating} stars`);
+            size="md"
+            onRate={(rating, stats) => {
+              console.log(`User rated post ${post.slug}: ${rating} stars. New average: ${stats.average_rating}`);
             }}
           />
         </div>
