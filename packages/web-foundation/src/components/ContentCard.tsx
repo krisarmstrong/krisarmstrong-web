@@ -138,8 +138,8 @@ export function ContentCard({
   // Loading skeleton
   if (isLoading) {
     return (
-      <article
-        className={`flex flex-col bg-surface-raised rounded-2xl p-6 border border-surface-border ${className}`}
+      <div
+        className={`flex flex-col h-full bg-surface-raised rounded-2xl p-6 border border-surface-border ${className}`}
         aria-busy="true"
         aria-label="Loading content card"
       >
@@ -152,7 +152,7 @@ export function ContentCard({
           <div className="h-6 bg-surface-hover rounded-full animate-pulse w-16" />
           <div className="h-6 bg-surface-hover rounded-full animate-pulse w-16" />
         </div>
-      </article>
+      </div>
     );
   }
 
@@ -163,8 +163,9 @@ export function ContentCard({
   };
 
   return (
-    <article
-      className={`relative flex bg-surface-raised rounded-2xl border border-surface-border shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 group ${accentColors[accentColor]} ${variantStyles[variant]} ${variant === 'compact' ? 'flex-row' : 'flex-col'} ${className}`}
+    <Link
+      to={href}
+      className={`relative flex bg-surface-raised rounded-2xl border border-surface-border shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 group ${accentColors[accentColor]} ${variantStyles[variant]} ${variant === 'compact' ? 'flex-row' : 'flex-col h-full'} ${className}`}
       style={{ animationDelay: `${animationDelay}ms` }}
     >
       {/* Progress Bar */}
@@ -184,13 +185,13 @@ export function ContentCard({
 
       {/* Image Thumbnail */}
       {image && (
-        <Link to={href} className={variant === 'compact' ? 'w-1/3 flex-shrink-0' : 'w-full'}>
+        <div className={variant === 'compact' ? 'w-1/3 flex-shrink-0' : 'w-full'}>
           <img
             src={image}
             alt={imageAlt || title}
             className={`object-cover rounded-xl ${variant === 'compact' ? 'h-full' : 'h-48 w-full mb-4'}`}
           />
-        </Link>
+        </div>
       )}
 
       <div className="flex flex-col flex-grow">
@@ -201,14 +202,12 @@ export function ContentCard({
           </span>
         )}
 
-        {/* Title - Clickable and prominent */}
-        <Link to={href}>
-          <h2
-            className={`${variant === 'compact' ? 'text-lg' : variant === 'expanded' ? 'text-2xl' : 'text-xl'} font-semibold mb-3 transition-colors ${accentTextColors[accentColor]}`}
-          >
-            {title}
-          </h2>
-        </Link>
+        {/* Title - prominent with hover effect from parent */}
+        <h2
+          className={`${variant === 'compact' ? 'text-lg' : variant === 'expanded' ? 'text-2xl' : 'text-xl'} font-semibold mb-3 transition-colors ${accentTextColors[accentColor]}`}
+        >
+          {title}
+        </h2>
 
         {/* Excerpt */}
         <p
@@ -273,6 +272,6 @@ export function ContentCard({
           </div>
         )}
       </div>
-    </article>
+    </Link>
   );
 }
