@@ -11,7 +11,19 @@ export { TailwindSafelist } from './components/TailwindSafelist';
 // UI Components
 export { Button } from './components/ui/Button';
 export type { ButtonProps } from './components/ui/Button';
-export { H1, H2, P } from './components/ui/Typography';
+export {
+  H1,
+  H2,
+  ArticleTitle,
+  SubSectionTitle,
+  CardTitle,
+  P,
+  SmallText,
+  MutedText,
+  AccentLink,
+  Tag,
+  Badge,
+} from './components/ui/Typography';
 
 // Forms
 export { ContactForm } from './components/ContactForm';

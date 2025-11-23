@@ -164,7 +164,7 @@ export function ContentCard({
 
   return (
     <article
-      className={`relative flex bg-surface-raised rounded-2xl border border-surface-border shadow-lg hover:shadow-xl transition-all duration-300 group ${accentColors[accentColor]} ${variantStyles[variant]} ${variant === 'compact' ? 'flex-row' : 'flex-col'} ${className}`}
+      className={`relative flex bg-surface-raised rounded-2xl border border-surface-border shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 group ${accentColors[accentColor]} ${variantStyles[variant]} ${variant === 'compact' ? 'flex-row' : 'flex-col'} ${className}`}
       style={{ animationDelay: `${animationDelay}ms` }}
     >
       {/* Progress Bar */}

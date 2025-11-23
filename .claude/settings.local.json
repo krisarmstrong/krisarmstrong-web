@@ -44,7 +44,8 @@
       "Bash(xargs rm:*)",
       "Bash(tree:*)",
       "Bash(gh issue list:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(npx tsc:*)"
     ],
     "deny": [],
     "ask": []
