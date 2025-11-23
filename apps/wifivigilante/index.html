@@ -57,8 +57,8 @@
   <!-- Canonical URL -->
   <link rel="canonical" href="https://wifi-vigilante.com/" />
 
-  <!-- Content Security Policy -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://eumqnuyqxcbcnsohpjyh.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';">
+  <!-- Content Security Policy - Relaxed for development -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' ws://localhost:* http://localhost:* https://eumqnuyqxcbcnsohpjyh.supabase.co; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';">
 
   <!-- Security Headers -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -67,6 +67,17 @@
 
   <meta name="theme-color" content="#111827" />
   <title>Wi-Fi Vigilante - Wireless Security Case Database</title>
+
+  <!-- Theme initialization - prevents FOUC (Flash of Unstyled Content) -->
+  <!-- Full theme logic handled by initTheme() in main.tsx -->
+  <script>
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {}
+  </script>
 
   <!-- Structured Data (JSON-LD) for SEO -->
   <script type="application/ld+json">
