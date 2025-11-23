@@ -18,6 +18,8 @@ export interface ContentSearchProps<T extends SearchableItem> {
   accentColor?: 'violet' | 'emerald' | 'blue' | 'amber' | 'rose';
   /** Show result count */
   showResultCount?: boolean;
+  /** Show search icon */
+  showIcon?: boolean;
   /** Debounce delay in ms */
   debounceMs?: number;
   /** Custom className for wrapper */
@@ -79,6 +81,7 @@ export function ContentSearch<T extends SearchableItem>({
   placeholder = 'Search...',
   accentColor = 'violet',
   showResultCount = true,
+  showIcon = false,
   debounceMs = 300,
   className = '',
 }: ContentSearchProps<T>) {
@@ -163,14 +166,16 @@ export function ContentSearch<T extends SearchableItem>({
       {/* Search Input */}
       <div className="relative">
         <div className="relative flex items-center">
-          <Search size={20} className={`absolute left-4 ${colors.text} pointer-events-none`} />
+          {showIcon && (
+            <Search size={20} className={`absolute left-4 ${colors.text} pointer-events-none`} />
+          )}
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={placeholder}
             className={`
-              w-full pl-12 pr-12 py-3
+              w-full ${showIcon ? 'pl-12' : 'pl-4'} pr-12 py-3
               bg-gray-900/50 backdrop-blur-sm
               border border-gray-700 rounded-lg
               text-white placeholder-gray-500
