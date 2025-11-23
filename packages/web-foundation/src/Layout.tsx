@@ -4,7 +4,6 @@ import { PageShell } from './components/PageShell';
 import { Footer } from './components/Footer';
 import { Navbar } from './components/Navbar';
 import { LoadingPage } from './components/Loading';
-import { ThemeCanary } from './components/ThemeCanary';
 import 'react/jsx-runtime';
 
 export default function Layout() {
@@ -15,7 +14,6 @@ export default function Layout() {
       <div className="header-token">
         <Navbar logo="" navItems={[]} />
       </div>
-      <ThemeCanary />
       <PageShell>
         <Suspense fallback={<LoadingPage message="Loading page..." />}>
           <Outlet />

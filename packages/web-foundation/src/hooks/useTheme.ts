@@ -3,23 +3,19 @@ import { useState, useEffect } from 'react';
 /**
  * Simple theme hook - Professional approach using CSS classes only
  * Replaces complex ThemeContext with minimal JavaScript
+ * Now with cross-tab synchronization
  */
 export function useTheme() {
   const [theme, setThemeState] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
-    // Read from localStorage or system preference
-    const stored = localStorage.getItem('theme') as 'light' | 'dark' | null;
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initial = stored || (systemDark ? 'dark' : 'light');
-
-    // Apply theme class to <html>
-    document.documentElement.classList.toggle('dark', initial === 'dark');
-    setThemeState(initial);
+    // Read current theme from DOM (set by inline script in <head>)
+    const isDark = document.documentElement.classList.contains('dark');
+    setThemeState(isDark ? 'dark' : 'light');
 
     // Listen for system theme changes
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e: MediaQueryListEvent) => {
+    const handleSystemChange = (e: MediaQueryListEvent) => {
       if (!localStorage.getItem('theme')) {
         // Only follow system if user hasn't set preference
         document.documentElement.classList.toggle('dark', e.matches);
@@ -27,8 +23,22 @@ export function useTheme() {
       }
     };
 
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    // Listen for theme changes in other tabs (cross-tab sync)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'theme' && e.newValue) {
+        const newTheme = e.newValue as 'light' | 'dark';
+        document.documentElement.classList.toggle('dark', newTheme === 'dark');
+        setThemeState(newTheme);
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleSystemChange);
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleSystemChange);
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   const setTheme = (newTheme: 'light' | 'dark') => {

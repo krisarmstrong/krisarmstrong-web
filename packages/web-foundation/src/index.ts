@@ -5,6 +5,7 @@ export { Breadcrumbs } from './components/Breadcrumbs';
 export { PageShell } from './components/PageShell';
 export { PrimaryNav } from './components/PrimaryNav';
 export { Navbar } from './components/Navbar';
+export { ThemeProvider } from './components/ThemeProvider';
 export { ThemeToggle } from './components/ThemeToggle';
 export type { ThemeToggleProps } from './components/ThemeToggle';
 export { SiteSearch } from './components/SiteSearch';
@@ -68,6 +69,7 @@ export { SOCIAL_ICONS, createSocialLinks } from './constants/socialIcons';
 export type { SocialIcon } from './constants/socialIcons';
 export { useClickOutside, useEscapeKey, useBodyScrollLock } from './hooks';
 export { useTheme as useSimpleTheme } from './hooks/useTheme'; // New simple theme hook (Phase 2)
+export { initTheme } from './utils/initTheme'; // Simple JavaScript theme initialization
 export { ActiveFilterBadges } from './components/ActiveFilterBadges';
 export type { ActiveFilterBadgesProps, ActiveFilter } from './components/ActiveFilterBadges';
 export { LoadMoreButton } from './components/LoadMoreButton';
@@ -94,7 +96,4 @@ export type {
   ContactFormTone,
   ContactFormSurface,
 } from './components/ContactForm';
-export { ThemeCanary } from './components/ThemeCanary';
-export { ThemeDiagnostics } from './components/ThemeDiagnostics';
-export { ThemeTokenProbe } from './components/ThemeTokenProbe';
 export * from './utils/validation';

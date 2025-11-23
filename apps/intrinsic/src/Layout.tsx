@@ -8,7 +8,9 @@ import { PageLoadingFallback } from './components/PageLoadingFallback.tsx';
 export default function Layout(): JSX.Element {
   return (
     <>
-      <Navbar />
+      <header>
+        <Navbar />
+      </header>
       <PageShell>
         <Suspense fallback={<PageLoadingFallback message="Loading page..." />}>
           <Outlet />
