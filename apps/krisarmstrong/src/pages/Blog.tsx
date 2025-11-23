@@ -7,11 +7,11 @@ import {
   ActiveFilterBadges,
   LoadMoreButton,
   EmptyState,
+  ContentCard,
   useProgressiveLoad,
   type ActiveFilter,
 } from '@krisarmstrong/web-foundation';
 import { useState, useMemo, useEffect, useTransition } from 'react';
-import { Link } from 'react-router-dom';
 import { getAllBlogPosts, type BlogPost } from '../lib/supabase';
 
 export default function Blog() {
@@ -163,47 +163,19 @@ export default function Blog() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-surface-raised p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-surface-border hover:border-brand-accent/50"
             >
-              {post.featured && (
-                <span className="inline-block px-3 py-1 bg-brand-accent/20 text-text-accent text-xs rounded-full mb-3">
-                  Featured
-                </span>
-              )}
-              <Link to={`/blog/${post.slug}`}>
-                <h2 className="text-xl font-semibold text-text-primary mb-3 hover:text-text-accent transition-colors">
-                  {post.title}
-                </h2>
-              </Link>
-              <p className="text-text-muted text-sm mb-4 line-clamp-3">{post.excerpt}</p>
-              <div className="flex items-center gap-4 text-xs text-text-muted mb-3">
-                <span>
-                  {new Date(post.date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </span>
-                <span>{post.read_time || 5} min read</span>
-              </div>
-              {post.tags && post.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {post.tags.slice(0, 3).map((tag) => (
-                    <button
-                      key={tag}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        startTransition(() => {
-                          setSelectedTag(tag);
-                        });
-                      }}
-                      className="bg-surface-hover text-text-primary text-xs px-2 py-1 rounded-full hover:bg-brand-accent/20 hover:text-text-accent transition-colors cursor-pointer"
-                    >
-                      {tag}
-                    </button>
-                  ))}
-                </div>
-              )}
+              <ContentCard
+                href={`/blog/${post.slug}`}
+                title={post.title}
+                excerpt={post.excerpt}
+                date={post.date}
+                readTime={post.read_time || 5}
+                tags={post.tags || []}
+                onTagClick={(tag) => startTransition(() => setSelectedTag(tag))}
+                featured={post.featured}
+                accentColor="violet"
+                animationDelay={index * 100}
+              />
             </motion.div>
           ))}
         </div>
