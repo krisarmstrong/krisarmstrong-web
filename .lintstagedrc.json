@@ -1,5 +1,5 @@
 {
   "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
   "*.{json,md,yml,yaml}": ["prettier --write"],
-  "package.json": ["npm audit --audit-level=moderate"]
+  "package.json": ["npx audit-ci --config audit-ci.json"]
 }
