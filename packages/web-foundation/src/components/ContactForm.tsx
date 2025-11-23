@@ -1,4 +1,4 @@
-import { FormEvent, ReactNode, useId, useState } from 'react';
+import { FormEvent, ReactNode, useId, useState, useOptimistic } from 'react';
 import { Button } from './ui/Button';
 import { useTelemetry } from '../hooks/useTelemetry';
 import type { TelemetryConfig } from '../hooks/useTelemetry';
@@ -106,6 +106,12 @@ export function ContactForm({
   const [honeypot, setHoneypot] = useState('');
   const honeypotId = useId();
 
+  // React 19: Optimistic UI - show success immediately while request processes
+  const [optimisticSent, setOptimisticSent] = useOptimistic(
+    sent,
+    (_currentState, optimisticValue: boolean) => optimisticValue
+  );
+
   const palette = toneStyles[tone];
   const surface = surfaces[background];
   const telemetryHook = useTelemetry(telemetry);
@@ -135,6 +141,9 @@ export function ContactForm({
 
     setSubmitting(true);
     setError(null);
+
+    // React 19: Show optimistic success immediately for instant feedback
+    setOptimisticSent(true);
 
     const formData = new FormData(event.currentTarget);
 
@@ -197,7 +206,7 @@ export function ContactForm({
         </div>
       )}
 
-      {sent ? (
+      {optimisticSent ? (
         <div className={`rounded-2xl px-6 py-10 text-center ${surface.success}`} aria-live="polite">
           <h3 className="text-2xl font-semibold mb-2">{successTitle}</h3>
           <p className="text-base opacity-90">{successMessage}</p>

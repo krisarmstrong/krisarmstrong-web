@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useDeferredValue } from 'react';
 import { Search, X } from 'lucide-react';
 
 export interface SearchableItem {
@@ -96,6 +96,9 @@ export function ContentSearch<T extends SearchableItem>({
     return () => clearTimeout(timer);
   }, [query, debounceMs]);
 
+  // React 19: Defer filtering to keep input responsive during expensive operations
+  const deferredQuery = useDeferredValue(debouncedQuery);
+
   // Get nested value from object using dot notation path
   const getNestedValue = (obj: SearchableItem, path: string): unknown => {
     return path.split('.').reduce((current, key) => {
@@ -108,11 +111,11 @@ export function ContentSearch<T extends SearchableItem>({
 
   // Filter items based on search query
   const filteredItems = useMemo(() => {
-    if (!debouncedQuery.trim()) {
+    if (!deferredQuery.trim()) {
       return items;
     }
 
-    const searchTerms = debouncedQuery.toLowerCase().split(' ').filter(Boolean);
+    const searchTerms = deferredQuery.toLowerCase().split(' ').filter(Boolean);
 
     return items.filter((item) => {
       // Build searchable text from all specified fields
@@ -143,7 +146,7 @@ export function ContentSearch<T extends SearchableItem>({
       // All search terms must be present
       return searchTerms.every((term) => searchableText.includes(term));
     });
-  }, [items, debouncedQuery, searchFields]);
+  }, [items, deferredQuery, searchFields]);
 
   // Notify parent of filtered results
   useEffect(() => {
