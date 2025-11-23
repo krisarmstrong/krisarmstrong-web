@@ -85,7 +85,7 @@ export function SubSectionTitle({
 }: PolymorphicComponentProp<'h3', SimpleHeadingProps>) {
   return (
     <h3
-      className={`text-xl font-semibold text-text-primary border-b border-surface-border pb-2 mb-3 flex items-center gap-2 ${className}`}
+      className={`text-xl font-semibold text-text-primary mb-3 flex items-center gap-2 ${className}`}
       {...props}
     >
       {icon && <span className="flex-shrink-0">{icon}</span>}

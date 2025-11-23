@@ -1,15 +1,6 @@
 // src/pages/CaseOverview.tsx
 import React, { useEffect, useState, useMemo, useTransition } from 'react';
-import {
-  ListFilter,
-  Loader2,
-  AlertCircle,
-  Book,
-  Briefcase,
-  Globe,
-  Stethoscope,
-} from 'lucide-react';
-import { H1 } from '../components/ui/Typography.jsx';
+import { Loader2, AlertCircle, Book, Briefcase, Globe, Stethoscope } from 'lucide-react';
 import {
   ContentCard,
   ContentSearch,
@@ -124,31 +115,35 @@ export default function CaseOverview(): React.ReactElement {
   // Loading state
   if (isLoading) {
     return (
-      <div className="px-4 py-8 sm:px-6 lg:px-8">
+      <section className="max-w-6xl mx-auto py-12 px-4">
         <div className="flex flex-col items-center justify-center p-10 min-h-[300px]">
           <Loader2 size={48} className="animate-spin text-brand-primary mb-4" />
-          <H1 className="text-lg">Loading cases...</H1>
+          <p className="text-lg">Loading cases...</p>
         </div>
-      </div>
+      </section>
     );
   }
 
   // Error state
   if (error) {
     return (
-      <div className="px-4 py-8 sm:px-6 lg:px-8">
+      <section className="max-w-6xl mx-auto py-12 px-4">
         <div className="flex flex-col items-center justify-center p-10 min-h-[300px] bg-error/20 border border-error/50 rounded-lg">
           <AlertCircle size={48} className="text-error mb-4" />
-          <H1 className="text-lg text-error">{error}</H1>
+          <p className="text-lg text-error">{error}</p>
         </div>
-      </div>
+      </section>
     );
   }
 
   return (
-    <div className="px-4 py-8 sm:px-6 lg:px-8">
-      <header className="mb-6 sm:mb-8">
-        <H1 icon={<ListFilter size={32} className="text-brand-primary" />}>Case Files</H1>
+    <section className="max-w-6xl mx-auto py-12 px-4">
+      <header className="mb-8">
+        <h1 className="text-4xl font-bold mb-3">Case Files</h1>
+        <p className="text-text-muted mb-8">
+          Real-world network investigations, security incidents, and troubleshooting case studies
+          from enterprise Wi-Fi deployments.
+        </p>
       </header>
 
       {/* Search */}
@@ -268,6 +263,6 @@ export default function CaseOverview(): React.ReactElement {
           minHeight="300px"
         />
       )}
-    </div>
+    </section>
   );
 }

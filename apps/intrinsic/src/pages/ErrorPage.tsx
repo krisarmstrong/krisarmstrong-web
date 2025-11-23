@@ -1,6 +1,6 @@
 import { useRouteError, isRouteErrorResponse, Link } from 'react-router-dom';
 
-export default function ErrorPage(): JSX.Element {
+export default function ErrorPage() {
   const error = useRouteError();
   console.error('Routing Error:', error);
 
