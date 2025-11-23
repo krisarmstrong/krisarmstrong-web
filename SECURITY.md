@@ -22,6 +22,7 @@ Please do not create public GitHub issues for security vulnerabilities. This hel
 Send your vulnerability report to: **security@krisarmstrong.com**
 
 Include the following information:
+
 - Description of the vulnerability
 - Steps to reproduce the issue
 - Potential impact
@@ -49,6 +50,7 @@ Include the following information:
 ## Security Best Practices for Contributors
 
 ### Code Security
+
 - Never commit secrets, API keys, or credentials
 - Use environment variables for sensitive data
 - Follow the principle of least privilege
@@ -57,12 +59,14 @@ Include the following information:
 - Implement proper authentication and authorization
 
 ### Dependency Security
+
 - Keep dependencies up to date
 - Review security advisories regularly
 - Use `npm audit` before committing
 - Avoid dependencies with known vulnerabilities
 
 ### CI/CD Security
+
 - All PRs must pass security checks
 - Automated security scans run on every commit
 - Pre-commit hooks enforce security linting
@@ -78,6 +82,62 @@ This project uses several automated security tools:
 - **eslint-plugin-no-secrets**: Prevents secret leakage
 - **Dependabot**: Automated dependency updates
 - **CodeQL**: Static code analysis (GitHub Security)
+
+## Content Security Policy (CSP)
+
+### Current Strategy
+
+All apps use Content Security Policy headers to mitigate XSS and injection attacks:
+
+```
+default-src 'self';
+script-src 'self' 'unsafe-inline' blob:;
+style-src 'self' 'unsafe-inline';
+img-src 'self' data: https:;
+connect-src 'self' [app-specific APIs];
+object-src 'none';
+base-uri 'self';
+form-action 'self';
+frame-ancestors 'none';
+```
+
+### Why 'unsafe-inline' is Acceptable
+
+**Current Risk: LOW** - These are static sites with controlled inline scripts.
+
+1. **Minimal Inline Scripts**: Only critical theme initialization (5 lines)
+2. **No User-Generated Content**: All content is developer-controlled
+3. **No eval() or Dynamic Code**: Scripts are static and reviewed
+4. **Static Sites**: Apps are built at compile-time, not runtime
+
+### CSP Directives Explained
+
+- `script-src 'self' 'unsafe-inline'` - Allows app scripts + minimal theme init
+- `style-src 'self' 'unsafe-inline'` - Allows Tailwind + component styles
+- `blob:` - Only needed for development HMR (Vite hot module replacement)
+- `object-src 'none'` - Blocks Flash/Java plugins
+- `frame-ancestors 'none'` - Prevents clickjacking
+
+### Future Improvements
+
+If stronger CSP is needed, implement nonce-based CSP:
+
+```typescript
+// vite.config.ts
+const nonce = crypto.randomBytes(16).toString('base64');
+// Inject nonce into scripts and CSP header
+```
+
+**Trade-offs:**
+
+- ✅ Eliminates 'unsafe-inline'
+- ❌ Adds build complexity
+- ❌ Requires dynamic nonce generation
+- ❌ Minimal security benefit for static sites
+
+### Monitoring
+
+CSP violations can be monitored via `report-uri` directive in production.
 
 ## Security-Related NPM Scripts
 
@@ -95,27 +155,32 @@ npm audit fix
 ## Vulnerability Severity Levels
 
 ### Critical
+
 - Remote code execution
 - Authentication bypass
 - Data exposure of sensitive information
 
 ### High
+
 - SQL injection
 - Cross-site scripting (XSS)
 - Privilege escalation
 
 ### Medium
+
 - Denial of service
 - Information disclosure
 - Cross-site request forgery (CSRF)
 
 ### Low
+
 - Minor information leakage
 - Issues requiring user interaction
 
 ## Security Updates
 
 Security updates will be released as patch versions (x.x.X) and will be communicated via:
+
 - GitHub Security Advisories
 - Release notes
 - Email to security contacts (if registered)
