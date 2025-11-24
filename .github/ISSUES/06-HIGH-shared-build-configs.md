@@ -1,8 +1,10 @@
 ---
-title: "🟠 HIGH: Create shared base configs for Vite, Vitest, and TypeScript (saves ~300 lines)"
+title: '🟠 HIGH: Create shared base configs for Vite, Vitest, and TypeScript (saves ~300 lines)'
 labels: build-config, high-priority, refactor, tooling
 assignees: krisarmstrong
 ---
+
+**Status: CLOSED (2025-11-24) — Shared base configs exist: `vite.config.base.ts`, `vitest.config.base.ts`, and `tsconfig.base.json`, consumed by all apps.**
 
 ## Priority: HIGH 🟠
 
@@ -13,11 +15,11 @@ assignees: krisarmstrong
 Each app has nearly identical configurations:
 
 | Config Type | Lines per App | Apps | Total Duplication |
-|-------------|---------------|------|-------------------|
-| Vite | 59 | 3 | ~150 lines |
-| Vitest | ~50 | 3 | ~100 lines |
-| TSConfig | ~45 | 2 | ~80 lines |
-| **TOTAL** | | | **~330 lines** |
+| ----------- | ------------- | ---- | ----------------- |
+| Vite        | 59            | 3    | ~150 lines        |
+| Vitest      | ~50           | 3    | ~100 lines        |
+| TSConfig    | ~45           | 2    | ~80 lines         |
+| **TOTAL**   |               |      | **~330 lines**    |
 
 Only differences: port numbers and minor app-specific settings
 
@@ -103,6 +105,7 @@ export function createViteConfig(appConfig: AppConfig): UserConfig {
 #### Step 2: Update app Vite configs
 
 **Intrinsic (`apps/intrinsic/vite.config.ts`):**
+
 ```typescript
 import { createViteConfig } from '../../vite.config.base';
 
@@ -113,6 +116,7 @@ export default createViteConfig({
 ```
 
 **KrisArmstrong (`apps/krisarmstrong/vite.config.ts`):**
+
 ```typescript
 import { createViteConfig } from '../../vite.config.base';
 
@@ -123,6 +127,7 @@ export default createViteConfig({
 ```
 
 **WiFiVigilante (`apps/wifivigilante/vite.config.ts`):**
+
 ```typescript
 import { createViteConfig } from '../../vite.config.base';
 
@@ -182,6 +187,7 @@ export function createVitestConfig(testConfig: TestConfig = {}): UserConfig {
 #### Step 2: Update app Vitest configs
 
 **Intrinsic (`apps/intrinsic/vitest.config.ts`):**
+
 ```typescript
 import { createVitestConfig } from '../../vitest.config.base';
 
@@ -191,6 +197,7 @@ export default createVitestConfig({
 ```
 
 **KrisArmstrong (`apps/krisarmstrong/vitest.config.ts`):**
+
 ```typescript
 import { createVitestConfig } from '../../vitest.config.base';
 
@@ -200,6 +207,7 @@ export default createVitestConfig({
 ```
 
 **WiFiVigilante (`apps/wifivigilante/vitest.config.ts`):**
+
 ```typescript
 import { createVitestConfig } from '../../vitest.config.base';
 
@@ -243,6 +251,7 @@ Create `tsconfig.base.json` in root:
 #### Step 2: Update app TSConfigs
 
 **All apps (`apps/*/tsconfig.json`):**
+
 ```json
 {
   "extends": "../../tsconfig.base.json",
@@ -277,6 +286,7 @@ npm run lint --workspaces
 ```
 
 ## Testing Checklist
+
 - [ ] Base configs created (vite, vitest, tsconfig)
 - [ ] All apps extend base configs
 - [ ] All apps build successfully
@@ -287,11 +297,13 @@ npm run lint --workspaces
 - [ ] Production builds work
 
 ## Files to Create
+
 - `vite.config.base.ts`
 - `vitest.config.base.ts`
 - `tsconfig.base.json`
 
 ## Files to Update
+
 - `apps/intrinsic/vite.config.ts` (59 → 5 lines)
 - `apps/krisarmstrong/vite.config.ts` (59 → 5 lines)
 - `apps/wifivigilante/vite.config.ts` (59 → 8 lines)
@@ -303,6 +315,7 @@ npm run lint --workspaces
 - `apps/wifivigilante/tsconfig.json` (reduce)
 
 ## Success Criteria
+
 - [ ] ~330 lines of configuration reduced to ~50
 - [ ] Single source of truth for build config
 - [ ] Easy to add new apps
@@ -310,6 +323,7 @@ npm run lint --workspaces
 - [ ] App-specific customization still possible
 
 ## Benefits
+
 - **Code reduction:** ~330 lines → ~50 lines + base configs
 - **Consistency:** Same build/test settings across apps
 - **Maintainability:** Update once, affects all apps

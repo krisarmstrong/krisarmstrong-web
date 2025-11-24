@@ -1,8 +1,10 @@
 ---
-title: "🟡 MEDIUM: Create shared test utilities and standardize test setup"
+title: '🟡 MEDIUM: Create shared test utilities and standardize test setup'
 labels: testing, medium-priority, refactor, dx
 assignees: krisarmstrong
 ---
+
+**Status: CLOSED (2025-11-24) — Shared test utilities live in `packages/web-foundation/src/test-utils`, referenced by apps; Vitest base config supports shared setup.**
 
 ## Priority: MEDIUM 🟡
 
@@ -11,17 +13,20 @@ assignees: krisarmstrong
 ## Current State
 
 Test setup files duplicated across apps:
+
 - `apps/intrinsic/src/__tests__/setup.ts` (56 lines)
 - `apps/krisarmstrong/tests/setup.ts` (39 lines)
 - `apps/wifivigilante/src/tests/setup.ts` (37 lines)
 
 ### Duplicated Setup Code
+
 - localStorage mock (95% identical)
 - window.matchMedia mock (95% identical)
 - IntersectionObserver mock (intrinsic only)
 - Cleanup teardown (similar)
 
 ### Inconsistent Test Locations
+
 - Intrinsic: `src/__tests__/`
 - KrisArmstrong: `tests/`
 - WiFiVigilante: `src/tests/`
@@ -165,6 +170,7 @@ export { vi, expect, describe, it, test, beforeEach, afterEach } from 'vitest';
 ### Step 2: Export from web-foundation
 
 Update `packages/web-foundation/src/index.ts`:
+
 ```typescript
 // ... existing exports
 
@@ -173,6 +179,7 @@ export * from './test-utils';
 ```
 
 Update `packages/web-foundation/package.json`:
+
 ```json
 {
   "exports": {
@@ -205,6 +212,7 @@ mv src/tests src/__tests__
 ```
 
 Update `tsconfig.json` in all apps:
+
 ```json
 {
   "include": ["src"],
@@ -237,6 +245,7 @@ That's it! Reduced from 50+ lines to ~10 lines.
 ### Step 5: Update test files to use utilities
 
 **Before:**
+
 ```typescript
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
@@ -250,6 +259,7 @@ describe('Component', () => {
 ```
 
 **After:**
+
 ```typescript
 import { renderWithProviders, screen, describe, it, expect } from '@krisarmstrong/web-foundation/test-utils';
 
@@ -264,6 +274,7 @@ describe('Component', () => {
 ### Step 6: Update vitest configs
 
 All apps:
+
 ```typescript
 export default defineConfig({
   test: {
@@ -278,6 +289,7 @@ export default defineConfig({
 ### Step 7: Update package.json test scripts
 
 Standardize across all apps:
+
 ```json
 {
   "scripts": {
@@ -290,6 +302,7 @@ Standardize across all apps:
 ```
 
 ## Testing Checklist
+
 - [ ] Shared test utilities created
 - [ ] Exported from web-foundation
 - [ ] Test directories standardized to `src/__tests__/`
@@ -301,9 +314,11 @@ Standardize across all apps:
 ## Files to Modify
 
 ### Create
+
 - `packages/web-foundation/src/test-utils/index.ts`
 
 ### Update
+
 - `packages/web-foundation/src/index.ts` (export test utils)
 - `packages/web-foundation/package.json` (export test-utils path)
 - `apps/intrinsic/src/__tests__/setup.ts` (use shared utils)
@@ -313,10 +328,12 @@ Standardize across all apps:
 - All `package.json` (standardize test scripts)
 
 ### Move/Rename
+
 - `apps/krisarmstrong/tests/` → `apps/krisarmstrong/src/__tests__/`
 - `apps/wifivigilante/src/tests/` → `apps/wifivigilante/src/__tests__/`
 
 ## Success Criteria
+
 - [ ] ~130 lines of duplicated setup removed
 - [ ] All apps use shared test utilities
 - [ ] Consistent test directory structure
@@ -324,6 +341,7 @@ Standardize across all apps:
 - [ ] Better developer experience
 
 ## Benefits
+
 - **Code reduction:** 130+ lines → ~30 lines + shared module
 - **Consistency:** Same test patterns across apps
 - **DX:** Easier to write tests with helpers

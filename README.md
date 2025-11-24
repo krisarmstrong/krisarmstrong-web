@@ -45,7 +45,7 @@ krisarmstrong-web/
 
 See [SETUP.md](./SETUP.md) for complete setup instructions.
 
-### Quick Start
+### Quick Start (Root)
 
 ```bash
 # Clone the repository
@@ -64,6 +64,14 @@ npm run build
 # Run tests
 npm test
 ```
+
+### App Quickstart Cheatsheet
+
+- `apps/intrinsic` — `npm run dev --workspace intrinsic` (port 3001)
+- `apps/krisarmstrong` — `npm run dev --workspace krisarmstrong` (port 5173)
+- `apps/wifivigilante` — `npm run dev --workspace wifivigilante` (port 3002)
+
+> First run: `npx playwright install --with-deps` if you plan to run e2e tests.
 
 ### Prerequisites
 

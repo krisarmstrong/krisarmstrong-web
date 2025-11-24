@@ -32,21 +32,21 @@ export default function Home(): React.ReactElement {
 
       {/* Stats Section */}
       <section className="grid gap-8 md:grid-cols-3 mb-24">
-        <div className="bg-surface-raised/50 border border-surface-border p-8 rounded-lg text-center hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
+        <div className="bg-surface-raised border border-surface-border p-8 rounded-lg text-center hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
           <div className="flex justify-center mb-3">
             <FileText size={32} className="text-brand-primary" />
           </div>
           <P className="text-3xl font-bold text-text-primary mb-1">200+</P>
           <P className="text-text-muted text-sm">Real-World Cases</P>
         </div>
-        <div className="bg-surface-raised/50 border border-surface-border p-8 rounded-lg text-center hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
+        <div className="bg-surface-raised border border-surface-border p-8 rounded-lg text-center hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
           <div className="flex justify-center mb-3">
             <Shield size={32} className="text-brand-primary" />
           </div>
           <P className="text-3xl font-bold text-text-primary mb-1">Enterprise</P>
           <P className="text-text-muted text-sm">Grade Analysis</P>
         </div>
-        <div className="bg-surface-raised/50 border border-surface-border p-8 rounded-lg text-center hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
+        <div className="bg-surface-raised border border-surface-border p-8 rounded-lg text-center hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
           <div className="flex justify-center mb-3">
             <Users size={32} className="text-brand-primary" />
           </div>
@@ -94,7 +94,7 @@ export default function Home(): React.ReactElement {
       </section>
 
       {/* Tools Section */}
-      <section className="bg-gradient-to-br from-surface-raised/50 to-surface-base/50 border border-surface-border p-10 rounded-lg">
+      <section className="bg-surface-raised border border-surface-border p-10 rounded-lg">
         <H2 className="text-center mb-6 !text-2xl">Professional-Grade Tools</H2>
         <P className="text-center text-text-primary mb-8 max-w-2xl mx-auto">
           Every investigation leverages enterprise tools from NetAlly, Wireshark, and

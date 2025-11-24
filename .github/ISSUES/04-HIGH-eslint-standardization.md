@@ -1,8 +1,10 @@
 ---
-title: "🟠 HIGH: Create shared ESLint base config for all apps"
+title: '🟠 HIGH: Create shared ESLint base config for all apps'
 labels: eslint, high-priority, refactor, tooling
 assignees: krisarmstrong
 ---
+
+**Status: CLOSED (2025-11-24) — Shared base config lives at `eslint.config.base.js` and all apps/packages extend it.**
 
 ## Priority: HIGH 🟠
 
@@ -12,13 +14,14 @@ assignees: krisarmstrong
 
 Each app has its own ESLint config with different rules and plugins:
 
-| App | Config | Plugins | Type Check | Security |
-|-----|--------|---------|------------|----------|
-| Intrinsic | Minimal | 4 | ❌ | ❌ |
-| KrisArmstrong | Comprehensive | 8 | ✅ | ✅ |
-| WiFiVigilante | Comprehensive | 8 | ❌ | ✅ |
+| App           | Config        | Plugins | Type Check | Security |
+| ------------- | ------------- | ------- | ---------- | -------- |
+| Intrinsic     | Minimal       | 4       | ❌         | ❌       |
+| KrisArmstrong | Comprehensive | 8       | ✅         | ✅       |
+| WiFiVigilante | Comprehensive | 8       | ❌         | ✅       |
 
 ## Problems
+
 1. Configuration drift between apps
 2. Maintenance burden (3 copies)
 3. New apps require copying config
@@ -31,6 +34,7 @@ Create shared base configuration that all apps extend.
 ## Implementation
 
 ### Step 1: Create base config
+
 Create `.eslint.config.base.js` in root:
 
 ```javascript
@@ -75,10 +79,7 @@ export default [
     rules: {
       // React
       'react/react-in-jsx-scope': 'off', // Not needed in React 17+
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
 
       // Security
       'no-secrets/no-secrets': 'error',
@@ -101,6 +102,7 @@ export default [
 ### Step 2: Update app configs
 
 #### Intrinsic (`apps/intrinsic/eslint.config.js`)
+
 ```javascript
 import baseConfig from '../../eslint.config.base.js';
 
@@ -113,6 +115,7 @@ export default [
 ```
 
 #### KrisArmstrong (`apps/krisarmstrong/eslint.config.js`)
+
 ```javascript
 import baseConfig from '../../eslint.config.base.js';
 
@@ -125,6 +128,7 @@ export default [
 ```
 
 #### WiFiVigilante (`apps/wifivigilante/eslint.config.js`)
+
 ```javascript
 import baseConfig from '../../eslint.config.base.js';
 
@@ -139,6 +143,7 @@ export default [
 ### Step 3: Update all package.json lint scripts
 
 All apps should have:
+
 ```json
 {
   "scripts": {
@@ -171,6 +176,7 @@ npm run lint --workspaces
 ```
 
 ## Testing Checklist
+
 - [ ] Base config created
 - [ ] All apps extend base config
 - [ ] All apps include TypeScript checking in lint
@@ -180,6 +186,7 @@ npm run lint --workspaces
 - [ ] Pre-commit hooks work
 
 ## Files to Modify
+
 - **Create:** `eslint.config.base.js`
 - **Update:** `apps/intrinsic/eslint.config.js`
 - **Update:** `apps/krisarmstrong/eslint.config.js`
@@ -187,12 +194,14 @@ npm run lint --workspaces
 - **Update:** All `package.json` lint scripts
 
 ## Success Criteria
+
 - [ ] Single source of truth for linting rules
 - [ ] All apps have same security/accessibility checks
 - [ ] Consistent developer experience
 - [ ] Easy to add new apps
 
 ## Benefits
+
 - ~60 lines reduced (3 configs → 1 base + 3 minimal)
 - Consistent rules enforcement
 - Easier maintenance

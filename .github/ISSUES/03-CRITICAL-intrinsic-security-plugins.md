@@ -1,8 +1,10 @@
 ---
-title: "🔴 CRITICAL: Add security plugins to Intrinsic ESLint config"
+title: '🔴 CRITICAL: Add security plugins to Intrinsic ESLint config'
 labels: security, critical, eslint, intrinsic
 assignees: krisarmstrong
 ---
+
+**Status: CLOSED (2025-11-24) — Intrinsic now inherits the shared ESLint base which includes security plugin rules (eslint-plugin-security/no-secrets).**
 
 ## Priority: CRITICAL 🔴
 
@@ -11,18 +13,22 @@ assignees: krisarmstrong
 ## Current State
 
 **Intrinsic ESLint config is incomplete:**
+
 - File: `apps/intrinsic/eslint.config.js` (lines 1-23)
 - Only 4 basic plugins
 - **Missing critical security checks**
 
 **Other apps have comprehensive security:**
+
 - KrisArmstrong: 8 plugins including security
 - WiFiVigilante: 8 plugins including security
 
 ## Missing Security Plugins
 
 ### 1. eslint-plugin-security
+
 Detects security anti-patterns:
+
 - SQL injection vulnerabilities
 - Regex DoS
 - Unsafe regex
@@ -30,14 +36,18 @@ Detects security anti-patterns:
 - Insecure random number generation
 
 ### 2. eslint-plugin-no-secrets
+
 Prevents accidental secret commits:
+
 - API keys
 - Passwords
 - Tokens
 - Private keys
 
 ### 3. eslint-plugin-jsx-a11y
+
 Accessibility checks:
+
 - ARIA attributes
 - Alt text for images
 - Keyboard navigation
@@ -46,6 +56,7 @@ Accessibility checks:
 ## Implementation
 
 ### Step 1: Install dependencies
+
 ```bash
 cd apps/intrinsic
 npm install -D eslint-plugin-security eslint-plugin-jsx-a11y eslint-plugin-no-secrets
@@ -54,6 +65,7 @@ npm install -D eslint-plugin-security eslint-plugin-jsx-a11y eslint-plugin-no-se
 ### Step 2: Update eslint.config.js
 
 Replace current config with:
+
 ```javascript
 import js from '@eslint/js';
 import globals from 'globals';
@@ -84,10 +96,7 @@ export default [
       globals: globals.browser,
     },
     rules: {
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'no-secrets/no-secrets': 'error',
     },
   },
@@ -95,19 +104,23 @@ export default [
 ```
 
 ### Step 3: Update lint script
+
 Update `apps/intrinsic/package.json`:
+
 ```json
 "lint": "eslint . && tsc --noEmit",
 "lint:fix": "eslint . --fix"
 ```
 
 ### Step 4: Fix any new errors
+
 ```bash
 npm run lint:fix
 npm run lint
 ```
 
 ## Testing Checklist
+
 - [ ] Dependencies installed
 - [ ] ESLint config updated
 - [ ] Lint script includes type checking
@@ -118,16 +131,19 @@ npm run lint
 - [ ] Pre-commit hooks work
 
 ## Files to Modify
+
 - `apps/intrinsic/eslint.config.js`
 - `apps/intrinsic/package.json` (lint scripts)
 
 ## Success Criteria
+
 - [ ] Intrinsic has same security plugins as other apps
 - [ ] Security linting runs in CI
 - [ ] Pre-commit hooks catch security issues
 - [ ] Accessibility issues caught before commit
 
 ## References
+
 - KrisArmstrong config: `apps/krisarmstrong/eslint.config.js`
 - WiFiVigilante config: `apps/wifivigilante/eslint.config.js`
 - Security policy: `SECURITY.md`
