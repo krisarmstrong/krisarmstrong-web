@@ -28,7 +28,7 @@ function walk(dir: string, exts: string[], acc: string[] = []): string[] {
 function tokensFromCss(cssPath: string): string[] {
   const content = read(cssPath);
   const re = /--theme-([A-Za-z0-9_-]+):/g;
-  const tokens = new Set();
+  const tokens = new Set<string>();
   let m;
   while ((m = re.exec(content)) !== null) {
     tokens.add(m[1]);

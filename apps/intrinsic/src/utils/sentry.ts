@@ -7,10 +7,17 @@ import * as Sentry from '@sentry/react';
  * VITE_SENTRY_DSN=https://your-sentry-dsn@sentry.io/your-project-id
  */
 export function initSentry() {
-  const dsn = import.meta.env.VITE_SENTRY_DSN;
+  const env: ImportMeta['env'] = import.meta.env;
+  const dsn = typeof env.VITE_SENTRY_DSN === 'string' ? env.VITE_SENTRY_DSN : undefined;
+  const environment =
+    typeof env.VITE_APP_ENV === 'string'
+      ? env.VITE_APP_ENV
+      : typeof env.MODE === 'string'
+        ? env.MODE
+        : 'production';
 
   // Only initialize if DSN is provided and not in development
-  if (!dsn || import.meta.env.DEV) {
+  if (!dsn || env.DEV) {
     if (!dsn) {
       console.warn('Sentry DSN not configured - error tracking disabled');
     }
@@ -19,7 +26,7 @@ export function initSentry() {
 
   Sentry.init({
     dsn,
-    environment: import.meta.env.VITE_APP_ENV || import.meta.env.MODE || 'production',
+    environment,
     integrations: [
       Sentry.browserTracingIntegration(),
       Sentry.replayIntegration({

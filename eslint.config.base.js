@@ -20,16 +20,16 @@ export default [
       'coverage/**',
       'node_modules/**',
       '.github/**',
-      'scripts/**',
-      '**/legacy-scripts/**',
-      '*.config.js',
-      '*.config.ts',
+      '**/eslint.config.*',
     ],
   },
   js.configs.recommended,
-  ...tseslint.configs.recommended,
+  ...tseslint.configs.recommended.map((config) => ({
+    ...config,
+    files: ['**/*.{ts,tsx,cts,mts}'],
+  })),
   {
-    files: ['**/*.{ts,tsx,js,jsx}'],
+    files: ['**/*.{ts,tsx,cts,mts}'],
     languageOptions: {
       ecmaVersion: 2020,
       globals: {
@@ -102,6 +102,43 @@ export default [
       react: {
         version: 'detect',
       },
+    },
+  },
+  {
+    files: ['**/*.config.{js,cjs,mjs,ts}', '**/vite.config.{js,ts}', '**/vitest.config.{js,ts}'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+      sourceType: 'module',
+    },
+    rules: {
+      '@typescript-eslint/await-thenable': 'off',
+      '@typescript-eslint/no-misused-promises': 'off',
+    },
+  },
+  {
+    files: ['scripts/**/*.{js,ts,tsx,cjs,cts,mjs}'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+      sourceType: 'module',
+    },
+    rules: {
+      'no-console': 'off',
+      'security/detect-non-literal-fs-filename': 'off',
+      'security/detect-object-injection': 'off',
+      'security/detect-non-literal-regexp': 'off',
+    },
+  },
+  {
+    files: ['**/*.cjs'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+      sourceType: 'commonjs',
     },
   },
 ];
