@@ -18,7 +18,7 @@ export default function Blog() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'popular'>('newest');
   const [searchResults, setSearchResults] = useState<BlogPost[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -66,14 +66,17 @@ export default function Blog() {
   }, [blogPosts, sortBy]);
 
   // Use search results if searching, otherwise use sorted posts
-  const isSearching = searchQuery.trim().length > 0;
+  const isSearching = searchQuery.trim().length > 0 || searchResults.length !== sortedPosts.length;
   const postsToFilter = isSearching ? searchResults : sortedPosts;
 
   // Filter by tag
   const filteredPosts = useMemo(() => {
-    if (!selectedTag) return postsToFilter;
-    return postsToFilter.filter((post) => post.tags?.includes(selectedTag));
-  }, [postsToFilter, selectedTag]);
+    if (selectedTags.length === 0) return postsToFilter;
+    return postsToFilter.filter((post) => {
+      const tags = post.tags || [];
+      return selectedTags.every((t) => tags.includes(t));
+    });
+  }, [postsToFilter, selectedTags]);
 
   // Progressive loading
   const {
@@ -84,15 +87,14 @@ export default function Blog() {
   } = useProgressiveLoad(filteredPosts, { itemsPerLoad: 12, initialCount: 12 });
 
   // Active filters for badge display
-  const activeFilters: ActiveFilter[] = selectedTag
-    ? [
-        {
-          id: 'tag',
-          value: selectedTag,
-          onRemove: () => startTransition(() => setSelectedTag(null)),
-        },
-      ]
-    : [];
+  const activeFilters: ActiveFilter[] = selectedTags.map((tag) => ({
+    id: `tag-${tag}`,
+    value: tag,
+    onRemove: () =>
+      startTransition(() =>
+        setSelectedTags((prev) => prev.filter((t) => t.toLowerCase() !== tag.toLowerCase()))
+      ),
+  }));
 
   // Loading state
   if (loading) {
@@ -173,7 +175,14 @@ export default function Blog() {
                 date={post.date}
                 readTime={post.read_time || 5}
                 tags={post.tags || []}
-                onTagClick={(tag) => startTransition(() => setSelectedTag(tag))}
+                onTagClick={(tag) =>
+                  startTransition(() => {
+                    setSelectedTags((prev) => {
+                      const exists = prev.some((t) => t.toLowerCase() === tag.toLowerCase());
+                      return exists ? prev : [...prev, tag];
+                    });
+                  })
+                }
                 featured={post.featured}
                 accentColor="violet"
                 animationDelay={index * 100}
@@ -200,10 +209,10 @@ export default function Blog() {
             title="No posts found"
             description="Try selecting a different tag or clearing filters"
             action={
-              selectedTag
+              selectedTags.length > 0
                 ? {
                     label: 'Clear Filters',
-                    onClick: () => setSelectedTag(null),
+                    onClick: () => setSelectedTags([]),
                   }
                 : undefined
             }
