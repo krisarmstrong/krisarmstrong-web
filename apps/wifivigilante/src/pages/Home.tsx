@@ -8,7 +8,7 @@ export default function Home(): React.ReactElement {
       {/* Hero Section */}
       <header className="text-center mb-20 sm:mb-24">
         <div className="mb-6">
-          <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-primary/20 to-brand-accent/20 border border-brand-primary/30 rounded-full text-brand-primary font-semibold text-sm sm:text-base">
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-primary/20 to-brand-accent/20 dark:from-brand-primary/25 dark:to-brand-accent/25 border border-brand-primary/30 dark:border-brand-primary/45 rounded-full text-brand-primary font-semibold text-sm sm:text-base">
             <Shield size={20} className="text-brand-primary" />
             Expert-Level Field Investigations
           </span>
@@ -32,21 +32,21 @@ export default function Home(): React.ReactElement {
 
       {/* Stats Section */}
       <section className="grid gap-8 md:grid-cols-3 mb-24">
-        <div className="bg-surface-raised border border-surface-border p-8 rounded-lg text-center hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
+        <div className="bg-surface-raised border border-surface-border p-8 rounded-lg text-center shadow-lg dark:shadow-black/30 hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
           <div className="flex justify-center mb-3">
             <FileText size={32} className="text-brand-primary" />
           </div>
           <P className="text-3xl font-bold text-text-primary mb-1">200+</P>
           <P className="text-text-muted text-sm">Real-World Cases</P>
         </div>
-        <div className="bg-surface-raised border border-surface-border p-8 rounded-lg text-center hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
+        <div className="bg-surface-raised border border-surface-border p-8 rounded-lg text-center shadow-lg dark:shadow-black/30 hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
           <div className="flex justify-center mb-3">
             <Shield size={32} className="text-brand-primary" />
           </div>
           <P className="text-3xl font-bold text-text-primary mb-1">Enterprise</P>
           <P className="text-text-muted text-sm">Grade Analysis</P>
         </div>
-        <div className="bg-surface-raised border border-surface-border p-8 rounded-lg text-center hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
+        <div className="bg-surface-raised border border-surface-border p-8 rounded-lg text-center shadow-lg dark:shadow-black/30 hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
           <div className="flex justify-center mb-3">
             <Users size={32} className="text-brand-primary" />
           </div>
@@ -59,7 +59,7 @@ export default function Home(): React.ReactElement {
       <section className="mb-24">
         <H2 className="text-center mb-12 !text-2xl sm:!text-3xl">What You'll Find</H2>
         <div className="grid gap-8 md:grid-cols-2">
-          <div className="bg-surface-raised border border-surface-border p-8 rounded-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
+          <div className="bg-surface-raised border border-surface-border p-8 rounded-lg shadow-lg dark:shadow-black/30 hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
             <H2 className="!text-xl !mb-4 flex items-center gap-2">
               <ShieldCheck size={24} className="text-brand-primary" />
               Security Investigations
@@ -75,7 +75,7 @@ export default function Home(): React.ReactElement {
             </ul>
           </div>
 
-          <div className="bg-surface-raised border border-surface-border p-8 rounded-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
+          <div className="bg-surface-raised border border-surface-border p-8 rounded-lg shadow-lg dark:shadow-black/30 hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all">
             <H2 className="!text-xl !mb-4 flex items-center gap-2">
               <TrendingUp size={24} className="text-brand-primary" />
               Performance Troubleshooting
@@ -94,7 +94,7 @@ export default function Home(): React.ReactElement {
       </section>
 
       {/* Tools Section */}
-      <section className="bg-surface-raised border border-surface-border p-10 rounded-lg">
+      <section className="bg-surface-raised border border-surface-border p-10 rounded-lg shadow-lg dark:shadow-black/30">
         <H2 className="text-center mb-6 !text-2xl">Professional-Grade Tools</H2>
         <P className="text-center text-text-primary mb-8 max-w-2xl mx-auto">
           Every investigation leverages enterprise tools from NetAlly, Wireshark, and
