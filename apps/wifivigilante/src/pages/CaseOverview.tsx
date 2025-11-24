@@ -21,7 +21,7 @@ export default function CaseOverview(): React.ReactElement {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchResults, setSearchResults] = useState<TransformedCase[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<'newest' | 'severity' | 'duration' | 'alphabetical'>(
     'newest'
   );
@@ -77,14 +77,16 @@ export default function CaseOverview(): React.ReactElement {
   }, [allCases, sortBy]);
 
   // Use search results if searching, otherwise use sorted cases
-  const isSearching = searchQuery.trim().length > 0;
+  const isSearching = searchQuery.trim().length > 0 || searchResults.length !== sortedCases.length;
   const casesToFilter = isSearching ? searchResults : sortedCases;
 
   // Filter by selected tag
   const filteredCases = useMemo(() => {
-    if (!selectedTag) return casesToFilter;
-    return casesToFilter.filter((c) => Array.isArray(c.tags) && c.tags.includes(selectedTag));
-  }, [casesToFilter, selectedTag]);
+    if (selectedTags.length === 0) return casesToFilter;
+    return casesToFilter.filter(
+      (c) => Array.isArray(c.tags) && selectedTags.every((t) => c.tags.includes(t))
+    );
+  }, [casesToFilter, selectedTags]);
 
   // Progressive loading
   const {
@@ -95,15 +97,14 @@ export default function CaseOverview(): React.ReactElement {
   } = useProgressiveLoad(filteredCases, { itemsPerLoad: 12, initialCount: 12 });
 
   // Active filters for badge display
-  const activeFilters: ActiveFilter[] = selectedTag
-    ? [
-        {
-          id: 'tag',
-          value: selectedTag,
-          onRemove: () => startTransition(() => setSelectedTag(null)),
-        },
-      ]
-    : [];
+  const activeFilters: ActiveFilter[] = selectedTags.map((tag) => ({
+    id: `tag-${tag}`,
+    value: tag,
+    onRemove: () =>
+      startTransition(() =>
+        setSelectedTags((prev) => prev.filter((t) => t.toLowerCase() !== tag.toLowerCase()))
+      ),
+  }));
 
   const getIndustryIcon = (sectorName: string | undefined): React.ReactNode => {
     const lowerSector = sectorName?.toLowerCase() || '';
@@ -219,7 +220,14 @@ export default function CaseOverview(): React.ReactElement {
                 date={c.incidentDate}
                 durationMinutes={c.durationMinutes}
                 tags={c.tags}
-                onTagClick={(tag) => startTransition(() => setSelectedTag(tag))}
+                onTagClick={(tag) =>
+                  startTransition(() => {
+                    setSelectedTags((prev) => {
+                      const exists = prev.some((t) => t.toLowerCase() === tag.toLowerCase());
+                      return exists ? prev : [...prev, tag];
+                    });
+                  })
+                }
                 severity={c.severity}
                 status={c.status}
                 metadata={`${c.sector?.replace(/_/g, ' ') || 'N/A'}${c.subsector ? ` • ${c.subsector.replace(/_/g, ' ')}` : ''}${c.tool ? ` • ${c.tool}` : ''}`}
