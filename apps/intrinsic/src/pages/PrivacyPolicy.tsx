@@ -9,7 +9,7 @@ export default function PrivacyPolicy() {
           </p>
 
           <section>
-            <h2 className="text-2xl font-heading text-primary-dark mt-8 mb-4">Introduction</h2>
+            <h2 className="text-2xl font-heading text-text-primary mt-8 mb-4">Introduction</h2>
             <p>
               Intrinsic Momentum Mindset ("we," "our," or "us") is committed to protecting your
               privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard
@@ -18,7 +18,7 @@ export default function PrivacyPolicy() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-heading text-primary-dark mt-8 mb-4">
+            <h2 className="text-2xl font-heading text-text-primary mt-8 mb-4">
               Information We Collect
             </h2>
             <p>We may collect personal information that you voluntarily provide to us when you:</p>
@@ -40,7 +40,7 @@ export default function PrivacyPolicy() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-heading text-primary-dark mt-8 mb-4">
+            <h2 className="text-2xl font-heading text-text-primary mt-8 mb-4">
               How We Use Your Information
             </h2>
             <p>We use the information we collect to:</p>
@@ -54,7 +54,7 @@ export default function PrivacyPolicy() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-heading text-primary-dark mt-8 mb-4">
+            <h2 className="text-2xl font-heading text-text-primary mt-8 mb-4">
               Information Sharing
             </h2>
             <p>
@@ -65,7 +65,7 @@ export default function PrivacyPolicy() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-heading text-primary-dark mt-8 mb-4">Data Security</h2>
+            <h2 className="text-2xl font-heading text-text-primary mt-8 mb-4">Data Security</h2>
             <p>
               We implement reasonable security measures to protect your personal information from
               unauthorized access, use, or disclosure. However, no method of transmission over the
@@ -74,7 +74,7 @@ export default function PrivacyPolicy() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-heading text-primary-dark mt-8 mb-4">Your Rights</h2>
+            <h2 className="text-2xl font-heading text-text-primary mt-8 mb-4">Your Rights</h2>
             <p>You have the right to:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li>Access the personal information we hold about you</li>
@@ -85,7 +85,7 @@ export default function PrivacyPolicy() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-heading text-primary-dark mt-8 mb-4">Contact Us</h2>
+            <h2 className="text-2xl font-heading text-text-primary mt-8 mb-4">Contact Us</h2>
             <p>
               If you have questions about this Privacy Policy, please contact us at:
               <br />

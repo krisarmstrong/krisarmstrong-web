@@ -9,7 +9,7 @@ export default function About() {
         </h1>
 
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-          <div className="aspect-square bg-primary/10 rounded-2xl flex items-center justify-center border-2 border-brand-accent/20">
+          <div className="aspect-square bg-brand-primary/10 rounded-2xl flex items-center justify-center border-2 border-brand-accent/20">
             <p className="text-text-muted text-xl">[ Photo Placeholder ]</p>
           </div>
           <div className="space-y-6 text-text-muted leading-relaxed">

@@ -9,7 +9,7 @@ export default function TermsOfService() {
           </p>
 
           <section>
-            <h2 className="text-2xl font-heading text-primary-dark mt-8 mb-4">
+            <h2 className="text-2xl font-heading text-text-primary mt-8 mb-4">
               Agreement to Terms
             </h2>
             <p>
@@ -19,7 +19,7 @@ export default function TermsOfService() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-heading text-primary-dark mt-8 mb-4">Services</h2>
+            <h2 className="text-2xl font-heading text-text-primary mt-8 mb-4">Services</h2>
             <p>
               Intrinsic Momentum Mindset provides life coaching, leadership coaching, and related
               professional development services. Our services are intended for informational and
@@ -29,7 +29,7 @@ export default function TermsOfService() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-heading text-primary-dark mt-8 mb-4">
+            <h2 className="text-2xl font-heading text-text-primary mt-8 mb-4">
               Client Responsibilities
             </h2>
             <p>As a client, you agree to:</p>
@@ -42,7 +42,7 @@ export default function TermsOfService() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-heading text-primary-dark mt-8 mb-4">Confidentiality</h2>
+            <h2 className="text-2xl font-heading text-text-primary mt-8 mb-4">Confidentiality</h2>
             <p>
               All information shared during coaching sessions is confidential and will not be
               disclosed to third parties except as required by law or with your explicit consent.
@@ -50,7 +50,7 @@ export default function TermsOfService() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-heading text-primary-dark mt-8 mb-4">Payment Terms</h2>
+            <h2 className="text-2xl font-heading text-text-primary mt-8 mb-4">Payment Terms</h2>
             <p>
               Payment for coaching services is due as agreed upon in your coaching agreement.
               Cancellations must be made at least 24 hours in advance to avoid charges.
@@ -58,7 +58,7 @@ export default function TermsOfService() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-heading text-primary-dark mt-8 mb-4">
+            <h2 className="text-2xl font-heading text-text-primary mt-8 mb-4">
               Limitation of Liability
             </h2>
             <p>
@@ -69,7 +69,7 @@ export default function TermsOfService() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-heading text-primary-dark mt-8 mb-4">Termination</h2>
+            <h2 className="text-2xl font-heading text-text-primary mt-8 mb-4">Termination</h2>
             <p>
               Either party may terminate the coaching relationship at any time with written notice.
               Refunds, if applicable, will be determined on a case-by-case basis.
@@ -77,7 +77,7 @@ export default function TermsOfService() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-heading text-primary-dark mt-8 mb-4">Changes to Terms</h2>
+            <h2 className="text-2xl font-heading text-text-primary mt-8 mb-4">Changes to Terms</h2>
             <p>
               We reserve the right to modify these Terms of Service at any time. Continued use of
               our services after changes constitutes acceptance of the new terms.
@@ -85,7 +85,7 @@ export default function TermsOfService() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-heading text-primary-dark mt-8 mb-4">Contact Us</h2>
+            <h2 className="text-2xl font-heading text-text-primary mt-8 mb-4">Contact Us</h2>
             <p>
               Questions about these Terms? Contact us at:
               <br />

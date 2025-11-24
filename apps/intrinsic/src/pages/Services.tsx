@@ -16,7 +16,7 @@ export default function Services() {
 
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           {/* 1:1 Coaching */}
-          <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all bg-surface-raised shadow-sm flex flex-col">
+          <div className="enhanced-card accent-border-top rounded-2xl p-8 md:p-10 transition-all flex flex-col stagger-item">
             <div className="h-2 w-16 bg-brand-accent rounded mb-6"></div>
             <h2 className="text-2xl font-heading mb-4">1:1 Coaching</h2>
             <h3 className="text-lg font-semibold text-text-primary mb-3">
@@ -39,14 +39,14 @@ export default function Services() {
             </p>
             <Link
               to="/contact"
-              className="inline-block w-full bg-brand-accent text-primary-dark font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity text-center mt-auto"
+              className="inline-block w-full bg-brand-accent text-text-inverse font-semibold py-3 rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all text-center mt-auto"
             >
               Book A Call
             </Link>
           </div>
 
           {/* Intrinsic Foundations */}
-          <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all bg-surface-raised shadow-sm flex flex-col">
+          <div className="enhanced-card accent-border-top rounded-2xl p-8 md:p-10 transition-all flex flex-col stagger-item">
             <div className="h-2 w-16 bg-brand-accent rounded mb-6"></div>
             <h2 className="text-2xl font-heading mb-4">Intrinsic Foundations — Group Coaching</h2>
             <h3 className="text-lg font-semibold text-text-primary mb-3">
@@ -70,14 +70,14 @@ export default function Services() {
             </p>
             <Link
               to="/contact"
-              className="inline-block w-full bg-brand-accent text-primary-dark font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity text-center mt-auto"
+              className="inline-block w-full bg-brand-accent text-text-inverse font-semibold py-3 rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all text-center mt-auto"
             >
               Join A Cohort
             </Link>
           </div>
 
           {/* Intrinsic Momentum */}
-          <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all bg-surface-raised shadow-sm flex flex-col">
+          <div className="enhanced-card accent-border-top rounded-2xl p-8 md:p-10 transition-all flex flex-col stagger-item">
             <div className="h-2 w-16 bg-brand-accent rounded mb-6"></div>
             <h2 className="text-2xl font-heading mb-4">Intrinsic Momentum — Group Coaching</h2>
             <h3 className="text-lg font-semibold text-text-primary mb-3">
@@ -102,14 +102,14 @@ export default function Services() {
             </p>
             <Link
               to="/contact"
-              className="inline-block w-full bg-brand-accent text-primary-dark font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity text-center mt-auto"
+              className="inline-block w-full bg-brand-accent text-text-inverse font-semibold py-3 rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all text-center mt-auto"
             >
               Join A Cohort
             </Link>
           </div>
 
           {/* Mindset Immersion */}
-          <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all bg-surface-raised shadow-sm flex flex-col">
+          <div className="enhanced-card accent-border-top rounded-2xl p-8 md:p-10 transition-all flex flex-col stagger-item">
             <div className="h-2 w-16 bg-brand-accent rounded mb-6"></div>
             <h2 className="text-2xl font-heading mb-4">Mindset Immersion — Group Coaching</h2>
             <h3 className="text-lg font-semibold text-text-primary mb-3">
@@ -133,14 +133,14 @@ export default function Services() {
             </p>
             <Link
               to="/contact"
-              className="inline-block w-full bg-brand-accent text-primary-dark font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity text-center mt-auto"
+              className="inline-block w-full bg-brand-accent text-text-inverse font-semibold py-3 rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all text-center mt-auto"
             >
               Join A Cohort
             </Link>
           </div>
 
           {/* Corporate Leadership */}
-          <div className="border-2 border-brand-accent/30 rounded-2xl p-8 hover:border-brand-accent hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all bg-surface-raised shadow-sm flex flex-col">
+          <div className="enhanced-card accent-border-top rounded-2xl p-8 md:p-10 transition-all flex flex-col stagger-item">
             <div className="h-2 w-16 bg-brand-accent rounded mb-6"></div>
             <h2 className="text-2xl font-heading mb-4">Corporate Leadership</h2>
             <h3 className="text-lg font-semibold text-text-primary mb-3">
@@ -162,7 +162,7 @@ export default function Services() {
             </p>
             <Link
               to="/contact"
-              className="inline-block w-full bg-brand-accent text-primary-dark font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity text-center mt-auto"
+              className="inline-block w-full bg-brand-accent text-text-inverse font-semibold py-3 rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all text-center mt-auto"
             >
               Book A Call
             </Link>
@@ -170,14 +170,14 @@ export default function Services() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="bg-brand-accent/10 rounded-2xl p-8 md:p-12 text-center border-2 border-brand-accent/30">
+        <div className="bg-brand-accent/10 dark:bg-brand-accent/15 rounded-2xl p-8 md:p-12 text-center border-2 border-brand-accent/30 enhanced-card">
           <h2 className="text-3xl font-heading mb-4">Not Sure Which Path Is Right for You?</h2>
           <p className="text-text-muted mb-8 max-w-2xl mx-auto">
             Book a free 30-minute consultation to discuss your goals and find the best fit.
           </p>
           <Link
             to="/contact"
-            className="inline-block bg-brand-accent text-primary-dark font-semibold px-8 py-4 rounded-lg hover:opacity-90 transition-opacity"
+            className="inline-block bg-brand-accent text-text-inverse font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
           >
             Schedule Free Consultation
           </Link>
