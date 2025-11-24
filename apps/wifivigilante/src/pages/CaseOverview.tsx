@@ -20,6 +20,7 @@ export default function CaseOverview(): React.ReactElement {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchResults, setSearchResults] = useState<TransformedCase[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<'newest' | 'severity' | 'duration' | 'alphabetical'>(
     'newest'
@@ -76,7 +77,8 @@ export default function CaseOverview(): React.ReactElement {
   }, [allCases, sortBy]);
 
   // Use search results if searching, otherwise use sorted cases
-  const casesToFilter = searchResults.length > 0 ? searchResults : sortedCases;
+  const isSearching = searchQuery.trim().length > 0;
+  const casesToFilter = isSearching ? searchResults : sortedCases;
 
   // Filter by selected tag
   const filteredCases = useMemo(() => {
@@ -150,6 +152,7 @@ export default function CaseOverview(): React.ReactElement {
       <ContentSearch
         items={sortedCases}
         onSearch={setSearchResults}
+        onQueryChange={setSearchQuery}
         searchFields={[
           'title',
           'summary',
