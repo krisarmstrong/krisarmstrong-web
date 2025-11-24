@@ -1,13 +1,11 @@
 // src/components/CaseDisplay.tsx
-import React, { useState, memo } from 'react';
+import React, { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Facebook,
   Twitter,
   Linkedin,
   Instagram,
-  FileText,
-  FileDown,
   AlertCircle,
   Loader2,
   Share2,
@@ -41,7 +39,6 @@ interface CaseDisplayProps {
   error: Error | { message: string } | null;
 }
 
-type DownloadFormat = 'pdf' | 'md';
 type SharePlatform = 'linkedin' | 'twitter' | 'facebook' | 'instagram';
 
 // Memoized CaseDisplay to prevent re-renders when props haven't changed
@@ -54,43 +51,6 @@ const CaseDisplay = memo(
     error,
   }: CaseDisplayProps): React.ReactElement {
     const navigate = useNavigate();
-
-    // State for tracking PDF download progress
-    const [isDownloadingPdf, setIsDownloadingPdf] = useState<boolean>(false);
-
-    const handleDownloadWrapper = async (format: DownloadFormat): Promise<void> => {
-      if (!caseData) return;
-
-      const loadDownloadUtils = () => import('../utils/download.js');
-
-      const filenameBase = String(
-        caseData.title
-          ? caseData.title
-              .replace(/[^a-z0-9_]/gi, '_')
-              .toLowerCase()
-              .substring(0, 50)
-          : caseData.publicId || caseData.id || 'case_file'
-      ).replace(/_{2,}/g, '_');
-
-      if (format === 'pdf') {
-        try {
-          setIsDownloadingPdf(true);
-
-          const { generateAndDownloadPdf } = await loadDownloadUtils();
-          await generateAndDownloadPdf(caseData);
-
-          setIsDownloadingPdf(false);
-        } catch (error) {
-          console.error('PDF generation failed:', error);
-          setIsDownloadingPdf(false);
-          alert('Failed to generate PDF. Please try again.');
-        }
-      } else if (format === 'md') {
-        const { generateMarkdownContent, downloadFile } = await loadDownloadUtils();
-        const markdownContent = generateMarkdownContent(caseData);
-        downloadFile(markdownContent, `${filenameBase}.md`, 'text/markdown');
-      }
-    };
 
     const handleShareWrapper = (platform: SharePlatform): void => {
       if (!caseData) return;
@@ -336,30 +296,6 @@ const CaseDisplay = memo(
             </div>
 
             <footer className="p-6 sm:p-8 flex flex-col sm:flex-row flex-wrap justify-between items-center gap-4">
-              <div className="flex flex-wrap gap-3">
-                <Button
-                  onClick={() => handleDownloadWrapper('md')}
-                  leftIcon={<FileText size={16} />}
-                  variant="secondary"
-                  disabled={!caseData}
-                >
-                  Markdown
-                </Button>
-                <Button
-                  onClick={() => handleDownloadWrapper('pdf')}
-                  leftIcon={
-                    isDownloadingPdf ? (
-                      <Loader2 size={16} className="animate-spin" />
-                    ) : (
-                      <FileDown size={16} />
-                    )
-                  }
-                  variant="secondary"
-                  disabled={!caseData || isDownloadingPdf}
-                >
-                  {isDownloadingPdf ? 'Generating...' : 'PDF'}
-                </Button>
-              </div>
               <div className="flex items-center gap-2">
                 <Share2 size={18} className="text-gray-400 hidden sm:inline" />
                 <MutedText className="hidden sm:inline !mb-0 text-gray-300">Share:</MutedText>
