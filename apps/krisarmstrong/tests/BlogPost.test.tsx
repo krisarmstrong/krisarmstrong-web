@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import BlogPost from '../src/pages/BlogPost';
 import type { BlogPost as BlogPostType } from '../src/lib/supabase';
@@ -77,6 +77,16 @@ vi.mock('@krisarmstrong/web-foundation', async () => {
     ...actual,
     StarRating: MockStarRating,
   };
+});
+
+beforeEach(() => {
+  (global.fetch as unknown as vi.Mock).mockReset();
+  vi.spyOn(console, 'error').mockImplementation(() => {});
+  vi.spyOn(console, 'warn').mockImplementation(() => {});
+});
+
+afterEach(() => {
+  vi.restoreAllMocks();
 });
 
 const renderBlogPost = (postId: string = 'wifi7-intro-802-11be') => {
