@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import Resume from '../src/pages/Resume';
 
 // Mock markdown content
@@ -60,10 +60,16 @@ vi.mock('docx', () => {
 describe('Resume', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
     (global.fetch as unknown as { mockResolvedValue: (val: unknown) => void }).mockResolvedValue({
       ok: true,
       text: async () => mockResume,
     });
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   it('shows loading spinner while fetching resume', async () => {
