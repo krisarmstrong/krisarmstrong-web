@@ -19,7 +19,6 @@ import {
   BarChart3,
   ArrowLeft,
 } from 'lucide-react';
-import { generateMarkdownContent, downloadFile } from '../utils/download.js';
 import { shareToPlatform } from '../utils/share.ts';
 import {
   H1,
@@ -62,6 +61,8 @@ const CaseDisplay = memo(
     const handleDownloadWrapper = async (format: DownloadFormat): Promise<void> => {
       if (!caseData) return;
 
+      const loadDownloadUtils = () => import('../utils/download.js');
+
       const filenameBase = String(
         caseData.title
           ? caseData.title
@@ -75,7 +76,7 @@ const CaseDisplay = memo(
         try {
           setIsDownloadingPdf(true);
 
-          const { generateAndDownloadPdf } = await import('../utils/download.js');
+          const { generateAndDownloadPdf } = await loadDownloadUtils();
           await generateAndDownloadPdf(caseData);
 
           setIsDownloadingPdf(false);
@@ -85,6 +86,7 @@ const CaseDisplay = memo(
           alert('Failed to generate PDF. Please try again.');
         }
       } else if (format === 'md') {
+        const { generateMarkdownContent, downloadFile } = await loadDownloadUtils();
         const markdownContent = generateMarkdownContent(caseData);
         downloadFile(markdownContent, `${filenameBase}.md`, 'text/markdown');
       }
