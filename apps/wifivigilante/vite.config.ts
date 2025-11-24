@@ -5,5 +5,6 @@ export default createViteConfig({
   port: 3000,
   vendorChunks: {
     'vendor-radix': ['@radix-ui/react-icons'],
+    'vendor-download': ['html2canvas', 'jspdf'],
   },
 });
