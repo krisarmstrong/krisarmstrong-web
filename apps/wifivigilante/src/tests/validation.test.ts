@@ -5,6 +5,7 @@ import {
   validateCaseData,
   sanitizeInput,
 } from '../utils/validation';
+import type { TransformedCase } from '../types';
 
 describe('Validation Utils', () => {
   describe('validateSearchQuery', () => {
@@ -99,7 +100,10 @@ describe('Validation Utils', () => {
     });
 
     it('should reject invalid severity levels', () => {
-      const invalidData = { ...validCaseData, severity: 'Unknown' as const };
+      const invalidData = {
+        ...validCaseData,
+        severity: 'Unknown' as unknown as TransformedCase['severity'],
+      };
       const result = validateCaseData(invalidData);
       expect(result.isValid).toBe(false);
       expect(result.errors?.severity).toContain('Invalid severity');

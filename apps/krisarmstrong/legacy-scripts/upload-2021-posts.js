@@ -1,5 +1,4 @@
 import { createClient } from '@supabase/supabase-js';
-/* eslint-disable security/detect-non-literal-fs-filename */
 import * as dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';

@@ -77,8 +77,11 @@ export default function CaseOverview(): React.ReactElement {
   }, [allCases, sortBy]);
 
   // Use search results if searching, otherwise use sorted cases
-  const isSearching = searchQuery.trim().length > 0 || searchResults.length !== sortedCases.length;
+  const isSearching = searchQuery.trim().length > 0;
   const casesToFilter = isSearching ? searchResults : sortedCases;
+
+  const hasFilters = isSearching || selectedTags.length > 0;
+  const totalCount = sortedCases.length;
 
   // Filter by selected tag
   const filteredCases = useMemo(() => {
@@ -152,7 +155,10 @@ export default function CaseOverview(): React.ReactElement {
       {/* Search */}
       <ContentSearch
         items={sortedCases}
-        onSearch={setSearchResults}
+        onSearch={(results, meta) => {
+          setSearchResults(results);
+          setSearchQuery(meta?.query ?? '');
+        }}
         onQueryChange={setSearchQuery}
         searchFields={[
           'title',
@@ -187,7 +193,11 @@ export default function CaseOverview(): React.ReactElement {
             resultCount={filteredCases.length}
             resultLabel="cases"
             accentColor="emerald"
-            emptyMessage="Click tags on cases to filter • Showing all cases"
+            emptyMessage={
+              hasFilters
+                ? `Showing ${filteredCases.length} of ${totalCount} cases`
+                : `Click tags on cases to filter • Showing all ${totalCount} cases`
+            }
           />
         </div>
 
@@ -224,7 +234,9 @@ export default function CaseOverview(): React.ReactElement {
                   startTransition(() => {
                     setSelectedTags((prev) => {
                       const exists = prev.some((t) => t.toLowerCase() === tag.toLowerCase());
-                      return exists ? prev : [...prev, tag];
+                      return exists
+                        ? prev.filter((t) => t.toLowerCase() !== tag.toLowerCase())
+                        : [...prev, tag];
                     });
                   })
                 }
@@ -263,10 +275,10 @@ export default function CaseOverview(): React.ReactElement {
           title="No matching cases found"
           description="Try adjusting your search or filters"
           action={
-            selectedTag
+            selectedTags.length > 0
               ? {
                   label: 'Clear Filters',
-                  onClick: () => startTransition(() => setSelectedTag(null)),
+                  onClick: () => startTransition(() => setSelectedTags([])),
                 }
               : undefined
           }

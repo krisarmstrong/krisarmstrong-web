@@ -33,6 +33,11 @@
     /* Module resolution */
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@krisarmstrong/web-foundation": ["packages/web-foundation/src/index.ts"],
+      "@krisarmstrong/web-foundation/*": ["packages/web-foundation/src/*"]
+    }
   }
 }

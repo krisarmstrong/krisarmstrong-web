@@ -1,5 +1,4 @@
 import fs from 'fs';
-/* eslint-disable security/detect-non-literal-fs-filename */
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { newPosts2025 } from './NEW-POSTS-2024-2025-METADATA.js';

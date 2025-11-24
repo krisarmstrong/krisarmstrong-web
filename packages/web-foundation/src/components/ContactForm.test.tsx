@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/require-await, @typescript-eslint/no-unnecessary-type-assertion */
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
@@ -31,23 +31,24 @@ const renderWithRouter = (ui: ReactElement) => {
 };
 
 // Helper to create a mock Response object
-const createMockResponse = (data: unknown = { success: true }, ok = true): Response => ({
-  ok,
-  status: ok ? 200 : 500,
-  statusText: ok ? 'OK' : 'Internal Server Error',
-  headers: new Headers(),
-  redirected: false,
-  type: 'basic',
-  url: '',
-  clone: () => ({} as Response),
-  body: null,
-  bodyUsed: false,
-  arrayBuffer: async () => new ArrayBuffer(0),
-  blob: async () => new Blob(),
-  formData: async () => new FormData(),
-  json: async () => data,
-  text: async () => JSON.stringify(data),
-} as Response);
+const createMockResponse = (data: unknown = { success: true }, ok = true): Response =>
+  ({
+    ok,
+    status: ok ? 200 : 500,
+    statusText: ok ? 'OK' : 'Internal Server Error',
+    headers: new Headers(),
+    redirected: false,
+    type: 'basic',
+    url: '',
+    clone: () => ({}) as Response,
+    body: null,
+    bodyUsed: false,
+    arrayBuffer: async () => new ArrayBuffer(0),
+    blob: async () => new Blob(),
+    formData: async () => new FormData(),
+    json: async () => data,
+    text: async () => JSON.stringify(data),
+  }) as Response;
 
 describe('ContactForm', () => {
   let user: ReturnType<typeof userEvent.setup>;
@@ -65,10 +66,10 @@ describe('ContactForm', () => {
     it('renders the contact form with all fields', () => {
       renderWithRouter(<ContactForm endpoint="/api/contact" />);
 
-      const nameInput = screen.getByLabelText(/name/i);
+      const nameInput = screen.getByLabelText(/name/i) as HTMLInputElement;
       expect(nameInput).toBeInTheDocument();
 
-      const emailInput = screen.getByLabelText(/email/i);
+      const emailInput = screen.getByLabelText(/email/i) as HTMLInputElement;
       expect(emailInput).toBeInTheDocument();
 
       const messageInput = screen.getByRole('textbox', { name: /message/i });
@@ -113,9 +114,7 @@ describe('ContactForm', () => {
     });
 
     it('renders privacy notice', () => {
-      render(
-        <ContactForm endpoint="/api/contact" privacyNotice="Your data is safe with us." />
-      );
+      render(<ContactForm endpoint="/api/contact" privacyNotice="Your data is safe with us." />);
 
       expect(screen.getByText('Your data is safe with us.')).toBeInTheDocument();
     });
@@ -135,17 +134,12 @@ describe('ContactForm', () => {
       renderWithRouter(<ContactForm />);
 
       expect(screen.getByText('Contact form offline')).toBeInTheDocument();
-      expect(
-        screen.getByText(/The form endpoint is not configured/i)
-      ).toBeInTheDocument();
+      expect(screen.getByText(/The form endpoint is not configured/i)).toBeInTheDocument();
     });
 
     it('renders custom offline message', () => {
       render(
-        <ContactForm
-          offlineTitle="Form Unavailable"
-          offlineMessage="Please try again later"
-        />
+        <ContactForm offlineTitle="Form Unavailable" offlineMessage="Please try again later" />
       );
 
       expect(screen.getByText('Form Unavailable')).toBeInTheDocument();
@@ -158,7 +152,7 @@ describe('ContactForm', () => {
       const honeypotContainer = container.querySelector('.sr-only');
       expect(honeypotContainer).toBeInTheDocument();
 
-      const honeypotInput = container.querySelector('input[name="company"]') as HTMLInputElement;
+      const honeypotInput = container.querySelector('input[name="company"]');
       expect(honeypotInput).toBeInTheDocument();
       expect(honeypotInput).toHaveAttribute('tabIndex', '-1');
       expect(honeypotInput).toHaveAttribute('autoComplete', 'off');
@@ -552,7 +546,6 @@ describe('ContactForm', () => {
     it.skip('tracks submit attempt event', async () => {
       vi.mocked(global.fetch).mockResolvedValueOnce(createMockResponse());
 
-      // @ts-expect-error - telemetry prop doesn't exist, test for future feature
       renderWithRouter(<ContactForm endpoint="/api/contact" telemetry={{ enabled: true }} />);
 
       await user.type(screen.getByLabelText(/name/i), 'John Doe');
@@ -574,7 +567,6 @@ describe('ContactForm', () => {
     it.skip('tracks success event after successful submission', async () => {
       vi.mocked(global.fetch).mockResolvedValueOnce(createMockResponse());
 
-      // @ts-expect-error - telemetry prop doesn't exist, test for future feature
       renderWithRouter(<ContactForm endpoint="/api/contact" telemetry={{ enabled: true }} />);
 
       await user.type(screen.getByLabelText(/name/i), 'John Doe');
@@ -593,7 +585,6 @@ describe('ContactForm', () => {
     it.skip('tracks error event on submission failure', async () => {
       vi.mocked(global.fetch).mockRejectedValueOnce(new Error('Network error'));
 
-      // @ts-expect-error - telemetry prop doesn't exist, test for future feature
       renderWithRouter(<ContactForm endpoint="/api/contact" telemetry={{ enabled: true }} />);
 
       await user.type(screen.getByLabelText(/name/i), 'John Doe');
@@ -618,8 +609,9 @@ describe('ContactForm', () => {
     });
 
     it.skip('tracks spam detection event', async () => {
-      // @ts-expect-error - telemetry prop doesn't exist, test for future feature
-      const { container } = renderWithRouter(<ContactForm endpoint="/api/contact" telemetry={{ enabled: true }} />);
+      const { container } = renderWithRouter(
+        <ContactForm endpoint="/api/contact" telemetry={{ enabled: true }} />
+      );
 
       const honeypotInput = container.querySelector('input[name="company"]') as HTMLInputElement;
 
@@ -638,7 +630,6 @@ describe('ContactForm', () => {
     });
 
     it('tracks error when no endpoint is configured', async () => {
-      // @ts-expect-error - telemetry prop doesn't exist, test for future feature
       renderWithRouter(<ContactForm telemetry={{ enabled: true }} />);
 
       const submitButton = screen.getByRole('button', { name: /send message/i });
@@ -651,8 +642,9 @@ describe('ContactForm', () => {
     it.skip('uses custom tone in telemetry events', async () => {
       vi.mocked(global.fetch).mockResolvedValueOnce(createMockResponse());
 
-      // @ts-expect-error - telemetry prop doesn't exist, test for future feature
-      renderWithRouter(<ContactForm endpoint="/api/contact" tone="blue" telemetry={{ enabled: true }} />);
+      renderWithRouter(
+        <ContactForm endpoint="/api/contact" tone="blue" telemetry={{ enabled: true }} />
+      );
 
       await user.type(screen.getByLabelText(/name/i), 'John Doe');
       await user.type(screen.getByLabelText(/email/i), 'john@example.com');
@@ -699,13 +691,17 @@ describe('ContactForm', () => {
 
   describe('Different Backgrounds', () => {
     it('renders with dark background', () => {
-      const { container } = renderWithRouter(<ContactForm endpoint="/api/contact" background="dark" />);
+      const { container } = renderWithRouter(
+        <ContactForm endpoint="/api/contact" background="dark" />
+      );
       const form = container.querySelector('form');
       expect(form).toHaveClass('bg-gray-900', 'border-gray-800');
     });
 
     it('renders with light background', () => {
-      const { container } = renderWithRouter(<ContactForm endpoint="/api/contact" background="light" />);
+      const { container } = renderWithRouter(
+        <ContactForm endpoint="/api/contact" background="light" />
+      );
       const form = container.querySelector('form');
       expect(form).toHaveClass('bg-white', 'border-gray-200');
     });

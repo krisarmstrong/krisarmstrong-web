@@ -118,7 +118,7 @@ export default function BlogPost() {
                     platform as 'linkedin' | 'twitter' | 'facebook',
                     post,
                     window.location.href,
-                    console.info
+                    console.warn
                   )
                 }
                 className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-surface-border text-text-primary hover:bg-surface-hover transition-colors text-sm"
@@ -141,7 +141,7 @@ export default function BlogPost() {
             starColor="violet-400"
             size="md"
             onRate={(rating, stats) => {
-              console.log(
+              console.warn(
                 `User rated post ${post.slug}: ${rating} stars. New average: ${stats.average_rating}`
               );
             }}

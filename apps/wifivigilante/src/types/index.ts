@@ -49,6 +49,7 @@ export interface CaseFile {
 // ============================================================================
 
 export interface TransformedCase {
+  [key: string]: unknown;
   id: number;
   publicId: string;
   title: string;

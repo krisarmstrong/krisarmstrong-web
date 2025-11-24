@@ -23,6 +23,17 @@ export default [
       '**/eslint.config.*',
     ],
   },
+  {
+    files: ['**/*.{js,jsx,ts,tsx,cjs,mjs,cts,mts}'],
+    plugins: {
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+      react,
+      'jsx-a11y': jsxA11y,
+      'no-secrets': noSecrets,
+      security,
+    },
+  },
   js.configs.recommended,
   ...tseslint.configs.recommended.map((config) => ({
     ...config,
@@ -49,14 +60,6 @@ export default [
           jsx: true,
         },
       },
-    },
-    plugins: {
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
-      react: react,
-      'jsx-a11y': jsxA11y,
-      'no-secrets': noSecrets,
-      security: security,
     },
     rules: {
       // React Hooks rules
@@ -118,7 +121,10 @@ export default [
     },
   },
   {
-    files: ['scripts/**/*.{js,ts,tsx,cjs,cts,mjs}'],
+    files: [
+      '**/scripts/**/*.{js,ts,tsx,cjs,cts,mjs}',
+      '**/legacy-scripts/**/*.{js,ts,tsx,cjs,cts,mjs}',
+    ],
     languageOptions: {
       globals: {
         ...globals.node,

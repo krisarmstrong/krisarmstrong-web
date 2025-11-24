@@ -47,8 +47,8 @@ export const isDevelopmentEnvironment = (() => {
   // Check import.meta.env.MODE (Vite) - safe because import.meta is statically analyzed
   // at build time and replaced with the actual value
   try {
-    // @ts-expect-error - import.meta may not be available in all environments
-    return import.meta.env?.MODE !== 'production';
+    const mode = (import.meta as { env?: { MODE?: string } }).env?.MODE;
+    return mode !== 'production';
   } catch {
     // Fallback to process.env check if import.meta is not available
     return typeof process !== 'undefined' && process?.env?.NODE_ENV !== 'production';
