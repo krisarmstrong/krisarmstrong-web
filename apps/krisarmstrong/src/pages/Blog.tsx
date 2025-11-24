@@ -21,6 +21,7 @@ export default function Blog() {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'popular'>('newest');
   const [searchResults, setSearchResults] = useState<BlogPost[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   // React 19: Show pending state during tag filtering
   const [isPending, startTransition] = useTransition();
@@ -65,8 +66,8 @@ export default function Blog() {
   }, [blogPosts, sortBy]);
 
   // Use search results if searching, otherwise use sorted posts
-  const postsToFilter =
-    searchResults.length > 0 || blogPosts.length === 0 ? searchResults : sortedPosts;
+  const isSearching = searchQuery.trim().length > 0;
+  const postsToFilter = isSearching ? searchResults : sortedPosts;
 
   // Filter by tag
   const filteredPosts = useMemo(() => {
@@ -120,6 +121,7 @@ export default function Blog() {
         <ContentSearch
           items={sortedPosts}
           onSearch={setSearchResults}
+          onQueryChange={setSearchQuery}
           searchFields={['title', 'excerpt', 'content', 'tags']}
           placeholder="Search blog posts..."
           accentColor="violet"

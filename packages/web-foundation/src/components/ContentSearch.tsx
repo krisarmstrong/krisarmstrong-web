@@ -10,6 +10,8 @@ export interface ContentSearchProps<T extends SearchableItem> {
   items: T[];
   /** Callback when search results change */
   onSearch: (filtered: T[]) => void;
+  /** Optional callback when query changes (trimmed). Use to track search state. */
+  onQueryChange?: (query: string) => void;
   /** Fields to search within each item (supports nested paths like 'author.name') */
   searchFields?: string[];
   /** Placeholder text for search input */
@@ -77,6 +79,7 @@ const accentColors = {
 export function ContentSearch<T extends SearchableItem>({
   items,
   onSearch,
+  onQueryChange,
   searchFields = ['title', 'excerpt'],
   placeholder = 'Search...',
   accentColor = 'violet',
@@ -94,10 +97,11 @@ export function ContentSearch<T extends SearchableItem>({
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedQuery(query);
+      onQueryChange?.(query.trim());
     }, debounceMs);
 
     return () => clearTimeout(timer);
-  }, [query, debounceMs]);
+  }, [query, debounceMs, onQueryChange]);
 
   // React 19: Defer filtering to keep input responsive during expensive operations
   const deferredQuery = useDeferredValue(debouncedQuery);
