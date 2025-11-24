@@ -89,7 +89,7 @@ export default function BlogPost() {
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 bg-brand-accent/10 text-text-accent rounded-full text-sm"
+                  className="px-3 py-1 bg-brand-accent/10 dark:bg-brand-accent/20 text-text-accent rounded-full text-sm"
                 >
                   {tag}
                 </span>

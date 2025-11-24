@@ -56,7 +56,7 @@ export default function Home() {
             Kris Armstrong
           </H1>
           <div className="mb-3">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-accent/20 to-brand-accent/20 border border-brand-accent/30 rounded-full text-brand-accent font-semibold text-sm sm:text-base">
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-accent/20 to-brand-accent/20 dark:from-brand-accent/25 dark:to-brand-accent/25 border border-brand-accent/30 dark:border-brand-accent/45 rounded-full text-brand-accent font-semibold text-sm sm:text-base">
               <Shield size={20} className="text-brand-accent" />
               CISSP • CWSP • CWDP • CWNA
             </span>
