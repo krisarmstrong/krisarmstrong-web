@@ -66,8 +66,11 @@ export default function Blog() {
   }, [blogPosts, sortBy]);
 
   // Use search results if searching, otherwise use sorted posts
-  const isSearching = searchQuery.trim().length > 0 || searchResults.length !== sortedPosts.length;
+  const isSearching = searchQuery.trim().length > 0;
   const postsToFilter = isSearching ? searchResults : sortedPosts;
+
+  const hasFilters = isSearching || selectedTags.length > 0;
+  const totalCount = sortedPosts.length;
 
   // Filter by tag
   const filteredPosts = useMemo(() => {
@@ -122,8 +125,10 @@ export default function Blog() {
         {/* Search */}
         <ContentSearch
           items={sortedPosts}
-          onSearch={setSearchResults}
-          onQueryChange={setSearchQuery}
+          onSearch={(results, meta) => {
+            setSearchResults(results);
+            setSearchQuery(meta?.query ?? '');
+          }}
           searchFields={['title', 'excerpt', 'content', 'tags']}
           placeholder="Search blog posts..."
           accentColor="violet"
@@ -140,7 +145,11 @@ export default function Blog() {
               resultCount={filteredPosts.length}
               resultLabel="posts"
               accentColor="violet"
-              emptyMessage={`Click tags on posts to filter • Showing all ${blogPosts.length} posts`}
+              emptyMessage={
+                hasFilters
+                  ? `Showing ${filteredPosts.length} of ${totalCount} posts`
+                  : `Click tags on posts to filter • Showing all ${totalCount} posts`
+              }
             />
           </div>
 
@@ -179,7 +188,9 @@ export default function Blog() {
                   startTransition(() => {
                     setSelectedTags((prev) => {
                       const exists = prev.some((t) => t.toLowerCase() === tag.toLowerCase());
-                      return exists ? prev : [...prev, tag];
+                      return exists
+                        ? prev.filter((t) => t.toLowerCase() !== tag.toLowerCase())
+                        : [...prev, tag];
                     });
                   })
                 }

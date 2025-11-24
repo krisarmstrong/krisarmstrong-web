@@ -144,7 +144,6 @@ export function SiteSearch({
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder={placeholder}
                     className="flex-1 bg-transparent border-none outline-none text-text-primary placeholder:text-text-muted font-medium"
-                    autoFocus
                   />
                   <button
                     onClick={() => setIsOpen(false)}
@@ -165,11 +164,15 @@ export function SiteSearch({
                         className="w-full text-left p-4 transition-colors border-b last:border-0 border-surface-border text-text-primary hover:bg-surface-raised hover:border-brand-primary/30"
                       >
                         <div className="flex items-start gap-3">
-                          <span className={`px-2 py-0.5 text-xs rounded font-semibold flex-shrink-0 ${getTypeColor(result.type)}`}>
+                          <span
+                            className={`px-2 py-0.5 text-xs rounded font-semibold flex-shrink-0 ${getTypeColor(result.type)}`}
+                          >
                             {result.type}
                           </span>
                           <div className="flex-1 min-w-0">
-                            <div className="font-semibold mb-1 text-text-primary">{result.title}</div>
+                            <div className="font-semibold mb-1 text-text-primary">
+                              {result.title}
+                            </div>
                             <div className="text-sm line-clamp-2 text-text-muted">
                               {result.excerpt}
                             </div>

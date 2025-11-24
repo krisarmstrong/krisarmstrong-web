@@ -4,7 +4,7 @@ export function shareToPlatform(
   platform: SharePlatform,
   post: { title: string; slug: string },
   url: string,
-  logger: (msg: string) => void = console.info
+  logger: (msg: string) => void = () => {}
 ) {
   const text = encodeURIComponent(post.title);
   const shareUrl = encodeURIComponent(url);

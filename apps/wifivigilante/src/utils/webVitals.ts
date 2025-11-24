@@ -17,9 +17,7 @@ interface NavigatorWithConnection extends Navigator {
 
 function getConnectionSpeed(): string {
   const nav = navigator as NavigatorWithConnection;
-  return 'connection' in nav &&
-    nav.connection &&
-    'effectiveType' in nav.connection
+  return 'connection' in nav && nav.connection && 'effectiveType' in nav.connection
     ? nav.connection.effectiveType || ''
     : '';
 }
@@ -33,7 +31,7 @@ function sendToAnalytics(metric: Metric): void {
 
   // Only send in production if analytics ID is configured
   if (!analyticsId || import.meta.env.DEV) {
-    console.log('[Web Vitals]', metric.name, metric.value, metric.rating);
+    console.warn('[Web Vitals]', metric.name, metric.value, metric.rating);
     return;
   }
 
@@ -71,12 +69,12 @@ export function reportWebVitals(onPerfEntry?: (metric: Metric) => void): void {
   const reportMetric = onPerfEntry || sendToAnalytics;
 
   // Core Web Vitals
-  onCLS(reportMetric);  // Cumulative Layout Shift
-  onINP(reportMetric);  // Interaction to Next Paint (replaces FID)
-  onLCP(reportMetric);  // Largest Contentful Paint
+  onCLS(reportMetric); // Cumulative Layout Shift
+  onINP(reportMetric); // Interaction to Next Paint (replaces FID)
+  onLCP(reportMetric); // Largest Contentful Paint
 
   // Other important metrics
-  onFCP(reportMetric);  // First Contentful Paint
+  onFCP(reportMetric); // First Contentful Paint
   onTTFB(reportMetric); // Time to First Byte
 }
 
@@ -84,11 +82,11 @@ export function reportWebVitals(onPerfEntry?: (metric: Metric) => void): void {
  * Get Web Vitals thresholds for scoring
  */
 export const webVitalsThresholds = {
-  LCP: { good: 2500, poor: 4000 },      // Largest Contentful Paint (ms)
-  INP: { good: 200, poor: 500 },        // Interaction to Next Paint (ms)
-  CLS: { good: 0.1, poor: 0.25 },       // Cumulative Layout Shift (score)
-  FCP: { good: 1800, poor: 3000 },      // First Contentful Paint (ms)
-  TTFB: { good: 800, poor: 1800 },      // Time to First Byte (ms)
+  LCP: { good: 2500, poor: 4000 }, // Largest Contentful Paint (ms)
+  INP: { good: 200, poor: 500 }, // Interaction to Next Paint (ms)
+  CLS: { good: 0.1, poor: 0.25 }, // Cumulative Layout Shift (score)
+  FCP: { good: 1800, poor: 3000 }, // First Contentful Paint (ms)
+  TTFB: { good: 800, poor: 1800 }, // Time to First Byte (ms)
 } as const;
 
 type MetricName = keyof typeof webVitalsThresholds;

@@ -83,12 +83,14 @@ const accentTextColors = {
 };
 
 const tagHoverColors = {
-  violet: 'hover:bg-violet-500',
-  blue: 'hover:bg-blue-500',
-  green: 'hover:bg-green-500',
-  red: 'hover:bg-red-500',
-  yellow: 'hover:bg-yellow-500',
-  teal: 'hover:bg-teal-500',
+  violet:
+    'text-violet-200 hover:text-white hover:bg-violet-500/20 focus-visible:ring-violet-400/50',
+  blue: 'text-blue-200 hover:text-white hover:bg-blue-500/20 focus-visible:ring-blue-400/50',
+  green: 'text-green-200 hover:text-white hover:bg-green-500/20 focus-visible:ring-green-400/50',
+  red: 'text-red-200 hover:text-white hover:bg-red-500/20 focus-visible:ring-red-400/50',
+  yellow:
+    'text-yellow-200 hover:text-yellow-50 hover:bg-yellow-500/20 focus-visible:ring-yellow-400/50',
+  teal: 'text-teal-200 hover:text-white hover:bg-teal-500/20 focus-visible:ring-teal-400/50',
 };
 
 const progressBarColors = {

@@ -8,9 +8,14 @@ export interface SearchableItem {
 export interface ContentSearchProps<T extends SearchableItem> {
   /** Array of items to search through */
   items: T[];
-  /** Callback when search results change */
-  onSearch: (filtered: T[]) => void;
-  /** Optional callback when query changes (trimmed). Use to track search state. */
+  /**
+   * Callback when search results change.
+   * Receives the filtered items and search metadata (trimmed query + terms).
+   */
+  onSearch: (filtered: T[], meta?: { query: string; terms: string[] }) => void;
+  /**
+   * Optional callback when query changes (trimmed). Use to track search state.
+   */
   onQueryChange?: (query: string) => void;
   /** Fields to search within each item (supports nested paths like 'author.name') */
   searchFields?: string[];
@@ -106,6 +111,13 @@ export function ContentSearch<T extends SearchableItem>({
   // React 19: Defer filtering to keep input responsive during expensive operations
   const deferredQuery = useDeferredValue(debouncedQuery);
 
+  // Normalized query & split terms (reused for filtering + callbacks)
+  const normalizedQuery = useMemo(() => deferredQuery.trim(), [deferredQuery]);
+  const searchTerms = useMemo(
+    () => normalizedQuery.toLowerCase().split(' ').filter(Boolean),
+    [normalizedQuery]
+  );
+
   // Get nested value from object using dot notation path
   const getNestedValue = (obj: SearchableItem, path: string): unknown => {
     return path.split('.').reduce((current, key) => {
@@ -118,11 +130,9 @@ export function ContentSearch<T extends SearchableItem>({
 
   // Filter items based on search query
   const filteredItems = useMemo(() => {
-    if (!deferredQuery.trim()) {
+    if (!normalizedQuery) {
       return items;
     }
-
-    const searchTerms = deferredQuery.toLowerCase().split(' ').filter(Boolean);
 
     return items.filter((item) => {
       // Build searchable text from all specified fields
@@ -153,12 +163,12 @@ export function ContentSearch<T extends SearchableItem>({
       // All search terms must be present
       return searchTerms.every((term) => searchableText.includes(term));
     });
-  }, [items, deferredQuery, searchFields]);
+  }, [items, normalizedQuery, searchTerms, searchFields]);
 
   // Notify parent of filtered results
   useEffect(() => {
-    onSearch(filteredItems);
-  }, [filteredItems, onSearch]);
+    onSearch(filteredItems, { query: normalizedQuery, terms: searchTerms });
+  }, [filteredItems, normalizedQuery, onSearch, searchTerms]);
 
   const handleClear = () => {
     setQuery('');

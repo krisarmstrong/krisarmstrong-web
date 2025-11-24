@@ -55,7 +55,7 @@ const CaseDisplay = memo(
     const handleShareWrapper = (platform: SharePlatform): void => {
       if (!caseData) return;
       shareToPlatform(platform, caseData, window.location.href, (m: string) =>
-        console.info(`Share alert: ${m}`)
+        console.warn(`Share alert: ${m}`)
       );
     };
 
@@ -168,7 +168,7 @@ const CaseDisplay = memo(
                 {tagsArray.length > 0 && (
                   <div className="flex flex-wrap gap-2">
                     {tagsArray.map((tag, index) => (
-                      <Tag key={`${tag}-${index}`} colorScheme="blue">
+                      <Tag key={`${tag}-${index}`} colorScheme="primary">
                         {tag}
                       </Tag>
                     ))}
@@ -288,7 +288,7 @@ const CaseDisplay = memo(
                 }}
                 size="md"
                 onRate={(rating, stats) =>
-                  console.log(
+                  console.warn(
                     `Rated case ${caseData.publicId}: ${rating} stars. New average: ${stats.average_rating}`
                   )
                 }

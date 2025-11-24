@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
@@ -162,7 +163,11 @@ describe('Button', () => {
 
     it('does not trigger onClick when disabled', () => {
       const onClick = vi.fn();
-      render(<Button disabled onClick={onClick}>Click</Button>);
+      render(
+        <Button disabled onClick={onClick}>
+          Click
+        </Button>
+      );
       const button = screen.getByRole('button');
       fireEvent.click(button);
       expect(onClick).not.toHaveBeenCalled();
@@ -184,10 +189,7 @@ describe('Button', () => {
 
     it('renders both icons', () => {
       render(
-        <Button
-          leftIcon={<span>LeftIcon</span>}
-          rightIcon={<span>RightIcon</span>}
-        >
+        <Button leftIcon={<span>LeftIcon</span>} rightIcon={<span>RightIcon</span>}>
           Text
         </Button>
       );
@@ -196,9 +198,7 @@ describe('Button', () => {
     });
 
     it('applies margin to left icon when there is text', () => {
-      render(
-        <Button leftIcon={<span>LeftIcon</span>}>Text</Button>
-      );
+      render(<Button leftIcon={<span>LeftIcon</span>}>Text</Button>);
       const iconSpan = screen.getByText('LeftIcon').parentElement;
       expect(iconSpan).toHaveClass('mr-1.5', '-ml-0.5');
     });
@@ -210,9 +210,7 @@ describe('Button', () => {
     });
 
     it('applies margin to right icon when there is text', () => {
-      render(
-        <Button rightIcon={<span>RightIcon</span>}>Text</Button>
-      );
+      render(<Button rightIcon={<span>RightIcon</span>}>Text</Button>);
       const iconSpan = screen.getByText('RightIcon').parentElement;
       expect(iconSpan).toHaveClass('ml-1.5', '-mr-0.5');
     });
@@ -541,9 +539,7 @@ describe('Button', () => {
       });
 
       it('shows spinner without margin on anchor when no text', () => {
-        const { container } = render(
-          <Button as="a" href="https://example.com" isLoading />
-        );
+        const { container } = render(<Button as="a" href="https://example.com" isLoading />);
         const svg = container.querySelector('svg');
         expect(svg).not.toHaveClass('mr-2');
       });
@@ -579,9 +575,7 @@ describe('Button', () => {
       });
 
       it('does not apply left icon margin on anchor when no text', () => {
-        render(
-          <Button as="a" href="https://example.com" leftIcon={<span>LeftIcon</span>} />
-        );
+        render(<Button as="a" href="https://example.com" leftIcon={<span>LeftIcon</span>} />);
         const iconSpan = screen.getByText('LeftIcon').parentElement;
         expect(iconSpan).not.toHaveClass('mr-1.5');
       });
@@ -597,9 +591,7 @@ describe('Button', () => {
       });
 
       it('does not apply right icon margin on anchor when no text', () => {
-        render(
-          <Button as="a" href="https://example.com" rightIcon={<span>RightIcon</span>} />
-        );
+        render(<Button as="a" href="https://example.com" rightIcon={<span>RightIcon</span>} />);
         const iconSpan = screen.getByText('RightIcon').parentElement;
         expect(iconSpan).not.toHaveClass('ml-1.5');
       });
@@ -642,9 +634,7 @@ describe('Button', () => {
     });
 
     it('has gap between icon and text', () => {
-      render(
-        <Button leftIcon={<span>Icon</span>}>Text</Button>
-      );
+      render(<Button leftIcon={<span>Icon</span>}>Text</Button>);
       const button = screen.getByRole('button');
       expect(button).toHaveClass('gap-1.5');
     });
@@ -761,12 +751,7 @@ describe('Button', () => {
 
     it('combines variant, size, loading, and icons', () => {
       const { container } = render(
-        <Button
-          variant="danger"
-          size="lg"
-          isLoading
-          leftIcon={<span>Icon</span>}
-        >
+        <Button variant="danger" size="lg" isLoading leftIcon={<span>Icon</span>}>
           Delete
         </Button>
       );
@@ -777,7 +762,15 @@ describe('Button', () => {
     });
 
     it('applies all base classes to every variant', () => {
-      const variants = ['primary', 'secondary', 'danger', 'warning', 'success', 'outline', 'ghost'] as const;
+      const variants = [
+        'primary',
+        'secondary',
+        'danger',
+        'warning',
+        'success',
+        'outline',
+        'ghost',
+      ] as const;
 
       variants.forEach((variant) => {
         const { unmount } = render(<Button variant={variant}>Test</Button>);

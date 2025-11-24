@@ -35,11 +35,7 @@ class Logger {
 
     // Console output in development
     if (this.isDev) {
-      const consoleMethod = level === 'error' || level === 'fatal'
-        ? console.error
-        : level === 'warn'
-          ? console.warn
-          : console.log;
+      const consoleMethod = level === 'error' || level === 'fatal' ? console.error : console.warn;
       consoleMethod(`[${level.toUpperCase()}]`, message, context, error);
     }
 

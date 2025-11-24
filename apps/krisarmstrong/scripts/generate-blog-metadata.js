@@ -1,5 +1,4 @@
 import fs from 'fs';
-/* eslint-disable security/detect-non-literal-fs-filename, security/detect-object-injection */
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -13,9 +12,9 @@ const outputFile = path.join(__dirname, '../src/content/blog/blog-posts.json');
 const posts = [];
 
 // Read all markdown files (exclude README)
-const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.md') && f !== 'README.md');
+const files = fs.readdirSync(postsDir).filter((f) => f.endsWith('.md') && f !== 'README.md');
 
-files.forEach(filename => {
+files.forEach((filename) => {
   const filepath = path.join(postsDir, filename);
   const content = fs.readFileSync(filepath, 'utf-8');
 
@@ -24,7 +23,7 @@ files.forEach(filename => {
   const title = titleMatch ? titleMatch[1] : filename.replace('.md', '');
 
   // Extract first paragraph as excerpt
-  const lines = content.split('\n').filter(l => l.trim());
+  const lines = content.split('\n').filter((l) => l.trim());
   let excerpt = '';
   for (let i = 0; i < lines.length; i++) {
     if (!lines[i].startsWith('#') && lines[i].length > 50) {
@@ -40,9 +39,18 @@ files.forEach(filename => {
 
   // Extract month and year
   const monthMap = {
-    'jan': '01', 'feb': '02', 'mar': '03', 'apr': '04',
-    'may': '05', 'jun': '06', 'jul': '07', 'aug': '08',
-    'sep': '09', 'oct': '10', 'nov': '11', 'dec': '12'
+    jan: '01',
+    feb: '02',
+    mar: '03',
+    apr: '04',
+    may: '05',
+    jun: '06',
+    jul: '07',
+    aug: '08',
+    sep: '09',
+    oct: '10',
+    nov: '11',
+    dec: '12',
   };
 
   const month = monthYear.substring(0, 3);
@@ -86,7 +94,12 @@ files.forEach(filename => {
   }
 
   // Generate ID from filename
-  const id = filename.replace('.md', '').replace(/-jan\d{4}|-feb\d{4}|-mar\d{4}|-apr\d{4}|-may\d{4}|-jun\d{4}|-jul\d{4}|-aug\d{4}|-sep\d{4}|-oct\d{4}|-nov\d{4}|-dec\d{4}/, '');
+  const id = filename
+    .replace('.md', '')
+    .replace(
+      /-jan\d{4}|-feb\d{4}|-mar\d{4}|-apr\d{4}|-may\d{4}|-jun\d{4}|-jul\d{4}|-aug\d{4}|-sep\d{4}|-oct\d{4}|-nov\d{4}|-dec\d{4}/,
+      ''
+    );
 
   // Featured posts: Jan 2024 and Jan 2025
   const featured = filename.includes('jan2024') || filename.includes('jan2025');
@@ -99,7 +112,7 @@ files.forEach(filename => {
     author: 'Kris Armstrong',
     tags: tags.slice(0, 5), // Max 5 tags
     featured,
-    contentFile: filename
+    contentFile: filename,
   });
 });
 

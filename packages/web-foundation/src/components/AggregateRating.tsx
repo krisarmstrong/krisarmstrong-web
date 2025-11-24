@@ -78,7 +78,7 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
       }
     };
 
-    fetchData();
+    void fetchData();
   }, [itemId, itemType, ratingAPI]);
 
   const handleStarClick = async (rating: number) => {
@@ -107,7 +107,7 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
     return (
       <button
         key={index}
-        onClick={() => handleStarClick(index)}
+        onClick={() => void handleStarClick(index)}
         onMouseEnter={() => setHoveredStar(index)}
         onMouseLeave={() => setHoveredStar(null)}
         disabled={submitting}
@@ -189,7 +189,7 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
     return (
       <div className="flex items-center gap-2 animate-pulse">
         <div className="flex gap-1">
-          {[...Array(5)].map((_, i) => (
+          {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className={`${sizeClasses[size]} bg-gray-300 rounded`} />
           ))}
         </div>

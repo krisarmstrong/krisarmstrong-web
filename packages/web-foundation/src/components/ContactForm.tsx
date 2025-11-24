@@ -69,6 +69,9 @@ export interface ContactFormProps {
   cardClassName?: string;
   onSubmitSuccess?: () => void;
   onSubmitError?: (error: Error) => void;
+  telemetry?: {
+    enabled: boolean;
+  };
 }
 
 export function ContactForm({
