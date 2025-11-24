@@ -1,4 +1,4 @@
-import { FormEvent, ReactNode, useId, useState, useOptimistic } from 'react';
+import { FormEvent, ReactNode, useId, useState, useOptimistic, startTransition } from 'react';
 import { Button } from './ui/Button';
 
 const toneStyles = {
@@ -126,11 +126,15 @@ export function ContactForm({
       return;
     }
 
-    setSubmitting(true);
-    setError(null);
+    startTransition(() => {
+      setSubmitting(true);
+      setError(null);
+    });
 
     // React 19: Show optimistic success immediately for instant feedback
-    setOptimisticSent(true);
+    startTransition(() => {
+      setOptimisticSent(true);
+    });
 
     const formData = new FormData(event.currentTarget);
 
@@ -146,14 +150,20 @@ export function ContactForm({
       }
 
       event.currentTarget.reset();
-      setSent(true);
+      startTransition(() => {
+        setSent(true);
+      });
       onSubmitSuccess?.();
     } catch (err) {
       const errorObject = err instanceof Error ? err : new Error('Failed to submit contact form');
-      setError("We couldn't send your message. Please try again or email me directly.");
+      startTransition(() => {
+        setError("We couldn't send your message. Please try again or email me directly.");
+      });
       onSubmitError?.(errorObject);
     } finally {
-      setSubmitting(false);
+      startTransition(() => {
+        setSubmitting(false);
+      });
     }
   };
 
