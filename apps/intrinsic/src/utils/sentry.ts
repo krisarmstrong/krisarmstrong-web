@@ -12,7 +12,7 @@ export function initSentry() {
   // Only initialize if DSN is provided and not in development
   if (!dsn || import.meta.env.DEV) {
     if (!dsn) {
-      console.info('Sentry DSN not configured - error tracking disabled');
+      console.warn('Sentry DSN not configured - error tracking disabled');
     }
     return;
   }

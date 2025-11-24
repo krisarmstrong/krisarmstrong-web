@@ -10,6 +10,7 @@ export default function Contact() {
             Ready to begin your transformation? Fill out the form below and I'll get back to you
             within 24 hours.
           </p>
+          <div className="accent-divider mt-8" aria-hidden="true" />
         </div>
 
         <div className="bg-surface-raised rounded-2xl shadow-lg p-8 md:p-12 border-t-4 border-brand-accent">
@@ -18,7 +19,7 @@ export default function Contact() {
             <div>
               <label
                 htmlFor="fullName"
-                className="block text-sm font-semibold text-primary-dark mb-2"
+                className="block text-sm font-semibold text-text-primary mb-2"
               >
                 Full Name *
               </label>
@@ -27,14 +28,14 @@ export default function Contact() {
                 id="fullName"
                 name="fullName"
                 required
-                className="w-full px-4 py-3 border-2 border-surface-border rounded-lg focus:border-brand-accent focus:ring-0 outline-none transition-colors"
+                className="w-full px-4 py-3 border-2 border-surface-border rounded-lg bg-surface-raised focus:border-brand-accent focus:ring-0 outline-none transition-colors"
                 placeholder="John Doe"
               />
             </div>
 
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-semibold text-primary-dark mb-2">
+              <label htmlFor="email" className="block text-sm font-semibold text-text-primary mb-2">
                 Email Address *
               </label>
               <input
@@ -42,14 +43,14 @@ export default function Contact() {
                 id="email"
                 name="email"
                 required
-                className="w-full px-4 py-3 border-2 border-surface-border rounded-lg focus:border-brand-accent focus:ring-0 outline-none transition-colors"
+                className="w-full px-4 py-3 border-2 border-surface-border rounded-lg bg-surface-raised focus:border-brand-accent focus:ring-0 outline-none transition-colors"
                 placeholder="john@example.com"
               />
             </div>
 
             {/* Phone Number */}
             <div>
-              <label htmlFor="phone" className="block text-sm font-semibold text-primary-dark mb-2">
+              <label htmlFor="phone" className="block text-sm font-semibold text-text-primary mb-2">
                 Phone Number *
               </label>
               <input
@@ -57,14 +58,14 @@ export default function Contact() {
                 id="phone"
                 name="phone"
                 required
-                className="w-full px-4 py-3 border-2 border-surface-border rounded-lg focus:border-brand-accent focus:ring-0 outline-none transition-colors"
+                className="w-full px-4 py-3 border-2 border-surface-border rounded-lg bg-surface-raised focus:border-brand-accent focus:ring-0 outline-none transition-colors"
                 placeholder="(555) 123-4567"
               />
             </div>
 
             {/* Date of Birth */}
             <div>
-              <label htmlFor="dob" className="block text-sm font-semibold text-primary-dark mb-2">
+              <label htmlFor="dob" className="block text-sm font-semibold text-text-primary mb-2">
                 Date of Birth *
               </label>
               <input
@@ -72,7 +73,7 @@ export default function Contact() {
                 id="dob"
                 name="dob"
                 required
-                className="w-full px-4 py-3 border-2 border-surface-border rounded-lg focus:border-brand-accent focus:ring-0 outline-none transition-colors"
+                className="w-full px-4 py-3 border-2 border-surface-border rounded-lg bg-surface-raised focus:border-brand-accent focus:ring-0 outline-none transition-colors"
               />
             </div>
 
@@ -80,7 +81,7 @@ export default function Contact() {
             <div>
               <label
                 htmlFor="gender"
-                className="block text-sm font-semibold text-primary-dark mb-2"
+                className="block text-sm font-semibold text-text-primary mb-2"
               >
                 Gender *
               </label>
@@ -88,7 +89,7 @@ export default function Contact() {
                 id="gender"
                 name="gender"
                 required
-                className="w-full px-4 py-3 border-2 border-surface-border rounded-lg focus:border-brand-accent focus:ring-0 outline-none transition-colors"
+                className="w-full px-4 py-3 border-2 border-surface-border rounded-lg bg-surface-raised focus:border-brand-accent focus:ring-0 outline-none transition-colors"
               >
                 <option value="">Select...</option>
                 <option value="male">Male</option>
@@ -102,7 +103,7 @@ export default function Contact() {
             <div>
               <label
                 htmlFor="message"
-                className="block text-sm font-semibold text-primary-dark mb-2"
+                className="block text-sm font-semibold text-text-primary mb-2"
               >
                 Message *
               </label>
@@ -111,7 +112,7 @@ export default function Contact() {
                 name="message"
                 rows={6}
                 required
-                className="w-full px-4 py-3 border-2 border-border rounded-lg focus:border-accent focus:ring-0 outline-none transition-colors resize-none"
+                className="w-full px-4 py-3 border-2 border-surface-border rounded-lg bg-surface-raised focus:border-brand-accent focus:ring-0 outline-none transition-colors resize-none"
                 placeholder="Tell me about your goals and what you're looking to achieve..."
               ></textarea>
             </div>
@@ -120,7 +121,7 @@ export default function Contact() {
             <div>
               <button
                 type="submit"
-                className="w-full bg-brand-accent text-primary-dark font-semibold py-4 rounded-lg hover:opacity-90 transition-opacity text-lg shadow-lg"
+                className="w-full bg-brand-accent text-text-inverse font-semibold py-4 rounded-lg hover:shadow-xl hover:-translate-y-0.5 transition-all text-lg shadow-lg"
               >
                 Send Message
               </button>
