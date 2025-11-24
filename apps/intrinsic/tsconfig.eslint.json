@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["vite/client", "react", "node"]
+  },
+  "include": [
+    "src",
+    "src/__tests__",
+    "src/__tests__/**/*",
+    "src/**/__tests__/**/*",
+    "scripts",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "tsconfig.node.json",
+    "vitest.shims.d.ts"
+  ],
+  "exclude": []
+}

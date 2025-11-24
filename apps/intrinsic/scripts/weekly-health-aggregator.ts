@@ -14,16 +14,8 @@ function writeReport(repoRoot: string, md: string) {
 function main() {
   const repoRoot = process.cwd();
   let token = '';
-  const tPathCts = path.join(repoRoot, 'scripts', 'token-usage-test.cts');
   const tPathTs = path.join(repoRoot, 'scripts', 'token-usage-test.ts');
-  if (fs.existsSync(tPathCts)) {
-    try {
-      token = execSync(`node ${tPathCts}`, { stdio: 'pipe' }).toString();
-    } catch (e: unknown) {
-      const err = e as { stdout?: Buffer; stderr?: Buffer };
-      token = (err.stdout?.toString() || '') + (err.stderr?.toString() || '');
-    }
-  } else if (fs.existsSync(tPathTs)) {
+  if (fs.existsSync(tPathTs)) {
     try {
       token = execSync(`node ${tPathTs}`, { stdio: 'pipe' }).toString();
     } catch (e: unknown) {

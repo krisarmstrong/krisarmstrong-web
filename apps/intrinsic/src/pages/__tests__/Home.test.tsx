@@ -3,6 +3,7 @@
  * Tests content, structure, and links
  */
 
+import type { ReactElement, ReactNode } from 'react';
 import { describe, it, expect, vi } from 'vitest';
 import Home from '../Home';
 
@@ -15,9 +16,7 @@ vi.mock('lucide-react', () => ({
 
 // Mock React Router
 vi.mock('react-router-dom', () => ({
-  Link: ({ children, to }: { children: React.ReactNode; to: string }) => (
-    <a href={to}>{children}</a>
-  ),
+  Link: ({ children, to }: { children: ReactNode; to: string }) => <a href={to}>{children}</a>,
 }));
 
 describe('Home', () => {
@@ -32,7 +31,7 @@ describe('Home', () => {
   });
 
   it('renders sections with expected structure', () => {
-    const component = Home();
+    const component = Home() as ReactElement<{ children?: ReactNode }>;
     expect(component.props.children).toBeTruthy();
   });
 });

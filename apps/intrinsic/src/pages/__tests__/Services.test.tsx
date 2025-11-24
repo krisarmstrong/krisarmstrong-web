@@ -3,14 +3,13 @@
  * Tests component structure and exports
  */
 
+import type { ReactElement, ReactNode } from 'react';
 import { describe, it, expect, vi } from 'vitest';
 import Services from '../Services';
 
 // Mock React Router
 vi.mock('react-router-dom', () => ({
-  Link: ({ children, to }: { children: React.ReactNode; to: string }) => (
-    <a href={to}>{children}</a>
-  ),
+  Link: ({ children, to }: { children: ReactNode; to: string }) => <a href={to}>{children}</a>,
 }));
 
 describe('Services', () => {
@@ -25,7 +24,7 @@ describe('Services', () => {
   });
 
   it('renders sections with expected structure', () => {
-    const component = Services();
+    const component = Services() as ReactElement<{ children?: ReactNode }>;
     expect(component.props.children).toBeTruthy();
   });
 });
