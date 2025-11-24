@@ -2,9 +2,16 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import rehypeSanitize from 'rehype-sanitize';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Linkedin, Twitter, Facebook } from 'lucide-react';
 import { AggregateRating, LoadingPage, ErrorPage } from '@krisarmstrong/web-foundation';
-import { getBlogPostBySlug, type BlogPost as BlogPostType, getRatingStats, submitRating, getUserRating } from '../lib/supabase';
+import {
+  getBlogPostBySlug,
+  type BlogPost as BlogPostType,
+  getRatingStats,
+  submitRating,
+  getUserRating,
+} from '../lib/supabase';
+import { shareToPlatform } from '../lib/share';
 
 export default function BlogPost() {
   const { id } = useParams<{ id: string }>();
@@ -95,8 +102,34 @@ export default function BlogPost() {
           <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{post.content}</ReactMarkdown>
         </div>
 
-        {/* Rating Section */}
-        <div className="mt-8 p-6 bg-surface-raised rounded-2xl border border-surface-border">
+        {/* Share + Rating Section */}
+        <div className="mt-8 p-6 bg-surface-raised rounded-2xl border border-surface-border space-y-4">
+          <div className="flex items-center gap-3 flex-wrap">
+            <span className="text-sm text-text-muted">Share:</span>
+            {[
+              { platform: 'linkedin', icon: <Linkedin size={18} />, label: 'LinkedIn' },
+              { platform: 'twitter', icon: <Twitter size={18} />, label: 'Twitter' },
+              { platform: 'facebook', icon: <Facebook size={18} />, label: 'Facebook' },
+            ].map(({ platform, icon, label }) => (
+              <button
+                key={platform}
+                onClick={() =>
+                  shareToPlatform(
+                    platform as 'linkedin' | 'twitter' | 'facebook',
+                    post,
+                    window.location.href,
+                    console.info
+                  )
+                }
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-surface-border text-text-primary hover:bg-surface-hover transition-colors text-sm"
+                aria-label={`Share on ${label}`}
+              >
+                {icon}
+                <span>{label}</span>
+              </button>
+            ))}
+          </div>
+
           <AggregateRating
             itemId={post.slug}
             itemType="blog"
@@ -108,7 +141,9 @@ export default function BlogPost() {
             starColor="violet-400"
             size="md"
             onRate={(rating, stats) => {
-              console.log(`User rated post ${post.slug}: ${rating} stars. New average: ${stats.average_rating}`);
+              console.log(
+                `User rated post ${post.slug}: ${rating} stars. New average: ${stats.average_rating}`
+              );
             }}
           />
         </div>
