@@ -1,8 +1,10 @@
 ---
-title: "🟡 MEDIUM: Restore deleted documentation and standardize docs across apps"
+title: '🟡 MEDIUM: Restore deleted documentation and standardize docs across apps'
 labels: documentation, medium-priority, intrinsic
 assignees: krisarmstrong
 ---
+
+**Status: CLOSED (2025-11-24) — Core docs restored and expanded (README, SETUP, ARCHITECTURE, THEMING, TESTING, SECURITY, CONTRIBUTING, RELEASE_PLAN).**
 
 ## Priority: MEDIUM 🟡
 
@@ -11,6 +13,7 @@ assignees: krisarmstrong
 ## Current State
 
 Recent git deletions in Intrinsic:
+
 ```
 D apps/intrinsic/ARCHITECTURE.md
 D apps/intrinsic/CHANGELOG.md
@@ -21,6 +24,7 @@ D apps/intrinsic/THEMING.md
 ```
 
 Also deleted in web-foundation:
+
 ```
 D packages/web-foundation/ARCHITECTURE.md
 D packages/web-foundation/CHANGELOG.md
@@ -31,15 +35,16 @@ D packages/web-foundation/THEMING.md
 
 ### Documentation Comparison
 
-| Doc Type | Root | Intrinsic | KrisArmstrong | WiFiVigilante | web-foundation |
-|----------|------|-----------|---------------|---------------|----------------|
-| README | ✅ | ✅ | ✅ | ✅ | ✅ |
-| CONTRIBUTING | ✅ | ❌ Deleted | ✅ | ✅ | ❌ Deleted |
-| CHANGELOG | ❌ | ❌ Deleted | ✅ | ✅ | ❌ Deleted |
-| THEMING | ❌ | ❌ Deleted | ✅ | ✅ | ❌ Deleted |
-| SECURITY | ✅ | ❌ Deleted | ❌ | ❌ | ❌ Deleted |
+| Doc Type     | Root | Intrinsic  | KrisArmstrong | WiFiVigilante | web-foundation |
+| ------------ | ---- | ---------- | ------------- | ------------- | -------------- |
+| README       | ✅   | ✅         | ✅            | ✅            | ✅             |
+| CONTRIBUTING | ✅   | ❌ Deleted | ✅            | ✅            | ❌ Deleted     |
+| CHANGELOG    | ❌   | ❌ Deleted | ✅            | ✅            | ❌ Deleted     |
+| THEMING      | ❌   | ❌ Deleted | ✅            | ✅            | ❌ Deleted     |
+| SECURITY     | ✅   | ❌ Deleted | ❌            | ❌            | ❌ Deleted     |
 
 ## Problems
+
 1. Intrinsic missing important documentation
 2. Inconsistent docs across apps
 3. New contributors lack guidance
@@ -56,6 +61,7 @@ D packages/web-foundation/THEMING.md
 ### Step 1: Decide what stays at root
 
 Keep at root (applies to all apps):
+
 - `CONTRIBUTING.md` ✅ (already exists)
 - `SECURITY.md` ✅ (already exists)
 - `SETUP.md` ✅ (already exists)
@@ -66,12 +72,14 @@ Keep at root (applies to all apps):
 Each app should have:
 
 #### `apps/*/README.md` (already exists, ensure completeness)
+
 - App overview
 - Features
 - Development setup
 - Link to root docs
 
 #### `apps/*/THEMING.md` (create/restore)
+
 - App-specific theme configuration
 - Color palette
 - Dark/light mode examples
@@ -87,11 +95,13 @@ This app uses the sage/earth tone theme from web-foundation.
 ## Theme Colors
 
 ### Light Mode
+
 - Primary: Sage green (#8B9A7E)
 - Accent: Warm terracotta (#D4907B)
 - Background: Warm white (#FAF9F6)
 
 ### Dark Mode
+
 - Primary: Muted sage (#6B7A5E)
 - Accent: Deep terracotta (#B4705B)
 - Background: Dark charcoal (#2A2A2A)
@@ -102,13 +112,14 @@ Theme is defined in `src/index.css`:
 
 \`\`\`css
 @theme {
-  --color-brand-primary: #8B9A7E;
-  --color-brand-accent: #D4907B;
-  /* ... */
+--color-brand-primary: #8B9A7E;
+--color-brand-accent: #D4907B;
+/_ ... _/
 }
 \`\`\`
 
 For more details on the theming system, see:
+
 - [web-foundation theming docs](../../packages/web-foundation/src/themes/README.md)
 - [Root README - Theming System](../../README.md#theming-system)
 ```
@@ -137,6 +148,7 @@ All app READMEs should have:
 **For apps:** Use semantic-release to auto-generate
 
 Ensure each app has:
+
 - Version in `package.json`
 - Semantic-release configured
 - CI workflow triggers releases
@@ -204,6 +216,7 @@ All apps use CSS variables for theming with dark/light mode support.
 ## Implementation Checklist
 
 ### Root Documentation
+
 - [ ] Verify CONTRIBUTING.md is complete
 - [ ] Verify SECURITY.md is complete
 - [ ] Verify SETUP.md is complete
@@ -211,26 +224,31 @@ All apps use CSS variables for theming with dark/light mode support.
 - [ ] Create docs/TESTING.md
 
 ### Web Foundation
+
 - [ ] Create packages/web-foundation/src/themes/README.md
 - [ ] Restore/update packages/web-foundation/README.md
 - [ ] Ensure API.md is complete
 
 ### Intrinsic App
+
 - [ ] Create apps/intrinsic/THEMING.md
 - [ ] Update apps/intrinsic/README.md with doc links
 - [ ] Remove outdated references
 
 ### KrisArmstrong App
+
 - [ ] Verify apps/krisarmstrong/THEMING.md
 - [ ] Update apps/krisarmstrong/README.md
 - [ ] Ensure CHANGELOG is managed by semantic-release
 
 ### WiFiVigilante App
+
 - [ ] Verify apps/wifivigilante/THEMING.md
 - [ ] Update apps/wifivigilante/README.md
 - [ ] Ensure CHANGELOG is managed by semantic-release
 
 ### All Apps
+
 - [ ] Link to root CONTRIBUTING.md
 - [ ] Link to root SECURITY.md
 - [ ] Link to root SETUP.md
@@ -249,6 +267,7 @@ All apps use CSS variables for theming with dark/light mode support.
 - `README.md` (link to new docs)
 
 ## Success Criteria
+
 - [ ] All apps have consistent documentation structure
 - [ ] No missing critical documentation
 - [ ] Clear links between root and app docs
@@ -256,6 +275,7 @@ All apps use CSS variables for theming with dark/light mode support.
 - [ ] Easy for new contributors to find information
 
 ## Benefits
+
 - **Clarity:** Clear documentation hierarchy
 - **Consistency:** Same structure across apps
 - **Maintainability:** Update common docs once

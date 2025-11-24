@@ -1,8 +1,10 @@
 ---
-title: "🟠 HIGH: Improve test coverage and add coverage thresholds to CI"
+title: '🟠 HIGH: Improve test coverage and add coverage thresholds to CI'
 labels: testing, high-priority, quality, ci
 assignees: krisarmstrong
 ---
+
+**Status: CLOSED (2025-11-24) — CI now runs `npm run test:coverage --workspaces` with Vitest thresholds (80% lines/branches/functions/statements) and uploads coverage from all workspace reports.**
 
 ## Priority: HIGH 🟠
 
@@ -16,14 +18,16 @@ assignees: krisarmstrong
 - **CI coverage checks:** None
 
 ### Test Distribution
-| Package | Test Files | Coverage Command | Thresholds |
-|---------|-----------|------------------|------------|
-| Intrinsic | ~5 | ✅ | ❌ |
-| KrisArmstrong | ~7 | ✅ | ❌ |
-| WiFiVigilante | ~7 | ✅ | ❌ |
-| web-foundation | 16 | ✅ | ❌ |
+
+| Package        | Test Files | Coverage Command | Thresholds |
+| -------------- | ---------- | ---------------- | ---------- |
+| Intrinsic      | ~5         | ✅               | ❌         |
+| KrisArmstrong  | ~7         | ✅               | ❌         |
+| WiFiVigilante  | ~7         | ✅               | ❌         |
+| web-foundation | 16         | ✅               | ❌         |
 
 ## Problems
+
 1. Unknown coverage percentage
 2. No minimum coverage enforcement
 3. PRs can merge without tests
@@ -219,6 +223,7 @@ export { default as userEvent } from '@testing-library/user-event';
 Focus on critical paths:
 
 **Priority 1 (Critical):**
+
 - [ ] All page components
 - [ ] Form validation and submission
 - [ ] Authentication flows (if any)
@@ -226,6 +231,7 @@ Focus on critical paths:
 - [ ] Theme switching logic
 
 **Priority 2 (Important):**
+
 - [ ] All shared UI components
 - [ ] Routing logic
 - [ ] Error boundaries
@@ -233,6 +239,7 @@ Focus on critical paths:
 - [ ] Navigation components
 
 **Priority 3 (Nice to have):**
+
 - [ ] Utility functions
 - [ ] Hooks
 - [ ] Constants/config
@@ -270,6 +277,7 @@ test.describe('Home Page', () => {
 ## Testing Checklist
 
 ### Setup
+
 - [ ] Measure baseline coverage for all packages
 - [ ] Add coverage thresholds to configs
 - [ ] Update CI to enforce coverage
@@ -277,12 +285,14 @@ test.describe('Home Page', () => {
 - [ ] Export test utilities from web-foundation
 
 ### Coverage Targets
+
 - [ ] web-foundation: >80% coverage
 - [ ] Intrinsic: >80% coverage
 - [ ] KrisArmstrong: >80% coverage
 - [ ] WiFiVigilante: >80% coverage
 
 ### Test Types
+
 - [ ] Unit tests for all components
 - [ ] Integration tests for user flows
 - [ ] E2E tests with Playwright
@@ -290,6 +300,7 @@ test.describe('Home Page', () => {
 - [ ] Visual regression tests (optional)
 
 ### CI/CD
+
 - [ ] Coverage reports generated in CI
 - [ ] Codecov integration working
 - [ ] PRs blocked if coverage drops
@@ -298,6 +309,7 @@ test.describe('Home Page', () => {
 ## Files to Modify
 
 ### Update
+
 - `apps/intrinsic/vitest.config.ts` (add thresholds)
 - `apps/krisarmstrong/vitest.config.ts` (add thresholds)
 - `apps/wifivigilante/vitest.config.ts` (add thresholds)
@@ -306,15 +318,18 @@ test.describe('Home Page', () => {
 - `package.json` (coverage scripts)
 
 ### Create
+
 - `packages/web-foundation/src/test-utils/index.ts`
 - `apps/intrinsic/e2e/` (E2E tests)
 - `apps/krisarmstrong/e2e/` (E2E tests)
 - `apps/wifivigilante/e2e/` (E2E tests)
 
 ### Add Tests
+
 - Multiple new test files across all packages
 
 ## Success Criteria
+
 - [ ] All packages >80% coverage
 - [ ] CI fails if coverage drops below threshold
 - [ ] Coverage reports visible in PRs
@@ -323,6 +338,7 @@ test.describe('Home Page', () => {
 - [ ] Developer documentation for testing
 
 ## Benefits
+
 - **Quality assurance:** Catch bugs before production
 - **Confidence:** Safe to refactor with test safety net
 - **Documentation:** Tests serve as usage examples

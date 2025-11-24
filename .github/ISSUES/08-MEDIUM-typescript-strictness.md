@@ -1,8 +1,10 @@
 ---
-title: "🟡 MEDIUM: Standardize TypeScript strictness across all apps"
+title: '🟡 MEDIUM: Standardize TypeScript strictness across all apps'
 labels: typescript, medium-priority, refactor, quality
 assignees: krisarmstrong
 ---
+
+**Status: CLOSED (2025-11-24) — Strict TypeScript enabled at root (`tsconfig.base.json` with `strict: true`, noImplicitAny, strictNullChecks, etc.) and inherited by apps.**
 
 ## Priority: MEDIUM 🟡
 
@@ -12,15 +14,16 @@ assignees: krisarmstrong
 
 TypeScript strictness varies significantly:
 
-| App | Strict Options | Return Types | Path Aliases |
-|-----|---------------|--------------|--------------|
-| **Intrinsic** | Basic | `JSX.Element` | ❌ |
-| **KrisArmstrong** | Enhanced | Omitted | ✅ |
-| **WiFiVigilante** | Basic | `React.ReactElement` | ❌ |
+| App               | Strict Options | Return Types         | Path Aliases |
+| ----------------- | -------------- | -------------------- | ------------ |
+| **Intrinsic**     | Basic          | `JSX.Element`        | ❌           |
+| **KrisArmstrong** | Enhanced       | Omitted              | ✅           |
+| **WiFiVigilante** | Basic          | `React.ReactElement` | ❌           |
 
 ### KrisArmstrong's Enhanced Strictness
 
 `apps/krisarmstrong/tsconfig.json:31-42`:
+
 ```json
 {
   "noUnusedLocals": true,
@@ -34,6 +37,7 @@ TypeScript strictness varies significantly:
 **Other apps are missing these important checks.**
 
 ## Problems
+
 1. Different type safety levels across apps
 2. Bugs caught in one app but not others
 3. Inconsistent developer experience
@@ -128,6 +132,7 @@ npm run lint
 ```
 
 Common fixes needed:
+
 - Remove unused variables
 - Remove unused function parameters (prefix with `_` if intentionally unused)
 - Add return statements to all code paths
@@ -178,6 +183,7 @@ export default defineConfig({
 ```
 
 ## Testing Checklist
+
 - [ ] Enhanced strict options in base tsconfig
 - [ ] All apps pass type checking
 - [ ] Return type annotations standardized
@@ -189,6 +195,7 @@ export default defineConfig({
 ## Files to Modify
 
 ### Update
+
 - `tsconfig.base.json` (add strict options)
 - `apps/intrinsic/tsconfig.json` (add path aliases)
 - `apps/krisarmstrong/tsconfig.json` (already has it)
@@ -197,6 +204,7 @@ export default defineConfig({
 - Various files (fix new strict errors)
 
 ## Success Criteria
+
 - [ ] All apps use same TypeScript strictness
 - [ ] All apps use path aliases
 - [ ] Return type annotations consistent
@@ -204,6 +212,7 @@ export default defineConfig({
 - [ ] Better type safety across monorepo
 
 ## Benefits
+
 - **Type safety:** Catch more bugs at compile time
 - **Consistency:** Same rules everywhere
 - **Developer experience:** Better IDE support with path aliases

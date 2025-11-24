@@ -1,8 +1,10 @@
 ---
-title: "🟢 LOW: Standardize code style (quotes, class names, formatting)"
+title: '🟢 LOW: Standardize code style (quotes, class names, formatting)'
 labels: code-style, low-priority, refactor, dx
 assignees: krisarmstrong
 ---
+
+**Status: CLOSED (2025-11-24) — ESLint + Prettier standardized via root configs and lint-staged; consistent formatting enforced across workspaces.**
 
 ## Priority: LOW 🟢
 
@@ -13,19 +15,21 @@ assignees: krisarmstrong
 ### 1. Quote Style Inconsistency
 
 **Import quotes:**
+
 - Intrinsic: Mix of single and double quotes
 - KrisArmstrong: Predominantly double quotes
 - WiFiVigilante: Mix of single and double quotes
 
 ```typescript
 // Inconsistent
-import Footer from './components/Footer.tsx';  // Single quotes
-import Footer from "./components/Footer";      // Double quotes
+import Footer from './components/Footer.tsx'; // Single quotes
+import Footer from './components/Footer'; // Double quotes
 ```
 
 ### 2. CSS Class Name Inconsistency
 
 Different class names for same concept:
+
 - `bg-surface-base` (Intrinsic/KrisArmstrong)
 - `bg-surface` (WiFiVigilante)
 
@@ -38,6 +42,7 @@ Different class names for same concept:
 ## Recommended Standards
 
 ### Quote Style
+
 **Standard:** Double quotes for strings, single quotes for JSX attributes (Prettier default)
 
 ```typescript
@@ -50,6 +55,7 @@ const message = "Hello, world!";
 ```
 
 ### CSS Class Names
+
 **Standard:** Follow Tailwind conventions, use descriptive names
 
 ```css
@@ -60,6 +66,7 @@ bg-surface-hover  // Hover states
 ```
 
 ### TypeScript Return Types
+
 **Standard:** Let TypeScript infer return types for components (unless complex)
 
 ```typescript
@@ -120,6 +127,7 @@ pnpm-lock.yaml
 ### Step 4: Fix CSS class names
 
 Search and replace:
+
 ```bash
 # WiFiVigilante - standardize surface classes
 find apps/wifivigilante/src -type f -name "*.tsx" -exec sed -i '' 's/bg-surface"/bg-surface-base"/g' {} +
@@ -156,17 +164,13 @@ Ensure `.lintstagedrc.json` includes formatting:
 
 ```json
 {
-  "*.{js,jsx,ts,tsx}": [
-    "eslint --fix",
-    "prettier --write"
-  ],
-  "*.{json,md,yml,yaml}": [
-    "prettier --write"
-  ]
+  "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
+  "*.{json,md,yml,yaml}": ["prettier --write"]
 }
 ```
 
 ## Testing Checklist
+
 - [ ] Prettier configured
 - [ ] All files formatted
 - [ ] CSS class names standardized
@@ -178,18 +182,22 @@ Ensure `.lintstagedrc.json` includes formatting:
 ## Files to Modify
 
 ### Create/Update
+
 - `.prettierrc` (standardize config)
 - `.prettierignore` (exclude build artifacts)
 
 ### Format (automated)
+
 - All `.ts`, `.tsx`, `.js`, `.jsx` files
 - All `.json`, `.yml`, `.yaml` files (except lock files)
 
 ### Manual fixes
+
 - CSS class names (search and replace)
 - Return type annotations (optional, low priority)
 
 ## Success Criteria
+
 - [ ] Consistent quote style across all files
 - [ ] Consistent CSS class naming
 - [ ] Prettier enforced in CI
@@ -197,6 +205,7 @@ Ensure `.lintstagedrc.json` includes formatting:
 - [ ] No manual formatting needed
 
 ## Benefits
+
 - **Consistency:** Same style everywhere
 - **Automation:** No manual formatting
 - **DX:** Focus on logic, not style

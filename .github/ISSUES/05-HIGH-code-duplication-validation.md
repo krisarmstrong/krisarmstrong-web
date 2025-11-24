@@ -1,8 +1,10 @@
 ---
-title: "🟠 HIGH: Move duplicate validation utilities to web-foundation (saves ~400 lines)"
+title: '🟠 HIGH: Move duplicate validation utilities to web-foundation (saves ~400 lines)'
 labels: code-duplication, high-priority, refactor, web-foundation
 assignees: krisarmstrong
 ---
+
+**Status: CLOSED (2025-11-24) — Shared validation utilities now live in `packages/web-foundation/src/utils/validation.ts`; app-specific duplicates removed.**
 
 ## Priority: HIGH 🟠
 
@@ -11,12 +13,14 @@ assignees: krisarmstrong
 ## Current State
 
 Validation utilities are duplicated in two apps:
+
 - `apps/intrinsic/src/utils/validation.ts` (292 lines)
 - `apps/wifivigilante/src/utils/validation.ts` (154 lines)
 
 ## Duplicated Functions
 
 ### Generic validators (should be shared):
+
 - `validateEmail()`
 - `validatePhone()`
 - `validateName()`
@@ -27,6 +31,7 @@ Validation utilities are duplicated in two apps:
 - `sanitizeInput()`
 
 ### App-specific (keep in apps):
+
 - `validateServiceSelection()` (intrinsic only)
 - `validateCaseData()` (wifivigilante only)
 
@@ -143,11 +148,56 @@ export function validateCity(city: string): ValidationResult {
  */
 export function validateState(state: string): ValidationResult {
   const validStates = [
-    'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
-    'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
-    'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
-    'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
-    'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY',
+    'AL',
+    'AK',
+    'AZ',
+    'AR',
+    'CA',
+    'CO',
+    'CT',
+    'DE',
+    'FL',
+    'GA',
+    'HI',
+    'ID',
+    'IL',
+    'IN',
+    'IA',
+    'KS',
+    'KY',
+    'LA',
+    'ME',
+    'MD',
+    'MA',
+    'MI',
+    'MN',
+    'MS',
+    'MO',
+    'MT',
+    'NE',
+    'NV',
+    'NH',
+    'NJ',
+    'NM',
+    'NY',
+    'NC',
+    'ND',
+    'OH',
+    'OK',
+    'OR',
+    'PA',
+    'RI',
+    'SC',
+    'SD',
+    'TN',
+    'TX',
+    'UT',
+    'VT',
+    'VA',
+    'WA',
+    'WV',
+    'WI',
+    'WY',
   ];
 
   const upperState = state.toUpperCase().trim();
@@ -229,6 +279,7 @@ export function validateLength(
 ### Step 2: Export from web-foundation
 
 Update `packages/web-foundation/src/index.ts`:
+
 ```typescript
 // ... existing exports
 export * from './utils/validation';
@@ -237,6 +288,7 @@ export * from './utils/validation';
 ### Step 3: Update Intrinsic
 
 Replace `apps/intrinsic/src/utils/validation.ts` with:
+
 ```typescript
 // Re-export shared validators
 export {
@@ -262,6 +314,7 @@ export function validateServiceSelection(service: string): ValidationResult {
 ### Step 4: Update WiFiVigilante
 
 Replace `apps/wifivigilante/src/utils/validation.ts` with:
+
 ```typescript
 // Re-export shared validators
 export {
@@ -298,6 +351,7 @@ npm test
 ```
 
 ## Testing Checklist
+
 - [ ] Shared validation module created
 - [ ] Exported from web-foundation
 - [ ] Intrinsic uses shared validators
@@ -307,12 +361,14 @@ npm test
 - [ ] Type checking passes
 
 ## Files to Modify
+
 - **Create:** `packages/web-foundation/src/utils/validation.ts`
 - **Update:** `packages/web-foundation/src/index.ts`
 - **Update:** `apps/intrinsic/src/utils/validation.ts` (reduce to re-exports + app-specific)
 - **Update:** `apps/wifivigilante/src/utils/validation.ts` (reduce to re-exports + app-specific)
 
 ## Success Criteria
+
 - [ ] ~400 lines of code removed
 - [ ] Single source of truth for validation
 - [ ] All apps use same validation logic
@@ -320,6 +376,7 @@ npm test
 - [ ] No functionality regression
 
 ## Benefits
+
 - Code reduction: ~400 lines → ~50 lines + shared module
 - Consistency: Same validation across all apps
 - Maintainability: Fix bugs in one place

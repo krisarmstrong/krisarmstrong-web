@@ -176,9 +176,9 @@ export function ContentSearch<T extends SearchableItem>({
             placeholder={placeholder}
             className={`
               w-full ${showIcon ? 'pl-12' : 'pl-4'} pr-12 py-3
-              bg-gray-900/50 backdrop-blur-sm
-              border border-gray-700 rounded-lg
-              text-white placeholder-gray-500
+              bg-surface-raised backdrop-blur-sm
+              border border-surface-border rounded-lg
+              text-text-primary placeholder-text-muted
               transition-all duration-200
               ${colors.border} ${colors.ring}
               focus:outline-none focus:ring-2
@@ -187,10 +187,10 @@ export function ContentSearch<T extends SearchableItem>({
           {query && (
             <button
               onClick={handleClear}
-              className="absolute right-4 p-1 hover:bg-gray-700 rounded transition-colors"
+              className="absolute right-4 p-1 hover:bg-surface-hover rounded transition-colors"
               aria-label="Clear search"
             >
-              <X size={18} className="text-gray-400 hover:text-white" />
+              <X size={18} className="text-text-muted hover:text-text-primary" />
             </button>
           )}
         </div>
@@ -199,10 +199,10 @@ export function ContentSearch<T extends SearchableItem>({
       {/* Result Count */}
       {showResultCount && debouncedQuery && (
         <div className="flex items-center gap-2 text-sm">
-          <span className="text-gray-400">
+          <span className="text-text-muted">
             Found {filteredItems.length} {filteredItems.length === 1 ? 'result' : 'results'}
           </span>
-          {filteredItems.length > 0 && <span className="text-gray-600">•</span>}
+          {filteredItems.length > 0 && <span className="text-text-muted opacity-50">•</span>}
           {filteredItems.length > 0 && (
             <span className={`${colors.text} font-medium`}>&quot;{debouncedQuery}&quot;</span>
           )}
@@ -211,12 +211,12 @@ export function ContentSearch<T extends SearchableItem>({
 
       {/* No Results Message */}
       {showResultCount && debouncedQuery && filteredItems.length === 0 && (
-        <div className={`p-4 rounded-lg ${colors.bg} border border-gray-700`}>
-          <p className="text-sm text-gray-400 text-center">
+        <div className={`p-4 rounded-lg ${colors.bg} border border-surface-border`}>
+          <p className="text-sm text-text-muted text-center">
             No results found for{' '}
             <span className={`${colors.text} font-medium`}>&quot;{debouncedQuery}&quot;</span>
           </p>
-          <p className="text-xs text-gray-500 text-center mt-1">
+          <p className="text-xs text-text-muted opacity-75 text-center mt-1">
             Try different keywords or{' '}
             <button onClick={handleClear} className={`${colors.text} hover:underline`}>
               clear search

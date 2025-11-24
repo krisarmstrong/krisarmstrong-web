@@ -117,10 +117,10 @@ const CaseDisplay = memo(
           : error?.message ||
             `Could not load ${pageTitle ? pageTitle.toLowerCase() : 'the requested content'}. Please try again later.`;
       return (
-        <div className="flex flex-col items-center justify-center min-h-[calc(100vh-120px)] w-full p-6 sm:p-10 bg-gray-800 border border-red-700/50 rounded-lg shadow-xl">
+        <div className="flex flex-col items-center justify-center min-h-[calc(100vh-120px)] w-full p-6 sm:p-10 bg-surface-raised border border-red-700/50 rounded-lg shadow-xl">
           <AlertCircle size={48} className="text-red-400 mb-4" />
-          <H1 className="!text-xl !mb-2 text-gray-100">Error Loading Content</H1>
-          <P className="text-center text-gray-300 mb-6">{errorMessage}</P>
+          <H1 className="!text-xl !mb-2">Error Loading Content</H1>
+          <P className="text-center mb-6">{errorMessage}</P>
         </div>
       );
     }
@@ -144,7 +144,7 @@ const CaseDisplay = memo(
           <div className="mb-4">
             <button
               onClick={() => navigate(-1)}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 hover:text-white rounded-md transition-all text-sm font-medium group"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-surface-hover hover:bg-surface-border/20 text-text-primary rounded-md transition-all text-sm font-medium group"
               aria-label="Go back to previous page"
             >
               <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
@@ -158,40 +158,48 @@ const CaseDisplay = memo(
             </H1>
           </header>
 
-          <article className="bg-gray-800 border border-gray-700 rounded-xl shadow-xl overflow-hidden">
+          <article className="bg-surface-raised border border-surface-border rounded-xl shadow-xl overflow-hidden">
             <div className="p-6 sm:p-8">
               <header className="mb-6 sm:mb-8">
                 <ArticleTitle>{caseData.title || 'Title Not Available'}</ArticleTitle>
 
-                <MutedText className="space-x-2 mb-4 text-gray-300 text-sm flex flex-wrap items-center gap-x-2 gap-y-1">
+                <MutedText className="space-x-2 mb-4 text-sm flex flex-wrap items-center gap-x-2 gap-y-1">
                   <span>
-                    <strong className="text-gray-400 font-medium">Sector:</strong>{' '}
-                    <span className="font-normal text-gray-100">{caseData.sector || 'N/A'}</span>
+                    <strong className="text-text-muted font-medium">Sector:</strong>{' '}
+                    <span className="font-normal text-text-primary">
+                      {caseData.sector || 'N/A'}
+                    </span>
                   </span>
                   <span className="hidden sm:inline">•</span>
                   <span>
-                    <strong className="text-gray-400 font-medium">Subsector:</strong>{' '}
-                    <span className="font-normal text-gray-100">{caseData.subsector || 'N/A'}</span>
+                    <strong className="text-text-muted font-medium">Subsector:</strong>{' '}
+                    <span className="font-normal text-text-primary">
+                      {caseData.subsector || 'N/A'}
+                    </span>
                   </span>
                   <span className="hidden sm:inline">•</span>
                   <span>
-                    <strong className="text-gray-400 font-medium">Tool:</strong>{' '}
-                    <span className="font-normal text-gray-100">{caseData.tool || 'N/A'}</span>
+                    <strong className="text-text-muted font-medium">Tool:</strong>{' '}
+                    <span className="font-normal text-text-primary">{caseData.tool || 'N/A'}</span>
                   </span>
                   <span className="hidden sm:inline">•</span>
                   <span>
-                    <strong className="text-gray-400 font-medium">Location:</strong>{' '}
-                    <span className="font-normal text-gray-100">{caseData.location || 'N/A'}</span>
+                    <strong className="text-text-muted font-medium">Location:</strong>{' '}
+                    <span className="font-normal text-text-primary">
+                      {caseData.location || 'N/A'}
+                    </span>
                   </span>
                   <span className="hidden sm:inline">•</span>
                   <span>
-                    <strong className="text-gray-400 font-medium">Category:</strong>{' '}
-                    <span className="font-normal text-gray-100">{caseData.category || 'N/A'}</span>
+                    <strong className="text-text-muted font-medium">Category:</strong>{' '}
+                    <span className="font-normal text-text-primary">
+                      {caseData.category || 'N/A'}
+                    </span>
                   </span>
                   <span className="hidden sm:inline">•</span>
                   <span>
-                    <strong className="text-gray-400 font-medium">Date:</strong>{' '}
-                    <span className="font-normal text-gray-100">{displayDate}</span>
+                    <strong className="text-text-muted font-medium">Date:</strong>{' '}
+                    <span className="font-normal text-text-primary">{displayDate}</span>
                   </span>
                 </MutedText>
 
@@ -212,7 +220,7 @@ const CaseDisplay = memo(
                 </SubSectionTitle>
                 <P>
                   {caseData.incidentOverview || (
-                    <span className="italic text-gray-500">No incident overview provided.</span>
+                    <span className="italic text-text-muted">No incident overview provided.</span>
                   )}
                 </P>
               </section>
@@ -223,7 +231,7 @@ const CaseDisplay = memo(
                 </SubSectionTitle>
                 <P>
                   {caseData.investigationBreakdown || (
-                    <span className="italic text-gray-500">
+                    <span className="italic text-text-muted">
                       No investigation breakdown provided.
                     </span>
                   )}
@@ -236,7 +244,7 @@ const CaseDisplay = memo(
                 </SubSectionTitle>
                 <P>
                   {caseData.rootCause || (
-                    <span className="italic text-gray-500">Root cause not detailed.</span>
+                    <span className="italic text-text-muted">Root cause not detailed.</span>
                   )}
                 </P>
               </section>
@@ -247,7 +255,7 @@ const CaseDisplay = memo(
                 </SubSectionTitle>
                 <P>
                   {caseData.resolution || (
-                    <span className="italic text-gray-500">Resolution not provided.</span>
+                    <span className="italic text-text-muted">Resolution not provided.</span>
                   )}
                 </P>
               </section>
@@ -258,18 +266,18 @@ const CaseDisplay = memo(
                 </SubSectionTitle>
                 {caseData.verdict && (
                   <P>
-                    <strong className="text-gray-400 font-medium">Verdict:</strong>{' '}
+                    <strong className="text-text-muted font-medium">Verdict:</strong>{' '}
                     {caseData.verdict}
                   </P>
                 )}
                 {caseData.summary && (
                   <P className={caseData.verdict ? 'mt-2' : ''}>
-                    <strong className="text-gray-400 font-medium">Summary:</strong>{' '}
+                    <strong className="text-text-muted font-medium">Summary:</strong>{' '}
                     {caseData.summary}
                   </P>
                 )}
                 {!(caseData.verdict || caseData.summary) && (
-                  <P className="italic text-gray-500">No verdict or summary provided.</P>
+                  <P className="italic text-text-muted">No verdict or summary provided.</P>
                 )}
               </section>
 
@@ -279,27 +287,27 @@ const CaseDisplay = memo(
                 </SubSectionTitle>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm">
                   <P>
-                    <strong className="text-gray-400 font-medium">Detected By:</strong>{' '}
+                    <strong className="text-text-muted font-medium">Detected By:</strong>{' '}
                     {caseData.detectedBy || 'N/A'}
                   </P>
                   <P>
-                    <strong className="text-gray-400 font-medium">Severity:</strong>{' '}
+                    <strong className="text-text-muted font-medium">Severity:</strong>{' '}
                     {caseData.severity || 'N/A'}
                   </P>
                   <P>
-                    <strong className="text-gray-400 font-medium">Status:</strong>{' '}
+                    <strong className="text-text-muted font-medium">Status:</strong>{' '}
                     {caseData.status || 'N/A'}
                   </P>
                   <P>
-                    <strong className="text-gray-400 font-medium">Impact Scope:</strong>{' '}
+                    <strong className="text-text-muted font-medium">Impact Scope:</strong>{' '}
                     {caseData.impactScope || 'N/A'}
                   </P>
                   <P>
-                    <strong className="text-gray-400 font-medium">Duration:</strong>{' '}
+                    <strong className="text-text-muted font-medium">Duration:</strong>{' '}
                     {caseData.durationMinutes ? `${caseData.durationMinutes} minutes` : 'N/A'}
                   </P>
                   <P>
-                    <strong className="text-gray-400 font-medium">Validated By:</strong>{' '}
+                    <strong className="text-text-muted font-medium">Validated By:</strong>{' '}
                     {caseData.validatedBy || 'N/A'}
                   </P>
                 </div>
@@ -318,7 +326,9 @@ const CaseDisplay = memo(
                 }}
                 size="md"
                 onRate={(rating, stats) =>
-                  console.log(`Rated case ${caseData.publicId}: ${rating} stars. New average: ${stats.average_rating}`)
+                  console.log(
+                    `Rated case ${caseData.publicId}: ${rating} stars. New average: ${stats.average_rating}`
+                  )
                 }
               />
             </div>

@@ -1,8 +1,10 @@
 ---
-title: "🔴 CRITICAL: Fix high severity npm audit vulnerabilities in semantic-release"
+title: '🔴 CRITICAL: Fix high severity npm audit vulnerabilities in semantic-release'
 labels: security, critical, dependencies
 assignees: krisarmstrong
 ---
+
+**Status: CLOSED (2025-11-24) — `npm audit --audit-level=moderate` returns 0 vulnerabilities; transitive `glob` issues mitigated via overrides. See AUDIT-EXCEPTIONS.md for rationale log.**
 
 ## Priority: CRITICAL 🔴
 
@@ -20,17 +22,20 @@ glob 10.2.0 - 10.4.5 || 11.0.0 - 11.0.3
 **CVE:** Command injection vulnerability in glob CLI (GHSA-5j98-mcp5-4vw2)
 
 ## Files Affected
+
 - `package.json:32` (@semantic-release/npm: ^13.1.2)
 - `packages/web-foundation/package.json:98` (semantic-release: ^25.0.2)
 
 ## Action Required
 
 1. Run security audit:
+
    ```bash
    npm audit --audit-level=moderate
    ```
 
 2. Attempt automatic fix:
+
    ```bash
    npm audit fix --force
    ```
@@ -38,6 +43,7 @@ glob 10.2.0 - 10.4.5 || 11.0.0 - 11.0.3
 3. If automatic fix fails, manually downgrade semantic-release or update glob dependency
 
 4. Test release process after fix:
+
    ```bash
    npm run release:dry
    ```
@@ -45,6 +51,7 @@ glob 10.2.0 - 10.4.5 || 11.0.0 - 11.0.3
 5. Verify CI/CD pipeline still works
 
 ## Testing Checklist
+
 - [ ] npm audit shows 0 high severity vulnerabilities
 - [ ] Semantic release dry-run succeeds
 - [ ] CI/CD pipeline passes
@@ -52,5 +59,6 @@ glob 10.2.0 - 10.4.5 || 11.0.0 - 11.0.3
 - [ ] Release workflow tested on test branch
 
 ## References
+
 - https://github.com/advisories/GHSA-5j98-mcp5-4vw2
 - Security policy: SECURITY.md

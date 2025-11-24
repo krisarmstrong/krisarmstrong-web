@@ -99,6 +99,35 @@ VITE_PAYPAL_INTRINSIC_MOMENTUM=https://www.paypal.com/your-button-url-2
 VITE_PAYPAL_MINDSET_IMMERSION=https://www.paypal.com/your-button-url-3
 ```
 
+#### KrisArmstrong App
+
+Create `.env` in `apps/krisarmstrong/`:
+
+```env
+VITE_APP_ENV=development
+
+# Analytics / Monitoring
+VITE_SENTRY_DSN=https://your-dsn@sentry.io/project
+
+# Supabase (blog views/likes)
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+```
+
+#### WiFiVigilante App
+
+Create `.env` in `apps/wifivigilante/`:
+
+```env
+VITE_APP_ENV=development
+
+# Monitoring (optional)
+VITE_SENTRY_DSN=https://your-dsn@sentry.io/project
+
+# Case export/service endpoints (if applicable)
+VITE_CASE_API_URL=https://api.example.com/cases
+```
+
 ## Development
 
 ### Run All Apps in Development Mode
