@@ -2,9 +2,20 @@
  * Minimal base styles for Tailwind v4
  *
  * In Tailwind v4, prefer using utility classes over custom CSS.
- * Only include essential resets that Tailwind doesn't provide.
+* Only include essential resets that Tailwind doesn't provide.
  */
 
 * {
   box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 150ms ease;
+}
+
+a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
 }
