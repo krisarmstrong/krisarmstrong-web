@@ -73,6 +73,15 @@ const accentColors = {
   teal: 'hover:border-teal-500/50 hover:shadow-teal-500/10',
 };
 
+const accentFocusRings = {
+  violet: 'focus-visible:ring-violet-400/60',
+  blue: 'focus-visible:ring-blue-400/60',
+  green: 'focus-visible:ring-green-400/60',
+  red: 'focus-visible:ring-red-400/60',
+  yellow: 'focus-visible:ring-yellow-400/60',
+  teal: 'focus-visible:ring-teal-400/60',
+};
+
 const accentTextColors = {
   violet: 'group-hover:text-violet-400',
   blue: 'group-hover:text-blue-400',
@@ -167,7 +176,7 @@ export function ContentCard({
   return (
     <Link
       to={href}
-      className={`relative flex bg-surface-raised rounded-2xl border border-surface-border shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 group ${accentColors[accentColor]} ${variantStyles[variant]} ${variant === 'compact' ? 'flex-row' : 'flex-col h-full'} ${className}`}
+      className={`relative flex bg-surface-raised rounded-2xl border border-surface-border shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 group focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-raised ${accentColors[accentColor]} ${accentFocusRings[accentColor]} ${variantStyles[variant]} ${variant === 'compact' ? 'flex-row' : 'flex-col h-full'} ${className}`}
       style={{ animationDelay: `${animationDelay}ms` }}
     >
       {/* Progress Bar */}

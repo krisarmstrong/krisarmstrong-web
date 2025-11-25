@@ -69,6 +69,8 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
   const [hoveredStar, setHoveredStar] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   // Fetch initial data
   useEffect(() => {
@@ -95,15 +97,23 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
     if (submitting) return;
 
     setSubmitting(true);
+    setErrorMessage(null);
+    setStatusMessage('Saving your rating…');
     try {
       const result = await ratingAPI.submitRating(itemId, itemType, rating);
       if (result && result.success) {
         setUserRating(rating);
         setStats(result.stats);
+        setStatusMessage('Thanks! Rating saved.');
         onRate?.(rating, result.stats);
+      } else {
+        setErrorMessage('Could not save your rating. Please try again.');
+        setStatusMessage(null);
       }
     } catch (error) {
       console.error('Error submitting rating:', error);
+      setErrorMessage('Something went wrong saving your rating.');
+      setStatusMessage(null);
     } finally {
       setSubmitting(false);
     }
@@ -236,10 +246,22 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
         <h4 className={`${textSizeClasses[size]} font-semibold mb-2 text-text-primary`}>
           {userRating ? 'Your rating' : 'Rate this ' + itemType}
         </h4>
-        <div className="flex gap-1">{[1, 2, 3, 4, 5].map((i) => renderStar(i))}</div>
+        <div className="flex gap-1" aria-live="polite">
+          {[1, 2, 3, 4, 5].map((i) => renderStar(i))}
+        </div>
         {userRating && (
           <p className={`${textSizeClasses[size]} text-text-muted mt-2`}>
             You rated this {userRating} star{userRating !== 1 ? 's' : ''}
+          </p>
+        )}
+        {statusMessage && (
+          <p className={`${textSizeClasses[size]} text-text-muted mt-2`} role="status">
+            {statusMessage}
+          </p>
+        )}
+        {errorMessage && (
+          <p className={`${textSizeClasses[size]} text-red-400 mt-2`} role="alert">
+            {errorMessage}
           </p>
         )}
       </div>
