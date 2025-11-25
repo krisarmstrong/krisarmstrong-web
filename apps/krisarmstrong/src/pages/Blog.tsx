@@ -72,7 +72,7 @@ export default function Blog() {
     }
 
     setHydratedParams(true);
-  }, [hydratedParams, searchParams, sortBy]);
+  }, [hydratedParams, searchParams, sortBy, setSearchParams]);
 
   // Persist filters to URL
   useEffect(() => {

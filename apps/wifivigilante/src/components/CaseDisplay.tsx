@@ -297,7 +297,7 @@ const CaseDisplay = memo(
 
             <footer className="p-6 sm:p-8 flex flex-col sm:flex-row flex-wrap justify-between items-center gap-4">
               <div className="flex items-center gap-2">
-                <Share2 size={18} className="text-gray-400 hidden sm:inline" />
+                <Share2 size={18} className="text-gray-400 hidden sm:inline" aria-hidden="true" />
                 <MutedText className="hidden sm:inline !mb-0 text-gray-300">Share:</MutedText>
                 {(['linkedin', 'twitter', 'facebook', 'instagram'] as SharePlatform[]).map(
                   (platform) => (
