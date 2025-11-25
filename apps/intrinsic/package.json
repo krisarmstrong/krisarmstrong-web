@@ -9,13 +9,14 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run sitemap && vite build",
     "lint": "eslint . --max-warnings=0 && tsc --noEmit",
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
     "test": "vitest --pool=threads",
     "test:ui": "vitest --ui --pool=threads",
-    "test:coverage": "vitest --coverage --pool=threads"
+    "test:coverage": "vitest --coverage --pool=threads",
+    "sitemap": "node scripts/generate-sitemap.js"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

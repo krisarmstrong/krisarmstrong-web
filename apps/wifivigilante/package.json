@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "vite --mode development",
     "dev:staging": "vite --mode staging",
-    "build": "vite build --mode production",
+    "build": "npm run sitemap && vite build --mode production",
     "build:dev": "vite build --mode development",
     "build:staging": "vite build --mode staging",
     "preview": "vite preview",
@@ -21,7 +21,8 @@
     "lint": "eslint . && tsc --noEmit",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "generate-icons": "node scripts/generate-icons.ts"
+    "generate-icons": "node scripts/generate-icons.ts",
+    "sitemap": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
     "@krisarmstrong/web-foundation": "*",
