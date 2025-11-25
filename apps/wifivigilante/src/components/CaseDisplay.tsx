@@ -349,6 +349,7 @@ const CaseDisplay = memo(
                   submitRating,
                   getUserRating,
                 }}
+                starColor="blue-400"
                 size="md"
                 onRate={(rating, stats) =>
                   console.warn(
