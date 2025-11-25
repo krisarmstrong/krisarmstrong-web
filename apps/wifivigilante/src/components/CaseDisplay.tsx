@@ -97,6 +97,10 @@ const CaseDisplay = memo(
       }
     }
 
+    const takeaways = [caseData.rootCause, caseData.resolution, caseData.verdict].filter(
+      Boolean
+    ) as string[];
+
     // Type-safe metadata access
 
     return (
@@ -114,10 +118,40 @@ const CaseDisplay = memo(
             </button>
           </div>
 
-          <header className="mb-6 sm:mb-8">
-            <H1 icon={pageIcon} className="!mb-3">
+          <header className="mb-6 sm:mb-8 space-y-3">
+            <div className="text-sm text-text-muted flex flex-wrap items-center gap-2">
+              <button
+                onClick={() => navigate('/')}
+                className="underline-offset-4 hover:text-text-primary focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
+              >
+                Home
+              </button>
+              <span aria-hidden="true">/</span>
+              <button
+                onClick={() => navigate('/cases')}
+                className="underline-offset-4 hover:text-text-primary focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
+              >
+                Cases
+              </button>
+              <span aria-hidden="true">/</span>
+              <span className="text-text-primary font-semibold line-clamp-1">{caseData.title}</span>
+            </div>
+            <H1 icon={pageIcon} className="!mb-0">
               {pageTitle}
             </H1>
+            <div className="flex flex-wrap gap-2">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-surface-border bg-surface-hover text-xs text-text-primary">
+                Severity: <strong className="text-red-300">{caseData.severity}</strong>
+              </span>
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-surface-border bg-surface-hover text-xs text-text-primary">
+                Status: <strong className="text-emerald-300">{caseData.status}</strong>
+              </span>
+              {caseData.durationMinutes && (
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-surface-border bg-surface-hover text-xs text-text-primary">
+                  Duration: <strong>{caseData.durationMinutes} min</strong>
+                </span>
+              )}
+            </div>
           </header>
 
           <article className="bg-surface-raised border border-surface-border rounded-xl shadow-xl overflow-hidden">
@@ -242,6 +276,21 @@ const CaseDisplay = memo(
                   <P className="italic text-text-muted">No verdict or summary provided.</P>
                 )}
               </section>
+
+              {takeaways.length > 0 && (
+                <section className="mb-8">
+                  <SubSectionTitle icon={<BarChart3 size={20} className="text-blue-400" />}>
+                    Key Takeaways
+                  </SubSectionTitle>
+                  <ul className="list-disc list-inside space-y-2 text-text-primary">
+                    {takeaways.map((t, idx) => (
+                      <li key={`${t}-${idx}`} className="text-sm leading-relaxed">
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
 
               <section className="mb-8">
                 <SubSectionTitle icon={<BarChart3 size={20} className="text-blue-400" />}>

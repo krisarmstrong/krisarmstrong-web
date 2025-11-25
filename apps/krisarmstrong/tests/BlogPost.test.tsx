@@ -47,10 +47,11 @@ vi.mock('../src/lib/supabase', () => ({
   getRatingStats: vi.fn(),
   submitRating: vi.fn(),
   getUserRating: vi.fn(),
+  getAllBlogPosts: vi.fn(),
 }));
 
 // Import mocked functions after the mock declaration
-import { getBlogPostBySlug } from '../src/lib/supabase';
+import { getBlogPostBySlug, getAllBlogPosts } from '../src/lib/supabase';
 
 // Mock framer-motion
 vi.mock('framer-motion', () => ({
@@ -103,6 +104,7 @@ describe('BlogPost', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(getBlogPostBySlug).mockResolvedValue(mockSupabasePost);
+    vi.mocked(getAllBlogPosts).mockResolvedValue([mockSupabasePost]);
     (global.fetch as unknown as { mockResolvedValue: (val: unknown) => void }).mockResolvedValue({
       ok: true,
       text: async () => mockPostContent,
