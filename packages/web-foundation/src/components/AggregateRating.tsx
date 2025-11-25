@@ -129,6 +129,7 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
         onMouseEnter={() => setHoveredStar(index)}
         onMouseLeave={() => setHoveredStar(null)}
         disabled={submitting}
+        type="button"
         className={`${sizeClasses[size]} transition-all duration-150 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 ${ringClass}`}
         aria-label={`Rate ${index} stars`}
       >

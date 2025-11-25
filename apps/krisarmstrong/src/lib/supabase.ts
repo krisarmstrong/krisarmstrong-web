@@ -85,32 +85,9 @@ export async function getFeaturedBlogPosts(): Promise<BlogPost[]> {
   return data || [];
 }
 
-// Search blog posts
-export async function searchBlogPosts(query: string): Promise<BlogPost[]> {
-  const { data, error } = await supabase
-    .from('blog_posts')
-    .select('*')
-    .eq('published', true)
-    .textSearch('title', query, {
-      type: 'websearch',
-      config: 'english',
-    })
-    .order('date', { ascending: false });
-
-  if (error) {
-    console.error('Error searching blog posts:', error);
-    throw error;
-  }
-
-  return data || [];
-}
-
 // Get all unique tags
 export async function getAllTags(): Promise<string[]> {
-  const { data, error } = await supabase
-    .from('blog_posts')
-    .select('tags')
-    .eq('published', true);
+  const { data, error } = await supabase.from('blog_posts').select('tags').eq('published', true);
 
   if (error) {
     console.error('Error fetching tags:', error);

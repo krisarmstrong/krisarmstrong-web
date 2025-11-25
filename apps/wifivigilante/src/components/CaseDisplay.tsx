@@ -1,5 +1,5 @@
 // src/components/CaseDisplay.tsx
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Facebook,
@@ -65,6 +65,16 @@ export default function CaseDisplay({
       console.warn(`Share alert: ${m}`)
     );
   };
+
+  // Memoize ratingAPI to prevent AggregateRating from re-fetching on every render
+  const ratingAPI = useMemo(
+    () => ({
+      getRatingStats,
+      submitRating,
+      getUserRating,
+    }),
+    []
+  );
 
   if (isLoading) {
     return (
@@ -395,11 +405,7 @@ export default function CaseDisplay({
                 <AggregateRating
                   itemId={caseData.publicId}
                   itemType="case"
-                  ratingAPI={{
-                    getRatingStats,
-                    submitRating,
-                    getUserRating,
-                  }}
+                  ratingAPI={ratingAPI}
                   starColor="blue-400"
                   size="md"
                   onRate={(rating, stats) =>

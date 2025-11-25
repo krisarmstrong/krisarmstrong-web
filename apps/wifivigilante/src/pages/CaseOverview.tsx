@@ -1,5 +1,5 @@
 // src/pages/CaseOverview.tsx
-import React, { useEffect, useState, useMemo, useTransition } from 'react';
+import React, { useEffect, useState, useMemo, useTransition, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Book, Briefcase, Globe, Stethoscope } from 'lucide-react';
 import {
@@ -168,6 +168,15 @@ export default function CaseOverview(): React.ReactElement {
     return <Globe className="inline mr-1 h-4 w-4" />;
   };
 
+  // Memoized search handler to prevent unnecessary effect re-runs
+  const handleSearchResults = useCallback(
+    (results: TransformedCase[], meta?: { query: string; terms: string[] }) => {
+      setSearchResults(results);
+      setSearchQuery(meta?.query ?? '');
+    },
+    []
+  );
+
   // Loading state
   if (isLoading) {
     return <LoadingPage message="Loading cases..." variant="green" />;
@@ -199,11 +208,7 @@ export default function CaseOverview(): React.ReactElement {
       {/* Search */}
       <ContentSearch
         items={sortedCases}
-        onSearch={(results, meta) => {
-          setSearchResults(results);
-          setSearchQuery(meta?.query ?? '');
-        }}
-        onQueryChange={setSearchQuery}
+        onSearch={handleSearchResults}
         searchFields={[
           'title',
           'summary',
@@ -221,9 +226,6 @@ export default function CaseOverview(): React.ReactElement {
           'detectedBy',
           'impactScope',
           'validatedBy',
-          'content',
-          'verdict',
-          'location',
         ]}
         placeholder="Search all case content..."
         accentColor="emerald"

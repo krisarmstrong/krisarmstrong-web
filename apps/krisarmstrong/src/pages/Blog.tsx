@@ -11,7 +11,7 @@ import {
   useProgressiveLoad,
   type ActiveFilter,
 } from '@krisarmstrong/web-foundation';
-import { useState, useMemo, useEffect, useTransition } from 'react';
+import { useState, useMemo, useEffect, useTransition, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getAllBlogPosts, type BlogPost } from '../lib/supabase';
 
@@ -147,6 +147,15 @@ export default function Blog() {
       ),
   }));
 
+  // Memoized search handler to prevent unnecessary effect re-runs
+  const handleSearchResults = useCallback(
+    (results: BlogPost[], meta?: { query: string; terms: string[] }) => {
+      setSearchResults(results);
+      setSearchQuery(meta?.query ?? '');
+    },
+    []
+  );
+
   // Loading state
   if (loading) {
     return <LoadingPage message="Loading blog posts..." variant="violet" />;
@@ -179,10 +188,7 @@ export default function Blog() {
         {/* Search */}
         <ContentSearch
           items={sortedPosts}
-          onSearch={(results, meta) => {
-            setSearchResults(results);
-            setSearchQuery(meta?.query ?? '');
-          }}
+          onSearch={handleSearchResults}
           searchFields={['title', 'excerpt', 'content', 'tags']}
           placeholder="Search blog posts..."
           accentColor="violet"
