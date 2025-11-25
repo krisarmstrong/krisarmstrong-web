@@ -15,6 +15,9 @@ import {
   FileCheck,
   BarChart3,
   ArrowLeft,
+  Clock4,
+  ShieldHalf,
+  MapPin,
 } from 'lucide-react';
 import { shareToPlatform } from '../utils/share.ts';
 import {
@@ -122,7 +125,7 @@ export default function CaseDisplay({
           </button>
         </div>
 
-        <header className="space-y-3 mb-8">
+        <header className="space-y-3 mb-10">
           <div className="flex flex-wrap items-center gap-2 text-sm text-text-muted">
             <button
               onClick={() => navigate('/')}
@@ -159,65 +162,80 @@ export default function CaseDisplay({
             {caseData.title}
           </H1>
 
-          <div className="flex flex-wrap gap-2">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-surface-border bg-surface-hover text-xs text-text-primary">
-              Severity: <strong className="text-red-300">{caseData.severity}</strong>
-            </span>
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-surface-border bg-surface-hover text-xs text-text-primary">
-              Status: <strong className="text-emerald-300">{caseData.status}</strong>
-            </span>
-            {caseData.durationMinutes && (
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-surface-border bg-surface-hover text-xs text-text-primary">
-                Duration: <strong>{caseData.durationMinutes} min</strong>
-              </span>
-            )}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="flex items-center gap-3 rounded-2xl bg-surface-hover/40 border border-surface-border px-4 py-3">
+              <ShieldHalf className="text-red-300" size={18} />
+              <div>
+                <p className="text-xs uppercase tracking-wide text-text-muted">Severity</p>
+                <p className="text-sm font-semibold text-text-primary">{caseData.severity}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 rounded-2xl bg-surface-hover/40 border border-surface-border px-4 py-3">
+              <Target className="text-emerald-300" size={18} />
+              <div>
+                <p className="text-xs uppercase tracking-wide text-text-muted">Status</p>
+                <p className="text-sm font-semibold text-text-primary">{caseData.status}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 rounded-2xl bg-surface-hover/40 border border-surface-border px-4 py-3">
+              <Clock4 className="text-blue-300" size={18} />
+              <div>
+                <p className="text-xs uppercase tracking-wide text-text-muted">Duration</p>
+                <p className="text-sm font-semibold text-text-primary">
+                  {caseData.durationMinutes ? `${caseData.durationMinutes} min` : 'N/A'}
+                </p>
+              </div>
+            </div>
           </div>
         </header>
 
-        <article className="bg-surface-raised border border-surface-border rounded-2xl shadow-2xl overflow-hidden">
+        <article className="bg-gradient-to-b from-blue-950/40 via-surface-raised to-surface-raised border border-surface-border rounded-3xl shadow-2xl overflow-hidden">
           <div className="p-6 sm:p-8">
             <header className="mb-6 sm:mb-8 space-y-4">
               <ArticleTitle>{caseData.title || 'Title Not Available'}</ArticleTitle>
 
-              <div className="flex flex-wrap gap-2 text-xs text-text-muted">
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-hover border border-surface-border">
-                  Sector:{' '}
-                  <span className="text-text-primary font-medium">{caseData.sector || 'N/A'}</span>
-                </span>
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-hover border border-surface-border">
-                  Subsector:{' '}
-                  <span className="text-text-primary font-medium">
-                    {caseData.subsector || 'N/A'}
-                  </span>
-                </span>
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-hover border border-surface-border">
-                  Tool:{' '}
-                  <span className="text-text-primary font-medium">{caseData.tool || 'N/A'}</span>
-                </span>
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-hover border border-surface-border">
-                  Location:{' '}
-                  <span className="text-text-primary font-medium">
+              <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 text-sm">
+                <div className="flex items-center gap-2 rounded-xl bg-surface-hover border border-surface-border px-3 py-2">
+                  <ShieldHalf size={16} className="text-red-300" />
+                  <span className="text-text-muted">Severity</span>
+                  <strong className="text-text-primary ml-auto">{caseData.severity}</strong>
+                </div>
+                <div className="flex items-center gap-2 rounded-xl bg-surface-hover border border-surface-border px-3 py-2">
+                  <Target size={16} className="text-emerald-300" />
+                  <span className="text-text-muted">Status</span>
+                  <strong className="text-text-primary ml-auto">{caseData.status}</strong>
+                </div>
+                <div className="flex items-center gap-2 rounded-xl bg-surface-hover border border-surface-border px-3 py-2">
+                  <Clock4 size={16} className="text-blue-300" />
+                  <span className="text-text-muted">Date</span>
+                  <strong className="text-text-primary ml-auto">{displayDate}</strong>
+                </div>
+                <div className="flex items-center gap-2 rounded-xl bg-surface-hover border border-surface-border px-3 py-2">
+                  <MapPin size={16} className="text-blue-200" />
+                  <span className="text-text-muted">Location</span>
+                  <strong className="text-text-primary ml-auto">
                     {caseData.location || 'N/A'}
-                  </span>
-                </span>
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-hover border border-surface-border">
-                  Category:{' '}
-                  <span className="text-text-primary font-medium">
-                    {caseData.category || 'N/A'}
-                  </span>
-                </span>
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-hover border border-surface-border">
-                  Date: <span className="text-text-primary font-medium">{displayDate}</span>
-                </span>
+                  </strong>
+                </div>
+                <div className="flex items-center gap-2 rounded-xl bg-surface-hover border border-surface-border px-3 py-2">
+                  <Network size={16} className="text-indigo-200" />
+                  <span className="text-text-muted">Sector</span>
+                  <strong className="text-text-primary ml-auto">{caseData.sector || 'N/A'}</strong>
+                </div>
+                <div className="flex items-center gap-2 rounded-xl bg-surface-hover border border-surface-border px-3 py-2">
+                  <Wrench size={16} className="text-sky-200" />
+                  <span className="text-text-muted">Tool</span>
+                  <strong className="text-text-primary ml-auto">{caseData.tool || 'N/A'}</strong>
+                </div>
               </div>
 
               {tagsArray.length > 0 && (
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2" aria-label="Tags">
                   {tagsArray.map((tag, index) => (
                     <button
                       key={`${tag}-${index}`}
                       onClick={() => handleTagClick(tag)}
-                      className="inline-flex items-center text-xs rounded-full font-medium px-3 py-1 border border-blue-400/50 bg-blue-500/10 text-blue-100 hover:bg-blue-500/20 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 transition-all duration-150 hover:-translate-y-0.5"
+                      className="inline-flex items-center gap-1 text-sm rounded-full font-medium px-3 py-1 border border-blue-400/40 bg-blue-500/10 text-blue-100 hover:bg-blue-500/20 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 transition-all duration-150 hover:-translate-y-0.5"
                       aria-label={`View cases tagged ${tag}`}
                     >
                       {tag}
@@ -343,7 +361,7 @@ export default function CaseDisplay({
           </div>
 
           <div className="p-6 sm:p-8">
-            <div className="grid gap-6 md:grid-cols-2 bg-surface-hover/60 border border-surface-border rounded-xl p-4 sm:p-6">
+            <div className="grid gap-6 md:grid-cols-2 bg-surface-raised border border-surface-border rounded-2xl p-4 sm:p-6 shadow-inner shadow-blue-500/5">
               <div className="space-y-3">
                 <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wide">
                   Share
@@ -356,14 +374,15 @@ export default function CaseDisplay({
                         onClick={() => handleShareWrapper(platform)}
                         variant="ghost"
                         size="sm"
-                        className="p-2 rounded-lg border border-surface-border hover:bg-blue-500/10 focus:ring-blue-500 hover:-translate-y-0.5 transition-all"
+                        className="px-3 py-2 rounded-lg border border-surface-border hover:bg-blue-500/10 focus:ring-blue-500 hover:-translate-y-0.5 transition-all inline-flex items-center gap-2"
                         aria-label={`Share on ${platform.charAt(0).toUpperCase() + platform.slice(1)}`}
                         disabled={!caseData}
                       >
-                        {platform === 'linkedin' && <Linkedin size={20} />}
-                        {platform === 'twitter' && <Twitter size={20} />}
-                        {platform === 'facebook' && <Facebook size={20} />}
-                        {platform === 'instagram' && <Instagram size={20} />}
+                        {platform === 'linkedin' && <Linkedin size={18} />}
+                        {platform === 'twitter' && <Twitter size={18} />}
+                        {platform === 'facebook' && <Facebook size={18} />}
+                        {platform === 'instagram' && <Instagram size={18} />}
+                        <span className="text-sm capitalize">{platform}</span>
                       </Button>
                     )
                   )}
@@ -417,6 +436,7 @@ export default function CaseDisplay({
                     tags={c.tags || []}
                     accentColor="blue"
                     animationDelay={idx * 60}
+                    onTagClick={(tag) => navigate(`/cases?tags=${encodeURIComponent(tag)}`)}
                   />
                 ))}
               </div>
