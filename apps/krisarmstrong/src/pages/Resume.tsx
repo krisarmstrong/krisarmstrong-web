@@ -20,7 +20,8 @@ export default function Resume() {
         return res.text();
       })
       .then((text) => {
-        setMd(text);
+        const cleaned = text.replace(/^#\s*Kris Armstrong\s*\n?/, '');
+        setMd(cleaned);
         setLoading(false);
       })
       .catch((err) => {
@@ -149,7 +150,9 @@ export default function Resume() {
       <div className="max-w-5xl mx-auto py-10 px-4 relative">
         <header className="mb-8 text-center">
           <p className="uppercase tracking-[0.3em] text-xs text-violet-200/70 mb-2">Resume</p>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">Kris A. Armstrong</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-3" aria-hidden="true">
+            Kris Armstrong
+          </h1>
           <p className="text-lg text-violet-100/90 max-w-3xl mx-auto">
             Principal Wi-Fi strategist, security architect, and pre-sales engineer. Hands-on leader
             who translates complex wireless problems into decisive, profitable outcomes.
@@ -266,7 +269,14 @@ export default function Resume() {
         {/* Resume Content */}
         <article className="bg-surface-raised rounded-2xl shadow-xl border border-surface-border overflow-hidden">
           <div className="p-8 md:p-12 prose prose-lg dark:prose-invert max-w-none resume-content">
-            <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{md}</ReactMarkdown>
+            <ReactMarkdown
+              rehypePlugins={[rehypeSanitize]}
+              components={{
+                h1: ({ node: _node, children, ...props }) => <h2 {...props}>{children}</h2>,
+              }}
+            >
+              {md}
+            </ReactMarkdown>
           </div>
         </article>
       </div>
