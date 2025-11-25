@@ -115,7 +115,7 @@ const CaseDisplay = memo(
             </button>
           </div>
 
-          <header className="mb-6 sm:mb-8 space-y-3">
+          <header className="mb-8 sm:mb-10 space-y-4">
             <div className="text-sm text-text-muted flex flex-wrap items-center gap-2">
               <button
                 onClick={() => navigate('/')}
