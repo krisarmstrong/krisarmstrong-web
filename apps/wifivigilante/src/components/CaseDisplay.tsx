@@ -14,8 +14,6 @@ import {
   Wrench,
   FileCheck,
   BarChart3,
-  ArrowLeft,
-  Clock4,
   ShieldHalf,
   MapPin,
   ShieldCheck,
@@ -123,56 +121,51 @@ export default function CaseDisplay({
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.18),transparent_45%),radial-gradient(circle_at_80%_0%,rgba(14,165,233,0.2),transparent_40%)] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 py-10 sm:px-6 lg:px-8 relative">
-        {/* Back Button */}
-        <div className="mb-6">
+        {/* Breadcrumb Navigation */}
+        <nav className="text-sm text-text-muted flex items-center gap-2 mb-4">
           <button
-            onClick={() => navigate(-1)}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-surface-hover hover:bg-surface-border/20 text-text-primary rounded-md transition-all text-sm font-medium group focus-visible:ring-2 focus-visible:ring-blue-500"
-            aria-label="Go back to previous page"
+            onClick={() => navigate('/')}
+            className="hover:text-text-primary focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded"
           >
-            <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-            <span>Back</span>
+            Home
+          </button>
+          <span aria-hidden="true">/</span>
+          <button
+            onClick={() => navigate('/cases')}
+            className="hover:text-text-primary focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded"
+          >
+            Cases
+          </button>
+          <span aria-hidden="true">/</span>
+          <span className="text-text-primary font-semibold line-clamp-1">{caseData.title}</span>
+        </nav>
+
+        {/* Back Link */}
+        <div className="mb-8">
+          <button
+            onClick={() => navigate('/cases')}
+            className="inline-flex items-center gap-2 text-text-accent hover:text-interactive-hover transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded px-1 py-0.5"
+          >
+            ← Back to Cases
           </button>
         </div>
 
         <header className="space-y-3 mb-10">
-          <div className="flex flex-wrap items-center gap-2 text-sm text-text-muted">
-            <button
-              onClick={() => navigate('/')}
-              className="underline-offset-4 hover:text-text-primary focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
-            >
-              Home
-            </button>
-            <span aria-hidden="true">/</span>
-            <button
-              onClick={() => navigate('/cases')}
-              className="underline-offset-4 hover:text-text-primary focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
-            >
-              Cases
-            </button>
-            <span aria-hidden="true">/</span>
-            <span className="text-text-primary font-semibold line-clamp-1">{caseData.title}</span>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-wide text-blue-100/80">
-            <span className="px-3 py-1 rounded-full bg-blue-500/15 border border-blue-400/30">
-              Case Detail
-            </span>
-            <span className="px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30">
-              {displayDate}
-            </span>
+          <div className="flex items-center gap-3 text-sm text-text-muted mb-4">
+            <time dateTime={caseData.incidentDate || ''}>{displayDate}</time>
             {caseData.durationMinutes && (
-              <span className="px-3 py-1 rounded-full bg-surface-hover border border-surface-border/60 text-text-primary">
-                {caseData.durationMinutes} min duration
-              </span>
+              <>
+                <span aria-hidden="true">•</span>
+                <span>{caseData.durationMinutes} min</span>
+              </>
             )}
           </div>
 
-          <H1 icon={pageIcon} className="!mb-2">
+          <H1 icon={pageIcon} className="!mb-4">
             {caseData.title}
           </H1>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="flex items-center gap-3 rounded-2xl bg-surface-hover/40 border border-surface-border px-4 py-3">
               <ShieldHalf className="text-red-300" size={18} />
               <div>
@@ -187,22 +180,8 @@ export default function CaseDisplay({
                 <p className="text-sm font-semibold text-text-primary">{caseData.status}</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 rounded-2xl bg-surface-hover/40 border border-surface-border px-4 py-3">
-              <Clock4 className="text-blue-300" size={18} />
-              <div>
-                <p className="text-xs uppercase tracking-wide text-text-muted">Duration</p>
-                <p className="text-sm font-semibold text-text-primary">
-                  {caseData.durationMinutes ? `${caseData.durationMinutes} min` : 'N/A'}
-                </p>
-              </div>
-            </div>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 mt-4 text-sm text-text-muted">
-            <div className="flex items-center gap-2 rounded-2xl bg-surface-hover border border-surface-border px-3 py-2">
-              <Clock4 size={16} className="text-sky-200" />
-              <span>Date</span>
-              <strong className="text-text-primary ml-auto">{displayDate}</strong>
-            </div>
             <div className="flex items-center gap-2 rounded-2xl bg-surface-hover border border-surface-border px-3 py-2">
               <MapPin size={16} className="text-blue-200" />
               <span>Location</span>
@@ -346,20 +325,8 @@ export default function CaseDisplay({
                   {caseData.detectedBy || 'N/A'}
                 </P>
                 <P>
-                  <strong className="text-text-muted font-medium">Severity:</strong>{' '}
-                  {caseData.severity || 'N/A'}
-                </P>
-                <P>
-                  <strong className="text-text-muted font-medium">Status:</strong>{' '}
-                  {caseData.status || 'N/A'}
-                </P>
-                <P>
                   <strong className="text-text-muted font-medium">Impact Scope:</strong>{' '}
                   {caseData.impactScope || 'N/A'}
-                </P>
-                <P>
-                  <strong className="text-text-muted font-medium">Duration:</strong>{' '}
-                  {caseData.durationMinutes ? `${caseData.durationMinutes} minutes` : 'N/A'}
                 </P>
                 <P>
                   <strong className="text-text-muted font-medium">Validated By:</strong>{' '}

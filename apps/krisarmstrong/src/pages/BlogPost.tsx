@@ -199,7 +199,7 @@ export default function BlogPost() {
                 itemId={post.slug}
                 itemType="blog"
                 ratingAPI={ratingAPI}
-                starColor="yellow-400"
+                starColor="violet-400"
                 size="md"
                 onRate={(rating, stats) => {
                   console.warn(

@@ -173,9 +173,11 @@ export function ContentCard({
     expanded: 'p-8',
   };
 
+  // Tag spacing - no mt-auto to avoid pushing to absolute bottom
+  // Tags should flow naturally after content with consistent spacing
   const tagAreaSpacing =
     variant === 'compact'
-      ? 'px-4 pb-4 pt-2'
+      ? 'px-4 pb-4 pt-3'
       : variant === 'expanded'
         ? 'px-8 pb-8 pt-4'
         : 'px-6 pb-6 pt-4';
@@ -232,7 +234,7 @@ export function ContentCard({
 
           {/* Excerpt */}
           <p
-            className={`text-text-muted text-sm mb-4 flex-grow ${variant === 'compact' ? 'line-clamp-2' : 'line-clamp-3'}`}
+            className={`text-text-muted text-sm mb-4 ${variant === 'compact' ? 'line-clamp-2' : 'line-clamp-3'}`}
           >
             {excerpt}
           </p>

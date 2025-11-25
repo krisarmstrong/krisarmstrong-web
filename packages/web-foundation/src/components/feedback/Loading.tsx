@@ -1,6 +1,6 @@
 import { Loader2 } from 'lucide-react';
 import { useEffect, useRef } from 'react';
-import { isDevelopmentEnvironment, getSentry } from '../utils/env';
+import { isDevelopmentEnvironment, getSentry } from '../../utils/env';
 
 // ============================================================================
 // Loading Spinner
