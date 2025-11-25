@@ -22,7 +22,6 @@ import {
 import { shareToPlatform } from '../utils/share.ts';
 import {
   H1,
-  ArticleTitle,
   SubSectionTitle,
   P,
   ContentCard,
@@ -53,17 +52,17 @@ export default function CaseDisplay({
 }: CaseDisplayProps): React.ReactElement {
   const navigate = useNavigate();
 
+  const tags = caseData?.tags || [];
+
+  const handleTagClick = (tag: string) => {
+    navigate(`/cases?tags=${encodeURIComponent(tag)}`);
+  };
+
   const handleShareWrapper = (platform: SharePlatform): void => {
     if (!caseData) return;
     shareToPlatform(platform, caseData, window.location.href, (m: string) =>
       console.warn(`Share alert: ${m}`)
     );
-  };
-
-  const tagsArray: string[] = caseData?.tags || [];
-
-  const handleTagClick = (tag: string) => {
-    navigate(`/cases?tags=${encodeURIComponent(tag)}`);
   };
 
   if (isLoading) {
@@ -187,64 +186,55 @@ export default function CaseDisplay({
               </div>
             </div>
           </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 mt-4 text-sm text-text-muted">
+            <div className="flex items-center gap-2 rounded-2xl bg-surface-hover border border-surface-border px-3 py-2">
+              <Clock4 size={16} className="text-sky-200" />
+              <span>Date</span>
+              <strong className="text-text-primary ml-auto">{displayDate}</strong>
+            </div>
+            <div className="flex items-center gap-2 rounded-2xl bg-surface-hover border border-surface-border px-3 py-2">
+              <MapPin size={16} className="text-blue-200" />
+              <span>Location</span>
+              <strong className="text-text-primary ml-auto">{caseData.location || 'N/A'}</strong>
+            </div>
+            <div className="flex items-center gap-2 rounded-2xl bg-surface-hover border border-surface-border px-3 py-2">
+              <Network size={16} className="text-indigo-200" />
+              <span>Sector</span>
+              <strong className="text-text-primary ml-auto">{caseData.sector || 'N/A'}</strong>
+            </div>
+            <div className="flex items-center gap-2 rounded-2xl bg-surface-hover border border-surface-border px-3 py-2">
+              <Target size={16} className="text-emerald-200" />
+              <span>Subsector</span>
+              <strong className="text-text-primary ml-auto">{caseData.subsector || 'N/A'}</strong>
+            </div>
+            <div className="flex items-center gap-2 rounded-2xl bg-surface-hover border border-surface-border px-3 py-2">
+              <FileCheck size={16} className="text-slate-200" />
+              <span>Category</span>
+              <strong className="text-text-primary ml-auto">{caseData.category || 'N/A'}</strong>
+            </div>
+            <div className="flex items-center gap-2 rounded-2xl bg-surface-hover border border-surface-border px-3 py-2">
+              <Wrench size={16} className="text-sky-200" />
+              <span>Tool</span>
+              <strong className="text-text-primary ml-auto">{caseData.tool || 'N/A'}</strong>
+            </div>
+          </div>
+          {tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-4" aria-label="Tags">
+              {tags.map((tag, index) => (
+                <button
+                  key={`${tag}-${index}`}
+                  onClick={() => handleTagClick(tag)}
+                  className="inline-flex items-center gap-1 text-sm rounded-full font-medium px-3 py-1 border border-blue-400/40 bg-blue-500/10 text-blue-100 hover:bg-blue-500/20 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 transition-all duration-150 hover:-translate-y-0.5"
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+          )}
         </header>
 
         <article className="bg-gradient-to-b from-blue-950/40 via-surface-raised to-surface-raised border border-surface-border rounded-3xl shadow-2xl overflow-hidden">
           <div className="p-6 sm:p-8">
-            <header className="mb-6 sm:mb-8 space-y-4">
-              <ArticleTitle>{caseData.title || 'Title Not Available'}</ArticleTitle>
-
-              <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 text-sm">
-                <div className="flex items-center gap-2 rounded-xl bg-surface-hover border border-surface-border px-3 py-2">
-                  <ShieldHalf size={16} className="text-red-300" />
-                  <span className="text-text-muted">Severity</span>
-                  <strong className="text-text-primary ml-auto">{caseData.severity}</strong>
-                </div>
-                <div className="flex items-center gap-2 rounded-xl bg-surface-hover border border-surface-border px-3 py-2">
-                  <Target size={16} className="text-emerald-300" />
-                  <span className="text-text-muted">Status</span>
-                  <strong className="text-text-primary ml-auto">{caseData.status}</strong>
-                </div>
-                <div className="flex items-center gap-2 rounded-xl bg-surface-hover border border-surface-border px-3 py-2">
-                  <Clock4 size={16} className="text-blue-300" />
-                  <span className="text-text-muted">Date</span>
-                  <strong className="text-text-primary ml-auto">{displayDate}</strong>
-                </div>
-                <div className="flex items-center gap-2 rounded-xl bg-surface-hover border border-surface-border px-3 py-2">
-                  <MapPin size={16} className="text-blue-200" />
-                  <span className="text-text-muted">Location</span>
-                  <strong className="text-text-primary ml-auto">
-                    {caseData.location || 'N/A'}
-                  </strong>
-                </div>
-                <div className="flex items-center gap-2 rounded-xl bg-surface-hover border border-surface-border px-3 py-2">
-                  <Network size={16} className="text-indigo-200" />
-                  <span className="text-text-muted">Sector</span>
-                  <strong className="text-text-primary ml-auto">{caseData.sector || 'N/A'}</strong>
-                </div>
-                <div className="flex items-center gap-2 rounded-xl bg-surface-hover border border-surface-border px-3 py-2">
-                  <Wrench size={16} className="text-sky-200" />
-                  <span className="text-text-muted">Tool</span>
-                  <strong className="text-text-primary ml-auto">{caseData.tool || 'N/A'}</strong>
-                </div>
-              </div>
-
-              {tagsArray.length > 0 && (
-                <div className="flex flex-wrap gap-2" aria-label="Tags">
-                  {tagsArray.map((tag, index) => (
-                    <button
-                      key={`${tag}-${index}`}
-                      onClick={() => handleTagClick(tag)}
-                      className="inline-flex items-center gap-1 text-sm rounded-full font-medium px-3 py-1 border border-blue-400/40 bg-blue-500/10 text-blue-100 hover:bg-blue-500/20 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 transition-all duration-150 hover:-translate-y-0.5"
-                      aria-label={`View cases tagged ${tag}`}
-                    >
-                      {tag}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </header>
-
             <section className="mb-8">
               <SubSectionTitle icon={<ClipboardList size={20} className="text-blue-400" />}>
                 Incident Overview
