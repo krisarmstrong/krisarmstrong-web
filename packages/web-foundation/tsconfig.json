@@ -11,5 +11,6 @@
     "outDir": "dist",
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["src", "vitest.config.ts", "vitest.setup.ts", "tsup.config.ts"]
+  "include": ["src", "vitest.config.ts", "vitest.setup.ts", "tsup.config.ts"],
+  "exclude": ["**/*.stories.tsx", ".storybook", "storybook-static"]
 }

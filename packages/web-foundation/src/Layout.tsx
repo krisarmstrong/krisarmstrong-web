@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { PageShell } from './components/PageShell';
-import { LoadingPage } from './components/Loading';
+import { PageShell } from './components/layout/PageShell';
+import { LoadingPage } from './components/feedback/Loading';
 import 'react/jsx-runtime';
 
 export default function Layout() {

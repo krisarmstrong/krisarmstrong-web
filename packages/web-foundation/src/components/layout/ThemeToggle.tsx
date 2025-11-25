@@ -1,5 +1,5 @@
 import { Moon, Sun } from 'lucide-react';
-import { useSimpleTheme } from '../index';
+import { useTheme } from '../../hooks/useTheme';
 
 export interface ThemeToggleProps {
   // Props no longer needed with CSS-first approach, but kept for backwards compatibility
@@ -8,7 +8,7 @@ export interface ThemeToggleProps {
 }
 
 export function ThemeToggle(_props: ThemeToggleProps) {
-  const { theme, toggleTheme } = useSimpleTheme();
+  const { theme, toggleTheme } = useTheme();
   const isDark = theme === 'dark';
 
   return (

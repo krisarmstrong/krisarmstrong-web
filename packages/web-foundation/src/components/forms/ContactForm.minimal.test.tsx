@@ -53,9 +53,12 @@ describe('ContactForm - Minimal', () => {
     await user.click(screen.getByRole('button', { name: /send message/i }));
 
     console.log('[TEST] Waiting for fetch...');
-    await waitFor(() => {
-      expect(mockFetch).toHaveBeenCalled();
-    }, { timeout: 2000 });
+    await waitFor(
+      () => {
+        expect(mockFetch).toHaveBeenCalled();
+      },
+      { timeout: 2000 }
+    );
 
     console.log('[TEST] Fetch was called, waiting for success message...');
     await waitFor(

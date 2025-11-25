@@ -31,19 +31,24 @@
     "clean": "rimraf dist",
     "build": "npm run clean && tsup --dts --sourcemap --format esm,cjs --out-dir dist --metafile",
     "dev": "tsup --dts --watch --format esm,cjs --out-dir dist",
-    "lint": "eslint . --ext .ts,.tsx && tsc --noEmit",
-    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "lint": "eslint src --ext .ts,.tsx --ignore-pattern '**/*.stories.tsx' && tsc --noEmit",
+    "lint:fix": "eslint src --ext .ts,.tsx --ignore-pattern '**/*.stories.tsx' --fix",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "prepare": "husky",
-    "bundle:analyze": "esbuild-visualizer --metadata ./dist/metafile-esm.json --filename ./dist/bundle.html"
+    "bundle:analyze": "esbuild-visualizer --metadata ./dist/metafile-esm.json --filename ./dist/bundle.html",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
+    "!(*.stories).{ts,tsx}": [
       "eslint --fix",
       "prettier --write",
       "bash -c 'tsc --noEmit'"
+    ],
+    "*.stories.tsx": [
+      "prettier --write"
     ],
     "*.{json,md}": [
       "prettier --write"
@@ -60,6 +65,9 @@
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@eslint/js": "^9.39.1",
+    "@storybook/addon-docs": "^10.0.8",
+    "@storybook/addon-onboarding": "^10.0.8",
+    "@storybook/react-vite": "^10.0.8",
     "@tailwindcss/postcss": "^4.1.17",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
@@ -80,6 +88,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-security": "^3.0.1",
+    "eslint-plugin-storybook": "^10.0.8",
     "husky": "^9.1.7",
     "jsdom": "^27.2.0",
     "lint-staged": "^16.2.7",
@@ -88,6 +97,7 @@
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
     "rimraf": "^6.1.0",
+    "storybook": "^10.0.8",
     "tailwindcss": "^4.1.17",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",

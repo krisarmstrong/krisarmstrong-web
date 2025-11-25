@@ -1,6 +1,6 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
 import { AlertCircle, RefreshCw } from 'lucide-react';
-import { isDevelopmentEnvironment, getSentry } from '../utils/env';
+import { isDevelopmentEnvironment, getSentry } from '../../utils/env';
 import DOMPurify from 'dompurify';
 
 // ============================================================================
