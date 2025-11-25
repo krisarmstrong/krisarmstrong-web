@@ -173,116 +173,128 @@ export function ContentCard({
     expanded: 'p-8',
   };
 
+  const tagAreaSpacing =
+    variant === 'compact'
+      ? 'px-4 pb-4 pt-2'
+      : variant === 'expanded'
+        ? 'px-8 pb-8 pt-4'
+        : 'px-6 pb-6 pt-4';
+
   return (
-    <Link
-      to={href}
-      className={`relative flex bg-surface-raised rounded-2xl border border-surface-border shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 group focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-raised ${accentColors[accentColor]} ${accentFocusRings[accentColor]} ${variantStyles[variant]} ${variant === 'compact' ? 'flex-row' : 'flex-col h-full'} ${className}`}
+    <div
+      className={`relative flex flex-col h-full bg-surface-raised rounded-2xl border border-surface-border shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 group ${accentColors[accentColor]} ${className}`}
       style={{ animationDelay: `${animationDelay}ms` }}
     >
-      {/* Progress Bar */}
-      {progress !== undefined && progress > 0 && (
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gray-800 rounded-t-2xl overflow-hidden">
-          <div
-            className={`h-full ${progressBarColors[accentColor]} transition-all duration-300`}
-            style={{ width: `${progress}%` }}
-            role="progressbar"
-            aria-valuenow={progress}
-            aria-valuemin={0}
-            aria-valuemax={100}
-            aria-label="Reading progress"
-          />
+      <Link
+        to={href}
+        className={`flex flex-col flex-grow ${variantStyles[variant]} ${variant === 'compact' ? 'flex-row gap-4' : 'flex-col h-full'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-raised ${accentFocusRings[accentColor]}`}
+      >
+        {/* Progress Bar */}
+        {progress !== undefined && progress > 0 && (
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gray-800 rounded-t-2xl overflow-hidden">
+            <div
+              className={`h-full ${progressBarColors[accentColor]} transition-all duration-300`}
+              style={{ width: `${progress}%` }}
+              role="progressbar"
+              aria-valuenow={progress}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label="Reading progress"
+            />
+          </div>
+        )}
+
+        {/* Image Thumbnail */}
+        {image && (
+          <div className={variant === 'compact' ? 'w-1/3 flex-shrink-0' : 'w-full'}>
+            <img
+              src={image}
+              alt={imageAlt || title}
+              className={`object-cover rounded-xl ${variant === 'compact' ? 'h-full' : 'h-48 w-full mb-4'}`}
+            />
+          </div>
+        )}
+
+        <div className="flex flex-col flex-grow">
+          {/* Featured Badge - Small and minimal */}
+          {featured && (
+            <span className="inline-block px-3 py-1 bg-violet-500/20 text-violet-400 text-xs rounded-full mb-3 self-start">
+              Featured
+            </span>
+          )}
+
+          {/* Title - prominent with hover effect from parent */}
+          <h2
+            className={`${variant === 'compact' ? 'text-lg' : variant === 'expanded' ? 'text-2xl' : 'text-xl'} font-semibold mb-3 transition-colors ${accentTextColors[accentColor]}`}
+          >
+            {title}
+          </h2>
+
+          {/* Excerpt */}
+          <p
+            className={`text-gray-400 text-sm mb-4 flex-grow ${variant === 'compact' ? 'line-clamp-2' : 'line-clamp-3'}`}
+          >
+            {excerpt}
+          </p>
+
+          {/* Meta Information (Date, Time, Duration) */}
+          {(date || readTime || durationMinutes) && (
+            <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500 mb-3">
+              {date && <span>{formatDate(date)}</span>}
+              {readTime && <span>{readTime} min read</span>}
+              {durationMinutes && <span>{durationMinutes} min</span>}
+            </div>
+          )}
+
+          {/* Metadata and Badges Row */}
+          {(metadata || severity || status) && (
+            <div className="flex items-center gap-2 flex-wrap mb-3">
+              {metadata && (
+                <div className="flex items-center gap-1 text-xs text-gray-500">
+                  {metadataIcon}
+                  <span>{metadata}</span>
+                </div>
+              )}
+              {severity && (
+                <span
+                  className={`inline-block px-2 py-0.5 text-xs rounded-full border ${severityColors[severity]}`}
+                >
+                  {severity}
+                </span>
+              )}
+              {status && (
+                <span className="inline-block px-2 py-0.5 bg-gray-700 text-gray-300 text-xs rounded-full">
+                  {status}
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+      </Link>
+
+      {/* Tags - Clickable for filtering */}
+      {tags.length > 0 && (
+        <div className={`flex flex-wrap gap-2 ${tagAreaSpacing}`} aria-label="Content tags">
+          {tags.map((tag) => (
+            <button
+              key={tag}
+              onClick={(e) => {
+                if (onTagClick) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onTagClick(tag);
+                }
+              }}
+              className={`inline-flex items-center gap-1 px-3 py-1 bg-gray-800 text-gray-400 text-xs rounded-full ${tagHoverColors[accentColor]} hover:text-white transition-colors ${onTagClick ? 'cursor-pointer' : 'cursor-default'}`}
+              disabled={!onTagClick}
+              type="button"
+            >
+              <TagIcon size={12} />
+              {tag}
+            </button>
+          ))}
         </div>
       )}
-
-      {/* Image Thumbnail */}
-      {image && (
-        <div className={variant === 'compact' ? 'w-1/3 flex-shrink-0' : 'w-full'}>
-          <img
-            src={image}
-            alt={imageAlt || title}
-            className={`object-cover rounded-xl ${variant === 'compact' ? 'h-full' : 'h-48 w-full mb-4'}`}
-          />
-        </div>
-      )}
-
-      <div className="flex flex-col flex-grow">
-        {/* Featured Badge - Small and minimal */}
-        {featured && (
-          <span className="inline-block px-3 py-1 bg-violet-500/20 text-violet-400 text-xs rounded-full mb-3 self-start">
-            Featured
-          </span>
-        )}
-
-        {/* Title - prominent with hover effect from parent */}
-        <h2
-          className={`${variant === 'compact' ? 'text-lg' : variant === 'expanded' ? 'text-2xl' : 'text-xl'} font-semibold mb-3 transition-colors ${accentTextColors[accentColor]}`}
-        >
-          {title}
-        </h2>
-
-        {/* Excerpt */}
-        <p
-          className={`text-gray-400 text-sm mb-4 flex-grow ${variant === 'compact' ? 'line-clamp-2' : 'line-clamp-3'}`}
-        >
-          {excerpt}
-        </p>
-
-        {/* Meta Information (Date, Time, Duration) */}
-        {(date || readTime || durationMinutes) && (
-          <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500 mb-3">
-            {date && <span>{formatDate(date)}</span>}
-            {readTime && <span>{readTime} min read</span>}
-            {durationMinutes && <span>{durationMinutes} min</span>}
-          </div>
-        )}
-
-        {/* Metadata and Badges Row */}
-        {(metadata || severity || status) && (
-          <div className="flex items-center gap-2 flex-wrap mb-3">
-            {metadata && (
-              <div className="flex items-center gap-1 text-xs text-gray-500">
-                {metadataIcon}
-                <span>{metadata}</span>
-              </div>
-            )}
-            {severity && (
-              <span
-                className={`inline-block px-2 py-0.5 text-xs rounded-full border ${severityColors[severity]}`}
-              >
-                {severity}
-              </span>
-            )}
-            {status && (
-              <span className="inline-block px-2 py-0.5 bg-gray-700 text-gray-300 text-xs rounded-full">
-                {status}
-              </span>
-            )}
-          </div>
-        )}
-
-        {/* Tags - Clickable for filtering */}
-        {tags.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {tags.map((tag) => (
-              <button
-                key={tag}
-                onClick={(e) => {
-                  if (onTagClick) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    onTagClick(tag);
-                  }
-                }}
-                className={`inline-flex items-center gap-1 px-3 py-1 bg-gray-800 text-gray-400 text-xs rounded-full ${tagHoverColors[accentColor]} hover:text-white transition-colors ${onTagClick ? 'cursor-pointer' : 'cursor-default'}`}
-                disabled={!onTagClick}
-              >
-                <TagIcon size={12} />
-                {tag}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-    </Link>
+    </div>
   );
 }

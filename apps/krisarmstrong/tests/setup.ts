@@ -5,7 +5,6 @@ vi.mock('../src/lib/supabase', () => ({
   getAllBlogPosts: vi.fn().mockResolvedValue([]),
   getFeaturedBlogPosts: vi.fn().mockResolvedValue([]),
   getBlogPostBySlug: vi.fn().mockResolvedValue(null),
-  searchBlogPosts: vi.fn().mockResolvedValue([]),
   getAllTags: vi.fn().mockResolvedValue([]),
   incrementViewCount: vi.fn().mockResolvedValue(undefined),
 }));

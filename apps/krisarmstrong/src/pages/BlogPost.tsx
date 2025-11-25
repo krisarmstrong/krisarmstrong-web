@@ -74,6 +74,16 @@ export default function BlogPost() {
 
   const metaReadTime = useMemo(() => post?.read_time ?? 5, [post]);
 
+  // Memoize ratingAPI to prevent AggregateRating from re-fetching on every render
+  const ratingAPI = useMemo(
+    () => ({
+      getRatingStats,
+      submitRating,
+      getUserRating,
+    }),
+    []
+  );
+
   if (loading) {
     return <LoadingPage message="Loading blog post..." variant="violet" />;
   }
@@ -188,11 +198,7 @@ export default function BlogPost() {
               <AggregateRating
                 itemId={post.slug}
                 itemType="blog"
-                ratingAPI={{
-                  getRatingStats,
-                  submitRating,
-                  getUserRating,
-                }}
+                ratingAPI={ratingAPI}
                 starColor="yellow-400"
                 size="md"
                 onRate={(rating, stats) => {

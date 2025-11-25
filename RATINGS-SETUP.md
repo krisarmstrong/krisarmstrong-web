@@ -5,6 +5,7 @@
 This project now includes an Amazon-style aggregate rating system for blog posts and case studies. Users can rate content, and ratings are displayed with averages and total counts.
 
 **Features:**
+
 - ★★★★☆ 4.3 from 127 ratings (like Amazon/Best Buy)
 - Aggregate ratings stored in Supabase
 - Browser fingerprinting prevents duplicate ratings from same user
@@ -23,6 +24,7 @@ Open your Supabase project's SQL Editor and run the migration file:
 ```
 
 This migration creates:
+
 - `ratings` table with proper indexes
 - Row Level Security (RLS) policies
 - Database functions for ratings operations
@@ -33,14 +35,17 @@ This migration creates:
 After running the migration, verify the following were created:
 
 **Table:**
+
 - `public.ratings`
 
 **Functions:**
+
 - `get_rating_stats(p_item_id, p_item_type)`
 - `submit_rating(p_item_id, p_item_type, p_rating, p_user_fingerprint)`
 - `get_user_rating(p_item_id, p_item_type, p_user_fingerprint)`
 
 **RLS Policies:**
+
 - Allow public read access to ratings
 - Allow public insert of ratings
 - Allow users to update their own ratings
@@ -76,12 +81,14 @@ SELECT get_user_rating(
 Both sites already have Supabase configured. Verify these environment variables exist:
 
 **krisarmstrong (.env):**
+
 ```
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
 **wifivigilante (.env):**
+
 ```
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
@@ -90,11 +97,13 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ### Code Changes Summary
 
 #### New Files Created:
+
 1. **`supabase-ratings-migration.sql`** - Database schema and functions
 2. **`packages/web-foundation/src/components/AggregateRating.tsx`** - Reusable rating component
 3. **`apps/wifivigilante/src/utils/ratings.ts`** - WiFi Vigilante rating API functions
 
 #### Updated Files:
+
 1. **`apps/krisarmstrong/src/lib/supabase.ts`** - Added rating functions
 2. **`apps/krisarmstrong/src/pages/BlogPost.tsx`** - Replaced StarRating with AggregateRating
 3. **`apps/wifivigilante/src/components/CaseDisplay.tsx`** - Replaced StarRating with AggregateRating
@@ -152,8 +161,8 @@ This creates a unique ID stored in localStorage to prevent duplicate ratings.
 
 ```typescript
 interface RatingStats {
-  average_rating: number;  // e.g., 4.3
-  total_ratings: number;   // e.g., 127
+  average_rating: number; // e.g., 4.3
+  total_ratings: number; // e.g., 127
 }
 ```
 
@@ -178,7 +187,7 @@ import { getRatingStats, submitRating, getUserRating } from '../lib/supabase';
   onRate={(rating, stats) => {
     console.log(`New average: ${stats.average_rating} from ${stats.total_ratings} ratings`);
   }}
-/>
+/>;
 ```
 
 ### In Case Studies (wifivigilante)
@@ -199,32 +208,34 @@ import { getRatingStats, submitRating, getUserRating } from '../utils/ratings';
   onRate={(rating, stats) => {
     console.log(`Rated: ${rating} stars. New average: ${stats.average_rating}`);
   }}
-/>
+/>;
 ```
 
 ## Component Props
 
 ### AggregateRating
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `itemId` | string | Unique identifier (blog slug or case ID) |
-| `itemType` | 'blog' \| 'case' | Type of content being rated |
-| `ratingAPI` | RatingAPI | Object containing rating functions |
-| `starColor` | string | Tailwind color class (e.g., "violet-400") |
-| `size` | 'sm' \| 'md' \| 'lg' | Size of stars and text |
-| `onRate` | function | Callback when user rates (optional) |
+| Prop        | Type                 | Description                               |
+| ----------- | -------------------- | ----------------------------------------- |
+| `itemId`    | string               | Unique identifier (blog slug or case ID)  |
+| `itemType`  | 'blog' \| 'case'     | Type of content being rated               |
+| `ratingAPI` | RatingAPI            | Object containing rating functions        |
+| `starColor` | string               | Tailwind color class (e.g., "violet-400") |
+| `size`      | 'sm' \| 'md' \| 'lg' | Size of stars and text                    |
+| `onRate`    | function             | Callback when user rates (optional)       |
 
 ## Troubleshooting
 
 ### Ratings not appearing?
 
 1. **Check database migration:**
+
    ```sql
    SELECT * FROM pg_tables WHERE tablename = 'ratings';
    ```
 
 2. **Check RLS policies:**
+
    ```sql
    SELECT * FROM pg_policies WHERE tablename = 'ratings';
    ```
@@ -257,6 +268,7 @@ import { getRatingStats, submitRating, getUserRating } from '../utils/ratings';
 ## Future Enhancements
 
 Possible improvements:
+
 - Add rating distribution chart (5★: 67%, 4★: 20%, etc.)
 - Add temporal decay for older ratings
 - Add moderation for spam ratings
@@ -266,3 +278,13 @@ Possible improvements:
 ---
 
 **Questions?** Check Supabase logs or contact the development team.
+
+### Verification Script
+
+We also include a small helper script that exercises the rating RPCs so you can confirm the Supabase functions are wired correctly before you touch the UI.
+
+```
+node scripts/check-rating-api.js
+```
+
+It loads `apps/wifivigilante/.env`, so make sure the Supabase URL/anon key are present there (the same project powers all the apps). The script submits a rating, fetches stats, and reads the `ratings` rows for a known fingerprint.
