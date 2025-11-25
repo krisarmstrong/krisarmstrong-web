@@ -101,13 +101,15 @@ const CaseDisplay = memo(
     // Type-safe metadata access
 
     return (
-      <div className="px-4 py-8 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+      <div className="relative overflow-hidden bg-gradient-to-br from-blue-950 via-slate-950 to-slate-900">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.18),transparent_45%),radial-gradient(circle_at_80%_0%,rgba(16,185,129,0.2),transparent_40%)] pointer-events-none" />
+
+        <div className="max-w-5xl mx-auto px-4 py-10 sm:px-6 lg:px-8 relative">
           {/* Back Button */}
-          <div className="mb-4">
+          <div className="mb-6">
             <button
               onClick={() => navigate(-1)}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-surface-hover hover:bg-surface-border/20 text-text-primary rounded-md transition-all text-sm font-medium group"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-surface-hover hover:bg-surface-border/20 text-text-primary rounded-md transition-all text-sm font-medium group focus-visible:ring-2 focus-visible:ring-blue-500"
               aria-label="Go back to previous page"
             >
               <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
@@ -115,8 +117,8 @@ const CaseDisplay = memo(
             </button>
           </div>
 
-          <header className="mb-8 sm:mb-10 space-y-4">
-            <div className="text-sm text-text-muted flex flex-wrap items-center gap-2">
+          <header className="space-y-3 mb-8">
+            <div className="flex flex-wrap items-center gap-2 text-sm text-text-muted">
               <button
                 onClick={() => navigate('/')}
                 className="underline-offset-4 hover:text-text-primary focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
@@ -133,9 +135,25 @@ const CaseDisplay = memo(
               <span aria-hidden="true">/</span>
               <span className="text-text-primary font-semibold line-clamp-1">{caseData.title}</span>
             </div>
-            <H1 icon={pageIcon} className="!mb-0">
-              {pageTitle}
+
+            <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-wide text-blue-100/80">
+              <span className="px-3 py-1 rounded-full bg-blue-500/15 border border-blue-400/30">
+                Case Detail
+              </span>
+              <span className="px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30">
+                {displayDate}
+              </span>
+              {caseData.durationMinutes && (
+                <span className="px-3 py-1 rounded-full bg-surface-hover border border-surface-border/60 text-text-primary">
+                  {caseData.durationMinutes} min duration
+                </span>
+              )}
+            </div>
+
+            <H1 icon={pageIcon} className="!mb-2">
+              {caseData.title}
             </H1>
+
             <div className="flex flex-wrap gap-2">
               <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-surface-border bg-surface-hover text-xs text-text-primary">
                 Severity: <strong className="text-red-300">{caseData.severity}</strong>
@@ -151,50 +169,44 @@ const CaseDisplay = memo(
             </div>
           </header>
 
-          <article className="bg-surface-raised border border-surface-border rounded-xl shadow-xl overflow-hidden">
+          <article className="bg-surface-raised border border-surface-border rounded-2xl shadow-2xl overflow-hidden">
             <div className="p-6 sm:p-8">
-              <header className="mb-6 sm:mb-8">
+              <header className="mb-6 sm:mb-8 space-y-4">
                 <ArticleTitle>{caseData.title || 'Title Not Available'}</ArticleTitle>
 
-                <MutedText className="space-x-2 mb-4 text-sm flex flex-wrap items-center gap-x-2 gap-y-1">
-                  <span>
-                    <strong className="text-text-muted font-medium">Sector:</strong>{' '}
-                    <span className="font-normal text-text-primary">
+                <div className="flex flex-wrap gap-2 text-xs text-text-muted">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-hover border border-surface-border">
+                    Sector:{' '}
+                    <span className="text-text-primary font-medium">
                       {caseData.sector || 'N/A'}
                     </span>
                   </span>
-                  <span className="hidden sm:inline">•</span>
-                  <span>
-                    <strong className="text-text-muted font-medium">Subsector:</strong>{' '}
-                    <span className="font-normal text-text-primary">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-hover border border-surface-border">
+                    Subsector:{' '}
+                    <span className="text-text-primary font-medium">
                       {caseData.subsector || 'N/A'}
                     </span>
                   </span>
-                  <span className="hidden sm:inline">•</span>
-                  <span>
-                    <strong className="text-text-muted font-medium">Tool:</strong>{' '}
-                    <span className="font-normal text-text-primary">{caseData.tool || 'N/A'}</span>
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-hover border border-surface-border">
+                    Tool:{' '}
+                    <span className="text-text-primary font-medium">{caseData.tool || 'N/A'}</span>
                   </span>
-                  <span className="hidden sm:inline">•</span>
-                  <span>
-                    <strong className="text-text-muted font-medium">Location:</strong>{' '}
-                    <span className="font-normal text-text-primary">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-hover border border-surface-border">
+                    Location:{' '}
+                    <span className="text-text-primary font-medium">
                       {caseData.location || 'N/A'}
                     </span>
                   </span>
-                  <span className="hidden sm:inline">•</span>
-                  <span>
-                    <strong className="text-text-muted font-medium">Category:</strong>{' '}
-                    <span className="font-normal text-text-primary">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-hover border border-surface-border">
+                    Category:{' '}
+                    <span className="text-text-primary font-medium">
                       {caseData.category || 'N/A'}
                     </span>
                   </span>
-                  <span className="hidden sm:inline">•</span>
-                  <span>
-                    <strong className="text-text-muted font-medium">Date:</strong>{' '}
-                    <span className="font-normal text-text-primary">{displayDate}</span>
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-hover border border-surface-border">
+                    Date: <span className="text-text-primary font-medium">{displayDate}</span>
                   </span>
-                </MutedText>
+                </div>
 
                 {tagsArray.length > 0 && (
                   <div className="flex flex-wrap gap-2">
