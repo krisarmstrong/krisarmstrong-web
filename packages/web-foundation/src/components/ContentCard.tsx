@@ -191,7 +191,7 @@ export function ContentCard({
       >
         {/* Progress Bar */}
         {progress !== undefined && progress > 0 && (
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gray-800 rounded-t-2xl overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-surface-hover rounded-t-2xl overflow-hidden">
             <div
               className={`h-full ${progressBarColors[accentColor]} transition-all duration-300`}
               style={{ width: `${progress}%` }}
@@ -232,14 +232,14 @@ export function ContentCard({
 
           {/* Excerpt */}
           <p
-            className={`text-gray-400 text-sm mb-4 flex-grow ${variant === 'compact' ? 'line-clamp-2' : 'line-clamp-3'}`}
+            className={`text-text-muted text-sm mb-4 flex-grow ${variant === 'compact' ? 'line-clamp-2' : 'line-clamp-3'}`}
           >
             {excerpt}
           </p>
 
           {/* Meta Information (Date, Time, Duration) */}
           {(date || readTime || durationMinutes) && (
-            <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500 mb-3">
+            <div className="flex flex-wrap items-center gap-4 text-xs text-text-muted mb-3">
               {date && <span>{formatDate(date)}</span>}
               {readTime && <span>{readTime} min read</span>}
               {durationMinutes && <span>{durationMinutes} min</span>}
@@ -250,7 +250,7 @@ export function ContentCard({
           {(metadata || severity || status) && (
             <div className="flex items-center gap-2 flex-wrap mb-3">
               {metadata && (
-                <div className="flex items-center gap-1 text-xs text-gray-500">
+                <div className="flex items-center gap-1 text-xs text-text-muted">
                   {metadataIcon}
                   <span>{metadata}</span>
                 </div>
@@ -263,7 +263,7 @@ export function ContentCard({
                 </span>
               )}
               {status && (
-                <span className="inline-block px-2 py-0.5 bg-gray-700 text-gray-300 text-xs rounded-full">
+                <span className="inline-block px-2 py-0.5 bg-surface-hover text-text-primary text-xs rounded-full">
                   {status}
                 </span>
               )}
@@ -285,7 +285,7 @@ export function ContentCard({
                   onTagClick(tag);
                 }
               }}
-              className={`inline-flex items-center gap-1 px-3 py-1 bg-gray-800 text-gray-400 text-xs rounded-full ${tagHoverColors[accentColor]} hover:text-white transition-colors ${onTagClick ? 'cursor-pointer' : 'cursor-default'}`}
+              className={`inline-flex items-center gap-1 px-3 py-1 bg-surface-hover text-text-muted text-xs rounded-full ${tagHoverColors[accentColor]} transition-colors ${onTagClick ? 'cursor-pointer' : 'cursor-default'}`}
               disabled={!onTagClick}
               type="button"
             >
