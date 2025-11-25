@@ -125,7 +125,7 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
     const fillColorClass =
       isHovered || isUserRated
         ? (starColorClasses[starColor]?.text ?? 'text-yellow-400')
-        : 'text-gray-300';
+        : 'text-slate-500';
     const ringClass = starColorClasses[starColor]?.ring ?? 'focus:ring-yellow-400/60';
 
     return (

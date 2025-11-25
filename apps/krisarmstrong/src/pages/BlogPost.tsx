@@ -193,7 +193,7 @@ export default function BlogPost() {
                   submitRating,
                   getUserRating,
                 }}
-                starColor="violet-400"
+                starColor="yellow-400"
                 size="md"
                 onRate={(rating, stats) => {
                   console.warn(
