@@ -87,21 +87,7 @@ export default function Blog() {
     setSearchParams(params, { replace: true });
   }, [selectedTags, sortBy, setSearchParams, searchParams, hydratedParams]);
 
-  const availableTags = useMemo(() => {
-    const tagSet = new Set<string>();
-    blogPosts.forEach((post) => (post.tags || []).forEach((t) => tagSet.add(t)));
-    return Array.from(tagSet).sort((a, b) => a.localeCompare(b));
-  }, [blogPosts]);
-
-  const toggleTag = (tag: string) =>
-    startTransition(() => {
-      setSelectedTags((prev) => {
-        const exists = prev.some((t) => t.toLowerCase() === tag.toLowerCase());
-        return exists ? prev.filter((t) => t.toLowerCase() !== tag.toLowerCase()) : [...prev, tag];
-      });
-    });
-
-  const clearFilters = () => startTransition(() => setSelectedTags([]));
+  // Tag rail removed for cleaner header per feedback
 
   // Sort posts with featured always at the top
   const sortedPosts = useMemo(() => {
@@ -189,39 +175,6 @@ export default function Blog() {
           </span>
           <span>Filter by tags or search across full content.</span>
         </div>
-
-        {/* Tag rail */}
-        {availableTags.length > 0 && (
-          <div className="mb-6 overflow-x-auto hide-scrollbar -mx-1">
-            <div className="flex gap-2 px-1 py-1">
-              {availableTags.map((tag) => {
-                const isActive = selectedTags.some((t) => t.toLowerCase() === tag.toLowerCase());
-                return (
-                  <button
-                    key={tag}
-                    onClick={() => toggleTag(tag)}
-                    className={`whitespace-nowrap rounded-full border px-3 py-1 text-sm transition-colors ${
-                      isActive
-                        ? 'bg-violet-600 text-white border-violet-500'
-                        : 'bg-surface-raised text-text-muted border-surface-border hover:border-violet-400 hover:text-text-primary'
-                    }`}
-                    aria-pressed={isActive}
-                  >
-                    {tag}
-                  </button>
-                );
-              })}
-              {selectedTags.length > 0 && (
-                <button
-                  onClick={clearFilters}
-                  className="whitespace-nowrap rounded-full border px-3 py-1 text-sm bg-surface-raised text-text-muted border-surface-border hover:border-violet-400 hover:text-text-primary"
-                >
-                  Clear
-                </button>
-              )}
-            </div>
-          </div>
-        )}
 
         {/* Search */}
         <ContentSearch
