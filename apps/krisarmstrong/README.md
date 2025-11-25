@@ -1,7 +1,6 @@
 # Kris Armstrong Portfolio
 
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green) ![Version](https://img.shields.io/badge/Version-0.8.4-blue) ![Status](https://img.shields.io/badge/Status-Active-success)
-
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green) ![Version](https://img.shields.io/badge/Version-0.8.5-blue) ![Status](https://img.shields.io/badge/Status-Active-success)
 
 Professional portfolio website built with React and modern web technologies.
 
@@ -39,11 +38,13 @@ cp .env.example .env
 ## Usage
 
 Development server:
+
 ```bash
 npm run dev
 ```
 
 Build for production:
+
 ```bash
 npm run build
 ```
@@ -63,6 +64,7 @@ SUPABASE_SERVICE_ROLE_KEY=only-needed-for-local-scripts
 When a variable is missing the UI falls back to safe defaults (blog data will not load and the contact form is disabled) so nothing is submitted to an invalid destination.
 
 Preview production build:
+
 ```bash
 npm run preview
 ```
