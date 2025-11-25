@@ -3,7 +3,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { ShieldCheck } from 'lucide-react';
-import { getCase } from '../api';
+import { getCase, getAllCases } from '../api';
 import CaseDisplay from '../components/CaseDisplay';
 import { TransformedCase } from '../types';
 import { transformApiData } from '../utils/caseUtils';
@@ -13,6 +13,7 @@ export default function CaseDetail(): React.ReactElement {
   const [caseData, setCaseData] = useState<TransformedCase | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [fetchError, setFetchError] = useState<Error | { message: string } | null>(null);
+  const [relatedCases, setRelatedCases] = useState<TransformedCase[]>([]);
 
   // Derive error state for missing case ID
   const missingIdError = useMemo(() => {
@@ -53,6 +54,27 @@ export default function CaseDetail(): React.ReactElement {
       .finally(() => setIsLoading(false));
   }, [caseIdFromParams, missingIdError]);
 
+  // Load related cases once primary case is available
+  useEffect(() => {
+    if (!caseData) return;
+
+    getAllCases()
+      .then((all) => {
+        const transformed = all.map(transformApiData).filter(Boolean) as TransformedCase[];
+        const related = transformed
+          .filter(
+            (c) =>
+              c.publicId !== caseData.publicId &&
+              c.tags &&
+              caseData.tags &&
+              c.tags.some((t) => caseData.tags?.includes(t))
+          )
+          .slice(0, 3);
+        setRelatedCases(related);
+      })
+      .catch((err) => console.warn('Related cases fetch failed:', err));
+  }, [caseData]);
+
   return (
     <CaseDisplay
       pageTitle="Case Details"
@@ -60,6 +82,7 @@ export default function CaseDetail(): React.ReactElement {
       caseData={caseData}
       isLoading={loading}
       error={error}
+      relatedCases={relatedCases}
     />
   );
 }
