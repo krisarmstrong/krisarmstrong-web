@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 export interface RatingStats {
   average_rating: number;
@@ -44,12 +44,12 @@ const textSizeClasses = {
 
 const starColorClasses: Record<
   NonNullable<AggregateRatingProps['starColor']>,
-  { text: string; ring: string }
+  { ring: string; hex: string }
 > = {
-  'yellow-400': { text: 'text-yellow-400', ring: 'focus:ring-yellow-400/60' },
-  'violet-400': { text: 'text-violet-400', ring: 'focus:ring-violet-400/60' },
-  'blue-400': { text: 'text-blue-400', ring: 'focus:ring-blue-400/60' },
-  'emerald-400': { text: 'text-emerald-400', ring: 'focus:ring-emerald-400/60' },
+  'yellow-400': { ring: 'focus:ring-yellow-400/60', hex: '#facc15' },
+  'violet-400': { ring: 'focus:ring-violet-400/60', hex: '#c084fc' },
+  'blue-400': { ring: 'focus:ring-blue-400/60', hex: '#38bdf8' },
+  'emerald-400': { ring: 'focus:ring-emerald-400/60', hex: '#34d399' },
 };
 
 /**
@@ -73,25 +73,23 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   // Fetch initial data
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const [statsData, userRatingData] = await Promise.all([
-          ratingAPI.getRatingStats(itemId, itemType),
-          ratingAPI.getUserRating(itemId, itemType),
-        ]);
-        setStats(statsData);
-        setUserRating(userRatingData);
-      } catch (error) {
-        console.error('Error fetching rating data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    void fetchData();
+  const refreshStats = useCallback(async () => {
+    try {
+      const [statsData, userRatingData] = await Promise.all([
+        ratingAPI.getRatingStats(itemId, itemType),
+        ratingAPI.getUserRating(itemId, itemType),
+      ]);
+      setStats(statsData);
+      setUserRating(userRatingData);
+    } catch (error) {
+      console.error('Error fetching rating data:', error);
+    }
   }, [itemId, itemType, ratingAPI]);
+
+  useEffect(() => {
+    setLoading(true);
+    void refreshStats().finally(() => setLoading(false));
+  }, [refreshStats]);
 
   const handleStarClick = async (rating: number) => {
     if (submitting) return;
@@ -102,10 +100,9 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
     try {
       const result = await ratingAPI.submitRating(itemId, itemType, rating);
       if (result && result.success) {
-        setUserRating(rating);
-        setStats(result.stats);
         setStatusMessage('Thanks! Rating saved.');
         onRate?.(rating, result.stats);
+        await refreshStats();
       } else {
         setErrorMessage('Could not save your rating. Please try again.');
         setStatusMessage(null);
@@ -122,11 +119,8 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
   const renderStar = (index: number) => {
     const isHovered = hoveredStar !== null && index <= hoveredStar;
     const isUserRated = userRating !== null && index <= userRating;
-    const fillColorClass =
-      isHovered || isUserRated
-        ? (starColorClasses[starColor]?.text ?? 'text-yellow-400')
-        : 'text-slate-500';
-    const ringClass = starColorClasses[starColor]?.ring ?? 'focus:ring-yellow-400/60';
+    const fillColor = isHovered || isUserRated ? starColorClasses[starColor].hex : '#94a3b8';
+    const ringClass = starColorClasses[starColor].ring;
 
     return (
       <button
@@ -140,7 +134,8 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className={`w-full h-full transition-colors duration-150 ${fillColorClass} fill-current`}
+          className="w-full h-full transition-colors duration-150 fill-current"
+          style={{ color: fillColor }}
           viewBox="0 0 20 20"
         >
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -154,6 +149,7 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
 
+    const accentColor = starColorClasses[starColor].hex;
     for (let i = 1; i <= 5; i++) {
       if (i <= fullStars) {
         // Full star
@@ -161,9 +157,8 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
           <svg
             key={i}
             xmlns="http://www.w3.org/2000/svg"
-            className={`${sizeClasses[size]} ${
-              starColorClasses[starColor]?.text ?? 'text-yellow-400'
-            } fill-current`}
+            className={`${sizeClasses[size]} fill-current`}
+            style={{ color: accentColor }}
             viewBox="0 0 20 20"
           >
             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -183,9 +178,8 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
             <div className="absolute inset-0 overflow-hidden" style={{ width: '50%' }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className={`${sizeClasses[size]} ${
-                  starColorClasses[starColor]?.text ?? 'text-yellow-400'
-                } fill-current`}
+                className={`${sizeClasses[size]} fill-current`}
+                style={{ color: accentColor }}
                 viewBox="0 0 20 20"
               >
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />

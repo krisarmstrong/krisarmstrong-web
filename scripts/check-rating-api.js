@@ -18,42 +18,35 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 async function runCheck() {
   const itemId = 'cloud-managed-networks-evolution-may2021';
   const itemType = 'blog';
+  const fingerprint = 'script-rating-check';
 
-  console.log('get_rating_stats →');
   const stats = await supabase.rpc('get_rating_stats', {
     p_item_id: itemId,
     p_item_type: itemType,
   });
-  if (stats.error) {
-    console.error(stats.error);
-  } else {
-    console.log(stats.data);
-  }
+  console.log('Stats', stats.data, stats.error);
 
-  console.log('get_user_rating →');
-  const rating = await supabase.rpc('get_user_rating', {
+  const userRating = await supabase.rpc('get_user_rating', {
     p_item_id: itemId,
     p_item_type: itemType,
-    p_user_fingerprint: 'script-rating-check',
+    p_user_fingerprint: fingerprint,
   });
-  if (rating.error) {
-    console.error(rating.error);
-  } else {
-    console.log(rating.data);
-  }
+  console.log('User rating', userRating.data, userRating.error);
 
-  console.log('submit_rating →');
   const submit = await supabase.rpc('submit_rating', {
     p_item_id: itemId,
     p_item_type: itemType,
-    p_rating: 5,
-    p_user_fingerprint: 'script-rating-check',
+    p_rating: 4,
+    p_user_fingerprint: fingerprint,
   });
-  if (submit.error) {
-    console.error(submit.error);
-  } else {
-    console.log(submit.data);
-  }
+  console.log('Submit', submit.data, submit.error);
+
+  const { data, error } = await supabase
+    .from('ratings')
+    .select('*')
+    .eq('user_fingerprint', fingerprint)
+    .order('created_at', { ascending: false });
+  console.log('Stored rows', data?.slice(0, 5), error);
 }
 
 runCheck().catch((err) => {
