@@ -110,7 +110,7 @@ export default function CaseDisplay({
 
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-blue-950 via-slate-950 to-slate-900">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.18),transparent_45%),radial-gradient(circle_at_80%_0%,rgba(16,185,129,0.2),transparent_40%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.18),transparent_45%),radial-gradient(circle_at_80%_0%,rgba(14,165,233,0.2),transparent_40%)] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 py-10 sm:px-6 lg:px-8 relative">
         {/* Back Button */}
