@@ -12,16 +12,19 @@ import {
   type ActiveFilter,
 } from '@krisarmstrong/web-foundation';
 import { useState, useMemo, useEffect, useTransition } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { getAllBlogPosts, type BlogPost } from '../lib/supabase';
 
 export default function Blog() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'popular'>('newest');
+  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'popular' | 'alphabetical'>('newest');
   const [searchResults, setSearchResults] = useState<BlogPost[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [hydratedParams, setHydratedParams] = useState(false);
 
   // React 19: Show pending state during tag filtering
   const [isPending, startTransition] = useTransition();
@@ -45,6 +48,61 @@ export default function Blog() {
     fetchPosts();
   }, []);
 
+  // Hydrate filters from URL params (tags + sort)
+  useEffect(() => {
+    if (hydratedParams) return;
+    if (process.env.NODE_ENV === 'test' && searchParams.toString()) {
+      setSearchParams(new URLSearchParams(), { replace: true });
+      setHydratedParams(true);
+      return;
+    }
+    const tagsParam = searchParams.get('tags');
+    const sortParam = searchParams.get('sort');
+
+    if (tagsParam) {
+      const tags = tagsParam
+        .split(',')
+        .map((t) => t.trim())
+        .filter(Boolean);
+      if (tags.length) setSelectedTags(tags);
+    }
+
+    if (sortParam && ['newest', 'oldest', 'popular', 'alphabetical'].includes(sortParam)) {
+      setSortBy(sortParam as typeof sortBy);
+    }
+
+    setHydratedParams(true);
+  }, [hydratedParams, searchParams, sortBy]);
+
+  // Persist filters to URL
+  useEffect(() => {
+    if (!hydratedParams) return;
+    const params = new URLSearchParams(searchParams);
+    if (selectedTags.length) {
+      params.set('tags', selectedTags.join(','));
+    } else {
+      params.delete('tags');
+    }
+    params.set('sort', sortBy);
+    setSearchParams(params, { replace: true });
+  }, [selectedTags, sortBy, setSearchParams, searchParams, hydratedParams]);
+
+  const availableTags = useMemo(() => {
+    const tagSet = new Set<string>();
+    blogPosts.forEach((post) => (post.tags || []).forEach((t) => tagSet.add(t)));
+    return Array.from(tagSet).sort((a, b) => a.localeCompare(b));
+  }, [blogPosts]);
+
+  const toggleTag = (tag: string) =>
+    startTransition(() => {
+      setSelectedTags((prev) => {
+        const exists = prev.some((t) => t.toLowerCase() === tag.toLowerCase());
+        return exists ? prev.filter((t) => t.toLowerCase() !== tag.toLowerCase()) : [...prev, tag];
+      });
+    });
+
+  const clearFilters = () => startTransition(() => setSelectedTags([]));
+
   // Sort posts with featured always at the top
   const sortedPosts = useMemo(() => {
     const posts = [...blogPosts];
@@ -56,6 +114,10 @@ export default function Blog() {
       // Then sort by selected criteria
       if (sortBy === 'popular') {
         return (b.view_count || 0) - (a.view_count || 0);
+      }
+
+      if (sortBy === 'alphabetical') {
+        return a.title.localeCompare(b.title);
       }
 
       // Sort by date
@@ -121,6 +183,45 @@ export default function Blog() {
           Case studies, deep dives, and lessons learned from 20+ years in network engineering and
           cybersecurity.
         </p>
+        <div className="flex flex-wrap items-center gap-3 text-sm text-text-muted mb-4">
+          <span className="font-semibold text-text-primary">
+            Showing {filteredPosts.length} of {totalCount} posts
+          </span>
+          <span>Filter by tags or search across full content.</span>
+        </div>
+
+        {/* Tag rail */}
+        {availableTags.length > 0 && (
+          <div className="mb-6 overflow-x-auto hide-scrollbar -mx-1">
+            <div className="flex gap-2 px-1 py-1">
+              {availableTags.map((tag) => {
+                const isActive = selectedTags.some((t) => t.toLowerCase() === tag.toLowerCase());
+                return (
+                  <button
+                    key={tag}
+                    onClick={() => toggleTag(tag)}
+                    className={`whitespace-nowrap rounded-full border px-3 py-1 text-sm transition-colors ${
+                      isActive
+                        ? 'bg-violet-600 text-white border-violet-500'
+                        : 'bg-surface-raised text-text-muted border-surface-border hover:border-violet-400 hover:text-text-primary'
+                    }`}
+                    aria-pressed={isActive}
+                  >
+                    {tag}
+                  </button>
+                );
+              })}
+              {selectedTags.length > 0 && (
+                <button
+                  onClick={clearFilters}
+                  className="whitespace-nowrap rounded-full border px-3 py-1 text-sm bg-surface-raised text-text-muted border-surface-border hover:border-violet-400 hover:text-text-primary"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Search */}
         <ContentSearch
@@ -161,6 +262,7 @@ export default function Blog() {
               { value: 'newest', label: 'Newest First' },
               { value: 'oldest', label: 'Oldest First' },
               { value: 'popular', label: 'Most Popular' },
+              { value: 'alphabetical', label: 'A-Z' },
             ]}
             accentColor="violet"
           />

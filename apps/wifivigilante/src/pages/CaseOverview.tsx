@@ -1,6 +1,7 @@
 // src/pages/CaseOverview.tsx
 import React, { useEffect, useState, useMemo, useTransition } from 'react';
-import { Loader2, AlertCircle, Book, Briefcase, Globe, Stethoscope } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
+import { Book, Briefcase, Globe, Stethoscope } from 'lucide-react';
 import {
   ContentCard,
   ContentSearch,
@@ -10,21 +11,25 @@ import {
   EmptyState,
   useProgressiveLoad,
   type ActiveFilter,
+  LoadingPage,
+  ErrorPage,
 } from '@krisarmstrong/web-foundation';
 import { getAllCases } from '../api';
 import { transformApiData } from '../utils/caseUtils';
 import { TransformedCase } from '../types';
 
 export default function CaseOverview(): React.ReactElement {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [allCases, setAllCases] = useState<TransformedCase[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchResults, setSearchResults] = useState<TransformedCase[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [sortBy, setSortBy] = useState<'newest' | 'severity' | 'duration' | 'alphabetical'>(
-    'newest'
-  );
+  const [sortBy, setSortBy] = useState<
+    'newest' | 'oldest' | 'severity' | 'duration' | 'alphabetical'
+  >('newest');
+  const [hydratedParams, setHydratedParams] = useState(false);
 
   // React 19: Show pending state during tag filtering
   const [isPending, startTransition] = useTransition();
@@ -49,11 +54,70 @@ export default function CaseOverview(): React.ReactElement {
     fetchCases();
   }, []);
 
+  // Hydrate filters from URL params (tags + sort)
+  useEffect(() => {
+    if (hydratedParams) return;
+    const tagsParam = searchParams.get('tags');
+    const sortParam = searchParams.get('sort');
+
+    if (tagsParam) {
+      const tags = tagsParam
+        .split(',')
+        .map((t) => t.trim())
+        .filter(Boolean);
+      if (tags.length) setSelectedTags(tags);
+    }
+
+    if (
+      sortParam &&
+      ['newest', 'oldest', 'severity', 'duration', 'alphabetical'].includes(sortParam)
+    ) {
+      setSortBy(sortParam as typeof sortBy);
+    }
+
+    setHydratedParams(true);
+  }, [hydratedParams, searchParams, sortBy]);
+
+  // Persist filters to URL
+  useEffect(() => {
+    if (!hydratedParams) return;
+    const params = new URLSearchParams(searchParams);
+    if (selectedTags.length) {
+      params.set('tags', selectedTags.join(','));
+    } else {
+      params.delete('tags');
+    }
+    params.set('sort', sortBy);
+    setSearchParams(params, { replace: true });
+  }, [selectedTags, sortBy, setSearchParams, searchParams, hydratedParams]);
+
+  // Tag rail data
+  const availableTags = useMemo(() => {
+    const tagSet = new Set<string>();
+    allCases.forEach((c) => (c.tags || []).forEach((t) => tagSet.add(t)));
+    return Array.from(tagSet).sort((a, b) => a.localeCompare(b));
+  }, [allCases]);
+
+  const toggleTag = (tag: string) =>
+    startTransition(() => {
+      setSelectedTags((prev) => {
+        const exists = prev.some((t) => t.toLowerCase() === tag.toLowerCase());
+        return exists ? prev.filter((t) => t.toLowerCase() !== tag.toLowerCase()) : [...prev, tag];
+      });
+    });
+
+  const clearFilters = () => startTransition(() => setSelectedTags([]));
+
   // Sort cases
   const sortedCases = useMemo(() => {
     const cases = [...allCases];
     return cases.sort((a, b) => {
       switch (sortBy) {
+        case 'oldest': {
+          const dateA = a.incidentDate ? new Date(a.incidentDate).getTime() : 0;
+          const dateB = b.incidentDate ? new Date(b.incidentDate).getTime() : 0;
+          return dateA - dateB;
+        }
         case 'severity': {
           const severityOrder = { Critical: 0, High: 1, Medium: 2, Low: 3 };
           const severityA = severityOrder[a.severity as keyof typeof severityOrder] ?? 99;
@@ -120,26 +184,12 @@ export default function CaseOverview(): React.ReactElement {
 
   // Loading state
   if (isLoading) {
-    return (
-      <section className="max-w-6xl mx-auto py-12 px-4">
-        <div className="flex flex-col items-center justify-center p-10 min-h-[300px]">
-          <Loader2 size={48} className="animate-spin text-brand-primary mb-4" />
-          <p className="text-lg">Loading cases...</p>
-        </div>
-      </section>
-    );
+    return <LoadingPage message="Loading cases..." variant="green" />;
   }
 
   // Error state
   if (error) {
-    return (
-      <section className="max-w-6xl mx-auto py-12 px-4">
-        <div className="flex flex-col items-center justify-center p-10 min-h-[300px] bg-error/20 border border-error/50 rounded-lg">
-          <AlertCircle size={48} className="text-error mb-4" />
-          <p className="text-lg text-error">{error}</p>
-        </div>
-      </section>
-    );
+    return <ErrorPage error={error} variant="green" onRetry={() => window.location.reload()} />;
   }
 
   return (
@@ -150,7 +200,46 @@ export default function CaseOverview(): React.ReactElement {
           Real-world network investigations, security incidents, and troubleshooting case studies
           from enterprise Wi-Fi deployments.
         </p>
+        <div className="flex flex-wrap items-center gap-3 text-sm text-text-muted">
+          <span className="font-semibold text-text-primary">
+            Showing {filteredCases.length} of {totalCount} cases
+          </span>
+          <span className="text-text-muted">Filter by tag or search full text.</span>
+        </div>
       </header>
+
+      {/* Tag rail */}
+      {availableTags.length > 0 && (
+        <div className="mb-6 overflow-x-auto hide-scrollbar -mx-1">
+          <div className="flex gap-2 px-1 py-1">
+            {availableTags.map((tag) => {
+              const isActive = selectedTags.some((t) => t.toLowerCase() === tag.toLowerCase());
+              return (
+                <button
+                  key={tag}
+                  onClick={() => toggleTag(tag)}
+                  className={`whitespace-nowrap rounded-full border px-3 py-1 text-sm transition-colors ${
+                    isActive
+                      ? 'bg-emerald-600 text-white border-emerald-500'
+                      : 'bg-surface-raised text-text-muted border-surface-border hover:border-emerald-400 hover:text-text-primary'
+                  }`}
+                  aria-pressed={isActive}
+                >
+                  {tag}
+                </button>
+              );
+            })}
+            {selectedTags.length > 0 && (
+              <button
+                onClick={clearFilters}
+                className="whitespace-nowrap rounded-full border px-3 py-1 text-sm bg-surface-raised text-text-muted border-surface-border hover:border-emerald-400 hover:text-text-primary"
+              >
+                Clear
+              </button>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Search */}
       <ContentSearch
@@ -177,6 +266,9 @@ export default function CaseOverview(): React.ReactElement {
           'detectedBy',
           'impactScope',
           'validatedBy',
+          'content',
+          'verdict',
+          'location',
         ]}
         placeholder="Search all case content..."
         accentColor="emerald"
@@ -207,6 +299,7 @@ export default function CaseOverview(): React.ReactElement {
           onChange={setSortBy}
           options={[
             { value: 'newest', label: 'Newest First' },
+            { value: 'oldest', label: 'Oldest First' },
             { value: 'severity', label: 'By Severity' },
             { value: 'duration', label: 'By Duration' },
             { value: 'alphabetical', label: 'A-Z' },
