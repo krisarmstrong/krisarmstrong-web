@@ -1,7 +1,7 @@
 // src/pages/Home.tsx
 import { motion } from 'framer-motion';
 import { ShieldCheck, Shield, FileText, Users, TrendingUp, Award } from 'lucide-react';
-import { H1, H2, P } from '@krisarmstrong/web-foundation';
+import { H1, H2, P, StatCard } from '@krisarmstrong/web-foundation';
 
 export default function Home(): React.ReactElement {
   return (
@@ -42,7 +42,7 @@ export default function Home(): React.ReactElement {
         </P>
       </motion.header>
 
-      {/* Stats Section */}
+      {/* Stats Section - Using StatCard component */}
       <motion.section
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -50,22 +50,23 @@ export default function Home(): React.ReactElement {
         className="grid gap-8 md:grid-cols-3 mb-24"
       >
         {[
-          { icon: FileText, value: '200+', label: 'Real-World Cases' },
-          { icon: Shield, value: 'Enterprise', label: 'Grade Analysis' },
-          { icon: Users, value: '20+ Years', label: 'Field Experience' },
+          { icon: <FileText size={32} />, value: '200+', label: 'Real-World Cases' },
+          { icon: <Shield size={32} />, value: 'Enterprise', label: 'Grade Analysis' },
+          { icon: <Users size={32} />, value: '20+ Years', label: 'Field Experience' },
         ].map((stat, index) => (
           <motion.div
             key={stat.label}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 + index * 0.1 }}
-            className="bg-surface-raised border border-surface-border p-8 rounded-lg text-center shadow-lg dark:shadow-black/30 hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all"
           >
-            <div className="flex justify-center mb-3">
-              <stat.icon size={32} className="text-brand-primary" />
-            </div>
-            <P className="text-3xl font-bold text-text-primary mb-1">{stat.value}</P>
-            <P className="text-text-muted text-sm">{stat.label}</P>
+            <StatCard
+              icon={stat.icon}
+              value={stat.value}
+              label={stat.label}
+              colorScheme="blue"
+              size="lg"
+            />
           </motion.div>
         ))}
       </motion.section>
@@ -83,7 +84,7 @@ export default function Home(): React.ReactElement {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.6 }}
-            className="bg-surface-raised border border-surface-border p-8 rounded-lg shadow-lg dark:shadow-black/30 hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all"
+            className="bg-surface-raised border border-surface-border p-8 rounded-2xl shadow-lg dark:shadow-black/30 hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all"
           >
             <H2 className="!text-xl !mb-4 flex items-center gap-2">
               <ShieldCheck size={24} className="text-brand-primary" />
@@ -104,7 +105,7 @@ export default function Home(): React.ReactElement {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.7 }}
-            className="bg-surface-raised border border-surface-border p-8 rounded-lg shadow-lg dark:shadow-black/30 hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all"
+            className="bg-surface-raised border border-surface-border p-8 rounded-2xl shadow-lg dark:shadow-black/30 hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all"
           >
             <H2 className="!text-xl !mb-4 flex items-center gap-2">
               <TrendingUp size={24} className="text-brand-primary" />
@@ -128,7 +129,7 @@ export default function Home(): React.ReactElement {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8 }}
-        className="bg-surface-raised border border-surface-border p-10 rounded-lg shadow-lg dark:shadow-black/30"
+        className="bg-surface-raised border border-surface-border p-10 rounded-2xl shadow-lg dark:shadow-black/30"
       >
         <H2 className="text-center mb-6 !text-2xl">Professional-Grade Tools</H2>
         <P className="text-center text-text-primary mb-8 max-w-2xl mx-auto">

@@ -1,5 +1,6 @@
 // src/pages/About.tsx
 import React from 'react';
+import { motion } from 'framer-motion';
 import { ShieldCheck, Wifi, Globe, Terminal, Mail, UserPlus } from 'lucide-react';
 import { H1, H2, P } from '@krisarmstrong/web-foundation';
 import { Button } from '../components/ui/Button.jsx';
@@ -37,17 +38,23 @@ interface InfoCardProps {
   icon: React.ReactNode;
   title: string;
   children: React.ReactNode;
+  delay?: number;
 }
 
-// Reusable InfoCard component
-function InfoCard({ icon, title, children }: InfoCardProps): React.ReactElement {
+// Reusable InfoCard component with animation
+function InfoCard({ icon, title, children, delay = 0 }: InfoCardProps): React.ReactElement {
   return (
-    <section className="bg-surface-raised border border-surface-border p-8 rounded-lg shadow-lg">
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay }}
+      className="bg-surface-raised border border-surface-border p-8 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all"
+    >
       <H2 icon={icon} className="!text-xl !mb-4">
         {title}
       </H2>
       <div className="space-y-2 text-text-primary">{children}</div>
-    </section>
+    </motion.section>
   );
 }
 
@@ -55,7 +62,12 @@ export default function About(): React.ReactElement {
   return (
     <div className="px-4 py-12 sm:py-16 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        <header className="mb-12 sm:mb-16">
+        <motion.header
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-12 sm:mb-16"
+        >
           <H1 icon={<ShieldCheck size={32} className="text-brand-primary" />} className="!mb-6">
             About Wi-Fi Vigilante
           </H1>
@@ -65,10 +77,14 @@ export default function About(): React.ReactElement {
             networking. Each case highlights root cause analysis and professional-grade tools used
             in high-stakes environments.
           </P>
-        </header>
+        </motion.header>
 
         <div className="grid gap-8 md:grid-cols-2 mb-12">
-          <InfoCard icon={<Wifi size={24} className="text-brand-primary" />} title="Focus Areas">
+          <InfoCard
+            icon={<Wifi size={24} className="text-brand-primary" />}
+            title="Focus Areas"
+            delay={0.2}
+          >
             <ul className="list-disc list-inside space-y-1">
               <li>Enterprise Wi-Fi validation & Performance</li>
               <li>Network Security Assessments</li>
@@ -81,6 +97,7 @@ export default function About(): React.ReactElement {
           <InfoCard
             icon={<Terminal size={24} className="text-brand-primary" />}
             title="Tools Featured"
+            delay={0.3}
           >
             <P className="mb-2">Detailed analyses often feature tools such as:</P>
             <ul className="list-disc list-inside space-y-1">
@@ -95,7 +112,11 @@ export default function About(): React.ReactElement {
         </div>
 
         <div className="space-y-8">
-          <InfoCard icon={<Globe size={24} className="text-brand-primary" />} title="Our Audience">
+          <InfoCard
+            icon={<Globe size={24} className="text-brand-primary" />}
+            title="Our Audience"
+            delay={0.4}
+          >
             <P>
               Network Engineers, Wi-Fi Professionals, Penetration Testers, Field Technicians, IT
               Managers, and anyone tasked with validating, troubleshooting, or defending modern
@@ -106,6 +127,7 @@ export default function About(): React.ReactElement {
           <InfoCard
             icon={<UserPlus size={24} className="text-brand-primary" />}
             title="Get Involved"
+            delay={0.5}
           >
             <P className="mb-4">
               Have an interesting case study or want to connect with the Vigilante network? Let's
