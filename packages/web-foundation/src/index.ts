@@ -32,6 +32,8 @@ export { ContactForm } from './components/ContactForm';
 export { StarRating } from './components/StarRating';
 export { AggregateRating } from './components/AggregateRating';
 export type { AggregateRatingProps, RatingStats, RatingAPI } from './components/AggregateRating';
+export { StatCard } from './components/StatCard';
+export type { StatCardProps, StatCardSize, StatCardColorScheme } from './components/StatCard';
 
 // Error Handling
 export { ErrorBoundary, ErrorMessage, ErrorCard, ErrorPage } from './components/Error';
