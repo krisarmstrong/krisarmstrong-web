@@ -40,6 +40,13 @@ const valueCards = [
       "Seeking opportunities in technical pre-sales, network architecture design, wireless infrastructure, and security consulting. Let's collaborate.",
     icon: <Mail size={32} />,
   },
+  {
+    title: 'Technical Content Creator',
+    to: '/blog',
+    description:
+      'Author of in-depth technical articles on network security, Wi-Fi troubleshooting, and enterprise architecture. Sharing 20+ years of field experience.',
+    icon: <TrendingUp size={32} />,
+  },
 ];
 
 export default function Home() {
