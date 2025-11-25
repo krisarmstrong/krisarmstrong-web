@@ -121,8 +121,9 @@ export default function BlogPost() {
                     console.warn
                   )
                 }
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-surface-border text-text-primary hover:bg-surface-hover transition-colors text-sm"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-surface-border text-text-primary hover:bg-surface-hover transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2"
                 aria-label={`Share on ${label}`}
+                title={`Share on ${label}`}
               >
                 {icon}
                 <span>{label}</span>
