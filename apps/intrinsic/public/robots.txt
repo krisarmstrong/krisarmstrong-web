@@ -1,0 +1,5 @@
+# robots.txt for intrinsicmomentummindset.com
+User-agent: *
+Allow: /
+
+Sitemap: https://www.intrinsicmomentummindset.com/sitemap.xml
