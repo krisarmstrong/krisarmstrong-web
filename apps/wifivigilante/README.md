@@ -1,6 +1,6 @@
 # Wi-Fi Vigilante
 
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green) ![Version](https://img.shields.io/badge/Version-1.2.0-blue) ![Status](https://img.shields.io/badge/Status-Active-success)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green) ![Version](https://img.shields.io/badge/Version-1.2.2-blue) ![Status](https://img.shields.io/badge/Status-Active-success)
 
 > Real-world investigations into Wi-Fi security, cybersecurity incidents, and network troubleshooting using expert tools and forensic techniques.
 
@@ -29,22 +29,26 @@ A comprehensive database of wireless security case studies, categorized by secto
 ### Installation
 
 1. **Clone the repository:**
+
    ```bash
    git clone git@github.com:krisarmstrong/wifivigilante-com.git
    cd wifivigilante-com
    ```
 
 2. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
 3. **Set up environment variables:**
+
    ```bash
    cp .env.example .env
    ```
 
    Edit `.env` and add your Supabase credentials:
+
    ```env
    VITE_SUPABASE_URL=https://your-project.supabase.co
    VITE_SUPABASE_ANON_KEY=your-anon-key
@@ -62,6 +66,7 @@ A comprehensive database of wireless security case studies, categorized by secto
    - Create an admin user with appropriate role metadata
 
 5. **Start the development server:**
+
    ```bash
    npm run dev
    ```
@@ -73,19 +78,19 @@ A comprehensive database of wireless security case studies, categorized by secto
 
 ## 📜 Available Scripts
 
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Start development server (localhost:3000) |
-| `npm run dev:staging` | Start dev server in staging mode |
-| `npm run build` | Build for production |
-| `npm run build:dev` | Build for development |
-| `npm run build:staging` | Build for staging |
-| `npm run preview` | Preview production build |
-| `npm run test` | Run tests with Vitest |
-| `npm run test:ui` | Run tests with UI |
-| `npm run test:coverage` | Generate test coverage report |
-| `npm run lint` | Lint code with ESLint |
-| `npm run format` | Format code with Prettier |
+| Script                  | Description                               |
+| ----------------------- | ----------------------------------------- |
+| `npm run dev`           | Start development server (localhost:3000) |
+| `npm run dev:staging`   | Start dev server in staging mode          |
+| `npm run build`         | Build for production                      |
+| `npm run build:dev`     | Build for development                     |
+| `npm run build:staging` | Build for staging                         |
+| `npm run preview`       | Preview production build                  |
+| `npm run test`          | Run tests with Vitest                     |
+| `npm run test:ui`       | Run tests with UI                         |
+| `npm run test:coverage` | Generate test coverage report             |
+| `npm run lint`          | Lint code with ESLint                     |
+| `npm run format`        | Format code with Prettier                 |
 
 ## 📁 Project Structure
 
@@ -121,13 +126,13 @@ wi-fi-vigilante/
 
 ## 🛠️ Technology Stack
 
-- **Framework:** React 18
+- **Framework:** React 19
 - **Language:** TypeScript 5.9
-- **Build Tool:** Vite 6.3
-- **Styling:** Tailwind CSS 3.4
+- **Build Tool:** Vite 7
+- **Styling:** Tailwind CSS 4
 - **Database:** Supabase (PostgreSQL)
 - **Auth:** Supabase Auth
-- **Routing:** React Router 6
+- **Routing:** React Router 7
 - **Testing:** Vitest + React Testing Library
 - **PWA:** Vite PWA Plugin
 - **Icons:** Lucide React
@@ -151,13 +156,13 @@ Comprehensive documentation is available in the `/docs` directory:
 
 All environment variables must be prefixed with `VITE_` to be available in the client:
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `VITE_SUPABASE_URL` | Yes | Your Supabase project URL |
-| `VITE_SUPABASE_ANON_KEY` | Yes | Your Supabase anonymous key |
-| `VITE_APP_ENV` | No | Environment (development/staging/production) |
-| `VITE_SENTRY_DSN` | No | Sentry error tracking DSN |
-| `VITE_ENABLE_ANALYTICS` | No | Enable analytics (true/false) |
+| Variable                 | Required | Description                                  |
+| ------------------------ | -------- | -------------------------------------------- |
+| `VITE_SUPABASE_URL`      | Yes      | Your Supabase project URL                    |
+| `VITE_SUPABASE_ANON_KEY` | Yes      | Your Supabase anonymous key                  |
+| `VITE_APP_ENV`           | No       | Environment (development/staging/production) |
+| `VITE_SENTRY_DSN`        | No       | Sentry error tracking DSN                    |
+| `VITE_ENABLE_ANALYTICS`  | No       | Enable analytics (true/false)                |
 
 See [.env.example](.env.example) for a complete list.
 
@@ -174,6 +179,7 @@ The app supports three build modes:
 ### Supabase Connection Error
 
 If you see "Missing Supabase environment variables":
+
 1. Ensure `.env` file exists in the project root
 2. Verify `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are set correctly
 3. Restart the development server after editing `.env`
@@ -182,6 +188,7 @@ If you see "Missing Supabase environment variables":
 ### Build Errors
 
 If the build fails:
+
 ```bash
 # Clean install
 rm -rf node_modules package-lock.json dist
@@ -192,6 +199,7 @@ npm run build
 ### Port Already in Use
 
 If port 3000 is busy:
+
 ```bash
 # Kill process on port 3000 (macOS/Linux)
 lsof -ti:3000 | xargs kill
@@ -303,6 +311,7 @@ Found a security vulnerability? Please email security@wi-fi-vigilante.com instea
 For production deployment instructions, see [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md).
 
 Supported platforms:
+
 - Cloudflare Pages ⭐ (Recommended)
 - Vercel
 - Netlify

@@ -1,6 +1,6 @@
 # @krisarmstrong/web-foundation
 
-![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green) ![Version](https://img.shields.io/badge/Version-0.9.0-blue) ![npm](https://img.shields.io/badge/npm-package-CB3837?logo=npm)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green) ![Version](https://img.shields.io/badge/Version-0.9.11-blue) ![npm](https://img.shields.io/badge/npm-package-CB3837?logo=npm)
 
 Shared UI component library for the krisarmstrong-web monorepo. Provides layout primitives (PageShell, Footer, Breadcrumbs, PrimaryNav), UI components (Button, Card, Typography, PageHeader), and theming utilities for consistent design across all applications.
 
@@ -14,7 +14,7 @@ This package provides:
 - **Utilities** - Error boundaries, hooks, type utilities
 - **Tokens** - Design tokens for spacing, colors, and typography
 
-Built for monorepo use with React 18, TypeScript, and Tailwind CSS v4.
+Built for monorepo use with React 19, TypeScript, and Tailwind CSS v4.
 
 ## Monorepo Development
 
