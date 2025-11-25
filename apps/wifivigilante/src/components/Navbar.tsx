@@ -103,7 +103,7 @@ export default function Navbar() {
               <Link
                 key={item.path}
                 to={item.path}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg text-text-primary hover:bg-brand-primary hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg text-text-primary hover:text-brand-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary/60 focus:ring-offset-2"
               >
                 {item.icon}
                 <span className="font-medium">{item.label}</span>
@@ -164,7 +164,7 @@ export default function Navbar() {
               <Link
                 key={item.path}
                 to={item.path}
-                className="flex items-center gap-3 px-4 py-3 text-text-primary hover:bg-brand-primary hover:text-white transition-colors duration-200"
+                className="flex items-center gap-3 px-4 py-3 text-text-primary hover:text-brand-primary transition-colors duration-200"
                 onClick={closeMenu}
               >
                 {item.icon}
