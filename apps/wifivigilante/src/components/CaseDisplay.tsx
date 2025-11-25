@@ -18,6 +18,7 @@ import {
   Clock4,
   ShieldHalf,
   MapPin,
+  ShieldCheck,
 } from 'lucide-react';
 import { shareToPlatform } from '../utils/share.ts';
 import {
@@ -235,6 +236,14 @@ export default function CaseDisplay({
 
         <article className="bg-gradient-to-b from-blue-950/40 via-surface-raised to-surface-raised border border-surface-border rounded-3xl shadow-2xl overflow-hidden">
           <div className="p-6 sm:p-8">
+            <section className="mb-8">
+              <SubSectionTitle icon={<ShieldCheck size={20} className="text-blue-400" />}>
+                Case Snapshot
+              </SubSectionTitle>
+              <P className="text-text-primary leading-relaxed">
+                {caseData.summary || caseData.incidentOverview || 'Summary unavailable.'}
+              </P>
+            </section>
             <section className="mb-8">
               <SubSectionTitle icon={<ClipboardList size={20} className="text-blue-400" />}>
                 Incident Overview
