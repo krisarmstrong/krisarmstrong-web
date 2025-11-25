@@ -2,7 +2,7 @@
   "name": "krisarmstrong-org",
   "author": "Kris Armstrong",
   "private": true,
-  "version": "0.8.4",
+  "version": "0.8.5",
   "type": "module",
   "engines": {
     "node": ">=22.0.0"

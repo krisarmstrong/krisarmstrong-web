@@ -18,14 +18,7 @@ import {
   ArrowLeft,
 } from 'lucide-react';
 import { shareToPlatform } from '../utils/share.ts';
-import {
-  H1,
-  ArticleTitle,
-  SubSectionTitle,
-  P,
-  MutedText,
-  Tag,
-} from '@krisarmstrong/web-foundation';
+import { H1, ArticleTitle, SubSectionTitle, P, MutedText } from '@krisarmstrong/web-foundation';
 import { Button } from './ui/Button.tsx';
 import { AggregateRating } from '@krisarmstrong/web-foundation';
 import { TransformedCase } from '@/types';
@@ -60,6 +53,10 @@ const CaseDisplay = memo(
     };
 
     const tagsArray: string[] = caseData?.tags || [];
+
+    const handleTagClick = (tag: string) => {
+      navigate(`/cases?tags=${encodeURIComponent(tag)}`);
+    };
 
     if (isLoading) {
       return (
@@ -202,9 +199,14 @@ const CaseDisplay = memo(
                 {tagsArray.length > 0 && (
                   <div className="flex flex-wrap gap-2">
                     {tagsArray.map((tag, index) => (
-                      <Tag key={`${tag}-${index}`} colorScheme="primary">
+                      <button
+                        key={`${tag}-${index}`}
+                        onClick={() => handleTagClick(tag)}
+                        className="inline-flex items-center text-xs rounded-full font-medium px-3 py-1 border border-blue-400/50 bg-blue-500/10 text-blue-100 hover:bg-blue-500/20 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 transition-all duration-150 hover:-translate-y-0.5"
+                        aria-label={`View cases tagged ${tag}`}
+                      >
                         {tag}
-                      </Tag>
+                      </button>
                     ))}
                   </div>
                 )}
@@ -345,9 +347,11 @@ const CaseDisplay = memo(
             </div>
 
             <footer className="p-6 sm:p-8 flex flex-col sm:flex-row flex-wrap justify-between items-center gap-4">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <Share2 size={18} className="text-gray-400 hidden sm:inline" aria-hidden="true" />
-                <MutedText className="hidden sm:inline !mb-0 text-gray-300">Share:</MutedText>
+                <MutedText className="hidden sm:inline !mb-0 text-gray-300">
+                  Share this case
+                </MutedText>
                 {(['linkedin', 'twitter', 'facebook', 'instagram'] as SharePlatform[]).map(
                   (platform) => (
                     <Button
@@ -355,7 +359,7 @@ const CaseDisplay = memo(
                       onClick={() => handleShareWrapper(platform)}
                       variant="ghost"
                       size="sm"
-                      className="p-2 focus:ring-blue-500"
+                      className="p-2 rounded-lg border border-surface-border hover:bg-blue-500/10 focus:ring-blue-500 hover:-translate-y-0.5 transition-all"
                       aria-label={`Share on ${platform.charAt(0).toUpperCase() + platform.slice(1)}`}
                       disabled={!caseData}
                     >

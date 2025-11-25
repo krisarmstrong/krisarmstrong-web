@@ -12,10 +12,19 @@
 a {
   text-decoration: none;
   color: inherit;
-  transition: color 150ms ease;
+  cursor: pointer;
+  transition: color 150ms ease, transform 120ms ease;
+}
+
+a:hover {
+  color: var(--color-brand-accent, #a78bfa);
 }
 
 a:focus-visible {
-  outline: 2px solid currentColor;
+  outline: 2px solid var(--color-brand-accent, currentColor);
   outline-offset: 2px;
+}
+
+a:active {
+  transform: translateY(1px);
 }

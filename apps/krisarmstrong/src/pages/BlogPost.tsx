@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import rehypeSanitize from 'rehype-sanitize';
 import { Linkedin, Twitter, Facebook } from 'lucide-react';
@@ -21,6 +21,7 @@ import { shareToPlatform } from '../lib/share';
 
 export default function BlogPost() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [post, setPost] = useState<BlogPostType | null>(null);
   const [relatedPosts, setRelatedPosts] = useState<BlogPostType[]>([]);
   const [loading, setLoading] = useState(true);
@@ -169,7 +170,7 @@ export default function BlogPost() {
                         console.warn
                       )
                     }
-                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-surface-border text-text-primary hover:bg-violet-500/10 hover:border-violet-400 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2"
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-surface-border text-text-primary bg-surface-hover hover:bg-violet-500/10 hover:border-violet-400 transition-all duration-200 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 hover:-translate-y-0.5 shadow-sm"
                     aria-label={`Share on ${label}`}
                     title={`Share on ${label}`}
                   >
@@ -227,6 +228,7 @@ export default function BlogPost() {
                   readTime={p.read_time || 5}
                   accentColor="violet"
                   animationDelay={idx * 60}
+                  onTagClick={(tag) => navigate(`/blog?tags=${encodeURIComponent(tag)}`)}
                 />
               ))}
             </div>
