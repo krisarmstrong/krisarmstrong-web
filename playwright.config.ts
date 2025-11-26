@@ -23,7 +23,7 @@ export default defineConfig({
       name: 'krisarmstrong',
       use: {
         ...devices['Desktop Chrome'],
-        baseURL: 'http://localhost:3000',
+        baseURL: 'http://localhost:3002',
       },
       testMatch: '**/krisarmstrong.smoke.spec.ts',
     },
@@ -39,7 +39,7 @@ export default defineConfig({
       name: 'wifivigilante',
       use: {
         ...devices['Desktop Chrome'],
-        baseURL: 'http://localhost:3002',
+        baseURL: 'http://localhost:3000',
       },
       testMatch: '**/wifivigilante.smoke.spec.ts',
     },
@@ -48,7 +48,7 @@ export default defineConfig({
   webServer: [
     {
       command: 'npm run dev --workspace=krisarmstrong-org',
-      url: 'http://localhost:3000',
+      url: 'http://localhost:3002',
       reuseExistingServer: !process.env.CI,
       timeout: 120000,
     },
@@ -60,7 +60,7 @@ export default defineConfig({
     },
     {
       command: 'npm run dev --workspace=wifivigilante-com',
-      url: 'http://localhost:3002',
+      url: 'http://localhost:3000',
       reuseExistingServer: !process.env.CI,
       timeout: 120000,
     },
