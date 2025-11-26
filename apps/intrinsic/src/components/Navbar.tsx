@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Home, Info, Briefcase, Mail } from 'lucide-react';
 import { ThemeToggle } from '@krisarmstrong/web-foundation';
@@ -15,7 +15,7 @@ export default function Navbar() {
   const [navHeight, setNavHeight] = useState(72);
   const menuRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
-  const currentYear = new Date().getFullYear();
+  const currentYear = useMemo(() => new Date().getFullYear(), []);
 
   const closeMenu = () => setMenuOpen(false);
 

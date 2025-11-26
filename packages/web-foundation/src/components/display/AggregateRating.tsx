@@ -71,9 +71,11 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
   const [submitting, setSubmitting] = useState(false);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [fetchError, setFetchError] = useState<string | null>(null);
 
   // Fetch initial data
   const refreshStats = useCallback(async () => {
+    setFetchError(null);
     try {
       const [statsData, userRatingData] = await Promise.all([
         ratingAPI.getRatingStats(itemId, itemType),
@@ -81,8 +83,8 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
       ]);
       setStats(statsData);
       setUserRating(userRatingData);
-    } catch (error) {
-      console.error('Error fetching rating data:', error);
+    } catch {
+      setFetchError('Unable to load ratings');
     }
   }, [itemId, itemType, ratingAPI]);
 
@@ -242,12 +244,16 @@ export const AggregateRating: React.FC<AggregateRatingProps> = ({
       <div className="flex items-center gap-2 animate-pulse">
         <div className="flex gap-1">
           {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className={`${sizeClasses[size]} bg-gray-300 rounded`} />
+            <div key={`loading-star-${i}`} className={`${sizeClasses[size]} bg-gray-300 rounded`} />
           ))}
         </div>
         <div className={`${textSizeClasses[size]} text-text-muted`}>Loading ratings...</div>
       </div>
     );
+  }
+
+  if (fetchError) {
+    return <div className={`${textSizeClasses[size]} text-text-muted`}>{fetchError}</div>;
   }
 
   const hasRatings = stats && stats.total_ratings > 0;

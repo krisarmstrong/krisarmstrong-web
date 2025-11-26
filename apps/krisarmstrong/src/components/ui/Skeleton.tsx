@@ -2,7 +2,7 @@ interface SkeletonProps {
   className?: string;
 }
 
-export function Skeleton({ className = "" }: SkeletonProps) {
+export function Skeleton({ className = '' }: SkeletonProps) {
   return (
     <div
       className={`animate-pulse bg-surface-raised rounded ${className}`}
@@ -17,8 +17,8 @@ export function SkeletonText({ lines = 3 }: { lines?: number }) {
     <div className="space-y-3">
       {Array.from({ length: lines }).map((_, i) => (
         <Skeleton
-          key={i}
-          className={`h-4 ${i === lines - 1 ? "w-5/6" : "w-full"}`}
+          key={`skeleton-line-${i}`}
+          className={`h-4 ${i === lines - 1 ? 'w-5/6' : 'w-full'}`}
         />
       ))}
     </div>

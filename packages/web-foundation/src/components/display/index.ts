@@ -5,3 +5,4 @@ export type { AggregateRatingProps, RatingStats, RatingAPI } from './AggregateRa
 export { StatCard } from './StatCard';
 export type { StatCardProps, StatCardSize, StatCardColorScheme } from './StatCard';
 export { ContentCard } from './ContentCard';
+export type { ContentCardProps } from './ContentCard';

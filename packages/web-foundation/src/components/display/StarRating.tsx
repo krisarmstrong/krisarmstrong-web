@@ -57,16 +57,30 @@ export function StarRating({
       const storedUserRating = storage.getItem(userRatingKey);
 
       if (storedRatings) {
-        const { total, count } = JSON.parse(storedRatings) as { total: number; count: number };
-        setAverageRating(count > 0 ? total / count : 0);
-        setTotalRatings(count);
+        const parsed: unknown = JSON.parse(storedRatings);
+        // Validate parsed data structure
+        if (
+          typeof parsed === 'object' &&
+          parsed !== null &&
+          'total' in parsed &&
+          'count' in parsed &&
+          typeof (parsed as { total: unknown }).total === 'number' &&
+          typeof (parsed as { count: unknown }).count === 'number'
+        ) {
+          const { total, count } = parsed as { total: number; count: number };
+          setAverageRating(count > 0 ? total / count : 0);
+          setTotalRatings(count);
+        }
       }
 
       if (storedUserRating) {
-        setUserRating(parseInt(storedUserRating, 10));
+        const rating = parseInt(storedUserRating, 10);
+        if (!isNaN(rating) && rating >= 1 && rating <= 5) {
+          setUserRating(rating);
+        }
       }
-    } catch (error) {
-      console.warn('Failed to read rating from storage', error);
+    } catch {
+      // Silently fail - localStorage data may be corrupted
     }
   }, [itemId, storagePrefix]);
 
@@ -85,9 +99,19 @@ export function StarRating({
     try {
       const storedRatings = storage.getItem(ratingsKey);
       if (storedRatings) {
-        const parsed = JSON.parse(storedRatings) as { total: number; count: number };
-        total = parsed.total;
-        count = parsed.count;
+        const parsed: unknown = JSON.parse(storedRatings);
+        // Validate parsed data structure
+        if (
+          typeof parsed === 'object' &&
+          parsed !== null &&
+          'total' in parsed &&
+          'count' in parsed &&
+          typeof (parsed as { total: unknown }).total === 'number' &&
+          typeof (parsed as { count: unknown }).count === 'number'
+        ) {
+          total = (parsed as { total: number }).total;
+          count = (parsed as { count: number }).count;
+        }
       }
 
       if (userRating > 0 && count > 0) {
@@ -100,8 +124,8 @@ export function StarRating({
 
       storage.setItem(ratingsKey, JSON.stringify({ total, count }));
       storage.setItem(userRatingKey, rating.toString());
-    } catch (error) {
-      console.warn('Failed to persist rating', error);
+    } catch {
+      // Silently fail - localStorage may be unavailable
     }
 
     return { total, count };
