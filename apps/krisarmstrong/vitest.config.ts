@@ -2,12 +2,12 @@ import { createVitestConfig } from '../../vitest.config.base';
 
 export default createVitestConfig({
   setupFiles: './tests/setup.ts',
-  // Coverage thresholds: 90% for statements/lines, 80-85% for branches/functions
-  // Note: Some branches (URL params) and functions (callback props) are harder to test in isolation
+  // Coverage thresholds: High coverage achieved
+  // Note: Some branches (URL params disabled in test mode) and functions (callback props) aren't testable in unit tests
   coverageThresholds: {
-    lines: 90,
-    functions: 85,
-    branches: 80,
-    statements: 90,
+    lines: 97,
+    functions: 92,
+    branches: 83,
+    statements: 96,
   },
 });

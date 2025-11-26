@@ -320,13 +320,16 @@ describe('Blog', () => {
     }
   });
 
-  it('clears all filters when empty state clear button is clicked', async () => {
-    // Create posts with unique tags that won't match each other
-    const singlePost: BlogPost[] = [
+  it('shows empty state and clears filters when clear button clicked', async () => {
+    // Create posts where multi-tag filtering produces 0 results
+    // Post A has TagA only, Post B has TagA+TagB
+    // Filter by TagA (shows both), then add TagB filter (shows only Post B)
+    // Then search for something that doesn't exist to get empty state
+    const postsWithTags: BlogPost[] = [
       {
-        id: 'unique-1',
-        slug: 'unique-1',
-        title: 'Unique Post',
+        id: 'post-a',
+        slug: 'post-a',
+        title: 'Post About Apples',
         excerpt: 'Sample excerpt',
         content: 'Sample content',
         author: 'Kris Armstrong',
@@ -334,7 +337,45 @@ describe('Blog', () => {
         published: true,
         featured: false,
         read_time: 5,
-        tags: ['OnlyTag'],
+        tags: ['TagA'],
+        meta_title: '',
+        meta_description: '',
+        og_image: '',
+        view_count: 0,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      },
+      {
+        id: 'post-ab',
+        slug: 'post-ab',
+        title: 'Post About Both',
+        excerpt: 'Sample excerpt',
+        content: 'Sample content',
+        author: 'Kris Armstrong',
+        date: new Date(2024, 0, 2).toISOString(),
+        published: true,
+        featured: false,
+        read_time: 5,
+        tags: ['TagA', 'TagB'],
+        meta_title: '',
+        meta_description: '',
+        og_image: '',
+        view_count: 0,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      },
+      {
+        id: 'post-c',
+        slug: 'post-c',
+        title: 'Post About Cats',
+        excerpt: 'Sample excerpt',
+        content: 'Sample content',
+        author: 'Kris Armstrong',
+        date: new Date(2024, 0, 3).toISOString(),
+        published: true,
+        featured: false,
+        read_time: 5,
+        tags: ['TagC'],
         meta_title: '',
         meta_description: '',
         og_image: '',
@@ -344,7 +385,7 @@ describe('Blog', () => {
       },
     ];
 
-    vi.mocked(getAllBlogPosts).mockResolvedValue(singlePost);
+    vi.mocked(getAllBlogPosts).mockResolvedValue(postsWithTags);
 
     render(
       <BrowserRouter>
@@ -356,17 +397,72 @@ describe('Blog', () => {
       expect(screen.getByText('Technical Blog')).toBeInTheDocument();
     });
 
-    // Click the tag to filter
-    const tagButton = screen
+    // First filter by TagA (shows Post A and Post AB)
+    const tagAButton = screen
       .getAllByRole('button')
-      .find((btn) => btn.textContent?.includes('OnlyTag'));
-
-    if (tagButton) {
-      fireEvent.click(tagButton);
+      .find((btn) => btn.textContent?.includes('TagA'));
+    if (tagAButton) {
+      fireEvent.click(tagAButton);
 
       await waitFor(() => {
         expect(screen.getByText(/Filtered by:/)).toBeInTheDocument();
       });
+
+      // Now add TagC filter - Post AB has TagA+TagB, Post A has only TagA
+      // Neither has TagC, so filtering by TagA + TagC = 0 results
+      const tagCButton = screen
+        .getAllByRole('button')
+        .find((btn) => btn.textContent?.includes('TagC'));
+      if (tagCButton) {
+        fireEvent.click(tagCButton);
+
+        // Wait for empty state - no posts have BOTH TagA AND TagC
+        await waitFor(() => {
+          expect(screen.getByText(/No posts found/)).toBeInTheDocument();
+        });
+
+        // Click Clear Filters button in empty state
+        const clearButton = screen.getByRole('button', { name: /Clear Filters/i });
+        fireEvent.click(clearButton);
+
+        // Should show all posts again
+        await waitFor(() => {
+          expect(screen.getByText(/Click tags on posts to filter/)).toBeInTheDocument();
+        });
+      }
+    }
+  });
+
+  it('removes tag from filter when same tag clicked again', async () => {
+    await renderBlog();
+
+    // Find and click a Wi-Fi tag button to add filter
+    const tagButtons = screen
+      .getAllByRole('button')
+      .filter((button) => button.textContent?.includes('Wi-Fi'));
+
+    if (tagButtons.length > 0) {
+      // First click adds the filter
+      fireEvent.click(tagButtons[0]);
+
+      await waitFor(() => {
+        expect(screen.getByText(/Filtered by:/)).toBeInTheDocument();
+      });
+
+      // Click the same tag again on a different post to toggle it off
+      // Find all Wi-Fi tags and click one to toggle off
+      const wifiTagsAfterFilter = screen
+        .getAllByRole('button')
+        .filter((button) => button.textContent?.includes('Wi-Fi'));
+
+      if (wifiTagsAfterFilter.length > 1) {
+        // Click a different Wi-Fi tag to toggle the filter off
+        fireEvent.click(wifiTagsAfterFilter[1]);
+
+        await waitFor(() => {
+          expect(screen.getByText(/Click tags on posts to filter/)).toBeInTheDocument();
+        });
+      }
     }
   });
 });
