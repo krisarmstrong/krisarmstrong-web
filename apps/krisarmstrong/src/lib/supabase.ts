@@ -11,6 +11,69 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+// Simple rate limiter for view count increments
+const viewCountLimiter = {
+  requests: new Map<string, number>(),
+  maxRequests: 1, // 1 view per slug per minute per user session
+  timeWindowMs: 60000,
+
+  checkLimit(slug: string): boolean {
+    const now = Date.now();
+    const lastRequest = this.requests.get(slug);
+
+    if (lastRequest && now - lastRequest < this.timeWindowMs) {
+      return false; // Rate limited
+    }
+
+    this.requests.set(slug, now);
+    return true;
+  },
+};
+
+/**
+ * Validate blog slug format
+ * Slugs should only contain lowercase letters, numbers, and hyphens
+ */
+function validateSlug(slug: string): boolean {
+  if (!slug || typeof slug !== 'string') return false;
+  // Allow alphanumeric, hyphens, max 200 chars
+  return /^[a-z0-9-]+$/.test(slug) && slug.length <= 200;
+}
+
+// Simple in-memory cache for blog data
+interface CacheEntry<T> {
+  data: T;
+  timestamp: number;
+}
+
+const blogCache = {
+  posts: null as CacheEntry<BlogPost[]> | null,
+  tags: null as CacheEntry<string[]> | null,
+  TTL: 300000, // 5 minutes
+
+  get<T>(key: 'posts' | 'tags'): T | null {
+    // eslint-disable-next-line security/detect-object-injection -- key is from typed union
+    const entry = this[key] as CacheEntry<T> | null;
+    if (!entry) return null;
+    if (Date.now() - entry.timestamp > this.TTL) {
+      // eslint-disable-next-line security/detect-object-injection -- key is from typed union
+      this[key] = null;
+      return null;
+    }
+    return entry.data;
+  },
+
+  set<T>(key: 'posts' | 'tags', data: T): void {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, security/detect-object-injection -- key is from typed union
+    (this as any)[key] = { data, timestamp: Date.now() };
+  },
+
+  invalidate(): void {
+    this.posts = null;
+    this.tags = null;
+  },
+};
+
 export interface BlogPost {
   id: string;
   slug: string;
@@ -31,8 +94,12 @@ export interface BlogPost {
   updated_at: string;
 }
 
-// Fetch all published blog posts
+// Fetch all published blog posts (cached for 5 minutes)
 export async function getAllBlogPosts(): Promise<BlogPost[]> {
+  // Check cache first
+  const cached = blogCache.get<BlogPost[]>('posts');
+  if (cached) return cached;
+
   const { data, error } = await supabase
     .from('blog_posts')
     .select('*')
@@ -44,11 +111,19 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
     throw error;
   }
 
-  return data || [];
+  const posts = data || [];
+  blogCache.set('posts', posts);
+  return posts;
 }
 
 // Fetch a single blog post by slug
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+  // Validate slug format before querying
+  if (!validateSlug(slug)) {
+    console.error('Invalid slug format:', slug);
+    return null;
+  }
+
   const { data, error } = await supabase
     .from('blog_posts')
     .select('*')
@@ -85,8 +160,12 @@ export async function getFeaturedBlogPosts(): Promise<BlogPost[]> {
   return data || [];
 }
 
-// Get all unique tags
+// Get all unique tags (cached for 5 minutes)
 export async function getAllTags(): Promise<string[]> {
+  // Check cache first
+  const cached = blogCache.get<string[]>('tags');
+  if (cached) return cached;
+
   const { data, error } = await supabase.from('blog_posts').select('tags').eq('published', true);
 
   if (error) {
@@ -99,11 +178,25 @@ export async function getAllTags(): Promise<string[]> {
     post.tags?.forEach((tag: string) => tagsSet.add(tag));
   });
 
-  return Array.from(tagsSet).sort();
+  const tags = Array.from(tagsSet).sort();
+  blogCache.set('tags', tags);
+  return tags;
 }
 
-// Increment view count
+// Increment view count (rate-limited to prevent abuse)
 export async function incrementViewCount(slug: string): Promise<void> {
+  // Validate slug format
+  if (!validateSlug(slug)) {
+    console.error('Invalid slug format for view count:', slug);
+    return;
+  }
+
+  // Rate limit: only allow 1 view per slug per minute per session
+  if (!viewCountLimiter.checkLimit(slug)) {
+    // Silently ignore - user already viewed this post recently
+    return;
+  }
+
   const { error } = await supabase.rpc('increment_view_count', { post_slug: slug });
 
   if (error) {
@@ -200,6 +293,13 @@ export async function getRatingStats(
 }
 
 /**
+ * Validate rating value is within acceptable range
+ */
+function validateRating(rating: number): boolean {
+  return Number.isInteger(rating) && rating >= 1 && rating <= 5;
+}
+
+/**
  * Submit or update a rating for an item
  */
 export async function submitRating(
@@ -207,6 +307,12 @@ export async function submitRating(
   itemType: 'blog' | 'case',
   rating: number
 ): Promise<RatingSubmitResponse | null> {
+  // Validate rating before sending to server
+  if (!validateRating(rating)) {
+    console.error('Invalid rating value:', rating);
+    return null;
+  }
+
   const userFingerprint = getUserFingerprint();
 
   const { data, error } = await supabase.rpc('submit_rating', {

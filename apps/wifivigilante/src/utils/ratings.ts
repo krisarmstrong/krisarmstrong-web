@@ -90,6 +90,13 @@ export async function getRatingStats(
 }
 
 /**
+ * Validate rating value is within acceptable range
+ */
+function validateRating(rating: number): boolean {
+  return Number.isInteger(rating) && rating >= 1 && rating <= 5;
+}
+
+/**
  * Submit or update a rating for an item
  */
 export async function submitRating(
@@ -97,6 +104,12 @@ export async function submitRating(
   itemType: 'blog' | 'case',
   rating: number
 ): Promise<RatingSubmitResponse | null> {
+  // Validate rating before sending to server
+  if (!validateRating(rating)) {
+    console.error('Invalid rating value:', rating);
+    return null;
+  }
+
   const userFingerprint = getUserFingerprint();
 
   const { data, error } = await supabase.rpc('submit_rating', {
