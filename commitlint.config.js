@@ -30,7 +30,7 @@ export default {
         'revert', // Revert a previous commit
       ],
     ],
-    'subject-case': [2, 'always', 'sentence-case'],
+    'subject-case': [2, 'never', ['start-case', 'pascal-case', 'upper-case']],
     'subject-empty': [2, 'never'],
     'subject-full-stop': [2, 'never', '.'],
     'type-case': [2, 'always', 'lower-case'],
