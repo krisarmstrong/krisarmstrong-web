@@ -2,7 +2,9 @@ import { useRouteError, isRouteErrorResponse, Link } from 'react-router-dom';
 
 export default function ErrorPage() {
   const error = useRouteError();
-  console.error('Routing Error:', error);
+  if (import.meta.env.DEV) {
+    console.error('Routing Error:', error);
+  }
 
   let errorMessage = 'Sorry, an unexpected error has occurred.';
   let errorStatus = 'Error';

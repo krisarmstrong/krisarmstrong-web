@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 const FOOTER_LINKS = {
   company: [
     { label: 'About', path: '/about' },
@@ -59,7 +61,7 @@ const SOCIAL_LINKS = [
 ];
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const currentYear = useMemo(() => new Date().getFullYear(), []);
 
   return (
     <footer className="bg-surface-raised text-text-muted border-t border-surface-border transition-colors duration-200 mt-32 pt-16 pb-16 px-4">
