@@ -405,6 +405,105 @@ test.describe('intrinsicmomentummindset.com Smoke Tests', () => {
   });
 
   // ============================================
+  // DATA LOADING VERIFICATION TESTS
+  // ============================================
+  test.describe('Data Loading Verification', () => {
+    test('Services page loads service data', async ({ page }) => {
+      await page.goto('/services', { waitUntil: 'networkidle' });
+
+      // Services content should be loaded and displayed
+      const bodyText = await page.locator('body').textContent();
+      expect(
+        bodyText?.length,
+        'Services page content too short - may not have loaded'
+      ).toBeGreaterThan(200);
+
+      // Check for service items or cards
+      const serviceItems = page.locator('article, .service, [class*="service"], .card, section');
+      const count = await serviceItems.count();
+
+      expect(count > 0 || (bodyText?.length ?? 0) > 500, 'No service data loaded').toBeTruthy();
+    });
+
+    test('About page loads complete content', async ({ page }) => {
+      await page.goto('/about', { waitUntil: 'networkidle' });
+
+      // About content should be loaded
+      const bodyText = await page.locator('body').textContent();
+      expect(bodyText?.length, 'About page content too short').toBeGreaterThan(200);
+
+      // Should have main content area
+      const mainContent = page.locator('article, main, .about, section');
+      await expect(mainContent.first()).toBeVisible();
+    });
+
+    test('Home page loads all content sections', async ({ page }) => {
+      await page.goto('/', { waitUntil: 'networkidle' });
+
+      // Home page should have substantial content
+      const bodyText = await page.locator('body').textContent();
+      expect(bodyText?.length, 'Home page content too short').toBeGreaterThan(300);
+
+      // Should have CTA elements
+      const ctaElements = page.locator('a[href*="contact"], a[href*="services"], button');
+      const count = await ctaElements.count();
+      expect(count, 'Home page missing CTA elements').toBeGreaterThan(0);
+    });
+
+    test('No loading spinners stuck on page after load', async ({ page }) => {
+      await page.goto('/services', { waitUntil: 'networkidle' });
+
+      // Wait a bit for any animations
+      await page.waitForTimeout(1000);
+
+      // Check for common loading indicators that should not persist
+      const loadingIndicators = page.locator(
+        '[class*="loading"], [class*="spinner"], [class*="skeleton"], [aria-busy="true"]'
+      );
+      const visibleLoading = await loadingIndicators
+        .filter({ has: page.locator(':visible') })
+        .count();
+
+      // No loading indicators should be visible after networkidle
+      expect(visibleLoading, 'Loading indicators still visible after page load').toBe(0);
+    });
+
+    test('API errors do not show on successful pages', async ({ page }) => {
+      const errors: string[] = [];
+      page.on('console', (msg) => {
+        if (msg.type() === 'error') {
+          const text = msg.text();
+          if (
+            text.includes('API') ||
+            text.includes('fetch') ||
+            text.includes('network') ||
+            text.includes('supabase')
+          ) {
+            errors.push(text);
+          }
+        }
+      });
+
+      await page.goto('/services', { waitUntil: 'networkidle' });
+
+      // No API-related errors
+      expect(errors, 'API errors detected during page load').toEqual([]);
+    });
+
+    test('Contact page loads form and content', async ({ page }) => {
+      await page.goto('/contact', { waitUntil: 'networkidle' });
+
+      // Contact page should have form
+      const form = page.locator('form');
+      await expect(form).toBeVisible();
+
+      // Should have page content
+      const bodyText = await page.locator('body').textContent();
+      expect(bodyText?.length, 'Contact page content too short').toBeGreaterThan(100);
+    });
+  });
+
+  // ============================================
   // PERFORMANCE BASELINE TESTS
   // ============================================
   test.describe('Performance Baseline', () => {

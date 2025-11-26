@@ -364,6 +364,115 @@ test.describe('krisarmstrong.com Smoke Tests', () => {
   });
 
   // ============================================
+  // DATA LOADING VERIFICATION TESTS
+  // ============================================
+  test.describe('Data Loading Verification', () => {
+    test('Blog page loads blog posts from database', async ({ page }) => {
+      await page.goto('/blog', { waitUntil: 'networkidle' });
+
+      // Blog posts should be loaded and displayed
+      const blogPosts = page.locator('a[href^="/blog/"]');
+      const postCount = await blogPosts.count();
+
+      // Should have at least one blog post loaded
+      expect(postCount, 'No blog posts loaded from database').toBeGreaterThan(0);
+    });
+
+    test('Blog post detail loads complete content', async ({ page }) => {
+      // Navigate to blog first
+      await page.goto('/blog', { waitUntil: 'networkidle' });
+
+      const firstPost = page.locator('a[href^="/blog/"]').first();
+      if (await firstPost.isVisible()) {
+        await firstPost.click();
+        await page.waitForLoadState('networkidle');
+
+        // Verify blog post content loaded
+        const articleContent = page.locator('article, main, .blog-content, .post-content');
+        await expect(articleContent.first()).toBeVisible();
+
+        // Content should have some meaningful length
+        const bodyText = await page.locator('body').textContent();
+        expect(
+          bodyText?.length,
+          'Blog post content too short - may not have loaded'
+        ).toBeGreaterThan(100);
+      }
+    });
+
+    test('Projects page loads project data', async ({ page }) => {
+      await page.goto('/projects', { waitUntil: 'networkidle' });
+
+      // Projects should be displayed
+      const bodyText = await page.locator('body').textContent();
+      expect(bodyText?.length, 'Projects page content too short').toBeGreaterThan(100);
+
+      // Check for project cards/items
+      const projectItems = page.locator('article, .project, [class*="project"], .card');
+      const count = await projectItems.count();
+
+      // Should have project content
+      expect(count > 0 || (bodyText?.length ?? 0) > 300, 'No project data loaded').toBeTruthy();
+    });
+
+    test('Skills page loads skills data', async ({ page }) => {
+      await page.goto('/skills', { waitUntil: 'networkidle' });
+
+      // Skills content should be displayed
+      const bodyText = await page.locator('body').textContent();
+      expect(bodyText?.length, 'Skills page content too short').toBeGreaterThan(100);
+    });
+
+    test('Resume page loads resume data', async ({ page }) => {
+      await page.goto('/resume', { waitUntil: 'networkidle' });
+
+      // Resume content should be displayed
+      const bodyText = await page.locator('body').textContent();
+      expect(bodyText?.length, 'Resume page content too short').toBeGreaterThan(200);
+    });
+
+    test('No loading spinners stuck on page after load', async ({ page }) => {
+      await page.goto('/blog', { waitUntil: 'networkidle' });
+
+      // Wait a bit for any animations
+      await page.waitForTimeout(1000);
+
+      // Check for common loading indicators that should not persist
+      const loadingIndicators = page.locator(
+        '[class*="loading"], [class*="spinner"], [class*="skeleton"], [aria-busy="true"]'
+      );
+      const visibleLoading = await loadingIndicators
+        .filter({ has: page.locator(':visible') })
+        .count();
+
+      // No loading indicators should be visible after networkidle
+      expect(visibleLoading, 'Loading indicators still visible after page load').toBe(0);
+    });
+
+    test('API errors do not show on successful pages', async ({ page }) => {
+      const errors: string[] = [];
+      page.on('console', (msg) => {
+        if (msg.type() === 'error') {
+          const text = msg.text();
+          if (
+            text.includes('API') ||
+            text.includes('fetch') ||
+            text.includes('network') ||
+            text.includes('supabase')
+          ) {
+            errors.push(text);
+          }
+        }
+      });
+
+      await page.goto('/blog', { waitUntil: 'networkidle' });
+
+      // No API-related errors
+      expect(errors, 'API errors detected during page load').toEqual([]);
+    });
+  });
+
+  // ============================================
   // PERFORMANCE BASELINE TESTS
   // ============================================
   test.describe('Performance Baseline', () => {
