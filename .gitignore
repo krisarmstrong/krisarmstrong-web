@@ -103,3 +103,14 @@ credentials.json
 
 # Screenshots (keep in project for now based on file listing)
 # *.png
+
+# Generated data files (regenerated from database)
+**/generated-images/
+**/blog_posts.json
+**/cases.json
+*.csv
+
+# One-time migration files (should not be re-committed)
+**/CLEAN_START.sql
+**/import_data.sql
+**/restore_database.sql
