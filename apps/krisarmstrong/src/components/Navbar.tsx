@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Home, FileText, User, Mail, Code2, Cpu, BookOpen } from 'lucide-react';
 import { ThemeToggle } from '@krisarmstrong/web-foundation';
@@ -57,6 +57,41 @@ export default function Navbar() {
     }
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [menuOpen]);
+
+  // Focus trap for mobile menu accessibility
+  const handleFocusTrap = useCallback(
+    (e: KeyboardEvent) => {
+      if (!menuOpen || !menuRef.current || e.key !== 'Tab') return;
+
+      const focusableElements = menuRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (e.shiftKey && document.activeElement === firstElement) {
+        e.preventDefault();
+        lastElement?.focus();
+      } else if (!e.shiftKey && document.activeElement === lastElement) {
+        e.preventDefault();
+        firstElement?.focus();
+      }
+    },
+    [menuOpen]
+  );
+
+  // Apply focus trap and focus first element when menu opens
+  useEffect(() => {
+    if (menuOpen && menuRef.current) {
+      document.addEventListener('keydown', handleFocusTrap);
+      // Focus first focusable element in menu
+      const firstFocusable = menuRef.current.querySelector<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      firstFocusable?.focus();
+    }
+    return () => document.removeEventListener('keydown', handleFocusTrap);
+  }, [menuOpen, handleFocusTrap]);
 
   // Update navbar height for mobile menu positioning
   useEffect(() => {

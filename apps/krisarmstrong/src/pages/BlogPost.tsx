@@ -60,9 +60,12 @@ export default function BlogPost() {
 
   // Load related posts once the main post is available
   useEffect(() => {
+    let cancelled = false;
+
     const loadRelated = async () => {
       if (!post?.tags?.length) return;
       const all = await getAllBlogPosts();
+      if (cancelled) return;
       const filtered = all
         .filter((p) => p.slug !== post.slug)
         .filter((p) => p.tags?.some((tag) => post.tags.includes(tag)))
@@ -70,6 +73,10 @@ export default function BlogPost() {
       setRelatedPosts(filtered);
     };
     void loadRelated();
+
+    return () => {
+      cancelled = true;
+    };
   }, [post]);
 
   const metaReadTime = useMemo(() => post?.read_time ?? 5, [post]);

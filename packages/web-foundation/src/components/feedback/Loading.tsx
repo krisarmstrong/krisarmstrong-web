@@ -197,7 +197,7 @@ export function SkeletonText({ lines = 3 }: SkeletonTextProps) {
  */
 export function SkeletonCard() {
   return (
-    <div className="rounded-lg border border-gray-700 bg-gray-800 shadow-lg p-6">
+    <div className="rounded-lg border border-surface-border bg-surface-raised shadow-lg p-6">
       <Skeleton className="h-6 w-3/4 mb-4" />
       <SkeletonText lines={3} />
       <Skeleton className="h-10 w-32 mt-6" />

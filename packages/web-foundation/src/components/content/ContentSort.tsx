@@ -66,8 +66,8 @@ export function ContentSort<T extends string = string>({
 
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      {showIcon && <ArrowUpDown size={16} className="text-gray-400" />}
-      <label htmlFor="content-sort" className="text-sm text-gray-400 whitespace-nowrap">
+      {showIcon && <ArrowUpDown size={16} className="text-text-muted" />}
+      <label htmlFor="content-sort" className="text-sm text-text-muted whitespace-nowrap">
         {label}
       </label>
       <select
@@ -76,14 +76,14 @@ export function ContentSort<T extends string = string>({
         onChange={(e) => onChange(e.target.value as T)}
         className={`
           px-3 py-2 pr-10
-          bg-gray-900/50 backdrop-blur-sm
-          border border-gray-700 rounded-lg
-          text-white text-sm
+          bg-surface-base/50 backdrop-blur-sm
+          border border-surface-border rounded-lg
+          text-text-primary text-sm
           transition-all duration-200
           ${colors}
           focus:outline-none focus:ring-2
           cursor-pointer
-          hover:border-gray-600
+          hover:border-surface-hover
         `}
       >
         {options.map((option) => (
