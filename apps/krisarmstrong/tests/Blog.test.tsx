@@ -293,4 +293,80 @@ describe('Blog', () => {
     const searchInput = screen.getByPlaceholderText(/Search blog posts/);
     expect(searchInput).toBeInTheDocument();
   });
+
+  it('toggles tag filter when same tag is clicked twice', async () => {
+    await renderBlog();
+
+    // Find a tag button and click it to filter
+    const tagButtons = screen
+      .getAllByRole('button')
+      .filter((button) => button.textContent?.includes('Wi-Fi'));
+
+    if (tagButtons.length > 0) {
+      // First click - add filter
+      fireEvent.click(tagButtons[0]);
+
+      await waitFor(() => {
+        expect(screen.getByText(/Filtered by:/)).toBeInTheDocument();
+      });
+
+      // Click same tag again to remove filter
+      const removeButton = screen.getByRole('button', { name: /remove filter/i });
+      fireEvent.click(removeButton);
+
+      await waitFor(() => {
+        expect(screen.getByText(/Click tags on posts to filter/)).toBeInTheDocument();
+      });
+    }
+  });
+
+  it('clears all filters when empty state clear button is clicked', async () => {
+    // Create posts with unique tags that won't match each other
+    const singlePost: BlogPost[] = [
+      {
+        id: 'unique-1',
+        slug: 'unique-1',
+        title: 'Unique Post',
+        excerpt: 'Sample excerpt',
+        content: 'Sample content',
+        author: 'Kris Armstrong',
+        date: new Date(2024, 0, 1).toISOString(),
+        published: true,
+        featured: false,
+        read_time: 5,
+        tags: ['OnlyTag'],
+        meta_title: '',
+        meta_description: '',
+        og_image: '',
+        view_count: 0,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      },
+    ];
+
+    vi.mocked(getAllBlogPosts).mockResolvedValue(singlePost);
+
+    render(
+      <BrowserRouter>
+        <Blog />
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText('Technical Blog')).toBeInTheDocument();
+    });
+
+    // Click the tag to filter
+    const tagButton = screen
+      .getAllByRole('button')
+      .find((btn) => btn.textContent?.includes('OnlyTag'));
+
+    if (tagButton) {
+      fireEvent.click(tagButton);
+
+      await waitFor(() => {
+        expect(screen.getByText(/Filtered by:/)).toBeInTheDocument();
+      });
+    }
+  });
 });

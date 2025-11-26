@@ -2,19 +2,30 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import Resume from '../src/pages/Resume';
 
-// Mock markdown content
+// Mock markdown content with various formatting to test all DOCX conversion branches
 const mockResume = `# Kris Armstrong
 ## Senior Sales Engineer
+
+<div class="contact-info">
+  <p>Contact details here</p>
+</div>
 
 ### Experience
 - **Company A** (2020-2024)
   - Led enterprise sales
-- **Company B** (2015-2020)
+* **Company B** (2015-2020)
   - Network architecture
+
+---
 
 ### Skills
 - Network Engineering
-- Cybersecurity`;
+- Cybersecurity
+
+Regular paragraph text with **bold** and [link](https://example.com).
+
+# Another H1 Heading
+Some more content here.`;
 
 // Mock fetch
 global.fetch = vi.fn();

@@ -2,12 +2,11 @@ import { createVitestConfig } from '../../vitest.config.base';
 
 export default createVitestConfig({
   setupFiles: './src/tests/setup.ts',
-  // Current coverage: 81% statements, 83% branches, 66% functions, 81% lines
-  // Set realistic thresholds, increase over time
+  // Coverage thresholds: 90%+ across all metrics
   coverageThresholds: {
-    lines: 80,
-    functions: 65,
-    branches: 80,
-    statements: 80,
+    lines: 90,
+    functions: 90,
+    branches: 90,
+    statements: 90,
   },
 });

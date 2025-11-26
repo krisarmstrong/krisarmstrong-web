@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import BlogPost from '../src/pages/BlogPost';
@@ -331,5 +331,78 @@ describe('BlogPost', () => {
       expect(screen.getByRole('link', { name: /Home/i })).toHaveAttribute('href', '/');
       expect(screen.getByRole('link', { name: /^Blog$/i })).toHaveAttribute('href', '/blog');
     });
+  });
+
+  it('calls window.open when share button is clicked', async () => {
+    // Mock window.open without stubbing entire window
+    const mockWindowOpen = vi.spyOn(window, 'open').mockImplementation(() => null);
+
+    renderBlogPost();
+
+    await waitFor(
+      () => {
+        expect(screen.getByRole('button', { name: /Share on LinkedIn/i })).toBeInTheDocument();
+      },
+      { timeout: 3000 }
+    );
+
+    const linkedinButton = screen.getByRole('button', { name: /Share on LinkedIn/i });
+    fireEvent.click(linkedinButton);
+
+    expect(mockWindowOpen).toHaveBeenCalledWith(
+      expect.stringContaining('linkedin.com'),
+      '_blank',
+      'noopener,noreferrer'
+    );
+
+    mockWindowOpen.mockRestore();
+  });
+
+  it('clicks Twitter share button', async () => {
+    const mockWindowOpen = vi.spyOn(window, 'open').mockImplementation(() => null);
+
+    renderBlogPost();
+
+    await waitFor(
+      () => {
+        expect(screen.getByRole('button', { name: /Share on Twitter/i })).toBeInTheDocument();
+      },
+      { timeout: 3000 }
+    );
+
+    const twitterButton = screen.getByRole('button', { name: /Share on Twitter/i });
+    fireEvent.click(twitterButton);
+
+    expect(mockWindowOpen).toHaveBeenCalledWith(
+      expect.stringContaining('twitter.com'),
+      '_blank',
+      'noopener,noreferrer'
+    );
+
+    mockWindowOpen.mockRestore();
+  });
+
+  it('clicks Facebook share button', async () => {
+    const mockWindowOpen = vi.spyOn(window, 'open').mockImplementation(() => null);
+
+    renderBlogPost();
+
+    await waitFor(
+      () => {
+        expect(screen.getByRole('button', { name: /Share on Facebook/i })).toBeInTheDocument();
+      },
+      { timeout: 3000 }
+    );
+
+    const facebookButton = screen.getByRole('button', { name: /Share on Facebook/i });
+    fireEvent.click(facebookButton);
+
+    expect(mockWindowOpen).toHaveBeenCalledWith(
+      expect.stringContaining('facebook.com'),
+      '_blank',
+      'noopener,noreferrer'
+    );
+
+    mockWindowOpen.mockRestore();
   });
 });
