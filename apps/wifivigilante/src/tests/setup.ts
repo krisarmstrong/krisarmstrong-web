@@ -6,11 +6,14 @@ import '@testing-library/jest-dom/vitest';
 const localStorageMock = (() => {
   let store: Record<string, string> = {};
   return {
+    // eslint-disable-next-line security/detect-object-injection
     getItem: (key: string) => store[key] || null,
     setItem: (key: string, value: string) => {
+      // eslint-disable-next-line security/detect-object-injection
       store[key] = value.toString();
     },
     removeItem: (key: string) => {
+      // eslint-disable-next-line security/detect-object-injection
       delete store[key];
     },
     clear: () => {
