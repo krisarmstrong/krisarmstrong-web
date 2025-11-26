@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Search as SearchIcon, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -48,7 +48,9 @@ export function SiteSearch({
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
+  const resultsRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   // Handle keyboard shortcut (Ctrl+K or Cmd+K)
@@ -78,6 +80,7 @@ export function SiteSearch({
   useEffect(() => {
     if (!query.trim()) {
       setResults([]);
+      setSelectedIndex(-1);
       return;
     }
 
@@ -88,13 +91,50 @@ export function SiteSearch({
     });
 
     setResults(filtered.slice(0, maxResults));
+    setSelectedIndex(filtered.length > 0 ? 0 : -1); // Auto-select first result
   }, [query, searchableContent, maxResults]);
 
-  const handleResultClick = (path: string) => {
-    void navigate(path);
-    setIsOpen(false);
-    setQuery('');
-  };
+  const handleResultClick = useCallback(
+    (path: string) => {
+      void navigate(path);
+      setIsOpen(false);
+      setQuery('');
+      setSelectedIndex(-1);
+    },
+    [navigate]
+  );
+
+  // Handle keyboard navigation in search input
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setSelectedIndex((prev) => (prev < results.length - 1 ? prev + 1 : prev));
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setSelectedIndex((prev) => (prev > 0 ? prev - 1 : 0));
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (selectedIndex >= 0 && results[selectedIndex]) {
+          handleResultClick(results[selectedIndex].path);
+        } else if (results.length > 0) {
+          // If no selection, navigate to first result
+          handleResultClick(results[0].path);
+        }
+      }
+    },
+    [results, selectedIndex, handleResultClick]
+  );
+
+  // Scroll selected item into view
+  useEffect(() => {
+    if (selectedIndex >= 0 && resultsRef.current) {
+      const selectedElement = resultsRef.current.children[selectedIndex] as HTMLElement;
+      if (selectedElement) {
+        selectedElement.scrollIntoView({ block: 'nearest' });
+      }
+    }
+  }, [selectedIndex]);
 
   const getTypeColor = (type: string) => {
     if (typeColors && typeColors[type]) {
@@ -142,8 +182,14 @@ export function SiteSearch({
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     placeholder={placeholder}
                     className="flex-1 bg-transparent border-none outline-none text-text-primary placeholder:text-text-muted font-medium"
+                    aria-autocomplete="list"
+                    aria-controls="search-results"
+                    aria-activedescendant={
+                      selectedIndex >= 0 ? `search-result-${selectedIndex}` : undefined
+                    }
                   />
                   <button
                     onClick={() => setIsOpen(false)}
@@ -156,12 +202,25 @@ export function SiteSearch({
 
                 {/* Results */}
                 {results.length > 0 ? (
-                  <div className="max-h-96 overflow-y-auto bg-surface-base">
+                  <div
+                    ref={resultsRef}
+                    id="search-results"
+                    role="listbox"
+                    className="max-h-96 overflow-y-auto bg-surface-base"
+                  >
                     {results.map((result, index) => (
                       <button
                         key={index}
+                        id={`search-result-${index}`}
+                        role="option"
+                        aria-selected={index === selectedIndex}
                         onClick={() => handleResultClick(result.path)}
-                        className="w-full text-left p-4 transition-colors border-b last:border-0 border-surface-border text-text-primary hover:bg-surface-raised hover:border-brand-primary/30"
+                        onMouseEnter={() => setSelectedIndex(index)}
+                        className={`w-full text-left p-4 transition-colors border-b last:border-0 border-surface-border text-text-primary ${
+                          index === selectedIndex
+                            ? 'bg-surface-raised border-brand-primary/30'
+                            : 'hover:bg-surface-raised hover:border-brand-primary/30'
+                        }`}
                       >
                         <div className="flex items-start gap-3">
                           <span

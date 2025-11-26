@@ -183,29 +183,30 @@ export function ContentCard({
         : 'px-6 pb-6 pt-4';
 
   return (
-    <div
-      className={`relative flex flex-col h-full bg-surface-raised rounded-2xl border border-surface-border shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 group ${accentColors[accentColor]} ${className}`}
+    <Link
+      to={href}
+      className={`relative flex flex-col h-full bg-surface-raised rounded-2xl border border-surface-border shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-raised ${accentColors[accentColor]} ${accentFocusRings[accentColor]} ${className}`}
       style={{ animationDelay: `${animationDelay}ms` }}
     >
-      <Link
-        to={href}
-        className={`flex flex-col flex-grow ${variantStyles[variant]} ${variant === 'compact' ? 'flex-row gap-4' : 'flex-col h-full'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-raised ${accentFocusRings[accentColor]}`}
-      >
-        {/* Progress Bar */}
-        {progress !== undefined && progress > 0 && (
-          <div className="absolute top-0 left-0 right-0 h-1 bg-surface-hover rounded-t-2xl overflow-hidden">
-            <div
-              className={`h-full ${progressBarColors[accentColor]} transition-all duration-300`}
-              style={{ width: `${progress}%` }}
-              role="progressbar"
-              aria-valuenow={progress}
-              aria-valuemin={0}
-              aria-valuemax={100}
-              aria-label="Reading progress"
-            />
-          </div>
-        )}
+      {/* Progress Bar */}
+      {progress !== undefined && progress > 0 && (
+        <div className="absolute top-0 left-0 right-0 h-1 bg-surface-hover rounded-t-2xl overflow-hidden">
+          <div
+            className={`h-full ${progressBarColors[accentColor]} transition-all duration-300`}
+            style={{ width: `${progress}%` }}
+            role="progressbar"
+            aria-valuenow={progress}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-label="Reading progress"
+          />
+        </div>
+      )}
 
+      {/* Main Content Area */}
+      <div
+        className={`flex flex-col flex-grow ${variantStyles[variant]} ${variant === 'compact' ? 'flex-row gap-4' : 'flex-col'}`}
+      >
         {/* Image Thumbnail */}
         {image && (
           <div className={variant === 'compact' ? 'w-1/3 flex-shrink-0' : 'w-full'}>
@@ -272,14 +273,16 @@ export function ContentCard({
             </div>
           )}
         </div>
-      </Link>
+      </div>
 
-      {/* Tags - Clickable for filtering */}
+      {/* Tags - Clickable for filtering, uses span with role="button" to avoid nested interactive content */}
       {tags.length > 0 && (
         <div className={`flex flex-wrap gap-2 ${tagAreaSpacing}`} aria-label="Content tags">
           {tags.map((tag) => (
-            <button
+            <span
               key={tag}
+              role={onTagClick ? 'button' : undefined}
+              tabIndex={onTagClick ? 0 : undefined}
               onClick={(e) => {
                 if (onTagClick) {
                   e.preventDefault();
@@ -287,16 +290,21 @@ export function ContentCard({
                   onTagClick(tag);
                 }
               }}
+              onKeyDown={(e) => {
+                if (onTagClick && (e.key === 'Enter' || e.key === ' ')) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onTagClick(tag);
+                }
+              }}
               className={`inline-flex items-center gap-1 px-3 py-1 bg-surface-hover text-text-muted text-xs rounded-full ${tagHoverColors[accentColor]} transition-colors ${onTagClick ? 'cursor-pointer' : 'cursor-default'}`}
-              disabled={!onTagClick}
-              type="button"
             >
               <TagIcon size={12} />
               {tag}
-            </button>
+            </span>
           ))}
         </div>
       )}
-    </div>
+    </Link>
   );
 }
