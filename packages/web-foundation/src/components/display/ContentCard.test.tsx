@@ -40,7 +40,7 @@ describe('ContentCard', () => {
 
     it('renders with custom className', () => {
       renderWithRouter(<ContentCard {...defaultProps} className="custom-class" />);
-      const card = screen.getByRole('link').parentElement;
+      const card = screen.getByRole('link');
       expect(card).toHaveClass('custom-class');
     });
   });
@@ -149,19 +149,21 @@ describe('ContentCard', () => {
       expect(onTagClick).toHaveBeenCalledTimes(1);
     });
 
-    it('disables tag buttons when no onTagClick provided', () => {
+    it('renders tags as non-interactive spans when no onTagClick provided', () => {
       renderWithRouter(<ContentCard {...defaultProps} tags={['Wi-Fi 7']} />);
-      const tagButton = screen.getByRole('button', { name: /Wi-Fi 7/i });
-      expect(tagButton).toBeDisabled();
+      const tag = screen.getByText('Wi-Fi 7');
+      // Tags without onTagClick should not have role="button"
+      expect(tag).not.toHaveAttribute('role', 'button');
+      expect(tag).not.toHaveAttribute('tabindex');
     });
 
-    it('enables tag buttons when onTagClick is provided', () => {
+    it('renders tags as interactive buttons when onTagClick is provided', () => {
       const onTagClick = vi.fn();
       renderWithRouter(
         <ContentCard {...defaultProps} tags={['Wi-Fi 7']} onTagClick={onTagClick} />
       );
       const tagButton = screen.getByRole('button', { name: /Wi-Fi 7/i });
-      expect(tagButton).not.toBeDisabled();
+      expect(tagButton).toHaveAttribute('tabindex', '0');
     });
   });
 
@@ -253,19 +255,23 @@ describe('ContentCard', () => {
     it('applies default variant styles', () => {
       renderWithRouter(<ContentCard {...defaultProps} variant="default" />);
       const link = screen.getByRole('link');
-      expect(link).toHaveClass('p-6');
+      // Variant padding is on the first flex-grow div (main content area)
+      const contentDiv = link.querySelector('.flex-grow');
+      expect(contentDiv).toHaveClass('p-6');
     });
 
     it('applies compact variant styles', () => {
       renderWithRouter(<ContentCard {...defaultProps} variant="compact" />);
       const link = screen.getByRole('link');
-      expect(link).toHaveClass('p-4');
+      const contentDiv = link.querySelector('.flex-grow');
+      expect(contentDiv).toHaveClass('p-4');
     });
 
     it('applies expanded variant styles', () => {
       renderWithRouter(<ContentCard {...defaultProps} variant="expanded" />);
       const link = screen.getByRole('link');
-      expect(link).toHaveClass('p-8');
+      const contentDiv = link.querySelector('.flex-grow');
+      expect(contentDiv).toHaveClass('p-8');
     });
   });
 
@@ -282,7 +288,7 @@ describe('ContentCard', () => {
     accentColors.forEach((color) => {
       it(`applies ${color} accent color classes`, () => {
         renderWithRouter(<ContentCard {...defaultProps} accentColor={color} />);
-        const card = screen.getByRole('link').parentElement;
+        const card = screen.getByRole('link');
         expect(card).toHaveClass(`hover:border-${color}-500/50`);
       });
     });
@@ -291,13 +297,13 @@ describe('ContentCard', () => {
   describe('Animation', () => {
     it('applies animation delay style', () => {
       renderWithRouter(<ContentCard {...defaultProps} animationDelay={100} />);
-      const card = screen.getByRole('link').parentElement;
+      const card = screen.getByRole('link');
       expect(card).toHaveStyle({ animationDelay: '100ms' });
     });
 
     it('defaults to 0ms animation delay', () => {
       renderWithRouter(<ContentCard {...defaultProps} />);
-      const card = screen.getByRole('link').parentElement;
+      const card = screen.getByRole('link');
       expect(card).toHaveStyle({ animationDelay: '0ms' });
     });
   });
@@ -320,10 +326,12 @@ describe('ContentCard', () => {
       expect(screen.getByLabelText('Content tags')).toBeInTheDocument();
     });
 
-    it('tag buttons have type="button"', () => {
-      renderWithRouter(<ContentCard {...defaultProps} tags={['Test']} />);
-      const tagButton = screen.getByRole('button');
-      expect(tagButton).toHaveAttribute('type', 'button');
+    it('interactive tags have role="button" and tabindex', () => {
+      const onTagClick = vi.fn();
+      renderWithRouter(<ContentCard {...defaultProps} tags={['Test']} onTagClick={onTagClick} />);
+      const tagButton = screen.getByRole('button', { name: /Test/i });
+      expect(tagButton).toHaveAttribute('role', 'button');
+      expect(tagButton).toHaveAttribute('tabindex', '0');
     });
   });
 

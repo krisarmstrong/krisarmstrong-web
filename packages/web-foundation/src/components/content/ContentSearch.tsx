@@ -173,6 +173,8 @@ export function ContentSearch<T extends SearchableItem>({
   const handleClear = () => {
     setQuery('');
     setDebouncedQuery('');
+    // Immediately notify parent with all items to avoid useDeferredValue lag
+    onSearch(items, { query: '', terms: [] });
   };
 
   return (

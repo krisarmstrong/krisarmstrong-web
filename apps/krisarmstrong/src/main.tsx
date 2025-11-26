@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, ComponentType } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ErrorBoundary, initTheme } from '@krisarmstrong/web-foundation';
@@ -14,18 +14,49 @@ initTheme();
 // Initialize error tracking
 initSentry();
 
-// Lazy load all page components
-const Home = React.lazy(() => import('./pages/Home.tsx'));
-const Resume = React.lazy(() => import('./pages/Resume.tsx'));
-const About = React.lazy(() => import('./pages/About.tsx'));
-const Skills = React.lazy(() => import('./pages/Skills.tsx'));
-const Projects = React.lazy(() => import('./pages/Projects.tsx'));
-const Contact = React.lazy(() => import('./pages/Contact.tsx'));
-const Blog = React.lazy(() => import('./pages/Blog.tsx'));
-const BlogPost = React.lazy(() => import('./pages/BlogPost.tsx'));
-const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy.tsx'));
-const TermsOfService = React.lazy(() => import('./pages/TermsOfService.tsx'));
-const NotFound = React.lazy(() => import('./pages/NotFound.tsx'));
+/**
+ * Retry wrapper for lazy imports - handles chunk load failures after deployments.
+ * When Vercel deploys, old chunk hashes become invalid. This catches the error
+ * and reloads the page to fetch fresh assets.
+ */
+function lazyWithRetry<T extends ComponentType<unknown>>(
+  importFn: () => Promise<{ default: T }>
+): React.LazyExoticComponent<T> {
+  return React.lazy(() =>
+    importFn().catch((error: Error) => {
+      // Check if this is a chunk load error (failed to fetch module)
+      if (
+        error.message.includes('Failed to fetch dynamically imported module') ||
+        error.message.includes('Loading chunk') ||
+        error.message.includes('Loading CSS chunk')
+      ) {
+        // Prevent infinite reload loops - check if we just reloaded
+        const lastReload = sessionStorage.getItem('chunk-reload-time');
+        const now = Date.now();
+        if (lastReload && now - parseInt(lastReload, 10) < 10000) {
+          // Reloaded within 10 seconds, don't reload again
+          throw error;
+        }
+        sessionStorage.setItem('chunk-reload-time', now.toString());
+        window.location.reload();
+      }
+      throw error;
+    })
+  );
+}
+
+// Lazy load all page components with chunk error handling
+const Home = lazyWithRetry(() => import('./pages/Home.tsx'));
+const Resume = lazyWithRetry(() => import('./pages/Resume.tsx'));
+const About = lazyWithRetry(() => import('./pages/About.tsx'));
+const Skills = lazyWithRetry(() => import('./pages/Skills.tsx'));
+const Projects = lazyWithRetry(() => import('./pages/Projects.tsx'));
+const Contact = lazyWithRetry(() => import('./pages/Contact.tsx'));
+const Blog = lazyWithRetry(() => import('./pages/Blog.tsx'));
+const BlogPost = lazyWithRetry(() => import('./pages/BlogPost.tsx'));
+const PrivacyPolicy = lazyWithRetry(() => import('./pages/PrivacyPolicy.tsx'));
+const TermsOfService = lazyWithRetry(() => import('./pages/TermsOfService.tsx'));
+const NotFound = lazyWithRetry(() => import('./pages/NotFound.tsx'));
 
 const router = createBrowserRouter([
   {
