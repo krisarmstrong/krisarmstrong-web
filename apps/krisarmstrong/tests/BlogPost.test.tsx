@@ -223,4 +223,113 @@ describe('BlogPost', () => {
       expect(true).toBe(true);
     });
   });
+
+  it('displays related posts when available', async () => {
+    const relatedPost: BlogPostType = {
+      id: 'wifi6-comparison',
+      slug: 'wifi6-comparison',
+      title: 'Wi-Fi 6 vs Wi-Fi 7 Comparison',
+      excerpt: 'Comparing Wi-Fi generations',
+      content: '# Wi-Fi 6 vs 7',
+      author: 'Kris Armstrong',
+      date: '2025-01-10',
+      published: true,
+      featured: false,
+      read_time: 4,
+      tags: ['Wi-Fi 7', 'Wi-Fi 6'],
+      meta_title: '',
+      meta_description: '',
+      og_image: '',
+      view_count: 0,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
+
+    vi.mocked(getAllBlogPosts).mockResolvedValue([mockSupabasePost, relatedPost]);
+
+    renderBlogPost('wifi7-intro-802-11be');
+
+    await waitFor(
+      () => {
+        expect(screen.getByText(/More like this/i)).toBeInTheDocument();
+      },
+      { timeout: 3000 }
+    );
+  });
+
+  it('shows share buttons for social platforms', async () => {
+    renderBlogPost();
+
+    await waitFor(
+      () => {
+        expect(screen.getByRole('button', { name: /Share on LinkedIn/i })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: /Share on Twitter/i })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: /Share on Facebook/i })).toBeInTheDocument();
+      },
+      { timeout: 3000 }
+    );
+  });
+
+  it('filters out current post from related posts', async () => {
+    const relatedPost: BlogPostType = {
+      id: 'wifi6-comparison',
+      slug: 'wifi6-comparison',
+      title: 'Wi-Fi 6 vs Wi-Fi 7 Comparison',
+      excerpt: 'Comparing Wi-Fi generations',
+      content: '# Wi-Fi 6 vs 7',
+      author: 'Kris Armstrong',
+      date: '2025-01-10',
+      published: true,
+      featured: false,
+      read_time: 4,
+      tags: ['Wi-Fi 7', 'Wi-Fi 6'],
+      meta_title: '',
+      meta_description: '',
+      og_image: '',
+      view_count: 0,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
+
+    vi.mocked(getAllBlogPosts).mockResolvedValue([mockSupabasePost, relatedPost]);
+
+    renderBlogPost('wifi7-intro-802-11be');
+
+    await waitFor(
+      () => {
+        expect(screen.getByText(/More like this/i)).toBeInTheDocument();
+        // Should show related post but not the current post again
+        expect(screen.getAllByText(/Wi-Fi 6 vs Wi-Fi 7 Comparison/i).length).toBe(1);
+      },
+      { timeout: 3000 }
+    );
+  });
+
+  it('uses default read time when not provided', async () => {
+    const postWithNoReadTime: BlogPostType = {
+      ...mockSupabasePost,
+      read_time: undefined as unknown as number,
+    };
+
+    vi.mocked(getBlogPostBySlug).mockResolvedValue(postWithNoReadTime);
+
+    renderBlogPost();
+
+    await waitFor(
+      () => {
+        // Should default to 5 min read
+        expect(screen.getByText(/5 min read/i)).toBeInTheDocument();
+      },
+      { timeout: 3000 }
+    );
+  });
+
+  it('displays breadcrumb navigation', async () => {
+    renderBlogPost();
+
+    await waitFor(() => {
+      expect(screen.getByRole('link', { name: /Home/i })).toHaveAttribute('href', '/');
+      expect(screen.getByRole('link', { name: /^Blog$/i })).toHaveAttribute('href', '/blog');
+    });
+  });
 });

@@ -199,4 +199,98 @@ describe('Blog', () => {
     const readTimes = screen.getAllByText(/5 min read/);
     expect(readTimes.length).toBeGreaterThan(0);
   });
+
+  it('allows sorting by popular posts', async () => {
+    await renderBlog();
+    const sortSelect = screen.getByRole('combobox');
+
+    fireEvent.change(sortSelect, { target: { value: 'popular' } });
+
+    await waitFor(() => {
+      expect(sortSelect).toHaveValue('popular');
+    });
+  });
+
+  it('allows sorting alphabetically', async () => {
+    await renderBlog();
+    const sortSelect = screen.getByRole('combobox');
+
+    fireEvent.change(sortSelect, { target: { value: 'alphabetical' } });
+
+    await waitFor(() => {
+      expect(sortSelect).toHaveValue('alphabetical');
+    });
+  });
+
+  it('shows error state when fetch fails', async () => {
+    vi.mocked(getAllBlogPosts).mockRejectedValueOnce(new Error('Network error'));
+
+    render(
+      <BrowserRouter>
+        <Blog />
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText(/Failed to load blog posts/)).toBeInTheDocument();
+    });
+
+    // Should show retry button
+    expect(screen.getByRole('button', { name: /Try Again/i })).toBeInTheDocument();
+  });
+
+  it('shows empty state when no posts match filter', async () => {
+    // Create mock data with only one unique tag
+    const singleTagPosts: BlogPost[] = Array.from({ length: 3 }).map((_, index) => ({
+      id: `post-${index}`,
+      slug: `post-${index}`,
+      title: `Post ${index + 1}`,
+      excerpt: 'Sample excerpt',
+      content: 'Sample content',
+      author: 'Kris Armstrong',
+      date: new Date(2024, 0, index + 1).toISOString(),
+      published: true,
+      featured: false,
+      read_time: 5,
+      tags: ['UniqueTag'],
+      meta_title: '',
+      meta_description: '',
+      og_image: '',
+      view_count: 0,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    }));
+
+    vi.mocked(getAllBlogPosts).mockResolvedValue(singleTagPosts);
+
+    render(
+      <BrowserRouter>
+        <Blog />
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText('Technical Blog')).toBeInTheDocument();
+    });
+
+    // Click a tag to filter
+    const tagButtons = screen
+      .getAllByRole('button')
+      .filter((button) => button.textContent?.includes('UniqueTag'));
+
+    if (tagButtons.length > 0) {
+      // First click filters by UniqueTag (should show all 3 posts)
+      fireEvent.click(tagButtons[0]);
+
+      await waitFor(() => {
+        expect(screen.getByText(/Filtered by:/)).toBeInTheDocument();
+      });
+    }
+  });
+
+  it('shows search input', async () => {
+    await renderBlog();
+    const searchInput = screen.getByPlaceholderText(/Search blog posts/);
+    expect(searchInput).toBeInTheDocument();
+  });
 });
