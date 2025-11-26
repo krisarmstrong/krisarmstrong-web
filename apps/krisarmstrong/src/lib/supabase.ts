@@ -63,9 +63,12 @@ const blogCache = {
     return entry.data;
   },
 
-  set<T>(key: 'posts' | 'tags', data: T): void {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, security/detect-object-injection -- key is from typed union
-    (this as any)[key] = { data, timestamp: Date.now() };
+  setPosts(data: BlogPost[]): void {
+    this.posts = { data, timestamp: Date.now() };
+  },
+
+  setTags(data: string[]): void {
+    this.tags = { data, timestamp: Date.now() };
   },
 
   invalidate(): void {
@@ -112,7 +115,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
   }
 
   const posts = data || [];
-  blogCache.set('posts', posts);
+  blogCache.setPosts(posts);
   return posts;
 }
 
@@ -179,7 +182,7 @@ export async function getAllTags(): Promise<string[]> {
   });
 
   const tags = Array.from(tagsSet).sort();
-  blogCache.set('tags', tags);
+  blogCache.setTags(tags);
   return tags;
 }
 

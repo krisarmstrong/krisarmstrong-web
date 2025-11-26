@@ -85,9 +85,9 @@ export function ActiveFilterBadges({
   if (!hasFilters) {
     return (
       <div className={`flex items-center gap-2 ${className}`}>
-        <span className="text-sm text-gray-400">{emptyMessage}</span>
+        <span className="text-sm text-text-muted">{emptyMessage}</span>
         {resultCount !== undefined && (
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-text-muted">
             • {resultCount} {resultCount === 1 ? resultLabel.replace(/s$/, '') : resultLabel}
           </span>
         )}
@@ -98,7 +98,7 @@ export function ActiveFilterBadges({
   return (
     <div className={`flex items-center gap-2 flex-wrap ${className}`}>
       <Filter size={16} className={colors.icon} />
-      <span className="text-sm text-gray-400">Filtered by:</span>
+      <span className="text-sm text-text-muted">Filtered by:</span>
 
       {filters.map((filter) => (
         <button
@@ -121,7 +121,7 @@ export function ActiveFilterBadges({
       ))}
 
       {resultCount !== undefined && (
-        <span className="text-sm text-gray-500">
+        <span className="text-sm text-text-muted">
           ({resultCount} {resultCount === 1 ? resultLabel.replace(/s$/, '') : resultLabel})
         </span>
       )}
@@ -129,7 +129,7 @@ export function ActiveFilterBadges({
       {onClearAll && filters.length > 1 && (
         <button
           onClick={onClearAll}
-          className="text-sm text-gray-400 hover:text-white underline ml-2"
+          className="text-sm text-text-muted hover:text-text-primary underline ml-2"
           aria-label="Clear all filters"
         >
           Clear all

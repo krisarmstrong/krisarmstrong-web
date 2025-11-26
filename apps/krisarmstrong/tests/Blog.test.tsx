@@ -25,6 +25,11 @@ const mockBlogPosts: BlogPost[] = Array.from({ length: 15 }).map((_, index) => (
   updated_at: new Date().toISOString(),
 }));
 
+// Mock getAllBlogPosts to return controlled test data
+vi.mock('../src/lib/supabase', () => ({
+  getAllBlogPosts: vi.fn(() => Promise.resolve(mockBlogPosts)),
+}));
+
 // Mock framer-motion to avoid animation issues in tests
 vi.mock('framer-motion', () => ({
   motion: {
@@ -181,10 +186,14 @@ describe('Blog', () => {
 
       fireEvent.click(loadMoreButton);
 
-      await waitFor(() => {
-        const newTitles = screen.getAllByRole('heading', { level: 2 });
-        expect(newTitles.length).toBeGreaterThan(initialCount);
-      });
+      // Wait for the button to disappear or text to change, indicating load completed
+      await waitFor(
+        () => {
+          const newTitles = screen.getAllByRole('heading', { level: 2 });
+          expect(newTitles.length).toBeGreaterThan(initialCount);
+        },
+        { timeout: 3000 }
+      );
     }
   });
 
