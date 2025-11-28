@@ -42,7 +42,7 @@ Outdoor infrastructure must survive conditions that would destroy indoor equipme
 
 Power delivery is often the primary constraint in outdoor deployments:
 
-**Power over Ethernet (PoE) limitations:** Standard PoE (802.3af, 15.4W) and PoE+ (802.3at, 30W) are insufficient for high-performance Wi-Fi 6E outdoor APs. These APs often require 802.3bt PoE++ (60-90W) to power multiple radios, especially in cold temperatures requiring heaters.
+**Power over Ethernet (PoE) limitations:** Standard PoE (802.3af, 12.95W to device) and PoE+ (802.3at, 25.5W to device) are insufficient for high-performance Wi-Fi 6E outdoor APs. These APs often require 802.3bt PoE++ (Type 3: 51W or Type 4: 71W to device) to power multiple radios, especially in cold temperatures requiring heaters.
 
 **Cable distance constraints:** PoE maximum distance is 100 meters (328 feet). Outdoor deployments frequently require longer runs. Options: mid-span power injection, fiber optic runs with media converters at AP location, or local AC power.
 
@@ -119,6 +119,7 @@ The FCC permits standard power (up to 36 dBm EIRP) outdoor 6 GHz operation using
 Large public university with 40,000 students across 600-acre campus:
 
 **Deployment scope:**
+
 - 180 outdoor Wi-Fi 6E APs covering quads, walkways, outdoor study areas
 - Fiber backhaul to all AP locations
 - 802.3bt PoE switches for AP power
@@ -126,6 +127,7 @@ Large public university with 40,000 students across 600-acre campus:
 - Integration with existing indoor Wi-Fi 6E infrastructure
 
 **Design approach:**
+
 - Outdoor APs at 25-foot mounting height on existing light poles
 - Omnidirectional antennas in quad areas (circular coverage)
 - Sector antennas along building perimeters (directional coverage)
@@ -133,12 +135,14 @@ Large public university with 40,000 students across 600-acre campus:
 - Weatherproof fiber splice enclosures at each AP location
 
 **Challenges:**
+
 - Historic campus areas restricted visible infrastructure—used concealed mounting and architecturally-matched enclosures
 - Winter heating requirements increased AP power consumption to 75W average (required PoE++ infrastructure)
 - Trees in quad areas required careful AP placement for Fresnel zone clearance
 - AFC coordination with local microwave links restricted certain channels in two quad areas
 
 **Results:**
+
 - Reliable outdoor coverage across all major outdoor spaces
 - Peak usage: 3,200 concurrent users during outdoor event
 - Average throughput: 380 Mbps per client in 6 GHz band
@@ -146,6 +150,7 @@ Large public university with 40,000 students across 600-acre campus:
 - Zero weather-related AP failures in 18 months (including severe winter conditions)
 
 **Lessons learned:**
+
 - Over-engineering weather protection pays dividends—several APs experienced ice storms that would have destroyed lesser-hardened equipment
 - Fiber backhaul complexity and cost are worth it for deployment flexibility and bandwidth
 - AFC channel restrictions were minimal but required channel plan adjustments in affected areas
