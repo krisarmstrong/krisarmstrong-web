@@ -5,16 +5,19 @@ Wi-Fi 6 and 6E's aggregate throughput capabilities make multi-gigabit Ethernet n
 ## The Gigabit Bottleneck
 
 For fifteen years, gigabit Ethernet has been the enterprise standard. 1000BASE-T provided adequate bandwidth for Wi-Fi 5 (802.11ac) deployments where:
+
 - Single AP maximum throughput: 600-800 Mbps typical
 - Real-world aggregate: 400-500 Mbps average
 
 Gigabit uplinks rarely bottlenecked wireless performance.
 
 **Wi-Fi 6 changed the equation:**
+
 - Single AP maximum throughput: 1-1.5 Gbps typical
 - High-density scenarios: 2-3 Gbps aggregate
 
 **Wi-Fi 6E raised stakes further:**
+
 - Clean 6 GHz spectrum with 160 MHz channels
 - Single AP maximum throughput: 2-4 Gbps potential
 - High-density scenarios: 4-6 Gbps aggregate
@@ -28,6 +31,7 @@ IEEE developed multi-gigabit standards using existing Cat 5e/6/6A cabling:
 ### 2.5GBASE-T (802.3bz)
 
 **Specifications:**
+
 - 2.5 Gbps
 - Cat 5e: 100 meters
 - Cat 6: 100 meters
@@ -38,6 +42,7 @@ IEEE developed multi-gigabit standards using existing Cat 5e/6/6A cabling:
 ### 5GBASE-T (802.3bz)
 
 **Specifications:**
+
 - 5 Gbps
 - Cat 5e: Limited/unreliable
 - Cat 6: 100 meters
@@ -48,6 +53,7 @@ IEEE developed multi-gigabit standards using existing Cat 5e/6/6A cabling:
 ### 10GBASE-T (802.3an)
 
 **Specifications:**
+
 - 10 Gbps
 - Cat 6: 55 meters
 - Cat 6A: 100 meters
@@ -62,24 +68,28 @@ Choosing appropriate multi-gigabit tier requires analyzing requirements, existin
 ### My Decision Matrix
 
 **2.5GBASE-T deployment:**
+
 - Wi-Fi 6 dual-band APs
 - Standard office density (10-20 users per AP)
 - Existing Cat 5e/6 cabling
 - Budget-conscious projects
 
 **5GBASE-T deployment:**
+
 - Wi-Fi 6E tri-band APs
 - Higher density (20-40 users per AP)
 - Cat 6 cabling confirmed
 - Balance between cost and performance
 
 **10GBASE-T deployment:**
+
 - High-density Wi-Fi 6E
 - Collaboration spaces (40+ users per AP)
 - Cat 6A cabling
 - Maximum performance requirements
 
 **Hybrid deployment:**
+
 - 2.5G for standard areas
 - 5G for medium density
 - 10G for high density and uplinks
@@ -94,16 +104,19 @@ Multi-gigabit success depends on cabling infrastructure quality.
 ### Cabling Requirements
 
 **2.5GBASE-T:**
+
 - Cat 5e minimum
 - Cat 6 recommended
 - Generally works on existing cabling
 
 **5GBASE-T:**
+
 - Cat 6 required for reliable operation
 - Cat 5e may work but not guaranteed
 - Test before committing to 5G
 
 **10GBASE-T:**
+
 - Cat 6A required for 100m runs
 - Cat 6 works up to 55m
 - Performance degrades with poor installation
@@ -113,6 +126,7 @@ Multi-gigabit success depends on cabling infrastructure quality.
 Never assume existing cabling supports multi-gigabit. I test sample runs:
 
 **Testing methodology:**
+
 1. Identify representative cable runs
 2. Test 10% of runs minimum
 3. Use cable certifiers (Fluke DSX, etc.)
@@ -120,6 +134,7 @@ Never assume existing cabling supports multi-gigabit. I test sample runs:
 5. Document failures and patterns
 
 **Common failure modes:**
+
 - Improper terminations
 - Cable damage during installation
 - Inferior cable quality
@@ -128,6 +143,7 @@ Never assume existing cabling supports multi-gigabit. I test sample runs:
 
 **2022 deployment example:**
 Building claimed "Cat 6 throughout" but testing revealed:
+
 - 15% of runs failed Cat 6 certification
 - Issues primarily in older wing (2005 installation)
 - Newer wing (2018) passed consistently
@@ -139,12 +155,14 @@ Result: Specified 2.5G for older wing, 5G for newer wing.
 Sometimes existing infrastructure can't support multi-gigabit:
 
 **Recabling indicators:**
+
 - Cat 5 or older cabling
 - High failure rates on certification testing
 - Visible damage or poor installation
 - Building renovation opportunities
 
 **Recabling recommendations:**
+
 - Cat 6A for future-proofing
 - Supports 10GBASE-T to 100m
 - Handles PoE++ power requirements
@@ -161,11 +179,13 @@ Multi-gigabit deployment requires compatible switch infrastructure.
 **Multi-gigabit modular switches:**
 
 **Advantages:**
+
 - Mix of 1G/2.5G/5G/10G ports as needed
 - Flexible configuration
 - Long-term investment
 
 **Disadvantages:**
+
 - Higher cost per port
 - Complexity
 - Overkill for simple deployments
@@ -173,11 +193,13 @@ Multi-gigabit deployment requires compatible switch infrastructure.
 **Fixed multi-gigabit switches:**
 
 **Advantages:**
+
 - Cost-effective
 - Simple deployment
 - Adequate for most needs
 
 **Disadvantages:**
+
 - Less flexibility
 - Port speeds fixed at purchase
 
@@ -188,6 +210,7 @@ My 2022 deployments primarily use fixed switches with 24 or 48 ports of 2.5G/5G/
 **Decision factors:**
 
 **Option 1: All ports same speed**
+
 - Simpler configuration
 - Consistent performance
 - May overspend on unnecessary capacity
@@ -195,6 +218,7 @@ My 2022 deployments primarily use fixed switches with 24 or 48 ports of 2.5G/5G/
 **Example:** 48-port 5GBASE-T switch, all APs get 5G
 
 **Option 2: Mixed port speeds**
+
 - Optimize cost vs. performance
 - Complexity in planning
 - More flexibility
@@ -208,19 +232,23 @@ I prefer consistent port speeds for simplicity unless budget constraints force o
 Multi-gigabit ports must deliver adequate PoE power.
 
 **Wi-Fi 6/6E AP power requirements:**
+
 - Dual-band Wi-Fi 6: 15-22W typical (PoE+ adequate)
 - Tri-band Wi-Fi 6E: 25-30W typical (PoE++ preferred)
 - With USB, security, etc.: 30-40W (PoE++ required)
 
-**Switch PoE standards:**
-- 802.3af (PoE): 15.4W per port
-- 802.3at (PoE+): 30W per port
-- 802.3bt (PoE++): 60-90W per port
+**Switch PoE standards (PSE output / delivered to PD):**
+
+- 802.3af (PoE): 15.4W / 12.95W per port
+- 802.3at (PoE+): 30W / 25.5W per port
+- 802.3bt Type 3 (PoE++): 60W / 51W per port
+- 802.3bt Type 4 (PoE++): 90W / 71W per port
 
 **Critical consideration:** Total switch power budget.
 
 **Example:**
 48-port switch, 740W total PoE budget:
+
 - 740W ÷ 48 ports = 15.4W average per port
 - If all APs need 25W, you'll exhaust power budget
 
@@ -235,15 +263,18 @@ Access switches need adequate uplinks to distribution/core.
 **Uplink capacity planning:**
 
 **Low-density access (2.5G ports):**
+
 - 2x 10G uplinks typical
 - 20:1 oversubscription (48x 2.5G = 120 Gbps, 20 Gbps uplink)
 
 **Medium-density access (5G ports):**
+
 - 2x 10G uplinks minimum
 - 4x 10G preferred for high utilization
 - 12:1 to 24:1 oversubscription
 
 **High-density access (10G ports):**
+
 - 4x 10G uplinks minimum
 - 25G/40G uplinks preferred
 - 6:1 to 12:1 oversubscription
@@ -260,6 +291,7 @@ Multi-gigabit deployment success requires thorough performance testing.
 I test multi-gigabit configurations in lab before production:
 
 **Test scenarios:**
+
 1. Single AP throughput to wired client
 2. Multiple APs simultaneously
 3. Sustained throughput over time
@@ -267,12 +299,14 @@ I test multi-gigabit configurations in lab before production:
 5. Failover and redundancy
 
 **Tools:**
+
 - iPerf3 for throughput testing
 - PoE power meters
 - Switch monitoring (utilization, errors)
 - Thermal monitoring
 
 **Success criteria:**
+
 - 2.5G: 2.3+ Gbps measured throughput
 - 5G: 4.7+ Gbps measured throughput
 - 10G: 9.5+ Gbps measured throughput
@@ -284,18 +318,21 @@ I test multi-gigabit configurations in lab before production:
 After production deployment, validate real-world performance:
 
 **Week 1-2:**
+
 - Monitor switch port utilization
 - Verify link negotiation (all ports at expected speeds)
 - Check for errors or flapping
 - Validate AP connectivity and throughput
 
 **Month 1:**
+
 - Analyze traffic patterns
 - Identify bottlenecks
 - Confirm uplink capacity adequate
 - Document peak utilization
 
 **Ongoing:**
+
 - Quarterly utilization reviews
 - Capacity planning for growth
 - Identification of issues
@@ -307,12 +344,14 @@ My 2022 deployments demonstrate measurable improvements from multi-gigabit.
 ### Scenario 1: Mid-Size Office (200 users)
 
 **Before (Gigabit):**
+
 - Wi-Fi 5 APs with 1G uplinks
 - Peak AP throughput: 600-700 Mbps
 - User complaints during video conferences
 - Help desk tickets: 25/month wireless-related
 
 **After (2.5 Gigabit):**
+
 - Wi-Fi 6 APs with 2.5G uplinks
 - Peak AP throughput: 1.2-1.4 Gbps
 - Video conference quality "excellent"
@@ -323,11 +362,13 @@ My 2022 deployments demonstrate measurable improvements from multi-gigabit.
 ### Scenario 2: High-Density Education (5000 students)
 
 **Before (Gigabit):**
+
 - Dense Wi-Fi 6 deployment bottlenecked at uplinks
 - Testing/exam periods suffered degraded performance
 - 1G uplinks saturated during peak usage
 
 **After (5 Gigabit hybrid):**
+
 - High-density areas: 5G uplinks
 - Standard classrooms: 2.5G uplinks
 - Peak AP throughput: 2.5-3 Gbps in dense areas
@@ -338,11 +379,13 @@ My 2022 deployments demonstrate measurable improvements from multi-gigabit.
 ### Scenario 3: Corporate Headquarters (1200 users)
 
 **Before (Gigabit):**
+
 - New Wi-Fi 6E tri-band deployment
 - 6 GHz performance limited by 1G uplinks
 - Expensive wireless infrastructure underutilized
 
 **After (10 Gigabit targeted):**
+
 - Collaboration spaces: 10G uplinks
 - Open office: 5G uplinks
 - Standard areas: 2.5G uplinks
@@ -357,20 +400,24 @@ Multi-gigabit upgrades require financial investment. Accurate costing informs de
 ### Hardware Costs (2022 pricing)
 
 **Switches:**
+
 - 48-port 2.5G PoE+ switch: $3,000-5,000
 - 48-port 5G PoE++ switch: $6,000-10,000
 - 48-port 10G PoE++ switch: $12,000-18,000
 
 **Per-port premium vs. gigabit:**
+
 - 2.5G: +$40-60 per port
 - 5G: +$80-120 per port
 - 10G: +$150-250 per port
 
 **Access points with multi-gigabit:**
+
 - Wi-Fi 6 with 2.5G: +$50-100 vs. 1G models
 - Wi-Fi 6E with 5G/10G: Often standard (no premium)
 
 **Cabling (if required):**
+
 - Cat 6A installation: $150-300 per drop
 - Cable testing/certification: $2,000-5,000 project cost
 
@@ -379,6 +426,7 @@ Multi-gigabit upgrades require financial investment. Accurate costing informs de
 **Example: 50-AP deployment**
 
 **Option 1: Gigabit (inadequate but cheap)**
+
 - Switches: $8,000
 - APs: $40,000
 - Installation/config: $15,000
@@ -386,6 +434,7 @@ Multi-gigabit upgrades require financial investment. Accurate costing informs de
 - **Performance: Bottlenecked**
 
 **Option 2: 2.5 Gigabit**
+
 - Switches: $15,000
 - APs: $45,000
 - Installation/config: $15,000
@@ -393,6 +442,7 @@ Multi-gigabit upgrades require financial investment. Accurate costing informs de
 - **Performance: Good for Wi-Fi 6**
 
 **Option 3: 5 Gigabit**
+
 - Switches: $25,000
 - APs (6E): $50,000
 - Installation/config: $15,000
@@ -400,6 +450,7 @@ Multi-gigabit upgrades require financial investment. Accurate costing informs de
 - **Performance: Excellent for Wi-Fi 6E**
 
 **Option 4: Hybrid (my recommendation)**
+
 - Switches (mixed 2.5G/5G): $20,000
 - APs (mixed Wi-Fi 6/6E): $47,000
 - Installation/config: $15,000
@@ -413,23 +464,27 @@ Multi-gigabit adds 15-30% to project costs but is essential for realizing Wi-Fi 
 **Quantifiable benefits:**
 
 **User productivity:**
+
 - Reduced wireless-related delays
 - Improved application performance
 - Better video conferencing quality
 - Value: $50-100 per user annually
 
 **IT efficiency:**
+
 - Reduced troubleshooting time
 - Fewer help desk tickets
 - Less performance firefighting
 - Value: 20-40 hours per month
 
 **Future-proofing:**
+
 - 5-7 year lifecycle vs. 3-4 for gigabit
 - Delayed next infrastructure refresh
 - Value: Extended ROI timeline
 
 **For 500-user environment:**
+
 - User productivity value: $25,000-50,000/year
 - IT efficiency value: $15,000-30,000/year
 - Total annual value: $40,000-80,000/year
@@ -488,6 +543,7 @@ Multi-gigabit Ethernet evolution continues:
 ### For New Deployments
 
 **Deploy multi-gigabit by default:**
+
 - Minimum 2.5G for Wi-Fi 6
 - Minimum 5G for Wi-Fi 6E
 - 10G for high-density Wi-Fi 6E
@@ -496,6 +552,7 @@ Multi-gigabit Ethernet evolution continues:
 ### For Existing Gigabit Networks
 
 **Upgrade alongside wireless refresh:**
+
 - Don't deploy Wi-Fi 6E on gigabit
 - Upgrade switches during AP upgrade
 - Test cabling first
@@ -504,6 +561,7 @@ Multi-gigabit Ethernet evolution continues:
 ### For Budget-Constrained Projects
 
 **Hybrid approach:**
+
 - 2.5G for standard density
 - 5G/10G for high density only
 - Plan for full upgrade within 2-3 years

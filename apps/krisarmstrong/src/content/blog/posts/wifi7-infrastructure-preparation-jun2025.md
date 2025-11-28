@@ -22,7 +22,7 @@ For new construction or major renovations accompanying Wi-Fi 7 deployment, insta
 
 Wi-Fi 7 access points consume more power than previous generations due to more capable radios, higher processing requirements, and multi-gigabit Ethernet interfaces. Tri-band enterprise APs typically require 25-35 watts—exceeding the 15.4W available from 802.3af PoE and pushing limits of 802.3at PoE+ (25.5W).
 
-The IEEE 802.3bt standard (PoE++, also called 4PPoE) provides up to 60W (Type 3) or 100W (Type 4) power delivery and is becoming standard for Wi-Fi 7 AP deployment. Most Wi-Fi 7 APs require 802.3bt Type 3 at minimum. Higher-power models with enhanced radios or integrated capabilities (IoT radios, sensors) may require Type 4.
+The IEEE 802.3bt standard (PoE++, also called 4PPoE) provides up to 60W (Type 3) or 90W (Type 4) power delivery and is becoming standard for Wi-Fi 7 AP deployment. Most Wi-Fi 7 APs require 802.3bt Type 3 at minimum. Higher-power models with enhanced radios or integrated capabilities (IoT radios, sensors) may require Type 4.
 
 Existing PoE switch infrastructure likely requires upgrades for Wi-Fi 7. Switches providing only 802.3af or 802.3at lack sufficient power for Wi-Fi 7 APs. Organizations must evaluate switch PoE budgets—total available PoE power across all ports—as well as per-port capabilities. A switch with 740W PoE budget can support 24 APs at 30W each but would be insufficient for 48 ports.
 
