@@ -17,6 +17,7 @@ Wi-Fi 6E deployment isn't simply installing tri-band access points. The infrastr
 ### Access Point Selection
 
 I chose enterprise tri-band access points supporting:
+
 - 2.4 GHz: 2x2:2 MIMO, 20/40 MHz channels
 - 5 GHz: 4x4:4 MIMO, 20/40/80/160 MHz channels
 - 6 GHz: 4x4:4 MIMO, 20/40/80/160 MHz channels
@@ -28,11 +29,12 @@ The tri-band architecture enables dedicated 6 GHz radios rather than sharing air
 Wi-Fi 6E access points consume more power than previous generations. My deployment required:
 
 **Power Budget per AP:**
+
 - Traditional Wi-Fi 5 AP: 15-17W typical
 - Wi-Fi 6 dual-band AP: 18-22W typical
 - Wi-Fi 6E tri-band AP: 25-30W typical
 
-Many existing 802.3af PoE switches (15.4W per port) couldn't support tri-band operation. I upgraded edge switches to 802.3at PoE+ minimum (30W per port), with 802.3bt PoE++ (60W-90W) for high-density areas supporting additional services like security cameras.
+Many existing 802.3af PoE switches (12.95W delivered per port) couldn't support tri-band operation. I upgraded edge switches to 802.3at PoE+ minimum (25.5W delivered per port), with 802.3bt PoE++ (Type 3: 51W or Type 4: 71W delivered) for high-density areas supporting additional services like security cameras.
 
 **Backhaul Capacity:**
 
@@ -64,6 +66,7 @@ Designing for 6 GHz challenged many assumptions I'd developed over years of 5 GH
 **5 GHz Constraints:**
 
 In 5 GHz, I typically design around DFS requirements, client compatibility, and interference avoidance:
+
 - Non-DFS channels (36-48, 149-165) for critical areas
 - 80 MHz channels where feasible, 40 MHz for dense environments
 - Extensive channel planning to minimize co-channel interference
@@ -101,11 +104,13 @@ This seems expensive, but multi-gigabit backhaul costs already exceeded AP costs
 Wi-Fi 6E operates under two power classes:
 
 **Low Power Indoor (LPI):**
+
 - No AFC required
 - Maximum 24 dBm EIRP (250 mW)
 - Simpler deployment
 
 **Standard Power:**
+
 - Requires AFC (Automated Frequency Coordination)
 - Maximum 30 dBm EIRP indoor (1W)
 - 6 dB additional power
@@ -128,12 +133,14 @@ Simple logic works well—prefer 5 GHz unless RSSI insufficient or client limite
 Should 6E-capable clients always use 6 GHz? My deployment revealed the answer is "it depends."
 
 **6 GHz Advantages:**
+
 - Clean spectrum, minimal interference
 - 160 MHz channels standard
 - Lower latency
 - More predictable performance
 
 **5 GHz Still Makes Sense For:**
+
 - Devices at coverage edge (better range)
 - High-mobility clients (fewer transitions between bands)
 - Power-sensitive devices (5 GHz radio typically more efficient)
@@ -158,12 +165,12 @@ Three months post-deployment, the performance improvements are dramatic.
 
 **Application Performance Testing:**
 
-| Scenario | 5 GHz (Before) | 6 GHz (After) | Improvement |
-|----------|---------------|---------------|-------------|
-| Single client, ideal conditions | 780 Mbps | 1.4 Gbps | +80% |
-| 10 clients, shared AP | 450 Mbps avg | 890 Mbps avg | +98% |
-| 30 clients, high density | 180 Mbps avg | 520 Mbps avg | +189% |
-| Large file transfer (1GB) | 11.2 sec | 6.4 sec | -43% time |
+| Scenario                        | 5 GHz (Before) | 6 GHz (After) | Improvement |
+| ------------------------------- | -------------- | ------------- | ----------- |
+| Single client, ideal conditions | 780 Mbps       | 1.4 Gbps      | +80%        |
+| 10 clients, shared AP           | 450 Mbps avg   | 890 Mbps avg  | +98%        |
+| 30 clients, high density        | 180 Mbps avg   | 520 Mbps avg  | +189%       |
+| Large file transfer (1GB)       | 11.2 sec       | 6.4 sec       | -43% time   |
 
 The high-density scenario improvements are most significant. Clean spectrum and wider channels maintain performance under load.
 
@@ -202,11 +209,13 @@ The result: 6 GHz radios serve enterprise traffic excellently, but guest network
 Not all 6E clients are equivalent. I've observed:
 
 **High-Performance Clients:**
+
 - Recent flagship smartphones (iPhone 13, Samsung S21)
 - Premium laptops (Dell XPS, HP EliteBook, Lenovo ThinkPad)
 - Generally support 160 MHz channels, connect reliably
 
 **Problematic Clients:**
+
 - Early 6E adapters with immature drivers
 - Budget laptops with 80 MHz maximum channel width
 - Devices that "see" 6 GHz but prefer 5 GHz incorrectly
@@ -236,6 +245,7 @@ Looking ahead to the rest of 2022 and beyond:
 ### Standard Power Migration
 
 AFC systems are maturing. Migration from LPI to standard power operation will provide 6 dB additional power, enabling:
+
 - Larger coverage cells
 - Reduced AP count in some areas
 - Better penetration through obstacles
@@ -245,6 +255,7 @@ I'm planning standard power migration for Q2 2022 once controller AFC features r
 ### Expanded Device Support
 
 6E client adoption continues accelerating. My 2022 forecast projects:
+
 - Q2 2022: 25-30% enterprise penetration
 - Q4 2022: 40-50% enterprise penetration
 - Mid-2023: Majority of enterprise clients 6E-capable
@@ -262,12 +273,14 @@ Based on three months of production experience:
 ### When to Deploy Wi-Fi 6E Now
 
 **Good candidates:**
+
 - High-density environments (conference centers, collaboration spaces)
 - Performance-critical applications (video production, engineering, healthcare)
 - Managed corporate environments with high client refresh rates
 - New construction or major renovation projects
 
 **Benefits justify costs when:**
+
 - 6E client penetration exceeds 15-20%
 - Current network suffers 5 GHz congestion
 - Applications demand low latency and high throughput
@@ -276,12 +289,14 @@ Based on three months of production experience:
 ### When to Wait
 
 **Defer deployment if:**
+
 - Current Wi-Fi 5 network performs adequately
 - 6E client penetration below 10%
 - Budget constraints prevent proper infrastructure upgrades
 - Management platform lacks mature 6 GHz features
 
 **Better timeline:**
+
 - Late 2022 or 2023 for most organizations
 - Client adoption will be higher
 - Infrastructure costs will decrease
