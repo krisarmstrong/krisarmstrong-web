@@ -182,14 +182,14 @@ export default function Blog() {
           <span className="font-semibold text-text-primary">
             Showing {filteredPosts.length} of {totalCount} posts
           </span>
-          <span>Filter by tags or search across full content.</span>
+          <span>Filter by tags or search by title, excerpt, and tags.</span>
         </div>
 
         {/* Search */}
         <ContentSearch
           items={sortedPosts}
           onSearch={handleSearchResults}
-          searchFields={['title', 'excerpt', 'content', 'tags']}
+          searchFields={['title', 'excerpt', 'tags']}
           placeholder="Search blog posts..."
           accentColor="violet"
           showResultCount

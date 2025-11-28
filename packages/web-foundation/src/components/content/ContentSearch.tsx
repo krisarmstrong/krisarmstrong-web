@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useDeferredValue } from 'react';
+import { useState, useEffect, useMemo, useDeferredValue, useRef } from 'react';
 import { Search, X } from 'lucide-react';
 
 export interface SearchableItem {
@@ -95,6 +95,8 @@ export function ContentSearch<T extends SearchableItem>({
 }: ContentSearchProps<T>) {
   const [query, setQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
+  // Track if clear was just called to prevent useEffect from overwriting with stale deferred value
+  const justClearedRef = useRef(false);
 
   const colors = accentColors[accentColor];
 
@@ -167,10 +169,22 @@ export function ContentSearch<T extends SearchableItem>({
 
   // Notify parent of filtered results
   useEffect(() => {
+    // Skip if clear was just called - we already called onSearch with all items
+    // Wait for deferredQuery to catch up (become empty string)
+    if (justClearedRef.current) {
+      if (normalizedQuery === '') {
+        // Deferred value has caught up, reset the flag
+        justClearedRef.current = false;
+      }
+      // Skip this effect until deferred value catches up
+      return;
+    }
     onSearch(filteredItems, { query: normalizedQuery, terms: searchTerms });
   }, [filteredItems, normalizedQuery, onSearch, searchTerms]);
 
   const handleClear = () => {
+    // Set flag to prevent useEffect from overwriting with stale deferred value
+    justClearedRef.current = true;
     setQuery('');
     setDebouncedQuery('');
     // Immediately notify parent with all items to avoid useDeferredValue lag

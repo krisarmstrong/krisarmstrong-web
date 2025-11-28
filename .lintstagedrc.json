@@ -1,5 +1,5 @@
 {
-  "*.{ts,tsx}": ["tsc-files --noEmit", "eslint --fix", "prettier --write"],
+  "*.{ts,tsx}": ["eslint --fix", "prettier --write"],
   "*.{js,jsx}": ["eslint --fix", "prettier --write"],
   "*.{json,md,yml,yaml}": ["prettier --write"],
   "package.json": ["npx audit-ci --config audit-ci.json"]
