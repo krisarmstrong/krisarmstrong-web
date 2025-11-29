@@ -61,6 +61,12 @@ export function createViteConfig(appConfig: AppConfig): UserConfig {
             'vendor-react': ['react', 'react-dom', 'react-router-dom'],
             // UI libraries chunk
             'vendor-ui': ['lucide-react', '@krisarmstrong/web-foundation'],
+            // React Query - separate chunk for better caching (rarely changes)
+            'vendor-query': ['@tanstack/react-query'],
+            // Framer Motion - separate chunk (large library, rarely changes)
+            'vendor-motion': ['framer-motion'],
+            // Markdown rendering - separate chunk for blog content
+            'vendor-markdown': ['react-markdown', 'rehype-sanitize'],
             // Sentry chunk (loaded on demand)
             'vendor-sentry': ['@sentry/react'],
             // Merge any additional app-specific vendor chunks
@@ -70,6 +76,10 @@ export function createViteConfig(appConfig: AppConfig): UserConfig {
       },
       // Target modern browsers for smaller bundles
       target: 'esnext',
+      // CSS code splitting - each chunk gets its own CSS file
+      cssCodeSplit: true,
+      // Asset inlining threshold - inline small assets as base64
+      assetsInlineLimit: 4096,
       // Chunk size warning limit (lowered from 600KB for better bundle awareness)
       chunkSizeWarningLimit: 400,
       // Source maps for production debugging
