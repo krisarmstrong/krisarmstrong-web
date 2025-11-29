@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import rehypeSanitize from 'rehype-sanitize';
 import { Linkedin, Twitter, Facebook } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
@@ -139,8 +140,10 @@ export default function BlogPost() {
           </div>
         </header>
 
-        <div className="prose dark:prose-invert prose-violet prose-lg max-w-none bg-surface-raised p-6 md:p-8 rounded-2xl shadow-inner shadow-violet-500/5 mx-6 md:mx-8 mb-8 [&_p]:mb-6 [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mt-10 [&_h1]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-3 [&_ul]:mb-6 [&_ol]:mb-6 [&_li]:mb-2">
-          <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{post.content}</ReactMarkdown>
+        <div className="prose dark:prose-invert prose-violet prose-lg max-w-none bg-surface-raised p-6 md:p-8 rounded-2xl shadow-inner shadow-violet-500/5 mx-6 md:mx-8 mb-8 [&_p]:mb-6 [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mt-10 [&_h1]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-3 [&_ul]:mb-6 [&_ol]:mb-6 [&_li]:mb-2 [&_table]:w-full [&_table]:my-6 [&_table]:border-collapse [&_table]:overflow-x-auto [&_table]:block [&_table]:md:table [&_thead]:bg-violet-900/50 [&_th]:px-4 [&_th]:py-3 [&_th]:text-left [&_th]:font-semibold [&_th]:text-violet-200 [&_th]:border [&_th]:border-violet-700/50 [&_td]:px-4 [&_td]:py-3 [&_td]:border [&_td]:border-violet-700/30 [&_tr]:even:bg-violet-950/30 [&_tr]:odd:bg-surface-raised [&_tbody_tr]:hover:bg-violet-900/20 [&_tbody_tr]:transition-colors">
+          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>
+            {post.content}
+          </ReactMarkdown>
         </div>
 
         <div className="mt-4 mb-10 px-6 md:px-8 pb-8">
