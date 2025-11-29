@@ -4,6 +4,8 @@
     "types": ["vite/client", "react"],
     "baseUrl": ".",
     "paths": {
+      "@krisarmstrong/web-foundation": ["../../packages/web-foundation/src/index.ts"],
+      "@krisarmstrong/web-foundation/*": ["../../packages/web-foundation/src/*"],
       "@/*": ["src/*"]
     }
   },
