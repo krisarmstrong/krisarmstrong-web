@@ -1,20 +1,20 @@
 // src/supabaseClient.ts
 import { createClient } from '@supabase/supabase-js';
 
-// Import environment variables for Supabase URL and Anon Key
+// Import environment variables for Supabase URL and Publishable Key
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+const supabasePublishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
 
 // Validate environment variables BEFORE creating client
-if (!supabaseUrl || !supabaseKey) {
+if (!supabaseUrl || !supabasePublishableKey) {
   throw new Error(
     'Missing Supabase environment variables. ' +
-    'Please copy .env.example to .env and add your Supabase credentials.'
+      'Please copy .env.example to .env and add your Supabase credentials.'
   );
 }
 
 // Create and export Supabase client with timeout configuration
-export const supabase = createClient(supabaseUrl, supabaseKey, {
+export const supabase = createClient(supabaseUrl, supabasePublishableKey, {
   auth: {
     persistSession: true,
     autoRefreshToken: true,
