@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import rehypeSanitize from 'rehype-sanitize';
 import { Linkedin, Twitter, Facebook } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
 import {
   AggregateRating,
   LoadingPage,
@@ -11,7 +12,6 @@ import {
 } from '@krisarmstrong/web-foundation';
 import {
   getBlogPostBySlug,
-  type BlogPost as BlogPostType,
   getRatingStats,
   submitRating,
   getUserRating,
@@ -22,62 +22,40 @@ import { shareToPlatform } from '../lib/share';
 export default function BlogPost() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [post, setPost] = useState<BlogPostType | null>(null);
-  const [relatedPosts, setRelatedPosts] = useState<BlogPostType[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchPost = async () => {
-      if (!id) {
-        setError('Blog post ID not provided');
-        setLoading(false);
-        return;
-      }
+  // Fetch specific post - uses separate cache key for individual posts
+  const {
+    data: post,
+    isLoading: postLoading,
+    error: postError,
+  } = useQuery({
+    queryKey: ['blogPost', id],
+    queryFn: () => getBlogPostBySlug(id!),
+    enabled: !!id,
+  });
 
-      try {
-        setLoading(true);
-        const fetchedPost = await getBlogPostBySlug(id);
+  // Fetch all posts for related posts - shares cache with Blog.tsx listing page
+  const { data: allPosts = [] } = useQuery({
+    queryKey: ['blogPosts'],
+    queryFn: getAllBlogPosts,
+    enabled: !!id,
+  });
 
-        if (!fetchedPost) {
-          setError('Blog post not found');
-          setLoading(false);
-          return;
-        }
+  // Derive related posts from cached data
+  const relatedPosts = useMemo(() => {
+    if (!post?.tags?.length || !allPosts.length) return [];
+    return allPosts
+      .filter((p) => p.slug !== post.slug)
+      .filter((p) => p.tags?.some((tag) => post.tags.includes(tag)))
+      .slice(0, 3);
+  }, [post, allPosts]);
 
-        setPost(fetchedPost);
-        setError(null);
-      } catch (err) {
-        console.error('Error loading blog post:', err);
-        setError('Failed to load blog post. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPost();
-  }, [id]);
-
-  // Load related posts once the main post is available
-  useEffect(() => {
-    let cancelled = false;
-
-    const loadRelated = async () => {
-      if (!post?.tags?.length) return;
-      const all = await getAllBlogPosts();
-      if (cancelled) return;
-      const filtered = all
-        .filter((p) => p.slug !== post.slug)
-        .filter((p) => p.tags?.some((tag) => post.tags.includes(tag)))
-        .slice(0, 3);
-      setRelatedPosts(filtered);
-    };
-    void loadRelated();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [post]);
+  const loading = postLoading;
+  const error = postError
+    ? 'Failed to load blog post. Please try again later.'
+    : !id
+      ? 'Blog post ID not provided'
+      : null;
 
   const metaReadTime = useMemo(() => post?.read_time ?? 5, [post]);
 

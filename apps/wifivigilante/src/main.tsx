@@ -1,6 +1,7 @@
 import React, { Suspense, ComponentType } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary, initTheme } from '@krisarmstrong/web-foundation';
 import Layout from './Layout.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
@@ -8,6 +9,18 @@ import { PageLoadingFallback } from './components/PageLoadingFallback.tsx';
 import { reportWebVitals } from './utils/webVitals.ts';
 import { setupErrorTracking } from './utils/errorTracking.ts';
 import './index.css';
+
+// Create React Query client with 5-minute cache (matches existing cache TTL)
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      gcTime: 10 * 60 * 1000, // 10 minutes (garbage collection)
+      retry: 1,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 // Initialize theme (system preference listening, cross-tab sync)
 initTheme();
@@ -135,8 +148,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ErrorBoundary>
-      <RouterProvider router={router} />
-    </ErrorBoundary>
+    <QueryClientProvider client={queryClient}>
+      <ErrorBoundary>
+        <RouterProvider router={router} />
+      </ErrorBoundary>
+    </QueryClientProvider>
   </React.StrictMode>
 );

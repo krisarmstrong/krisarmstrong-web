@@ -248,14 +248,14 @@ async function fetchCaseOfTheDay(
       query = query.in('sector_id', awareness.sectorIds);
     }
 
-    const { data: cases, error } = await query.limit(1000);
+    const { data: cases, error } = await query.limit(100);
 
     if (error || !cases || cases.length === 0) {
       // Fallback: get any case
       const { data: fallbackCases } = await supabase
         .from('case_files')
         .select('id, public_id')
-        .limit(1000);
+        .limit(100);
 
       if (!fallbackCases || fallbackCases.length === 0) {
         console.warn('No cases found for Case of the Day.');

@@ -1,9 +1,22 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Blog from '../src/pages/Blog';
 import type { BlogPost } from '../src/lib/supabase';
 import { getAllBlogPosts } from '../src/lib/supabase';
+
+// Create a fresh QueryClient for each test
+const createTestQueryClient = () =>
+  new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+        staleTime: 0,
+        gcTime: 0,
+      },
+    },
+  });
 
 const mockBlogPosts: BlogPost[] = Array.from({ length: 15 }).map((_, index) => ({
   id: `post-${index}`,
@@ -41,10 +54,13 @@ vi.mock('framer-motion', () => ({
 }));
 
 const renderBlog = async () => {
+  const queryClient = createTestQueryClient();
   const utils = render(
-    <BrowserRouter>
-      <Blog />
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Blog />
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 
   await waitFor(() => {
@@ -234,10 +250,13 @@ describe('Blog', () => {
   it('shows error state when fetch fails', async () => {
     vi.mocked(getAllBlogPosts).mockRejectedValueOnce(new Error('Network error'));
 
+    const queryClient = createTestQueryClient();
     render(
-      <BrowserRouter>
-        <Blog />
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Blog />
+        </BrowserRouter>
+      </QueryClientProvider>
     );
 
     await waitFor(() => {
@@ -272,10 +291,13 @@ describe('Blog', () => {
 
     vi.mocked(getAllBlogPosts).mockResolvedValue(singleTagPosts);
 
+    const queryClient = createTestQueryClient();
     render(
-      <BrowserRouter>
-        <Blog />
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Blog />
+        </BrowserRouter>
+      </QueryClientProvider>
     );
 
     await waitFor(() => {
@@ -396,10 +418,13 @@ describe('Blog', () => {
 
     vi.mocked(getAllBlogPosts).mockResolvedValue(postsWithTags);
 
+    const queryClient = createTestQueryClient();
     render(
-      <BrowserRouter>
-        <Blog />
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Blog />
+        </BrowserRouter>
+      </QueryClientProvider>
     );
 
     await waitFor(() => {
