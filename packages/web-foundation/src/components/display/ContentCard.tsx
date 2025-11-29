@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, memo } from 'react';
 import { Tag as TagIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -114,8 +114,9 @@ const progressBarColors = {
 /**
  * ContentCard - Reusable card component for blog posts, cases, or any content
  * Provides consistent styling across projects with customizable accent colors
+ * Wrapped with React.memo to prevent unnecessary re-renders when filtering/sorting
  */
-export function ContentCard({
+export const ContentCard = memo(function ContentCard({
   href,
   title,
   excerpt,
@@ -207,12 +208,14 @@ export function ContentCard({
       <div
         className={`flex flex-col flex-grow ${variantStyles[variant]} ${variant === 'compact' ? 'flex-row gap-4' : 'flex-col'}`}
       >
-        {/* Image Thumbnail */}
+        {/* Image Thumbnail - lazy loaded for performance */}
         {image && (
           <div className={variant === 'compact' ? 'w-1/3 flex-shrink-0' : 'w-full'}>
             <img
               src={image}
               alt={imageAlt || title}
+              loading="lazy"
+              decoding="async"
               className={`object-cover rounded-xl ${variant === 'compact' ? 'h-full' : 'h-48 w-full mb-4'}`}
             />
           </div>
@@ -307,4 +310,4 @@ export function ContentCard({
       )}
     </Link>
   );
-}
+});

@@ -1,8 +1,8 @@
-/* eslint react-hooks/set-state-in-effect: "off" */
 // src/pages/CaseDetail.tsx
-import { useEffect, useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { ShieldCheck } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
 import { getCase, getAllCases } from '../api';
 import CaseDisplay from '../components/CaseDisplay';
 import { TransformedCase } from '../types';
@@ -10,70 +10,57 @@ import { transformApiData } from '../utils/caseUtils';
 
 export default function CaseDetail(): React.ReactElement {
   const { id: caseIdFromParams } = useParams<{ id: string }>();
-  const [caseData, setCaseData] = useState<TransformedCase | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [fetchError, setFetchError] = useState<Error | { message: string } | null>(null);
-  const [relatedCases, setRelatedCases] = useState<TransformedCase[]>([]);
 
-  // Derive error state for missing case ID
-  const missingIdError = useMemo(() => {
+  // Fetch specific case - uses separate cache key for individual cases
+  const {
+    data: rawCaseData,
+    isLoading: caseLoading,
+    error: caseError,
+  } = useQuery({
+    queryKey: ['case', caseIdFromParams],
+    queryFn: () => getCase(caseIdFromParams!),
+    enabled: !!caseIdFromParams,
+  });
+
+  // Fetch all cases for related cases - shares cache with CaseOverview.tsx listing page
+  const { data: allCases = [] } = useQuery({
+    queryKey: ['cases'],
+    queryFn: getAllCases,
+    enabled: !!caseIdFromParams,
+  });
+
+  // Transform the fetched case data
+  const caseData = useMemo(() => {
+    if (!rawCaseData) return null;
+    return transformApiData(rawCaseData);
+  }, [rawCaseData]);
+
+  // Derive related cases from cached data
+  const relatedCases = useMemo(() => {
+    if (!caseData?.tags?.length || !allCases.length) return [];
+    const transformed = allCases.map(transformApiData).filter(Boolean) as TransformedCase[];
+    return transformed
+      .filter(
+        (c) =>
+          c.publicId !== caseData.publicId &&
+          c.tags &&
+          c.tags.some((t) => caseData.tags?.includes(t))
+      )
+      .slice(0, 3);
+  }, [caseData, allCases]);
+
+  // Derive error state
+  const error = useMemo(() => {
     if (!caseIdFromParams) {
       return { message: 'Case ID is missing from URL.' };
     }
-    return null;
-  }, [caseIdFromParams]);
-
-  // Derive final error and loading states
-  const error = useMemo(() => missingIdError || fetchError, [missingIdError, fetchError]);
-  const loading = useMemo(() => !missingIdError && isLoading, [missingIdError, isLoading]);
-
-  useEffect(() => {
-    if (missingIdError) {
-      return;
+    if (caseError) {
+      return { message: `Could not load case details for ID ${caseIdFromParams}.` };
     }
-    setIsLoading(true);
-    setFetchError(null);
+    return null;
+  }, [caseIdFromParams, caseError]);
 
-    getCase(caseIdFromParams!)
-      .then((rawData) => {
-        if (!rawData) {
-          throw new Error('Case not found or data is null from API.');
-        }
-        const processedData = transformApiData(rawData);
-        if (!processedData) {
-          throw new Error('Failed to transform case data.');
-        }
-        setCaseData(processedData);
-      })
-      .catch((err: Error) => {
-        console.error('Error in CaseDetail useEffect:', err);
-        setFetchError({
-          message: `Could not load case details for ID ${caseIdFromParams}. (${err.message})`,
-        });
-      })
-      .finally(() => setIsLoading(false));
-  }, [caseIdFromParams, missingIdError]);
-
-  // Load related cases once primary case is available
-  useEffect(() => {
-    if (!caseData) return;
-
-    getAllCases()
-      .then((all) => {
-        const transformed = all.map(transformApiData).filter(Boolean) as TransformedCase[];
-        const related = transformed
-          .filter(
-            (c) =>
-              c.publicId !== caseData.publicId &&
-              c.tags &&
-              caseData.tags &&
-              c.tags.some((t) => caseData.tags?.includes(t))
-          )
-          .slice(0, 3);
-        setRelatedCases(related);
-      })
-      .catch((err) => console.warn('Related cases fetch failed:', err));
-  }, [caseData]);
+  const loading = caseLoading;
 
   return (
     <CaseDisplay

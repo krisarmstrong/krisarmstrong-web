@@ -13,13 +13,11 @@ import {
 } from '@krisarmstrong/web-foundation';
 import { useState, useMemo, useEffect, useTransition, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { getAllBlogPosts, type BlogPost } from '../lib/supabase';
 
 export default function Blog() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'popular' | 'alphabetical'>('newest');
   const [searchResults, setSearchResults] = useState<BlogPost[]>([]);
@@ -29,30 +27,24 @@ export default function Blog() {
   // React 19: Show pending state during tag filtering
   const [isPending, startTransition] = useTransition();
 
-  // Fetch blog posts on mount
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        setLoading(true);
-        const posts = await getAllBlogPosts();
-        setBlogPosts(posts);
-        setError(null);
-      } catch (err) {
-        console.error('Error fetching blog posts:', err);
-        setError('Failed to load blog posts. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
+  // Fetch blog posts using React Query for automatic caching and deduplication
+  const {
+    data: blogPosts = [],
+    isLoading: loading,
+    error: queryError,
+  } = useQuery({
+    queryKey: ['blogPosts'],
+    queryFn: getAllBlogPosts,
+  });
 
-    fetchPosts();
-  }, []);
+  const error = queryError ? 'Failed to load blog posts. Please try again later.' : null;
 
-  // Hydrate filters from URL params (tags + sort)
+  // Hydrate filters from URL params (tags + sort) - one-time sync on mount
   useEffect(() => {
     if (hydratedParams) return;
     if (process.env.NODE_ENV === 'test' && searchParams.toString()) {
       setSearchParams(new URLSearchParams(), { replace: true });
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setHydratedParams(true);
       return;
     }

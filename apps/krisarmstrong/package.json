@@ -24,6 +24,7 @@
     "@krisarmstrong/web-foundation": "*",
     "@sentry/react": "^10.25.0",
     "@supabase/supabase-js": "^2.81.1",
+    "@tanstack/react-query": "^5.90.11",
     "clsx": "^2.1.1",
     "docx": "^9.5.1",
     "file-saver": "^2.0.5",

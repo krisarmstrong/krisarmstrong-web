@@ -1,7 +1,8 @@
 // src/pages/CaseOverview.tsx
-import React, { useEffect, useState, useMemo, useTransition, useCallback } from 'react';
+import React, { useState, useMemo, useEffect, useTransition, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Book, Briefcase, Globe, Stethoscope } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
 import {
   ContentCard,
   ContentSearch,
@@ -20,9 +21,6 @@ import { TransformedCase } from '../types';
 
 export default function CaseOverview(): React.ReactElement {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [allCases, setAllCases] = useState<TransformedCase[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchResults, setSearchResults] = useState<TransformedCase[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -34,27 +32,25 @@ export default function CaseOverview(): React.ReactElement {
   // React 19: Show pending state during tag filtering
   const [isPending, startTransition] = useTransition();
 
-  // Fetch cases on mount
-  useEffect(() => {
-    const fetchCases = async () => {
-      try {
-        setIsLoading(true);
-        const casesData = await getAllCases();
-        if (!Array.isArray(casesData)) throw new Error('Cases data is not an array.');
-        const transformed = casesData.map(transformApiData).filter(Boolean) as TransformedCase[];
-        setAllCases(transformed);
-        setError(null);
-      } catch (err) {
-        console.error('Error fetching cases:', err);
-        setError('Failed to load cases. Please try again.');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchCases();
-  }, []);
+  // Fetch cases using React Query for automatic caching and deduplication
+  const {
+    data: rawCases = [],
+    isLoading,
+    error: queryError,
+  } = useQuery({
+    queryKey: ['cases'],
+    queryFn: getAllCases,
+  });
 
-  // Hydrate filters from URL params (tags + sort)
+  // Transform raw API data to TransformedCase format
+  const allCases = useMemo(() => {
+    if (!Array.isArray(rawCases)) return [];
+    return rawCases.map(transformApiData).filter(Boolean) as TransformedCase[];
+  }, [rawCases]);
+
+  const error = queryError ? 'Failed to load cases. Please try again.' : null;
+
+  // Hydrate filters from URL params (tags + sort) - one-time sync on mount
   useEffect(() => {
     if (hydratedParams) return;
     const tagsParam = searchParams.get('tags');
@@ -65,7 +61,7 @@ export default function CaseOverview(): React.ReactElement {
         .split(',')
         .map((t) => t.trim())
         .filter(Boolean);
-      if (tags.length) setSelectedTags(tags);
+      if (tags.length) setSelectedTags(tags); // eslint-disable-line react-hooks/set-state-in-effect
     }
 
     if (

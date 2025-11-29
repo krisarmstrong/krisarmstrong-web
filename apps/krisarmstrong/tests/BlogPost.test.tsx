@@ -1,8 +1,21 @@
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import BlogPost from '../src/pages/BlogPost';
 import type { BlogPost as BlogPostType } from '../src/lib/supabase';
+
+// Create a fresh QueryClient for each test
+const createTestQueryClient = () =>
+  new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+        staleTime: 0,
+        gcTime: 0,
+      },
+    },
+  });
 
 // Mock markdown content
 const mockPostContent = `# Wi-Fi 7 Introduction
@@ -91,12 +104,15 @@ afterEach(() => {
 });
 
 const renderBlogPost = (postId: string = 'wifi7-intro-802-11be') => {
+  const queryClient = createTestQueryClient();
   return render(
-    <MemoryRouter initialEntries={[`/blog/${postId}`]}>
-      <Routes>
-        <Route path="/blog/:id" element={<BlogPost />} />
-      </Routes>
-    </MemoryRouter>
+    <QueryClientProvider client={queryClient}>
+      <MemoryRouter initialEntries={[`/blog/${postId}`]}>
+        <Routes>
+          <Route path="/blog/:id" element={<BlogPost />} />
+        </Routes>
+      </MemoryRouter>
+    </QueryClientProvider>
   );
 };
 
@@ -407,12 +423,15 @@ describe('BlogPost', () => {
   });
 
   it('shows error when blog post ID not provided', async () => {
+    const queryClient = createTestQueryClient();
     render(
-      <MemoryRouter initialEntries={['/blog/']}>
-        <Routes>
-          <Route path="/blog/" element={<BlogPost />} />
-        </Routes>
-      </MemoryRouter>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={['/blog/']}>
+          <Routes>
+            <Route path="/blog/" element={<BlogPost />} />
+          </Routes>
+        </MemoryRouter>
+      </QueryClientProvider>
     );
 
     // Should show error state when no ID is in route
