@@ -2,8 +2,8 @@
 
 **Senior Sales Engineer | Driving $33M+ Revenue in Networking & Cybersecurity**
 
-**LinkedIn:** https://www.linkedin.com/in/kris-armstrong-cissp/
-**GitHub:** https://github.com/krisarmstrong
+**LinkedIn:** [linkedin.com/in/kris-armstrong-cissp](https://www.linkedin.com/in/kris-armstrong-cissp/)
+**GitHub:** [github.com/krisarmstrong](https://github.com/krisarmstrong)
 
 ---
 
@@ -12,6 +12,7 @@
 A CISSP, CWSP, and CWNA certified Senior Sales Engineer with 20+ years of experience translating complex cybersecurity challenges into secure, scalable solutions. I empower organizations to navigate evolving threats, drive multi-million dollar revenue growth, and ensure operational resilience. My approach combines deep technical expertise with clear communication, bridging the gap between engineering teams and executive stakeholders to drive product adoption and customer success.
 
 ### Key Achievements
+
 - Key member of the 2-person Senior SE team that drives $33M in annual North American revenue
 - Personally boosted regional deal win rates by 65% through expert pre-sales strategy
 - Co-launched the industry-first CyberScope & CyberScope Air edge security scanners
@@ -22,6 +23,7 @@ A CISSP, CWSP, and CWNA certified Senior Sales Engineer with 20+ years of experi
 ## Core Competencies
 
 ### Technical Expertise
+
 - **Network Engineering:** Enterprise Wired & Wireless (Wi-Fi 6/6E/7) Infrastructure Design & Deployment
 - **Security Architecture:** CISSP, Wireless Security (CWSP), Zero Trust Principles, PCI DSS, ISO 27001
 - **Cloud Platforms:** AWS, Azure, Hybrid Cloud Solutions
@@ -31,6 +33,7 @@ A CISSP, CWSP, and CWNA certified Senior Sales Engineer with 20+ years of experi
 - **Tools & Platforms:** Ekahau, Wireshark, NetAlly, Cisco, Aruba, Juniper, Fortinet, Palo Alto Networks
 
 ### Business & Leadership
+
 - Pre-Sales Engineering & Strategy
 - Revenue & Market Growth
 - Go-to-Market (GTM) Strategy
@@ -56,9 +59,10 @@ A CISSP, CWSP, and CWNA certified Senior Sales Engineer with 20+ years of experi
 ## Professional Experience
 
 ### NetAlly
+
 **Senior Sales Engineer**
-*September 2019 - Present (6+ years)*
-*United States*
+_September 2019 - Present (6+ years)_
+_United States_
 
 - Act as a key technical driver for the 2-person pre-sales team that secures **$33M in annual North American revenue**
 - Personally increased regional deal win rates by **65%** by supporting 100+ high-stakes RFPs and proofs-of-concept (POCs), generating **$12M in incremental bookings**
@@ -68,9 +72,10 @@ A CISSP, CWSP, and CWNA certified Senior Sales Engineer with 20+ years of experi
 - Founded a product-security task force, integrating CI/CD scans to slash development defects by **20%** and speed up release cycles
 
 ### NETSCOUT
+
 **Senior Product Engineer**
-*June 2015 - September 2019 (4 years 4 months)*
-*Colorado Springs, CO*
+_June 2015 - September 2019 (4 years 4 months)_
+_Colorado Springs, CO_
 
 - Directed Technical Assistance Center (TAC), reducing resolution times by **25%** and improving customer satisfaction by **20%** for 50,000+ global users
 - Liaised between TAC, Sales, and R&D to prioritize fixes, which informed two major firmware updates and enhanced product reliability
@@ -78,9 +83,10 @@ A CISSP, CWSP, and CWNA certified Senior Sales Engineer with 20+ years of experi
 - Developed troubleshooting playbooks, increasing TAC efficiency by **30%** and minimizing client downtime
 
 ### Fluke Corporation
+
 **Senior Product Analyst**
-*December 2010 - June 2015 (4 years 7 months)*
-*Colorado Springs, CO*
+_December 2010 - June 2015 (4 years 7 months)_
+_Colorado Springs, CO_
 
 - Synthesized feedback from 50,000+ users to prioritize 30+ product enhancements, improving user satisfaction and market positioning
 - Conducted competitive analysis across 10+ vendors, driving features that increased win rates by **20%**
@@ -88,9 +94,10 @@ A CISSP, CWSP, and CWNA certified Senior Sales Engineer with 20+ years of experi
 - Delivered 12+ training sessions and webinars, reducing support escalations by **25%** and onboarding time by **30%**
 
 ### Commnet Broadband
+
 **Senior Network Architect**
-*January 2009 - December 2010 (2 years)*
-*Castle Rock, CO*
+_January 2009 - December 2010 (2 years)_
+_Castle Rock, CO_
 
 - Designed multi-site broadband networks for 10,000+ users, achieving **99.99% uptime** and **40% throughput gains** via MPLS and SD-WAN
 - Led security audits and penetration tests, cutting critical vulnerabilities by **80%** and achieving **PCI DSS compliance**
@@ -98,9 +105,10 @@ A CISSP, CWSP, and CWNA certified Senior Sales Engineer with 20+ years of experi
 - Mentored five junior engineers on BGP/OSPF and high-availability, accelerating team delivery by **30%**
 
 ### Perkins Motors
+
 **Director of Networking**
-*October 2001 - January 2009 (7 years 4 months)*
-*Colorado Springs, CO*
+_October 2001 - January 2009 (7 years 4 months)_
+_Colorado Springs, CO_
 
 - Led a 12-engineer team to deploy hybrid cloud and on-prem networks for 50,000+ users, achieving **99.99% uptime** and **40% throughput gains**
 - Automated operations with **Ansible and Python**, reducing MTTR by **60%** and operational costs by **30%**
@@ -108,9 +116,10 @@ A CISSP, CWSP, and CWNA certified Senior Sales Engineer with 20+ years of experi
 - Negotiated vendor contracts, saving **25% on telecom expenses** while maintaining SLAs
 
 ### Compaq Computer Corporation
+
 **Product Team Lead**
-*June 1999 - October 2001 (2 years 5 months)*
-*Colorado Springs, CO*
+_June 1999 - October 2001 (2 years 5 months)_
+_Colorado Springs, CO_
 
 - Led a 6-engineer team through SDLC for laptops and servers, delivering releases **20% ahead of schedule** and reducing defects by **30%**
 - Provided Tier-3 support for enterprise clients, improving resolution times by **30%** and maintaining **99.9% availability**
@@ -122,6 +131,7 @@ A CISSP, CWSP, and CWNA certified Senior Sales Engineer with 20+ years of experi
 ## Open Source Projects
 
 ### Wi-Fi Vigilante
+
 **Creator & Lead Developer** | [wi-fi-vigilante.com](https://wi-fi-vigilante.com)
 
 Comprehensive network investigation and troubleshooting platform used by network professionals worldwide. Features real-time packet analysis, RF spectrum visualization, and security assessment tools built with TypeScript, React, and modern web technologies.
@@ -137,19 +147,21 @@ Comprehensive network investigation and troubleshooting platform used by network
 - **enigma-v300** - Reverse-engineered NetAlly V300 option key algorithm implementations
 - **pro-dev-templates** - Production-grade starter templates for Python, Node.js, and C++ projects
 
-*View all projects at [github.com/krisarmstrong](https://github.com/krisarmstrong)*
+_View all projects at [github.com/krisarmstrong](https://github.com/krisarmstrong)_
 
 ---
 
 ## Education
 
 ### Colorado Technical University
+
 **Master of Science - Computer and Information Systems Security/Information Assurance**
-*January 2014 - December 2014*
+_January 2014 - December 2014_
 
 ### Colorado Technical University
+
 **Bachelor of Science - Management Information Systems and Services**
-*January 2008 - December 2013*
+_January 2008 - December 2013_
 
 ---
 
@@ -164,4 +176,4 @@ Comprehensive network investigation and troubleshooting platform used by network
 
 ---
 
-*Last Updated: November 2025*
+_Last Updated: November 2025_

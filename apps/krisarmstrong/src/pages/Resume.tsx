@@ -20,7 +20,7 @@ export default function Resume() {
         return res.text();
       })
       .then((text) => {
-        const cleaned = text.replace(/^#\s*Kris Armstrong\s*\n?/, '');
+        const cleaned = text.replace(/^#\s*Kris Armstrong[^\n]*\n?/, '');
         setMd(cleaned);
         setLoading(false);
       })
