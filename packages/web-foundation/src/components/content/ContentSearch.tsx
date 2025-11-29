@@ -1,8 +1,16 @@
 import { useState, useEffect, useMemo, useDeferredValue, useRef } from 'react';
 import { Search, X } from 'lucide-react';
+import Fuse from 'fuse.js';
 
 export interface SearchableItem {
   [key: string]: unknown;
+}
+
+export interface FieldWeight {
+  /** Field name (supports nested paths like 'author.name') */
+  name: string;
+  /** Weight for this field (higher = more important). Default: 1 */
+  weight?: number;
 }
 
 export interface ContentSearchProps<T extends SearchableItem> {
@@ -19,6 +27,12 @@ export interface ContentSearchProps<T extends SearchableItem> {
   onQueryChange?: (query: string) => void;
   /** Fields to search within each item (supports nested paths like 'author.name') */
   searchFields?: string[];
+  /**
+   * Field weights for fuzzy search. Allows prioritizing certain fields.
+   * If provided, overrides searchFields with weighted configuration.
+   * @example [{ name: 'title', weight: 2 }, { name: 'excerpt', weight: 1 }]
+   */
+  fieldWeights?: FieldWeight[];
   /** Placeholder text for search input */
   placeholder?: string;
   /** Accent color theme */
@@ -31,6 +45,16 @@ export interface ContentSearchProps<T extends SearchableItem> {
   debounceMs?: number;
   /** Custom className for wrapper */
   className?: string;
+  /**
+   * Enable fuzzy search with typo tolerance (uses Fuse.js).
+   * When false, uses exact substring matching. Default: true
+   */
+  fuzzySearch?: boolean;
+  /**
+   * Fuzzy search threshold (0.0 = exact match, 1.0 = match anything).
+   * Lower values are more strict. Default: 0.4
+   */
+  threshold?: number;
 }
 
 const accentColors = {
@@ -86,12 +110,15 @@ export function ContentSearch<T extends SearchableItem>({
   onSearch,
   onQueryChange,
   searchFields = ['title', 'excerpt'],
+  fieldWeights,
   placeholder = 'Search...',
   accentColor = 'violet',
   showResultCount = true,
   showIcon = false,
   debounceMs = 300,
   className = '',
+  fuzzySearch = true,
+  threshold = 0.4,
 }: ContentSearchProps<T>) {
   const [query, setQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
@@ -99,6 +126,34 @@ export function ContentSearch<T extends SearchableItem>({
   const justClearedRef = useRef(false);
 
   const colors = accentColors[accentColor];
+
+  // Build Fuse.js keys configuration from fieldWeights or searchFields
+  const fuseKeys = useMemo(() => {
+    if (fieldWeights && fieldWeights.length > 0) {
+      return fieldWeights.map((fw) => ({
+        name: fw.name,
+        weight: fw.weight ?? 1,
+      }));
+    }
+    // Default: equal weight for all searchFields
+    return searchFields.map((field) => ({
+      name: field,
+      weight: 1,
+    }));
+  }, [fieldWeights, searchFields]);
+
+  // Create Fuse instance for fuzzy search
+  const fuse = useMemo(() => {
+    if (!fuzzySearch) return null;
+    return new Fuse(items, {
+      keys: fuseKeys,
+      threshold,
+      includeScore: true,
+      ignoreLocation: true, // Search entire string, not just beginning
+      useExtendedSearch: false,
+      findAllMatches: true,
+    });
+  }, [items, fuseKeys, threshold, fuzzySearch]);
 
   // Debounce search query
   useEffect(() => {
@@ -130,12 +185,20 @@ export function ContentSearch<T extends SearchableItem>({
     }, obj as unknown);
   };
 
-  // Filter items based on search query
+  // Filter items based on search query using Fuse.js (fuzzy) or substring matching
   const filteredItems = useMemo(() => {
     if (!normalizedQuery) {
       return items;
     }
 
+    // Use Fuse.js for fuzzy search when enabled
+    if (fuzzySearch && fuse) {
+      const results = fuse.search(normalizedQuery);
+      // Return items sorted by relevance (lower score = better match)
+      return results.map((result) => result.item);
+    }
+
+    // Fallback: exact substring matching (when fuzzySearch is disabled)
     return items.filter((item) => {
       // Build searchable text from all specified fields
       const searchableText = searchFields
@@ -165,7 +228,7 @@ export function ContentSearch<T extends SearchableItem>({
       // All search terms must be present
       return searchTerms.every((term) => searchableText.includes(term));
     });
-  }, [items, normalizedQuery, searchTerms, searchFields]);
+  }, [items, normalizedQuery, searchTerms, searchFields, fuzzySearch, fuse]);
 
   // Notify parent of filtered results
   useEffect(() => {
