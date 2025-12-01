@@ -30,8 +30,8 @@
   "dependencies": {
     "@krisarmstrong/web-foundation": "*",
     "@sentry/react": "^10.25.0",
-    "framer-motion": "^12.23.24",
-    "lucide-react": "^0.553.0",
+    "framer-motion": "^12.23.25",
+    "lucide-react": "^0.555.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.9.6"
@@ -47,8 +47,8 @@
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
-    "@vitest/browser-playwright": "4.0.9",
-    "@vitest/coverage-v8": "4.0.9",
+    "@vitest/browser-playwright": "4.0.14",
+    "@vitest/coverage-v8": "4.0.14",
     "autoprefixer": "^10.4.22",
     "eslint": "^9.39.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
@@ -64,7 +64,7 @@
     "tailwindcss": "^4.1.17",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.2",
+    "vite": "^7.2.6",
     "vitest": "^4.0.9"
   }
 }
