@@ -27,13 +27,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Build web-foundation (required for tests)
+        run: npm run build -w @krisarmstrong/web-foundation
+
       - name: Run linting
         run: npm run lint --if-present
 
       - name: Run tests with coverage (workspaces)
         run: npm run test:coverage --workspaces --if-present
 
-      - name: Build
+      - name: Build all apps
         run: npm run build
 
       - name: Upload coverage
