@@ -4,8 +4,8 @@
 User-agent: *
 Allow: /
 
-# Sitemap location (will be generated)
-Sitemap: https://wifi-vigilante.com/sitemap.xml
+# Sitemap location
+Sitemap: https://www.wi-fivigilante.com/sitemap.xml
 
 # Crawl delay (optional - helps prevent overwhelming server)
-# Crawl-delay: 1
+Crawl-delay: 1
