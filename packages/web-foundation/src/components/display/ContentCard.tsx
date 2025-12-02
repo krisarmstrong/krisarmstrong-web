@@ -174,14 +174,14 @@ export const ContentCard = memo(function ContentCard({
     expanded: 'p-8',
   };
 
-  // Tag spacing - no mt-auto to avoid pushing to absolute bottom
-  // Tags should flow naturally after content with consistent spacing
+  // Tag spacing - generous padding for visual breathing room
+  // Tags should flow naturally after content with comfortable spacing from card edges
   const tagAreaSpacing =
     variant === 'compact'
-      ? 'px-4 pb-4 pt-3'
+      ? 'px-4 pb-5 pt-4'
       : variant === 'expanded'
-        ? 'px-8 pb-8 pt-4'
-        : 'px-6 pb-6 pt-4';
+        ? 'px-8 pb-10 pt-5'
+        : 'px-6 pb-8 pt-5';
 
   return (
     <Link
