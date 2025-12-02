@@ -1,7 +1,13 @@
-import { readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { writeFileSync, mkdirSync } from 'fs';
 import { resolve } from 'path';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
 
 const BASE_URL = 'https://wifi-vigilante.com';
+const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
 const routes = [
   '/',
@@ -13,26 +19,35 @@ const routes = [
   '/terms-of-service',
 ];
 
-const caseSqlPath = resolve(process.cwd(), 'database/import_cases.sql');
-let caseRoutes = [];
-try {
-  const sql = readFileSync(caseSqlPath, 'utf8');
-  const matches = sql.matchAll(/VALUES\s*\(([\s\S]*?)\)\s*;/gi);
-  const caseIds = new Set();
-
-  for (const match of matches) {
-    const block = match[1];
-    const idMatch = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i.exec(block);
-    if (idMatch) {
-      caseIds.add(idMatch[0]);
-    }
+// Fetch cases from Supabase
+async function fetchCases() {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    console.warn('Supabase credentials not found, skipping case routes');
+    return [];
   }
 
-  caseRoutes = Array.from(caseIds).map((id) => `/cases/${id}`);
-  console.log(`Discovered ${caseRoutes.length} cases from SQL`);
-} catch (error) {
-  console.warn('Unable to read case SQL for sitemap generation:', error);
+  try {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/case_files?select=public_id&order=id`, {
+      headers: {
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const cases = await response.json();
+    console.log(`Discovered ${cases.length} cases from Supabase`);
+    return cases.map((c) => `/cases/${c.public_id}`);
+  } catch (error) {
+    console.warn('Unable to fetch cases from Supabase:', error.message);
+    return [];
+  }
 }
+
+const caseRoutes = await fetchCases();
 
 const today = new Date().toISOString().split('T')[0];
 
