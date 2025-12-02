@@ -27,6 +27,7 @@ import {
   AggregateRating,
 } from '@krisarmstrong/web-foundation';
 import { Button } from './ui/Button.tsx';
+import { CaseContentRenderer } from './CaseContentRenderer.tsx';
 import { TransformedCase } from '@/types';
 import { getRatingStats, submitRating, getUserRating } from '../utils/ratings';
 
@@ -229,54 +230,49 @@ export default function CaseDisplay({
               <SubSectionTitle icon={<ShieldCheck size={20} className="text-blue-400" />}>
                 Case Snapshot
               </SubSectionTitle>
-              <P className="text-text-primary leading-relaxed">
-                {caseData.summary || caseData.incidentOverview || 'Summary unavailable.'}
-              </P>
+              <CaseContentRenderer
+                content={caseData.summary || caseData.incidentOverview}
+                fallback="Summary unavailable."
+              />
             </section>
             <section className="mb-8">
               <SubSectionTitle icon={<ClipboardList size={20} className="text-blue-400" />}>
                 Incident Overview
               </SubSectionTitle>
-              <P>
-                {caseData.incidentOverview || (
-                  <span className="italic text-text-muted">No incident overview provided.</span>
-                )}
-              </P>
+              <CaseContentRenderer
+                content={caseData.incidentOverview}
+                fallback="No incident overview provided."
+              />
             </section>
 
             <section className="mb-8">
               <SubSectionTitle icon={<Network size={20} className="text-blue-400" />}>
                 Investigation Breakdown
               </SubSectionTitle>
-              <P>
-                {caseData.investigationBreakdown || (
-                  <span className="italic text-text-muted">
-                    No investigation breakdown provided.
-                  </span>
-                )}
-              </P>
+              <CaseContentRenderer
+                content={caseData.investigationBreakdown}
+                fallback="No investigation breakdown provided."
+              />
             </section>
 
             <section className="mb-8">
               <SubSectionTitle icon={<Target size={20} className="text-blue-400" />}>
                 Root Cause
               </SubSectionTitle>
-              <P>
-                {caseData.rootCause || (
-                  <span className="italic text-text-muted">Root cause not detailed.</span>
-                )}
-              </P>
+              <CaseContentRenderer
+                content={caseData.rootCause}
+                fallback="Root cause not detailed."
+              />
             </section>
 
             <section className="mb-8">
               <SubSectionTitle icon={<Wrench size={20} className="text-blue-400" />}>
                 Resolution
               </SubSectionTitle>
-              <P>
-                {caseData.resolution || (
-                  <span className="italic text-text-muted">Resolution not provided.</span>
-                )}
-              </P>
+              <CaseContentRenderer
+                content={caseData.resolution}
+                fallback="Resolution not provided."
+              />
             </section>
 
             <section className="mb-8">
@@ -284,19 +280,23 @@ export default function CaseDisplay({
                 Verdict & Summary
               </SubSectionTitle>
               {caseData.verdict && (
-                <P>
-                  <strong className="text-text-muted font-medium">Verdict:</strong>{' '}
-                  {caseData.verdict}
-                </P>
+                <div className="mb-4">
+                  <h4 className="text-sm font-semibold text-blue-400 uppercase tracking-wide mb-2">
+                    Verdict
+                  </h4>
+                  <CaseContentRenderer content={caseData.verdict} />
+                </div>
               )}
               {caseData.summary && (
-                <P className={caseData.verdict ? 'mt-2' : ''}>
-                  <strong className="text-text-muted font-medium">Summary:</strong>{' '}
-                  {caseData.summary}
-                </P>
+                <div>
+                  <h4 className="text-sm font-semibold text-blue-400 uppercase tracking-wide mb-2">
+                    Summary
+                  </h4>
+                  <CaseContentRenderer content={caseData.summary} />
+                </div>
               )}
               {!(caseData.verdict || caseData.summary) && (
-                <P className="italic text-text-muted">No verdict or summary provided.</P>
+                <p className="italic text-text-muted">No verdict or summary provided.</p>
               )}
             </section>
 
@@ -305,10 +305,11 @@ export default function CaseDisplay({
                 <SubSectionTitle icon={<BarChart3 size={20} className="text-blue-400" />}>
                   Key Takeaways
                 </SubSectionTitle>
-                <ul className="list-disc list-inside space-y-2 text-text-primary">
+                <ul className="space-y-3">
                   {takeaways.map((t, idx) => (
-                    <li key={`${t}-${idx}`} className="text-sm leading-relaxed">
-                      {t}
+                    <li key={`${t}-${idx}`} className="flex items-start gap-3">
+                      <span className="text-blue-400 mt-1 flex-shrink-0">•</span>
+                      <span className="text-text-primary leading-relaxed">{t}</span>
                     </li>
                   ))}
                 </ul>
@@ -319,19 +320,25 @@ export default function CaseDisplay({
               <SubSectionTitle icon={<BarChart3 size={20} className="text-blue-400" />}>
                 Operational Context & Impact
               </SubSectionTitle>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm">
-                <P>
-                  <strong className="text-text-muted font-medium">Detected By:</strong>{' '}
-                  {caseData.detectedBy || 'N/A'}
-                </P>
-                <P>
-                  <strong className="text-text-muted font-medium">Impact Scope:</strong>{' '}
-                  {caseData.impactScope || 'N/A'}
-                </P>
-                <P>
-                  <strong className="text-text-muted font-medium">Validated By:</strong>{' '}
-                  {caseData.validatedBy || 'N/A'}
-                </P>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="bg-surface-hover/50 rounded-xl px-4 py-3 border border-surface-border">
+                  <p className="text-xs uppercase tracking-wide text-text-muted mb-1">
+                    Detected By
+                  </p>
+                  <p className="text-text-primary font-medium">{caseData.detectedBy || 'N/A'}</p>
+                </div>
+                <div className="bg-surface-hover/50 rounded-xl px-4 py-3 border border-surface-border">
+                  <p className="text-xs uppercase tracking-wide text-text-muted mb-1">
+                    Impact Scope
+                  </p>
+                  <p className="text-text-primary font-medium">{caseData.impactScope || 'N/A'}</p>
+                </div>
+                <div className="bg-surface-hover/50 rounded-xl px-4 py-3 border border-surface-border">
+                  <p className="text-xs uppercase tracking-wide text-text-muted mb-1">
+                    Validated By
+                  </p>
+                  <p className="text-text-primary font-medium">{caseData.validatedBy || 'N/A'}</p>
+                </div>
               </div>
             </section>
           </div>
