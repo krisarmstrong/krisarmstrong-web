@@ -238,7 +238,7 @@ export const ContentCard = memo(function ContentCard({
 
           {/* Excerpt */}
           <p
-            className={`text-text-muted text-sm mb-4 ${variant === 'compact' ? 'line-clamp-2' : 'line-clamp-3'}`}
+            className={`text-text-muted text-base leading-relaxed mb-4 ${variant === 'compact' ? 'line-clamp-2' : 'line-clamp-3'}`}
           >
             {excerpt}
           </p>
@@ -263,13 +263,13 @@ export const ContentCard = memo(function ContentCard({
               )}
               {severity && (
                 <span
-                  className={`inline-block px-2 py-0.5 text-xs rounded-full border ${severityColors[severity]}`}
+                  className={`inline-flex items-center px-2.5 py-1 min-h-[28px] text-xs rounded-full border ${severityColors[severity]}`}
                 >
                   {severity}
                 </span>
               )}
               {status && (
-                <span className="inline-block px-2 py-0.5 bg-surface-hover text-text-primary text-xs rounded-full">
+                <span className="inline-flex items-center px-2.5 py-1 min-h-[28px] bg-surface-hover text-text-primary text-xs rounded-full">
                   {status}
                 </span>
               )}
@@ -300,7 +300,7 @@ export const ContentCard = memo(function ContentCard({
                   onTagClick(tag);
                 }
               }}
-              className={`inline-flex items-center gap-1 px-3 py-1 bg-surface-hover text-text-muted text-xs rounded-full ${tagHoverColors[accentColor]} transition-colors ${onTagClick ? 'cursor-pointer' : 'cursor-default'}`}
+              className={`inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] bg-surface-hover text-text-muted text-xs rounded-full ${tagHoverColors[accentColor]} transition-colors ${onTagClick ? 'cursor-pointer' : 'cursor-default'}`}
             >
               <TagIcon size={12} />
               {tag}

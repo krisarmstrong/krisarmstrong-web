@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useReducedMotion } from '@krisarmstrong/web-foundation';
 import { H1, P } from '../components/ui/Typography';
 import { TrendingUp, Radio, Shield, Code2, Mail, User } from 'lucide-react';
 
@@ -50,15 +51,29 @@ const valueCards = [
 ];
 
 export default function Home() {
+  const prefersReducedMotion = useReducedMotion();
+
+  // Animation props - disabled for users who prefer reduced motion
+  const fadeInUp = prefersReducedMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 24 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.4 },
+      };
+
+  const fadeIn = prefersReducedMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 16 },
+        animate: { opacity: 1, y: 0 },
+        transition: { delay: 0.2, duration: 0.4 },
+      };
+
   return (
-    <section className="px-4 py-16">
+    <section className="px-3 sm:px-4 py-12 sm:py-16">
       <div className="max-w-4xl mx-auto text-center mb-12">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-6"
-        >
+        <motion.div {...fadeInUp} className="mb-6">
           <H1 icon={<User size={32} className="text-brand-primary" />} className="!mb-4">
             Kris Armstrong
           </H1>
@@ -81,9 +96,7 @@ export default function Home() {
 
       {/* Value Proposition Cards */}
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
+        {...fadeIn}
         className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto mb-16"
       >
         {valueCards.map((card) => (
