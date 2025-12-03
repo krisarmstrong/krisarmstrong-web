@@ -17,6 +17,7 @@ export * from './components';
 // ============================================================================
 export { useTheme as useSimpleTheme } from './hooks/useTheme';
 export { useProgressiveLoad } from './hooks/useProgressiveLoad';
+export { useReducedMotion } from './hooks/useReducedMotion';
 
 // ============================================================================
 // Utils

@@ -141,12 +141,11 @@ export default function Navbar() {
       {menuOpen && (
         <div
           ref={menuRef}
-          className="rounded-lg shadow-2xl bg-surface-raised text-text-primary border-2 border-surface-border transition-all duration-200 ease-in-out"
+          className="rounded-lg shadow-2xl bg-surface-raised text-text-primary border-2 border-surface-border transition-all duration-200 ease-in-out w-[calc(100vw-2rem)] max-w-[18rem]"
           style={{
             position: 'fixed',
             right: '1rem',
             top: `${navHeight + 8}px`,
-            width: '18rem',
             zIndex: 60,
           }}
           role="dialog"
