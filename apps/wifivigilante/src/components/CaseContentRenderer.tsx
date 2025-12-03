@@ -128,6 +128,7 @@ function normalizeToMarkdown(text: string): string {
   let inList = false;
 
   for (let i = 0; i < lines.length; i++) {
+    // eslint-disable-next-line security/detect-object-injection -- i is loop-controlled and bounds-checked
     let line = lines[i];
     const trimmedLine = line.trim();
 

@@ -74,7 +74,7 @@
     "vite": "^7.2.6",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-pwa": "^1.2.0",
-    "vitest": "^4.0.9",
+    "vitest": "4.0.15",
     "workbox-window": "^7.3.0"
   }
 }
