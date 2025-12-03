@@ -1,15 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
+import { env } from '@/config/env';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-const supabasePublishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined;
-
-if (!supabaseUrl || !supabasePublishableKey) {
-  throw new Error(
-    'Missing Supabase configuration. Please define VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY in your environment.'
-  );
-}
-
-export const supabase = createClient(supabaseUrl, supabasePublishableKey);
+export const supabase = createClient(env.VITE_SUPABASE_URL, env.VITE_SUPABASE_PUBLISHABLE_KEY);
 
 // Simple rate limiter for view count increments
 const viewCountLimiter = {

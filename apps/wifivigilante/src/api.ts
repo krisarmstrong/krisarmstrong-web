@@ -264,8 +264,8 @@ async function fetchCaseOfTheDay(
 
       // Deterministic selection using seed
       const index = seed % fallbackCases.length;
-
       const selectedCase =
+        // eslint-disable-next-line security/detect-object-injection -- index is bounds-checked
         index >= 0 && index < fallbackCases.length ? fallbackCases[index] : undefined;
       selectedPublicId = selectedCase?.public_id ?? null;
     } else {
