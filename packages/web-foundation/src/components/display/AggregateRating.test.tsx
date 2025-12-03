@@ -27,17 +27,27 @@ describe('AggregateRating', () => {
   describe('Loading State', () => {
     it('shows loading state initially', () => {
       const mockAPI = createMockRatingAPI();
-      render(<AggregateRating itemId="test-1" itemType="blog" ratingAPI={mockAPI} />);
+      const { unmount } = render(
+        <AggregateRating itemId="test-1" itemType="blog" ratingAPI={mockAPI} />
+      );
 
       expect(screen.getByText('Loading ratings...')).toBeInTheDocument();
+
+      // Clean up before async operations complete to avoid act() warnings
+      unmount();
     });
 
     it('shows 5 skeleton stars while loading', () => {
       const mockAPI = createMockRatingAPI();
-      render(<AggregateRating itemId="test-1" itemType="blog" ratingAPI={mockAPI} />);
+      const { unmount } = render(
+        <AggregateRating itemId="test-1" itemType="blog" ratingAPI={mockAPI} />
+      );
 
       const skeletonContainer = screen.getByText('Loading ratings...').previousElementSibling;
       expect(skeletonContainer?.children).toHaveLength(5);
+
+      // Clean up before async operations complete to avoid act() warnings
+      unmount();
     });
   });
 
