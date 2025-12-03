@@ -31,7 +31,7 @@
     "@krisarmstrong/web-foundation": "^0.9.11",
     "@sentry/react": "^10.28.0",
     "framer-motion": "^12.23.25",
-    "lucide-react": "^0.553.0",
+    "lucide-react": "^0.555.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.10.0"
