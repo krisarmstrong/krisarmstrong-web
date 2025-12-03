@@ -1,6 +1,7 @@
 // src/components/CaseContentRenderer.tsx
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import rehypeSanitize from 'rehype-sanitize';
 
 interface CaseContentRendererProps {
   content: string | null | undefined;
@@ -28,6 +29,7 @@ export function CaseContentRenderer({
   return (
     <div className={`case-content prose prose-invert max-w-none ${className}`}>
       <ReactMarkdown
+        rehypePlugins={[rehypeSanitize]}
         components={{
           // Paragraph styling
           p: ({ children }) => (

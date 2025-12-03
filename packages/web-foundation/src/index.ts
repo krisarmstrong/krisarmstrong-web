@@ -25,3 +25,5 @@ export { useReducedMotion } from './hooks/useReducedMotion';
 export { initTheme } from './utils/initTheme';
 export * from './utils/validation';
 export type { ValidationResult } from './utils/validation';
+export { errorTracker, setupErrorTracking, withErrorTracking } from './utils/errorTracking';
+export type { ErrorData, ErrorStats, ErrorCallback } from './utils/errorTracking';
