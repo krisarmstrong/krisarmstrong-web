@@ -37,8 +37,8 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",
-    "@commitlint/cli": "^20.1.0",
-    "@commitlint/config-conventional": "^20.0.0",
+    "@commitlint/cli": "^20.2.0",
+    "@commitlint/config-conventional": "^20.2.0",
     "@playwright/test": "^1.57.0",
     "@types/node": "^24.10.1",
     "audit-ci": "^7.1.0",
@@ -48,7 +48,7 @@
     "rollup-plugin-visualizer": "^6.0.5",
     "terser": "^5.44.1",
     "tsc-files": "^1.1.4",
-    "turbo": "^2.6.1"
+    "turbo": "^2.6.3"
   },
   "overrides": {
     "glob": "^13.0.0",
