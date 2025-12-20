@@ -122,3 +122,8 @@ credentials.json
 **/CLEAN_START.sql
 **/import_data.sql
 **/restore_database.sql
+
+# Tooling defaults
+.next/
+.turbo/
+.cache/

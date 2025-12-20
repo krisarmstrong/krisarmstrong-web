@@ -1,6 +1,6 @@
 # Wi-Fi Vigilante
 
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green) ![Version](https://img.shields.io/badge/Version-1.2.2-blue) ![Status](https://img.shields.io/badge/Status-Active-success)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green) ![Version](https://img.shields.io/badge/Version-1.3.1-blue) ![Status](https://img.shields.io/badge/Status-Active-success)
 
 > Real-world investigations into Wi-Fi security, cybersecurity incidents, and network troubleshooting using expert tools and forensic techniques.
 
