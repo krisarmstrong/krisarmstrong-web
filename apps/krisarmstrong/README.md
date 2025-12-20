@@ -1,6 +1,6 @@
 # Kris Armstrong Portfolio
 
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green) ![Version](https://img.shields.io/badge/Version-0.8.5-blue) ![Status](https://img.shields.io/badge/Status-Active-success)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green) ![Version](https://img.shields.io/badge/Version-0.8.6-blue) ![Status](https://img.shields.io/badge/Status-Active-success)
 
 Professional portfolio website built with React and modern web technologies.
 
