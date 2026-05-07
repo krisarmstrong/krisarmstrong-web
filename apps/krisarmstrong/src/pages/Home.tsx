@@ -1,8 +1,8 @@
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { useReducedMotion } from '@krisarmstrong/web-foundation';
+import { motion } from 'framer-motion';
+import { Code2, Mail, Radio, Shield, TrendingUp, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { H1, P } from '../components/ui/Typography';
-import { TrendingUp, Radio, Shield, Code2, Mail, User } from 'lucide-react';
 
 const valueCards = [
   {

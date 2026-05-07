@@ -29,7 +29,7 @@ let sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n';
 sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 
 // Add static pages
-staticPages.forEach(page => {
+staticPages.forEach((page) => {
   sitemap += '  <url>\n';
   sitemap += `    <loc>https://krisarmstrong.com${page.loc}</loc>\n`;
   sitemap += `    <lastmod>${page.lastmod}</lastmod>\n`;
@@ -39,7 +39,7 @@ staticPages.forEach(page => {
 });
 
 // Add blog posts
-blogPosts.forEach(post => {
+blogPosts.forEach((post) => {
   const priority = post.featured ? '0.8' : '0.7';
   sitemap += '  <url>\n';
   sitemap += `    <loc>https://krisarmstrong.com/blog/${post.id}</loc>\n`;

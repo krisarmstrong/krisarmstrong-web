@@ -1,7 +1,8 @@
 // src/Layout.tsx
+
+import { PageShell, TailwindSafelist } from '@krisarmstrong/web-foundation';
 import { Suspense, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { PageShell, TailwindSafelist } from '@krisarmstrong/web-foundation';
 import Footer from './components/Footer.tsx';
 import Navbar from './components/Navbar.tsx';
 import { PageLoadingFallback } from './components/PageLoadingFallback.tsx';

@@ -1,23 +1,25 @@
 // src/pages/CaseOverview.tsx
-import React, { useState, useMemo, useEffect, useTransition, useCallback } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Book, Briefcase, Globe, Stethoscope } from 'lucide-react';
-import { useQuery } from '@tanstack/react-query';
+
 import {
+  type ActiveFilter,
+  ActiveFilterBadges,
   ContentCard,
   ContentSearch,
   ContentSort,
-  ActiveFilterBadges,
-  LoadMoreButton,
   EmptyState,
-  useProgressiveLoad,
-  type ActiveFilter,
-  LoadingPage,
   ErrorPage,
+  LoadingPage,
+  LoadMoreButton,
+  useProgressiveLoad,
 } from '@krisarmstrong/web-foundation';
+import { useQuery } from '@tanstack/react-query';
+import { Book, Briefcase, Globe, Stethoscope } from 'lucide-react';
+import type React from 'react';
+import { useCallback, useEffect, useMemo, useState, useTransition } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { getAllCases } from '../api';
+import type { TransformedCase } from '../types';
 import { transformApiData } from '../utils/caseUtils';
-import { TransformedCase } from '../types';
 
 export default function CaseOverview(): React.ReactElement {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -61,7 +63,7 @@ export default function CaseOverview(): React.ReactElement {
         .split(',')
         .map((t) => t.trim())
         .filter(Boolean);
-      if (tags.length) setSelectedTags(tags); // eslint-disable-line react-hooks/set-state-in-effect
+      if (tags.length) setSelectedTags(tags);
     }
 
     if (

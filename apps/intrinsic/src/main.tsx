@@ -1,10 +1,10 @@
+import { ErrorBoundary, initTheme } from '@krisarmstrong/web-foundation';
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { ErrorBoundary, initTheme } from '@krisarmstrong/web-foundation';
+import { PageLoadingFallback } from './components/PageLoadingFallback.tsx';
 import Layout from './Layout.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
-import { PageLoadingFallback } from './components/PageLoadingFallback.tsx';
 import { initSentry } from './utils/sentry.ts';
 import './index.css';
 

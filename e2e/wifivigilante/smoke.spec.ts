@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('WiFi Vigilante - Smoke Tests', () => {
   test('homepage loads successfully', async ({ page }) => {
@@ -38,7 +38,10 @@ test.describe('WiFi Vigilante - Smoke Tests', () => {
 
     // Find theme toggle button
     const themeToggle = page.getByRole('button', { name: /theme/i }).or(
-      page.getByRole('button').filter({ has: page.locator('svg') }).first()
+      page
+        .getByRole('button')
+        .filter({ has: page.locator('svg') })
+        .first()
     );
 
     // Get initial theme

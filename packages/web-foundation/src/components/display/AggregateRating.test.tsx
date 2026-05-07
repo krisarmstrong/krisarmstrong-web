@@ -3,10 +3,10 @@
  * Tests rating display, user interaction, async operations, and error handling
  */
 
-import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { AggregateRating, RatingAPI } from './AggregateRating';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { AggregateRating, type RatingAPI } from './AggregateRating';
 
 // Mock rating API factory
 const createMockRatingAPI = (overrides?: Partial<RatingAPI>): RatingAPI => ({

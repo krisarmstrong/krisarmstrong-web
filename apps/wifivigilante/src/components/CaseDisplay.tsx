@@ -1,35 +1,34 @@
 // src/components/CaseDisplay.tsx
-import React, { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import {
-  Facebook,
-  Twitter,
-  Linkedin,
-  Instagram,
+  AggregateRating,
+  ContentCard,
+  H1,
+  P,
+  SubSectionTitle,
+} from '@krisarmstrong/web-foundation';
+import {
   AlertCircle,
-  Loader2,
+  BarChart3,
   ClipboardList,
+  FileCheck,
+  Loader2,
+  MapPin,
   Network,
+  Share2,
+  ShieldCheck,
+  ShieldHalf,
   Target,
   Wrench,
-  FileCheck,
-  BarChart3,
-  ShieldHalf,
-  MapPin,
-  ShieldCheck,
 } from 'lucide-react';
+import type React from 'react';
+import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import type { TransformedCase } from '@/types';
+import { getRatingStats, getUserRating, submitRating } from '../utils/ratings';
 import { shareToPlatform } from '../utils/share.ts';
-import {
-  H1,
-  SubSectionTitle,
-  P,
-  ContentCard,
-  AggregateRating,
-} from '@krisarmstrong/web-foundation';
-import { Button } from './ui/Button.tsx';
 import { CaseContentRenderer } from './CaseContentRenderer.tsx';
-import { TransformedCase } from '@/types';
-import { getRatingStats, submitRating, getUserRating } from '../utils/ratings';
+import { Button } from './ui/Button.tsx';
 
 interface CaseDisplayProps {
   pageTitle: string;
@@ -361,10 +360,7 @@ export default function CaseDisplay({
                         aria-label={`Share on ${platform.charAt(0).toUpperCase() + platform.slice(1)}`}
                         disabled={!caseData}
                       >
-                        {platform === 'linkedin' && <Linkedin size={18} />}
-                        {platform === 'twitter' && <Twitter size={18} />}
-                        {platform === 'facebook' && <Facebook size={18} />}
-                        {platform === 'instagram' && <Instagram size={18} />}
+                        <Share2 size={18} />
                         <span className="text-sm capitalize">{platform}</span>
                       </Button>
                     )

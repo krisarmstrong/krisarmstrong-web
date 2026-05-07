@@ -1,11 +1,11 @@
-import { describe, it, expect } from 'vitest';
-import {
-  validateSearchQuery,
-  validatePublicId,
-  validateCaseData,
-  sanitizeInput,
-} from '../utils/validation';
+import { describe, expect, it } from 'vitest';
 import type { TransformedCase } from '../types';
+import {
+  sanitizeInput,
+  validateCaseData,
+  validatePublicId,
+  validateSearchQuery,
+} from '../utils/validation';
 
 describe('Validation Utils', () => {
   describe('validateSearchQuery', () => {

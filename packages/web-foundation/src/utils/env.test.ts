@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { isDevelopmentEnvironment, getSentry } from './env';
+import { describe, expect, it } from 'vitest';
+import { getSentry, isDevelopmentEnvironment } from './env';
 
 describe('env utilities', () => {
   describe('isDevelopmentEnvironment', () => {

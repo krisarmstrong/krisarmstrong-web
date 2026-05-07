@@ -29,7 +29,7 @@ export const transformApiData = (rawCase: RawCase | null): TransformedCase | nul
     publicId: rawCase.public_id,
     title: rawCase.title,
     sectorId: rawCase.sector_id,
-    sector: rawCase.sectors?.name || "N/A", // From linked sectors table
+    sector: rawCase.sectors?.name || 'N/A', // From linked sectors table
     subsectorId: rawCase.subsector_id || undefined,
     subsector: rawCase.subsectors?.name || undefined,
     tool: rawCase.tool || undefined,
@@ -40,7 +40,9 @@ export const transformApiData = (rawCase: RawCase | null): TransformedCase | nul
     // Ensure tags are an array of strings, with '#' removed for internal logic/storage
     // (display components can add '#' back if needed)
     tags: rawCase.tags
-      ? String(rawCase.tags).split(',').map(tag => tag.trim().replace(/^#/, ''))
+      ? String(rawCase.tags)
+          .split(',')
+          .map((tag) => tag.trim().replace(/^#/, ''))
       : [],
     incidentOverview: rawCase.incident_overview,
     investigationBreakdown: rawCase.investigation_breakdown || undefined,
@@ -48,7 +50,7 @@ export const transformApiData = (rawCase: RawCase | null): TransformedCase | nul
     resolution: rawCase.resolution || undefined,
     verdict: rawCase.verdict || undefined,
     // Provide a consistent summary field
-    summary: rawCase.summary || rawCase.incident_overview || "No summary available.",
+    summary: rawCase.summary || rawCase.incident_overview || 'No summary available.',
     detectedBy: rawCase.detected_by || undefined,
     severity: rawCase.severity,
     status: rawCase.status,

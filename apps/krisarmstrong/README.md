@@ -54,14 +54,14 @@ npm run build
 Define these variables in `.env` before running the app:
 
 ```
-VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-key
 VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/your-form-id
 VITE_SENTRY_DSN=https://your-sentry-dsn@sentry.io/project
-SUPABASE_SERVICE_ROLE_KEY=only-needed-for-local-scripts
+TURSO_DATABASE_URL=libsql://your-database.turso.io
+TURSO_AUTH_TOKEN=your-turso-token
+ADMIN_API_TOKEN=change-this-long-random-admin-token
 ```
 
-When a variable is missing the UI falls back to safe defaults (blog data will not load and the contact form is disabled) so nothing is submitted to an invalid destination.
+Blog content uses Turso/libSQL for live updates, public aggregate ratings, and token-protected admin edits. Bundled markdown remains as a local fallback. Seed Turso from the bundled blog content with `npm run db:seed`.
 
 Preview production build:
 
@@ -73,6 +73,7 @@ npm run preview
 
 - `src/` - React components and application code
 - `public/` - Static assets
+- `docs/turso.md` - Turso/libSQL live data and admin API notes
 - `package.json` - Project dependencies and scripts
 
 ## License

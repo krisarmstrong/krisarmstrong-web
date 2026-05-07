@@ -1,7 +1,8 @@
 // src/pages/Home.tsx
-import { motion } from 'framer-motion';
-import { ShieldCheck, Shield, FileText, Users, TrendingUp, Award } from 'lucide-react';
+
 import { H1, H2, P, StatCard, useReducedMotion } from '@krisarmstrong/web-foundation';
+import { motion } from 'framer-motion';
+import { Award, FileText, Shield, ShieldCheck, TrendingUp, Users } from 'lucide-react';
 
 export default function Home(): React.ReactElement {
   const prefersReducedMotion = useReducedMotion();

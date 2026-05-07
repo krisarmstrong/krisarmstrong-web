@@ -1,7 +1,8 @@
 // src/pages/ErrorPage.tsx
-import { useRouteError, isRouteErrorResponse } from 'react-router-dom';
+
+import { AccentLink, H1, P } from '@krisarmstrong/web-foundation';
 import { AlertTriangle, ArrowLeft } from 'lucide-react';
-import { H1, P, AccentLink } from '@krisarmstrong/web-foundation';
+import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
 
 export default function ErrorPage(): React.ReactElement {
   const error = useRouteError();

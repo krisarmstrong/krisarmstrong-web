@@ -27,9 +27,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- DNS Prefetch for Supabase API - reduces connection time for data fetches -->
-  <link rel="dns-prefetch" href="https://eumqnuyqxcbcnsohpjyh.supabase.co">
-  <link rel="preconnect" href="https://eumqnuyqxcbcnsohpjyh.supabase.co" crossorigin>
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -72,7 +69,7 @@
 
   <!-- Content Security Policy - Development only (production uses HTTP headers) -->
   <!-- Note: frame-ancestors and X-Frame-Options only work as HTTP headers, not meta tags -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' ws://localhost:* http://localhost:* https://eumqnuyqxcbcnsohpjyh.supabase.co; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' ws://localhost:* http://localhost:*; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self';">
 
   <!-- Security Headers (X-Frame-Options must be HTTP header in production) -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -89,7 +86,7 @@
       if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
       }
-    } catch (e) {}
+    } catch (_e) {}
   </script>
 
   <!-- Structured Data (JSON-LD) for SEO -->

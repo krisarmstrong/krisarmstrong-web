@@ -1,5 +1,4 @@
-import { ContactForm } from '@krisarmstrong/web-foundation';
-import { H1 } from '@krisarmstrong/web-foundation';
+import { ContactForm, H1 } from '@krisarmstrong/web-foundation';
 import { Mail } from 'lucide-react';
 
 export default function Contact() {

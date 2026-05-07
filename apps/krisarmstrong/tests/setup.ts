@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { vi } from 'vitest';
 
-vi.mock('../src/lib/supabase', () => ({
+vi.mock('../src/lib/blogData', () => ({
   getAllBlogPosts: vi.fn().mockResolvedValue([]),
   getFeaturedBlogPosts: vi.fn().mockResolvedValue([]),
   getBlogPostBySlug: vi.fn().mockResolvedValue(null),

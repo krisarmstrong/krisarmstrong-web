@@ -31,8 +31,9 @@
     "clean": "rimraf dist",
     "build": "npm run clean && tsup --dts --sourcemap --format esm,cjs --out-dir dist --metafile",
     "dev": "tsup --dts --watch --format esm,cjs --out-dir dist",
-    "lint": "eslint src --ext .ts,.tsx --ignore-pattern '**/*.stories.tsx' && tsc --noEmit",
-    "lint:fix": "eslint src --ext .ts,.tsx --ignore-pattern '**/*.stories.tsx' --fix",
+    "lint": "biome check . && tsc --noEmit",
+    "lint:fix": "biome check --write .",
+    "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -42,71 +43,53 @@
     "build-storybook": "storybook build"
   },
   "lint-staged": {
-    "!(*.stories).{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write",
-      "bash -c 'tsc --noEmit'"
-    ],
-    "*.stories.tsx": [
-      "prettier --write"
-    ],
-    "*.{json,md}": [
-      "prettier --write"
+    "*.{js,jsx,ts,tsx,json,jsonc,css,md,yml,yaml}": [
+      "biome check --write --no-errors-on-unmatched"
     ]
   },
   "peerDependencies": {
-    "@sentry/react": "^10.28.0",
-    "lucide-react": "^0.555.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-router-dom": "^7.10.0"
+    "@sentry/react": "^10.52.0",
+    "lucide-react": "^1.14.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-router-dom": "^7.15.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.1.0",
-    "@commitlint/config-conventional": "^20.0.0",
-    "@eslint/js": "^9.39.1",
-    "@storybook/addon-docs": "^10.1.3",
-    "@storybook/addon-onboarding": "^10.1.3",
-    "@storybook/react-vite": "^10.1.3",
-    "@tailwindcss/postcss": "^4.1.17",
+    "@commitlint/cli": "^20.5.3",
+    "@commitlint/config-conventional": "^20.5.3",
+    "@storybook/addon-docs": "^10.3.6",
+    "@storybook/addon-onboarding": "^10.3.6",
+    "@storybook/react-vite": "^10.3.6",
+    "@tailwindcss/postcss": "^4.2.4",
+    "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.0",
+    "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
-    "@types/dompurify": "^3.0.5",
-    "@types/react": "^19.2.7",
+    "@types/node": "^25.6.1",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "@typescript-eslint/eslint-plugin": "^8.46.4",
-    "@typescript-eslint/parser": "^8.46.4",
-    "@vitejs/plugin-react": "^5.1.1",
-    "@vitest/browser-playwright": "4.0.15",
-    "@vitest/coverage-v8": "^4.0.15",
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/browser-playwright": "4.1.5",
+    "@vitest/coverage-v8": "^4.1.5",
     "audit-ci": "^7.1.0",
     "esbuild-visualizer": "^0.7.0",
-    "eslint": "^9.39.1",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-no-secrets": "^2.2.1",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-security": "^3.0.1",
-    "eslint-plugin-storybook": "^10.1.3",
     "husky": "^9.1.7",
-    "jsdom": "^27.2.0",
-    "lint-staged": "^16.2.7",
+    "jsdom": "^29.1.1",
+    "lint-staged": "^17.0.2",
     "npm-run-all": "^4.1.5",
-    "playwright": "^1.56.1",
-    "postcss": "^8.5.6",
-    "prettier": "^3.7.3",
-    "rimraf": "^6.1.2",
-    "storybook": "^10.1.3",
-    "tailwindcss": "^4.1.17",
+    "playwright": "^1.59.1",
+    "postcss": "^8.5.14",
+    "rimraf": "^6.1.3",
+    "storybook": "^10.3.6",
+    "tailwindcss": "^4.2.4",
     "tsup": "^8.5.1",
-    "typescript": "^5.9.3",
-    "vitest": "4.0.15"
+    "typescript": "^6.0.3",
+    "vitest": "4.1.5"
   },
   "license": "MIT",
   "dependencies": {
     "clsx": "^2.1.1",
-    "dompurify": "^3.3.0",
-    "fuse.js": "^7.1.0"
+    "dompurify": "^3.4.2",
+    "fuse.js": "^7.3.0"
   }
 }

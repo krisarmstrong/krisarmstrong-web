@@ -1,13 +1,11 @@
-import { writeFileSync, mkdirSync } from 'fs';
-import { resolve } from 'path';
 import dotenv from 'dotenv';
+import { mkdirSync, readFileSync, writeFileSync } from 'fs';
+import { resolve } from 'path';
 
 // Load environment variables
 dotenv.config();
 
 const BASE_URL = 'https://wifi-vigilante.com';
-const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
 const routes = [
   '/',
@@ -19,35 +17,14 @@ const routes = [
   '/terms-of-service',
 ];
 
-// Fetch cases from Supabase
-async function fetchCases() {
-  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-    console.warn('Supabase credentials not found, skipping case routes');
-    return [];
-  }
-
-  try {
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/case_files?select=public_id&order=id`, {
-      headers: {
-        apikey: SUPABASE_ANON_KEY,
-        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
-
-    const cases = await response.json();
-    console.log(`Discovered ${cases.length} cases from Supabase`);
-    return cases.map((c) => `/cases/${c.public_id}`);
-  } catch (error) {
-    console.warn('Unable to fetch cases from Supabase:', error.message);
-    return [];
-  }
+function getCaseRoutes() {
+  const dataPath = resolve(process.cwd(), 'src/data/wifiVigilanteData.json');
+  const data = JSON.parse(readFileSync(dataPath, 'utf8'));
+  console.log(`Discovered ${data.cases.length} bundled cases`);
+  return data.cases.map((c) => `/cases/${c.public_id}`);
 }
 
-const caseRoutes = await fetchCases();
+const caseRoutes = getCaseRoutes();
 
 const today = new Date().toISOString().split('T')[0];
 

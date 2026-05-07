@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import { Star } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 interface StarRatingProps {
   /** Unique identifier for the content being rated (e.g., post ID, case ID) */

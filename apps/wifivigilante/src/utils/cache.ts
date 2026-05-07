@@ -25,7 +25,8 @@ class CacheManager<T = unknown> {
   private cache: Map<string, CacheEntry<T>>;
   private ttl: number;
 
-  constructor(ttl: number = 300000) { // 5 minutes default
+  constructor(ttl: number = 300000) {
+    // 5 minutes default
     this.cache = new Map();
     this.ttl = ttl;
   }
@@ -39,8 +40,7 @@ class CacheManager<T = unknown> {
   generateKey(endpoint: string, params: Record<string, unknown> = {}): string {
     const paramString = Object.keys(params)
       .sort()
-      // eslint-disable-next-line security/detect-object-injection
-      .map(key => `${key}=${params[key]}`)
+      .map((key) => `${key}=${params[key]}`)
       .join('&');
     return `${endpoint}${paramString ? `?${paramString}` : ''}`;
   }
@@ -146,7 +146,7 @@ class CacheManager<T = unknown> {
       }
     });
 
-    keysToDelete.forEach(key => this.cache.delete(key));
+    keysToDelete.forEach((key) => this.cache.delete(key));
 
     return keysToDelete.length;
   }
@@ -182,10 +182,12 @@ export const withCache = <T, Args extends unknown[]>(
 
     if (cached && cached.isStale) {
       // Return stale data immediately, revalidate in background
-      promise.then(data => cache.set(key, data)).catch((err) => {
-        console.warn('Cache revalidation failed:', err);
-        // Consider notifying error tracking service in production
-      });
+      promise
+        .then((data) => cache.set(key, data))
+        .catch((err) => {
+          console.warn('Cache revalidation failed:', err);
+          // Consider notifying error tracking service in production
+        });
       return cached.data;
     }
 

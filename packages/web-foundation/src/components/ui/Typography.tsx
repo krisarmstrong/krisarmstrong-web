@@ -1,4 +1,4 @@
-import type { ReactNode, ComponentPropsWithoutRef, ElementType } from 'react';
+import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 // Polymorphic component props helper

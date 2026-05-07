@@ -1,4 +1,4 @@
-import { writeFileSync, mkdirSync } from 'fs';
+import { mkdirSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
 
 const BASE_URL = 'https://www.intrinsicmomentummindset.com';

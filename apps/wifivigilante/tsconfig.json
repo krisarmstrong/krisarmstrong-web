@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "types": ["vite/client", "react"],
+    "types": ["vite/client", "react", "@testing-library/jest-dom"],
     "baseUrl": ".",
     "paths": {
       "@krisarmstrong/web-foundation": ["../../packages/web-foundation/src/index.ts"],

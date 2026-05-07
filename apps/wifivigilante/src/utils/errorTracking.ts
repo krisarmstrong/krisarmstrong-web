@@ -111,15 +111,13 @@ class ErrorTracker {
     const errorsByType: Record<string, number> = {};
     const errorsByUrl: Record<string, number> = {};
 
-    this.errors.forEach(error => {
+    this.errors.forEach((error) => {
       // Count by error message
       const type = error.message || 'Unknown';
-      // eslint-disable-next-line security/detect-object-injection
       errorsByType[type] = (errorsByType[type] || 0) + 1;
 
       // Count by URL
       const url = error.url || 'Unknown';
-      // eslint-disable-next-line security/detect-object-injection
       errorsByUrl[url] = (errorsByUrl[url] || 0) + 1;
     });
 
@@ -191,9 +189,7 @@ export function setupErrorTracking(): void {
     // Prevent default behavior (crash)
     event.preventDefault();
 
-    const error = event.reason instanceof Error
-      ? event.reason
-      : new Error(String(event.reason));
+    const error = event.reason instanceof Error ? event.reason : new Error(String(event.reason));
 
     errorTracker.logError(error, {
       type: 'unhandledRejection',

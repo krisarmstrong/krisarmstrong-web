@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { shareToPlatform, type SharePlatform } from '../src/lib/share';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { type SharePlatform, shareToPlatform } from '../src/lib/share';
 
 describe('shareToPlatform', () => {
   const mockPost = {

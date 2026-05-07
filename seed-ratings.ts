@@ -36,7 +36,10 @@ function randomRating(): number {
 
 // Generate random number of ratings for an item (10-25)
 function randomRatingsCount(): number {
-  return Math.floor(Math.random() * (MAX_RATINGS_PER_ITEM - MIN_RATINGS_PER_ITEM + 1)) + MIN_RATINGS_PER_ITEM;
+  return (
+    Math.floor(Math.random() * (MAX_RATINGS_PER_ITEM - MIN_RATINGS_PER_ITEM + 1)) +
+    MIN_RATINGS_PER_ITEM
+  );
 }
 
 // Generate a unique fingerprint for each test user

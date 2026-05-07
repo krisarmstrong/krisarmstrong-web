@@ -1,9 +1,9 @@
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import type { BlogPost as BlogPostType } from '../src/lib/blogData';
 import BlogPost from '../src/pages/BlogPost';
-import type { BlogPost as BlogPostType } from '../src/lib/supabase';
 
 // Create a fresh QueryClient for each test
 const createTestQueryClient = () =>
@@ -54,8 +54,8 @@ const mockSupabasePost: BlogPostType = {
 // Mock fetch
 global.fetch = vi.fn();
 
-// Mock supabase module
-vi.mock('../src/lib/supabase', () => ({
+// Mock blog data module
+vi.mock('../src/lib/blogData', () => ({
   getBlogPostBySlug: vi.fn(),
   getRatingStats: vi.fn(),
   submitRating: vi.fn(),
@@ -64,7 +64,7 @@ vi.mock('../src/lib/supabase', () => ({
 }));
 
 // Import mocked functions after the mock declaration
-import { getBlogPostBySlug, getAllBlogPosts } from '../src/lib/supabase';
+import { getAllBlogPosts, getBlogPostBySlug } from '../src/lib/blogData';
 
 // Mock framer-motion
 vi.mock('framer-motion', () => ({

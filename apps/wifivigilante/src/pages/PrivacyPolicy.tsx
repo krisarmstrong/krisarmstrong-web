@@ -1,6 +1,7 @@
 // src/pages/Privacy.tsx
+
+import { H1, MutedText, P } from '@krisarmstrong/web-foundation';
 import { Lock } from 'lucide-react';
-import { H1, P, MutedText } from '@krisarmstrong/web-foundation';
 
 export default function Privacy(): React.ReactElement {
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 export type StatCardSize = 'sm' | 'md' | 'lg';
 export type StatCardColorScheme = 'blue' | 'teal' | 'violet' | 'emerald' | 'amber';

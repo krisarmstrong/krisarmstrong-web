@@ -11,7 +11,7 @@ A comprehensive database of wireless security case studies, categorized by secto
 - 📚 **Browse Case Studies** - Extensive library of real-world security investigations
 - 🔍 **Advanced Search** - Full-text search across all case fields
 - 🎯 **Smart Filtering** - Filter by sector, subsector, tool, tag, severity, and status
-- 🔐 **Admin Authentication** - Secure case management with Supabase Auth
+- 💾 **Turso/libSQL Data** - Live SQLite-compatible content with bundled fallback data
 - 📄 **Export Capabilities** - Download cases as PDF or Markdown
 - 📱 **Responsive Design** - Works seamlessly on mobile and desktop
 - ⚡ **PWA Ready** - Offline-capable Progressive Web App
@@ -23,7 +23,6 @@ A comprehensive database of wireless security case studies, categorized by secto
 ### Prerequisites
 
 - **Node.js** 22+ and npm 10+
-- **Supabase Account** (free tier works)
 - **Git**
 
 ### Installation
@@ -47,31 +46,29 @@ A comprehensive database of wireless security case studies, categorized by secto
    cp .env.example .env
    ```
 
-   Edit `.env` and add your Supabase credentials:
+   Edit `.env` if you need live data, ratings, or admin edits:
 
    ```env
-   VITE_SUPABASE_URL=https://your-project.supabase.co
-   VITE_SUPABASE_ANON_KEY=your-anon-key
    VITE_APP_ENV=development
+   TURSO_DATABASE_URL=libsql://your-database.turso.io
+   TURSO_AUTH_TOKEN=your-turso-token
+   ADMIN_API_TOKEN=change-this-long-random-admin-token
    VITE_SENTRY_DSN=https://your-dsn@sentry.io/project
    ```
 
-4. **Set up Supabase database:**
+   Seed Turso from the bundled case data:
 
-   See [docs/SUPABASE_RLS_SETUP.md](docs/SUPABASE_RLS_SETUP.md) for complete instructions.
+   ```bash
+   npm run db:seed
+   ```
 
-   Quick setup:
-   - Create a Supabase project
-   - Run the SQL scripts from the docs
-   - Create an admin user with appropriate role metadata
-
-5. **Start the development server:**
+4. **Start the development server:**
 
    ```bash
    npm run dev
    ```
 
-6. **Open your browser:**
+5. **Open your browser:**
    ```
    http://localhost:3000
    ```
@@ -113,13 +110,14 @@ wi-fi-vigilante/
 │   ├── types/          # TypeScript type definitions
 │   ├── constants/      # App constants
 │   ├── config/         # Configuration files
-│   ├── api.ts          # API layer (Supabase)
+│   ├── data/           # Bundled public case data
+│   ├── api.ts          # Local data access layer
 │   └── main.tsx        # Application entry point
 ├── docs/               # Documentation
 │   ├── architecture.md     # System architecture
 │   ├── api.md              # API reference
 │   ├── contributing.md     # Contribution guidelines
-│   └── SUPABASE_RLS_SETUP.md
+│   └── SUPABASE_RLS_SETUP.md # Legacy database restoration notes
 ├── tests/              # Test files
 └── DEPLOYMENT_GUIDE.md # Deployment instructions
 ```
@@ -130,8 +128,7 @@ wi-fi-vigilante/
 - **Language:** TypeScript 5.9
 - **Build Tool:** Vite 7
 - **Styling:** Tailwind CSS 4
-- **Database:** Supabase (PostgreSQL)
-- **Auth:** Supabase Auth
+- **Data:** Bundled JSON generated from public case records
 - **Routing:** React Router 7
 - **Testing:** Vitest + React Testing Library
 - **PWA:** Vite PWA Plugin
@@ -144,9 +141,10 @@ Comprehensive documentation is available in the `/docs` directory:
 
 - [**Architecture Guide**](docs/architecture.md) - System design and structure
 - [**API Reference**](docs/api.md) - API functions and usage examples
+- [**Turso Live Data**](docs/turso.md) - SQLite-compatible live data and admin API
 - [**Contributing Guide**](docs/contributing.md) - How to contribute
 - [**Deployment Guide**](DEPLOYMENT_GUIDE.md) - Deployment instructions
-- [**Supabase Setup**](docs/SUPABASE_RLS_SETUP.md) - Database configuration
+- [**Supabase Setup**](docs/SUPABASE_RLS_SETUP.md) - Legacy database restoration notes
 - [**Testing Guide**](docs/testing.md) - Testing documentation
 - [**Component Catalog**](docs/components.md) - UI component reference
 
@@ -154,15 +152,16 @@ Comprehensive documentation is available in the `/docs` directory:
 
 ### Environment Variables
 
-All environment variables must be prefixed with `VITE_` to be available in the client:
+Only client-exposed variables need the `VITE_` prefix. Turso and admin tokens are server-only Vercel function variables.
 
-| Variable                 | Required | Description                                  |
-| ------------------------ | -------- | -------------------------------------------- |
-| `VITE_SUPABASE_URL`      | Yes      | Your Supabase project URL                    |
-| `VITE_SUPABASE_ANON_KEY` | Yes      | Your Supabase anonymous key                  |
-| `VITE_APP_ENV`           | No       | Environment (development/staging/production) |
-| `VITE_SENTRY_DSN`        | No       | Sentry error tracking DSN                    |
-| `VITE_ENABLE_ANALYTICS`  | No       | Enable analytics (true/false)                |
+| Variable                | Required | Description                                  |
+| ----------------------- | -------- | -------------------------------------------- |
+| `TURSO_DATABASE_URL`    | Yes      | Turso/libSQL database URL for live data      |
+| `TURSO_AUTH_TOKEN`      | Yes      | Turso auth token for API functions           |
+| `ADMIN_API_TOKEN`       | Yes      | Token required for write/admin API calls     |
+| `VITE_APP_ENV`          | No       | Environment (development/staging/production) |
+| `VITE_SENTRY_DSN`       | No       | Sentry error tracking DSN                    |
+| `VITE_ENABLE_ANALYTICS` | No       | Enable analytics (true/false)                |
 
 See [.env.example](.env.example) for a complete list.
 
@@ -175,15 +174,6 @@ The app supports three build modes:
 - **Production** (`production`) - Optimized, minimal logging
 
 ## 🐛 Troubleshooting
-
-### Supabase Connection Error
-
-If you see "Missing Supabase environment variables":
-
-1. Ensure `.env` file exists in the project root
-2. Verify `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are set correctly
-3. Restart the development server after editing `.env`
-4. Check that variable names are prefixed with `VITE_`
 
 ### Build Errors
 
@@ -289,7 +279,6 @@ See [CHANGELOG.md](CHANGELOG.md) for a detailed history of changes.
 
 ## 🙏 Acknowledgments
 
-- [Supabase](https://supabase.com/) - Backend as a Service
 - [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 - [Lucide](https://lucide.dev/) - Beautiful icon library

@@ -1,12 +1,12 @@
-/* eslint react-hooks/set-state-in-effect: "off" */
 // src/pages/CaseOfTheDay.tsx
-import { useEffect, useState } from 'react';
+
 import { CalendarDays } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { fetchCaseOfTheDay, getAwarenessMonth } from '../api';
 import CaseDisplay from '../components/CaseDisplay';
-import { TransformedCase } from '../types';
-import { transformApiData } from '../utils/caseUtils';
 import { SIZE } from '../constants';
+import type { TransformedCase } from '../types';
+import { transformApiData } from '../utils/caseUtils';
 
 interface CachedCase {
   case: TransformedCase;

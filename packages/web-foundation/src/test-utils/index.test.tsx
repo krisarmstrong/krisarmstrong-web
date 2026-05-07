@@ -1,13 +1,13 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   createLocalStorageMock,
-  setupMatchMediaMock,
-  setupIntersectionObserverMock,
-  setupWindowMocks,
-  setupBrowserMocks,
-  renderWithDefaults,
   mockEnv,
   mockEnvVars,
+  renderWithDefaults,
+  setupBrowserMocks,
+  setupIntersectionObserverMock,
+  setupMatchMediaMock,
+  setupWindowMocks,
 } from './index';
 
 beforeEach(() => {

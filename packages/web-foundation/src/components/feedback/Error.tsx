@@ -1,7 +1,7 @@
-import { Component, ErrorInfo, ReactNode } from 'react';
-import { AlertCircle, RefreshCw } from 'lucide-react';
-import { isDevelopmentEnvironment, getSentry } from '../../utils/env';
 import DOMPurify from 'dompurify';
+import { AlertCircle, RefreshCw } from 'lucide-react';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { getSentry, isDevelopmentEnvironment } from '../../utils/env';
 
 // ============================================================================
 // Error Message

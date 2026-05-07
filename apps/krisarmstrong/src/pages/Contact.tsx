@@ -1,4 +1,4 @@
-import { ContactForm } from "@krisarmstrong/web-foundation";
+import { ContactForm } from '@krisarmstrong/web-foundation';
 
 export default function Contact() {
   const formEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT;
@@ -24,8 +24,8 @@ export default function Contact() {
               className="text-brand-accent underline"
             >
               LinkedIn
-            </a>
-            {' '}or review my work on{' '}
+            </a>{' '}
+            or review my work on{' '}
             <a
               href="https://github.com/krisarmstrong"
               target="_blank"

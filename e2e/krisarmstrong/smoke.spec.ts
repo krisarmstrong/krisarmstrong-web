@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('Kris Armstrong - Smoke Tests', () => {
   test('homepage loads successfully', async ({ page }) => {
@@ -20,7 +20,10 @@ test.describe('Kris Armstrong - Smoke Tests', () => {
   test('can navigate to projects', async ({ page }) => {
     await page.goto('http://localhost:3000');
 
-    await page.getByRole('link', { name: /projects/i }).first().click();
+    await page
+      .getByRole('link', { name: /projects/i })
+      .first()
+      .click();
 
     await expect(page).toHaveURL(/\/projects/);
   });
@@ -28,7 +31,10 @@ test.describe('Kris Armstrong - Smoke Tests', () => {
   test('can navigate to resume', async ({ page }) => {
     await page.goto('http://localhost:3000');
 
-    await page.getByRole('link', { name: /resume/i }).first().click();
+    await page
+      .getByRole('link', { name: /resume/i })
+      .first()
+      .click();
 
     await expect(page).toHaveURL(/\/resume/);
   });
@@ -37,7 +43,10 @@ test.describe('Kris Armstrong - Smoke Tests', () => {
     await page.goto('http://localhost:3000');
 
     const themeToggle = page.getByRole('button', { name: /theme/i }).or(
-      page.getByRole('button').filter({ has: page.locator('svg') }).first()
+      page
+        .getByRole('button')
+        .filter({ has: page.locator('svg') })
+        .first()
     );
 
     const htmlElement = page.locator('html');

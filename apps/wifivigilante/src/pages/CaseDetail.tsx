@@ -1,11 +1,12 @@
 // src/pages/CaseDetail.tsx
+
+import { useQuery } from '@tanstack/react-query';
+import { ShieldCheck } from 'lucide-react';
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { ShieldCheck } from 'lucide-react';
-import { useQuery } from '@tanstack/react-query';
-import { getCase, getAllCases } from '../api';
+import { getAllCases, getCase } from '../api';
 import CaseDisplay from '../components/CaseDisplay';
-import { TransformedCase } from '../types';
+import type { TransformedCase } from '../types';
 import { transformApiData } from '../utils/caseUtils';
 
 export default function CaseDetail(): React.ReactElement {

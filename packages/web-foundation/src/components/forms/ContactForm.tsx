@@ -1,4 +1,11 @@
-import { FormEvent, ReactNode, useId, useState, useOptimistic, startTransition } from 'react';
+import {
+  type FormEvent,
+  type ReactNode,
+  startTransition,
+  useId,
+  useOptimistic,
+  useState,
+} from 'react';
 import { Button } from '../ui/Button';
 
 const toneStyles = {

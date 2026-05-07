@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Heart, Lightbulb, Brain } from 'lucide-react';
+import { Brain, Heart, Lightbulb } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Home() {

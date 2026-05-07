@@ -10,8 +10,9 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run sitemap && vite build",
-    "lint": "eslint . --max-warnings=0 && tsc --noEmit",
-    "lint:fix": "eslint . --fix",
+    "lint": "biome check . && tsc --noEmit",
+    "lint:fix": "biome check --write .",
+    "typecheck": "tsc --noEmit",
     "preview": "vite preview",
     "test": "vitest --pool=threads",
     "test:ui": "vitest --ui --pool=threads",
@@ -19,52 +20,40 @@
     "sitemap": "node scripts/generate-sitemap.js"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,md}": [
-      "prettier --write"
+    "*.{js,jsx,ts,tsx,json,jsonc,css,md,yml,yaml}": [
+      "biome check --write --no-errors-on-unmatched"
     ]
   },
   "dependencies": {
     "@krisarmstrong/web-foundation": "^0.9.11",
-    "@sentry/react": "^10.28.0",
-    "framer-motion": "^12.23.25",
-    "lucide-react": "^0.555.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-router-dom": "^7.10.0"
+    "@sentry/react": "^10.52.0",
+    "framer-motion": "^12.38.0",
+    "lucide-react": "^1.14.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-router-dom": "^7.15.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@tailwindcss/postcss": "^4.1.17",
-    "@tailwindcss/vite": "^4.1.17",
+    "@tailwindcss/postcss": "^4.2.4",
+    "@tailwindcss/vite": "^4.2.4",
+    "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.0",
+    "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
-    "@types/node": "^24.10.1",
-    "@types/react": "^19.2.7",
+    "@types/node": "^25.6.1",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.1",
-    "@vitest/browser-playwright": "4.0.15",
-    "@vitest/coverage-v8": "4.0.15",
-    "autoprefixer": "^10.4.22",
-    "eslint": "^9.39.1",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-no-secrets": "^2.2.1",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
-    "eslint-plugin-security": "^3.0.1",
-    "globals": "^16.5.0",
-    "jsdom": "^27.2.0",
-    "playwright": "^1.56.1",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.17",
-    "typescript": "~5.9.3",
-    "typescript-eslint": "^8.48.1",
-    "vite": "^7.2.6",
-    "vitest": "4.0.15"
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/browser-playwright": "4.1.5",
+    "@vitest/coverage-v8": "4.1.5",
+    "autoprefixer": "^10.5.0",
+    "globals": "^17.6.0",
+    "jsdom": "^29.1.1",
+    "playwright": "^1.59.1",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^4.2.4",
+    "typescript": "~6.0.3",
+    "vite": "^8.0.11",
+    "vitest": "4.1.5"
   }
 }

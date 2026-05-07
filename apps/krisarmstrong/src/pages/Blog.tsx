@@ -1,20 +1,20 @@
-import { motion } from 'framer-motion';
 import {
-  LoadingPage,
-  ErrorPage,
+  type ActiveFilter,
+  ActiveFilterBadges,
+  ContentCard,
   ContentSearch,
   ContentSort,
-  ActiveFilterBadges,
-  LoadMoreButton,
   EmptyState,
-  ContentCard,
+  ErrorPage,
+  LoadingPage,
+  LoadMoreButton,
   useProgressiveLoad,
-  type ActiveFilter,
 } from '@krisarmstrong/web-foundation';
-import { useState, useMemo, useEffect, useTransition, useCallback } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { getAllBlogPosts, type BlogPost } from '../lib/supabase';
+import { motion } from 'framer-motion';
+import { useCallback, useEffect, useMemo, useState, useTransition } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { type BlogPost, getAllBlogPosts } from '../lib/blogData';
 
 export default function Blog() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -44,7 +44,6 @@ export default function Blog() {
     if (hydratedParams) return;
     if (process.env.NODE_ENV === 'test' && searchParams.toString()) {
       setSearchParams(new URLSearchParams(), { replace: true });
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setHydratedParams(true);
       return;
     }

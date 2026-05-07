@@ -1,16 +1,17 @@
 // UI Components - Base primitives and typography
-export { Button } from './Button';
+
 export type { ButtonProps } from './Button';
+export { Button } from './Button';
 export {
+  AccentLink,
+  ArticleTitle,
+  Badge,
+  CardTitle,
   H1,
   H2,
-  ArticleTitle,
-  SubSectionTitle,
-  CardTitle,
+  MutedText,
   P,
   SmallText,
-  MutedText,
-  AccentLink,
+  SubSectionTitle,
   Tag,
-  Badge,
 } from './Typography';

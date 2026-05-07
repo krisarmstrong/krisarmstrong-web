@@ -1,10 +1,10 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
-import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import { describe, expect, it, vi } from 'vitest';
+import type { BlogPost } from '../src/lib/blogData';
+import { getAllBlogPosts } from '../src/lib/blogData';
 import Blog from '../src/pages/Blog';
-import type { BlogPost } from '../src/lib/supabase';
-import { getAllBlogPosts } from '../src/lib/supabase';
 
 // Create a fresh QueryClient for each test
 const createTestQueryClient = () =>
@@ -39,7 +39,7 @@ const mockBlogPosts: BlogPost[] = Array.from({ length: 15 }).map((_, index) => (
 }));
 
 // Mock getAllBlogPosts to return controlled test data
-vi.mock('../src/lib/supabase', () => ({
+vi.mock('../src/lib/blogData', () => ({
   getAllBlogPosts: vi.fn(() => Promise.resolve(mockBlogPosts)),
 }));
 

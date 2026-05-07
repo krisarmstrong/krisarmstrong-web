@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
 import { SearchX } from 'lucide-react';
+import type { ReactNode } from 'react';
 
 export interface EmptyStateProps {
   /** Icon to display (defaults to SearchX) */

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Building2 } from 'lucide-react';
 import { BrowserRouter } from 'react-router-dom';
 import { ContentCard } from './ContentCard';
-import { Building2 } from 'lucide-react';
 
 const meta: Meta<typeof ContentCard> = {
   title: 'Display/ContentCard',

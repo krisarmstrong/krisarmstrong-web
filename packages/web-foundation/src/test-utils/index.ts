@@ -3,9 +3,9 @@
  * Provides common mocks, helpers, and setup functions for testing
  */
 
-import { cleanup, render, RenderOptions } from '@testing-library/react';
-import { afterEach, vi } from 'vitest';
+import { cleanup, type RenderOptions, render } from '@testing-library/react';
 import type { ReactElement } from 'react';
+import { afterEach, vi } from 'vitest';
 
 /**
  * Creates a localStorage mock with optional initial state
@@ -124,7 +124,7 @@ export function mockEnvVars(vars: Record<string, string>) {
   });
 }
 
-// Re-export commonly used testing-library utilities
-export { render, screen, waitFor, within, fireEvent } from '@testing-library/react';
-export { userEvent } from '@testing-library/user-event';
 export type { RenderOptions, RenderResult } from '@testing-library/react';
+// Re-export commonly used testing-library utilities
+export { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+export { userEvent } from '@testing-library/user-event';

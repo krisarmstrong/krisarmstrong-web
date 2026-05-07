@@ -1,6 +1,6 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import React from 'react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import Contact from '../src/pages/Contact';
 
 const contactFormSpy = vi.fn();

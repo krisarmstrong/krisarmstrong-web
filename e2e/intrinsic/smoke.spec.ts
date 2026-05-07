@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('Intrinsic Momentum Mindset - Smoke Tests', () => {
   test('homepage loads successfully', async ({ page }) => {
@@ -12,7 +12,10 @@ test.describe('Intrinsic Momentum Mindset - Smoke Tests', () => {
   test('can navigate to services page', async ({ page }) => {
     await page.goto('http://localhost:3001');
 
-    await page.getByRole('link', { name: /services/i }).first().click();
+    await page
+      .getByRole('link', { name: /services/i })
+      .first()
+      .click();
 
     await expect(page).toHaveURL(/\/services/);
   });
@@ -29,7 +32,10 @@ test.describe('Intrinsic Momentum Mindset - Smoke Tests', () => {
     await page.goto('http://localhost:3001');
 
     const themeToggle = page.getByRole('button', { name: /theme/i }).or(
-      page.getByRole('button').filter({ has: page.locator('svg') }).first()
+      page
+        .getByRole('button')
+        .filter({ has: page.locator('svg') })
+        .first()
     );
 
     const htmlElement = page.locator('html');

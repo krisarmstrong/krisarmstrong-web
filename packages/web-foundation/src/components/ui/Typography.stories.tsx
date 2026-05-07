@@ -1,19 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Shield, Star, Zap } from 'lucide-react';
 import { BrowserRouter } from 'react-router-dom';
 import {
+  AccentLink,
+  ArticleTitle,
+  Badge,
+  CardTitle,
   H1,
   H2,
-  ArticleTitle,
-  SubSectionTitle,
-  CardTitle,
+  MutedText,
   P,
   SmallText,
-  MutedText,
+  SubSectionTitle,
   Tag,
-  Badge,
-  AccentLink,
 } from './Typography';
-import { Star, Zap, Shield } from 'lucide-react';
 
 const meta: Meta = {
   title: 'UI/Typography',

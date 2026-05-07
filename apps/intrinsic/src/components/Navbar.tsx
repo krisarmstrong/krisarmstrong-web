@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, X, Home, Info, Briefcase, Mail } from 'lucide-react';
 import { ThemeToggle } from '@krisarmstrong/web-foundation';
+import { Briefcase, Home, Info, Mail, Menu, X } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const NAV_ITEMS = [
   { label: 'Home', path: '/', icon: <Home size={18} /> },

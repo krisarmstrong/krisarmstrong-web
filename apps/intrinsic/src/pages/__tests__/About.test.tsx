@@ -4,7 +4,7 @@
  */
 
 import type { ReactElement, ReactNode } from 'react';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import About from '../About';
 
 describe('About', () => {

@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import type React from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export interface RatingStats {
   average_rating: number;

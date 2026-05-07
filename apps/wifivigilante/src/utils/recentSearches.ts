@@ -17,7 +17,7 @@ export function getRecentSearches(): RecentSearch[] {
     if (!stored) return [];
 
     const searches = JSON.parse(stored) as RecentSearch[];
-    return searches.filter(s => s.query && s.timestamp);
+    return searches.filter((s) => s.query && s.timestamp);
   } catch (error) {
     console.warn('Failed to load recent searches:', error);
     return [];
@@ -34,12 +34,12 @@ export function addRecentSearch(query: string): RecentSearch[] {
     const searches = getRecentSearches();
 
     // Remove duplicate if exists
-    const filtered = searches.filter(s => s.query.toLowerCase() !== query.toLowerCase());
+    const filtered = searches.filter((s) => s.query.toLowerCase() !== query.toLowerCase());
 
     // Add new search at the beginning
     const updated: RecentSearch[] = [
       { query: query.trim(), timestamp: Date.now() },
-      ...filtered
+      ...filtered,
     ].slice(0, MAX_RECENT_SEARCHES);
 
     localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(updated));
@@ -67,7 +67,7 @@ export function clearRecentSearches(): void {
 export function removeRecentSearch(query: string): RecentSearch[] {
   try {
     const searches = getRecentSearches();
-    const filtered = searches.filter(s => s.query !== query);
+    const filtered = searches.filter((s) => s.query !== query);
     localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(filtered));
     return filtered;
   } catch (error) {

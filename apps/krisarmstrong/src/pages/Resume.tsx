@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { Button, LoadingSpinner } from '@krisarmstrong/web-foundation';
+import { ArrowRight, Mail } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeSanitize from 'rehype-sanitize';
-import { Button, LoadingSpinner } from '@krisarmstrong/web-foundation';
-import { Mail, ArrowRight } from 'lucide-react';
 
 type DownloadType = 'md' | 'pdf' | 'docx';
 

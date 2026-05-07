@@ -1,12 +1,12 @@
 export {
+  AccentLink,
+  ArticleTitle,
+  CardTitle,
   H1,
   H2,
-  ArticleTitle,
-  SubSectionTitle,
-  CardTitle,
+  MutedText,
   P,
   SmallText,
-  MutedText,
-  AccentLink,
+  SubSectionTitle,
   Tag,
-} from "@krisarmstrong/web-foundation";
+} from '@krisarmstrong/web-foundation';

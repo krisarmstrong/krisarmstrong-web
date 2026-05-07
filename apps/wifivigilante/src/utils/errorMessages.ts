@@ -74,7 +74,7 @@ export function getUserFriendlyMessage(error: unknown): string {
       case 403:
         return "You don't have permission to perform this action.";
       case 404:
-        return "The requested item could not be found. It may have been deleted.";
+        return 'The requested item could not be found. It may have been deleted.';
       case 409:
         return 'This action conflicts with existing data. Please refresh and try again.';
       case 422:

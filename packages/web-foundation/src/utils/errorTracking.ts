@@ -184,5 +184,5 @@ export const withErrorTracking = <T, Args extends unknown[]>(
   };
 };
 
-export type { ErrorData, ErrorStats, ErrorCallback };
+export type { ErrorCallback, ErrorData, ErrorStats };
 export default errorTracker;

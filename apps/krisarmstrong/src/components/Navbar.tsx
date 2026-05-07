@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, X, Home, FileText, User, Mail, Code2, Cpu, BookOpen } from 'lucide-react';
 import { ThemeToggle } from '@krisarmstrong/web-foundation';
+import { BookOpen, Code2, Cpu, FileText, Home, Mail, Menu, User, X } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const NAV_ITEMS = [
   { label: 'Home', path: '/', icon: <Home size={18} /> },

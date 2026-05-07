@@ -1,8 +1,9 @@
 // src/pages/About.tsx
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ShieldCheck, Wifi, Globe, Terminal, Mail, UserPlus } from 'lucide-react';
+
 import { H1, H2, P } from '@krisarmstrong/web-foundation';
+import { motion } from 'framer-motion';
+import { Globe, Mail, ShieldCheck, Terminal, UserPlus, Wifi } from 'lucide-react';
+import type React from 'react';
 import { Button } from '../components/ui/Button.jsx';
 
 // Inline SVG for Github Icon

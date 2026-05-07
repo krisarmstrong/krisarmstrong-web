@@ -1,23 +1,23 @@
-import { useMemo } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import rehypeSanitize from 'rehype-sanitize';
-import { Linkedin, Twitter, Facebook } from 'lucide-react';
-import { useQuery } from '@tanstack/react-query';
 import {
   AggregateRating,
-  LoadingPage,
-  ErrorPage,
   ContentCard,
+  ErrorPage,
+  LoadingPage,
 } from '@krisarmstrong/web-foundation';
+import { useQuery } from '@tanstack/react-query';
+import { Share2 } from 'lucide-react';
+import { useMemo } from 'react';
+import ReactMarkdown from 'react-markdown';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import rehypeSanitize from 'rehype-sanitize';
+import remarkGfm from 'remark-gfm';
 import {
+  getAllBlogPosts,
   getBlogPostBySlug,
   getRatingStats,
-  submitRating,
   getUserRating,
-  getAllBlogPosts,
-} from '../lib/supabase';
+  submitRating,
+} from '../lib/blogData';
 import { shareToPlatform } from '../lib/share';
 
 export default function BlogPost() {
@@ -154,10 +154,10 @@ export default function BlogPost() {
               </h3>
               <div className="flex items-center gap-3 flex-wrap">
                 {[
-                  { platform: 'linkedin', icon: <Linkedin size={18} />, label: 'LinkedIn' },
-                  { platform: 'twitter', icon: <Twitter size={18} />, label: 'Twitter' },
-                  { platform: 'facebook', icon: <Facebook size={18} />, label: 'Facebook' },
-                ].map(({ platform, icon, label }) => (
+                  { platform: 'linkedin', label: 'LinkedIn' },
+                  { platform: 'twitter', label: 'Twitter' },
+                  { platform: 'facebook', label: 'Facebook' },
+                ].map(({ platform, label }) => (
                   <button
                     key={platform}
                     onClick={() =>
@@ -172,7 +172,7 @@ export default function BlogPost() {
                     aria-label={`Share on ${label}`}
                     title={`Share on ${label}`}
                   >
-                    {icon}
+                    <Share2 size={18} />
                     <span>{label}</span>
                   </button>
                 ))}

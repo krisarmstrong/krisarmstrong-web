@@ -78,8 +78,7 @@ This project uses several automated security tools:
 
 - **npm audit**: Scans for vulnerable dependencies
 - **audit-ci**: Fails CI builds on moderate+ vulnerabilities
-- **eslint-plugin-security**: Detects security anti-patterns
-- **eslint-plugin-no-secrets**: Prevents secret leakage
+- **Biome**: Enforces baseline linting and formatting across JavaScript, TypeScript, JSON, CSS, and related frontend assets
 - **Dependabot**: Automated dependency updates
 - **CodeQL**: Static code analysis (GitHub Security)
 

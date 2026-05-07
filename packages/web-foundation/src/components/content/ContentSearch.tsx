@@ -1,6 +1,6 @@
-import { useState, useEffect, useMemo, useDeferredValue, useRef } from 'react';
-import { Search, X } from 'lucide-react';
 import Fuse from 'fuse.js';
+import { Search, X } from 'lucide-react';
+import { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
 
 export interface SearchableItem {
   [key: string]: unknown;

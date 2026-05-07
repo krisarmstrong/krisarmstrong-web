@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/require-await, @typescript-eslint/no-unnecessary-type-assertion */
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { MemoryRouter } from 'react-router-dom';
-import { ContactForm } from './ContactForm';
 import type { ReactElement } from 'react';
+import { MemoryRouter } from 'react-router-dom';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { ContactForm } from './ContactForm';
 
 // Mock useTelemetry hook
 const mockTrackEvent = vi.fn();

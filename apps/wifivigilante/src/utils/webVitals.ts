@@ -3,7 +3,7 @@
  * Tracks Core Web Vitals: LCP, INP, CLS, FCP, TTFB
  */
 
-import { onCLS, onFCP, onINP, onLCP, onTTFB, type Metric } from 'web-vitals';
+import { type Metric, onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals';
 
 const vitalsUrl = 'https://vitals.vercel-analytics.com/v1/vitals';
 

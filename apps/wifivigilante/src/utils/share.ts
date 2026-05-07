@@ -16,32 +16,37 @@ export function shareToPlatform(
   alertFn: (message: string) => void = alert
 ): void {
   if (!caseData) {
-    alertFn("Case data is not available for sharing.");
+    alertFn('Case data is not available for sharing.');
     return;
   }
 
-  const title = encodeURIComponent(caseData.title || "Wi-Fi Vigilante Case");
+  const title = encodeURIComponent(caseData.title || 'Wi-Fi Vigilante Case');
   const url = encodeURIComponent(currentUrl);
   let shareUrl: string | undefined;
 
   switch (platform.toLowerCase()) {
-    case "linkedin":
+    case 'linkedin':
       shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
       break;
-    case "twitter": // Or "x"
+    case 'twitter': // Or "x"
       shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
       break;
-    case "facebook":
+    case 'facebook':
       shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
       break;
-    case "instagram":
+    case 'instagram':
       // Instagram doesn't have a direct web share intent for posts with URLs.
       // Typically, apps guide users to copy a link and open Instagram.
-      navigator.clipboard.writeText(`${caseData.title}\n${currentUrl}`)
-        .then(() => alertFn("Instagram sharing not directly supported. Link copied to clipboard! You can paste it in your Instagram post."))
-        .catch(err => {
-          console.error("Failed to copy to clipboard for Instagram:", err);
-          alertFn("Could not copy link to clipboard. Please copy it manually.");
+      navigator.clipboard
+        .writeText(`${caseData.title}\n${currentUrl}`)
+        .then(() =>
+          alertFn(
+            'Instagram sharing not directly supported. Link copied to clipboard! You can paste it in your Instagram post.'
+          )
+        )
+        .catch((err) => {
+          console.error('Failed to copy to clipboard for Instagram:', err);
+          alertFn('Could not copy link to clipboard. Please copy it manually.');
         });
       return; // Exit early for Instagram
     default:
@@ -51,6 +56,6 @@ export function shareToPlatform(
   }
 
   if (shareUrl) {
-    window.open(shareUrl, "_blank", "noopener,noreferrer");
+    window.open(shareUrl, '_blank', 'noopener,noreferrer');
   }
 }

@@ -1,7 +1,8 @@
 // src/components/FilterDrawer.tsx
-import { useEffect, useState, useCallback } from "react";
-import { X, Filter } from "lucide-react";
-import { Button } from "./ui/Button.jsx";
+
+import { Filter, X } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
+import { Button } from './ui/Button.jsx';
 
 interface FilterDrawerProps {
   tags?: string[];
@@ -28,15 +29,15 @@ export default function FilterDrawer({
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent): void => {
-      if (e.key === "Escape") {
+      if (e.key === 'Escape') {
         handleCloseDrawer();
       }
     };
     if (open) {
-      window.addEventListener("keydown", handleEsc);
+      window.addEventListener('keydown', handleEsc);
     }
     return () => {
-      window.removeEventListener("keydown", handleEsc);
+      window.removeEventListener('keydown', handleEsc);
     };
   }, [open, handleCloseDrawer]);
 
@@ -46,8 +47,6 @@ export default function FilterDrawer({
       : [...selectedTags, tag];
     setSelectedTags(nextTags);
   };
-
-
 
   return (
     <>
@@ -98,34 +97,28 @@ export default function FilterDrawer({
                         type="button"
                         className={`px-3 py-1.5 text-sm rounded-full border transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface-raised ${
                           isSelected
-                            ? "bg-brand-accent border-brand-accent text-white hover:bg-interactive-hover"
-                            : "bg-surface-raised border-surface-border text-text-primary hover:bg-surface-raised hover:border-brand-accent"
+                            ? 'bg-brand-accent border-brand-accent text-white hover:bg-interactive-hover'
+                            : 'bg-surface-raised border-surface-border text-text-primary hover:bg-surface-raised hover:border-brand-accent'
                         }`}
                         aria-pressed={isSelected}
                       >
-                        {tag.replace(/^#/, "")}
+                        {tag.replace(/^#/, '')}
                       </button>
                     );
                   })}
                 </div>
               ) : (
-                <p className="text-text-muted italic text-center py-4">No tags available to filter.</p>
+                <p className="text-text-muted italic text-center py-4">
+                  No tags available to filter.
+                </p>
               )}
             </div>
 
             <div className="mt-auto pt-4 border-t border-surface-border flex justify-end gap-3">
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={() => setSelectedTags([])}
-              >
+              <Button variant="secondary" size="sm" onClick={() => setSelectedTags([])}>
                 Clear All
               </Button>
-              <Button
-                variant="primary"
-                size="sm"
-                onClick={handleCloseDrawer}
-              >
+              <Button variant="primary" size="sm" onClick={handleCloseDrawer}>
                 Done
               </Button>
             </div>

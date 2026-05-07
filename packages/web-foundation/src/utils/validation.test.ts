@@ -3,21 +3,21 @@
  * Comprehensive coverage for all validation functions used across apps
  */
 
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
-  validateEmail,
-  validatePhone,
-  validateName,
-  validateDateOfBirth,
+  sanitizeInput,
   validateAddress,
   validateCity,
-  validateState,
-  validateZipCode,
-  validateMessage,
-  sanitizeInput,
-  validateRequired,
+  validateDateOfBirth,
+  validateEmail,
   validateLength,
+  validateMessage,
+  validateName,
+  validatePhone,
+  validateRequired,
+  validateState,
   validateUrl,
+  validateZipCode,
 } from './validation';
 
 describe('validation utilities', () => {

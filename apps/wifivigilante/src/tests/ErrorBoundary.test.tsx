@@ -1,6 +1,6 @@
-import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest';
-import { render, screen } from '@testing-library/react';
 import { ErrorBoundary } from '@krisarmstrong/web-foundation';
+import { render, screen } from '@testing-library/react';
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 
 // Component that throws an error
 interface ThrowErrorProps {

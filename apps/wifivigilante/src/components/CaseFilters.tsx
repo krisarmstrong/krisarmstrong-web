@@ -1,8 +1,8 @@
 // src/components/CaseFilters.tsx
-import { useState, useEffect, useMemo, memo } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
+import type { Sector, Subsector, TransformedCase } from '@/types';
 import { getSubsectors } from '../api';
 import { Button } from './ui/Button.jsx';
-import { Sector, Subsector, TransformedCase } from '@/types';
 
 interface FilterOption {
   id?: string | number;
@@ -116,7 +116,6 @@ const CaseFilters = memo(
       }
       const sector = sectors.find((s) => s.name === selectedSectorName);
       if (sector && sector.id) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setIsLoadingSubsectors(true);
         getSubsectors(String(sector.id))
           .then((subsectorsData) => {

@@ -6,25 +6,25 @@
 
 @theme {
   /* Light mode (default) */
-  --color-brand-primary: #96A77A;
-  --color-brand-accent: #CFB53B;
-  --color-surface-base: #F8F6F1;
-  --color-surface-raised: #FFFFFF;
-  --color-surface-border: #4A574A;
+  --color-brand-primary: #96a77a;
+  --color-brand-accent: #cfb53b;
+  --color-surface-base: #f8f6f1;
+  --color-surface-raised: #ffffff;
+  --color-surface-border: #4a574a;
   --color-surface-hover: #dddbd4;
-  --color-text-primary: #303F33;
-  --color-text-muted: #4A574A;
-  --color-text-accent: #CFB53B;
-  --color-text-inverse: #F8F6F1;
-  --color-interactive-default: #96A77A;
-  --color-interactive-hover: #7A8A62;
-  --color-interactive-active: #CFB53B;
-  --color-interactive-focus: #CFB53B;
-  --color-interactive-disabled: #D9D7CF;
-  --color-status-success: #96A77A;
-  --color-status-warning: #CFB53B;
-  --color-status-error: #B85450;
-  --color-status-info: #5B7A8F;
+  --color-text-primary: #303f33;
+  --color-text-muted: #4a574a;
+  --color-text-accent: #cfb53b;
+  --color-text-inverse: #f8f6f1;
+  --color-interactive-default: #96a77a;
+  --color-interactive-hover: #7a8a62;
+  --color-interactive-active: #cfb53b;
+  --color-interactive-focus: #cfb53b;
+  --color-interactive-disabled: #d9d7cf;
+  --color-status-success: #96a77a;
+  --color-status-warning: #cfb53b;
+  --color-status-error: #b85450;
+  --color-status-info: #5b7a8f;
 
   /* Typography - Professional Fonts */
   --font-family-heading: Space Grotesk, system-ui, sans-serif;
@@ -34,25 +34,25 @@
 @layer theme {
   .dark {
     /* Dark mode overrides */
-    --color-brand-primary: #A8BA8E;
-    --color-brand-accent: #E0C84F;
-    --color-surface-base: #1A1F1C;
-    --color-surface-raised: #242B27;
-    --color-surface-border: #96A77A;
+    --color-brand-primary: #a8ba8e;
+    --color-brand-accent: #e0c84f;
+    --color-surface-base: #1a1f1c;
+    --color-surface-raised: #242b27;
+    --color-surface-border: #96a77a;
     --color-surface-hover: #3a4838;
-    --color-text-primary: #E8EDE4;
-    --color-text-muted: #A8BA8E;
-    --color-text-accent: #E0C84F;
-    --color-text-inverse: #1A1F1C;
-    --color-interactive-default: #A8BA8E;
-    --color-interactive-hover: #96A77A;
-    --color-interactive-active: #E0C84F;
-    --color-interactive-focus: #E0C84F;
-    --color-interactive-disabled: #3F4940;
-    --color-status-success: #A8BA8E;
-    --color-status-warning: #E0C84F;
-    --color-status-error: #CF6B67;
-    --color-status-info: #7A9AAF;
+    --color-text-primary: #e8ede4;
+    --color-text-muted: #a8ba8e;
+    --color-text-accent: #e0c84f;
+    --color-text-inverse: #1a1f1c;
+    --color-interactive-default: #a8ba8e;
+    --color-interactive-hover: #96a77a;
+    --color-interactive-active: #e0c84f;
+    --color-interactive-focus: #e0c84f;
+    --color-interactive-disabled: #3f4940;
+    --color-status-success: #a8ba8e;
+    --color-status-warning: #e0c84f;
+    --color-status-error: #cf6b67;
+    --color-status-info: #7a9aaf;
 
     /* Typography - Professional Fonts (same in dark mode) */
     --font-family-heading: Space Grotesk, system-ui, sans-serif;
@@ -63,24 +63,54 @@
 @layer components {
   .hero-gradient {
     position: relative;
-    background: radial-gradient(circle at 15% 20%, color-mix(in srgb, var(--color-brand-accent) 20%, transparent 80%) 0%, transparent 35%),
-      radial-gradient(circle at 80% 0%, color-mix(in srgb, var(--color-brand-primary) 25%, transparent 75%) 0%, transparent 40%),
-      linear-gradient(135deg, color-mix(in srgb, var(--color-surface-base) 85%, var(--color-brand-accent) 15%), var(--color-surface-base));
+    background:
+      radial-gradient(
+        circle at 15% 20%,
+        color-mix(in srgb, var(--color-brand-accent) 20%, transparent 80%) 0%,
+        transparent 35%
+      ),
+      radial-gradient(
+        circle at 80% 0%,
+        color-mix(in srgb, var(--color-brand-primary) 25%, transparent 75%) 0%,
+        transparent 40%
+      ),
+      linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--color-surface-base) 85%, var(--color-brand-accent) 15%),
+        var(--color-surface-base)
+      );
     color: var(--color-text-primary);
     overflow: hidden;
   }
 
   .dark .hero-gradient {
-    background: radial-gradient(circle at 20% 15%, color-mix(in srgb, var(--color-brand-accent) 30%, transparent 70%) 0%, transparent 32%),
-      radial-gradient(circle at 90% 10%, color-mix(in srgb, var(--color-brand-primary) 35%, transparent 65%) 0%, transparent 38%),
-      linear-gradient(145deg, color-mix(in srgb, var(--color-surface-base) 70%, var(--color-brand-primary) 30%), var(--color-surface-base));
+    background:
+      radial-gradient(
+        circle at 20% 15%,
+        color-mix(in srgb, var(--color-brand-accent) 30%, transparent 70%) 0%,
+        transparent 32%
+      ),
+      radial-gradient(
+        circle at 90% 10%,
+        color-mix(in srgb, var(--color-brand-primary) 35%, transparent 65%) 0%,
+        transparent 38%
+      ),
+      linear-gradient(
+        145deg,
+        color-mix(in srgb, var(--color-surface-base) 70%, var(--color-brand-primary) 30%),
+        var(--color-surface-base)
+      );
   }
 
   .dot-pattern {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background-image: radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--color-brand-accent) 28%, transparent 72%) 1px, transparent 0);
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      color-mix(in srgb, var(--color-brand-accent) 28%, transparent 72%) 1px,
+      transparent 0
+    );
     background-size: 26px 26px;
     opacity: 0.25;
   }
@@ -88,14 +118,26 @@
   .enhanced-card {
     background: var(--color-surface-raised);
     border: 1px solid color-mix(in srgb, var(--color-surface-border) 60%, transparent 40%);
-    box-shadow: 0 15px 35px color-mix(in srgb, #000 15%, transparent 85%), 0 8px 16px color-mix(in srgb, #000 8%, transparent 92%);
-    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
+    box-shadow:
+      0 15px 35px color-mix(in srgb, #000 15%, transparent 85%),
+      0 8px 16px color-mix(in srgb, #000 8%, transparent 92%);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      border-color 180ms ease,
+      background 180ms ease;
   }
 
   .enhanced-card:hover {
     transform: translateY(-6px);
-    border-color: color-mix(in srgb, var(--color-brand-accent) 65%, var(--color-surface-border) 35%);
-    box-shadow: 0 20px 40px color-mix(in srgb, #000 22%, transparent 78%), 0 10px 20px color-mix(in srgb, #000 12%, transparent 88%);
+    border-color: color-mix(
+      in srgb,
+      var(--color-brand-accent) 65%,
+      var(--color-surface-border) 35%
+    );
+    box-shadow:
+      0 20px 40px color-mix(in srgb, #000 22%, transparent 78%),
+      0 10px 20px color-mix(in srgb, #000 12%, transparent 88%);
   }
 
   .accent-border-top {
@@ -103,11 +145,15 @@
   }
 
   .accent-border-top::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--color-brand-accent), color-mix(in srgb, var(--color-brand-primary) 65%, var(--color-brand-accent) 35%));
+    background: linear-gradient(
+      90deg,
+      var(--color-brand-accent),
+      color-mix(in srgb, var(--color-brand-primary) 65%, var(--color-brand-accent) 35%)
+    );
     top: -1px;
     border-radius: 999px;
     pointer-events: none;
@@ -117,13 +163,23 @@
     width: 120px;
     height: 3px;
     margin: 0 auto;
-    background: linear-gradient(90deg, transparent, var(--color-brand-accent), var(--color-brand-primary), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-brand-accent),
+      var(--color-brand-primary),
+      transparent
+    );
     border-radius: 999px;
     opacity: 0.8;
   }
 
   .callout {
-    background: linear-gradient(135deg, color-mix(in srgb, var(--color-brand-accent) 18%, var(--color-surface-raised) 82%), var(--color-surface-raised));
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-brand-accent) 18%, var(--color-surface-raised) 82%),
+      var(--color-surface-raised)
+    );
     border-left: 4px solid var(--color-brand-accent);
     border-radius: 16px;
     box-shadow: 0 10px 25px color-mix(in srgb, #000 14%, transparent 86%);

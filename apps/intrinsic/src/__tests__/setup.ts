@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom/vitest';
 import {
   createLocalStorageMock,
+  mockEnvVars,
   setupBrowserMocks,
   setupTestCleanup,
-  mockEnvVars,
 } from '@krisarmstrong/web-foundation/src/test-utils';
 
 // Setup browser API mocks (matchMedia, IntersectionObserver, scrollTo, etc.)

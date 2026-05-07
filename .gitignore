@@ -122,6 +122,8 @@ credentials.json
 **/CLEAN_START.sql
 **/import_data.sql
 **/restore_database.sql
+!apps/krisarmstrong/database/schema.sql
+!apps/wifivigilante/database/schema.sql
 
 # Tooling defaults
 .next/

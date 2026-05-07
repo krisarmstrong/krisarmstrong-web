@@ -1,9 +1,10 @@
 // src/api.ts
-import { supabase } from './supabaseClient';
-import { apiRateLimiter, searchRateLimiter } from './utils/rateLimit';
-import { validateSearchQuery, validatePublicId } from './utils/validation';
+
+import type { CaseFile, Sector, Subsector } from '@/types';
+import localData from './data/wifiVigilanteData.json';
 import { sectorCache, withCache } from './utils/cache';
-import type { Sector, Subsector, CaseFile } from '@/types';
+import { apiRateLimiter, searchRateLimiter } from './utils/rateLimit';
+import { validatePublicId, validateSearchQuery } from './utils/validation';
 
 interface CaseWithRelations extends CaseFile {
   sectors?: { name?: string; description?: string } | null;
@@ -27,17 +28,41 @@ interface SimplifiedCase {
   subsector_id?: number | null;
 }
 
+type LocalCase = CaseFile & {
+  id: number;
+  featured_date?: string | null;
+};
+
+const sectors = localData.sectors as Sector[];
+const subsectors = localData.subsectors as Subsector[];
+const cases = localData.cases as LocalCase[];
+
+async function fetchJson<T>(url: string): Promise<T | null> {
+  try {
+    const response = await fetch(url, { headers: { Accept: 'application/json' } });
+    if (!response.ok) return null;
+    return (await response.json()) as T;
+  } catch {
+    return null;
+  }
+}
+
+function withRelations<T extends CaseFile>(caseFile: T): T & CaseWithRelations {
+  const existing = caseFile as T & CaseWithRelations;
+  return {
+    ...caseFile,
+    sectors: existing.sectors ?? sectors.find((sector) => sector.id === caseFile.sector_id) ?? null,
+    subsectors:
+      existing.subsectors ??
+      subsectors.find((subsector) => subsector.id === caseFile.subsector_id) ??
+      null,
+  };
+}
+
 // Fetch all sectors (internal, uncached)
 async function getSectorsInternal(): Promise<Sector[]> {
-  const { data, error } = await supabase
-    .from('sectors')
-    .select('id, name, description')
-    .order('name', { ascending: true });
-  if (error) {
-    console.error('Error fetching sectors:', error);
-    throw error;
-  }
-  return data || [];
+  const apiSectors = await fetchJson<Sector[]>('/api/sectors');
+  return (apiSectors?.length ? apiSectors : sectors).sort((a, b) => a.name.localeCompare(b.name));
 }
 
 // Fetch all sectors (cached)
@@ -45,16 +70,12 @@ const getSectors = withCache(getSectorsInternal, sectorCache, () => 'sectors');
 
 // Fetch subsectors for a sector (internal, uncached)
 async function getSubsectorsInternal(sectorId: string): Promise<Subsector[]> {
-  const { data, error } = await supabase
-    .from('subsectors')
-    .select('id, name, description, sector_id')
-    .eq('sector_id', sectorId)
-    .order('name', { ascending: true });
-  if (error) {
-    console.error('Error fetching subsectors:', error);
-    throw error;
-  }
-  return (data || []) as Subsector[];
+  const apiSubsectors = await fetchJson<Subsector[]>(
+    `/api/subsectors?sectorId=${encodeURIComponent(sectorId)}`
+  );
+  return (apiSubsectors?.length ? apiSubsectors : subsectors)
+    .filter((subsector) => String(subsector.sector_id) === sectorId)
+    .sort((a, b) => a.name.localeCompare(b.name));
 }
 
 // Fetch subsectors for a sector (cached)
@@ -78,76 +99,19 @@ async function getCase(publicId: string): Promise<CaseWithRelations | null> {
     console.error('getCase: Invalid public_id provided:', publicId);
     throw new Error(validation.error || 'Invalid public ID');
   }
-  const { data, error } = await supabase
-    .from('case_files')
-    .select(
-      `
-      id,
-      public_id,
-      title,
-      sector_id,
-      subsector_id,
-      tool,
-      location,
-      category,
-      incident_date,
-      tags,
-      incident_overview,
-      investigation_breakdown,
-      root_cause,
-      resolution,
-      verdict,
-      summary,
-      detected_by,
-      severity,
-      status,
-      impact_scope,
-      duration_minutes,
-      validated_by,
-      created_at,
-      updated_at,
-      sectors (name, description),
-      subsectors (name, description)
-    `
-    )
-    .eq('public_id', publicId)
-    .single();
-  if (error && error.code !== 'PGRST116') {
-    // PGRST116 means 0 rows, which is a valid "not found"
-    console.error('Error fetching case:', error);
-    throw error;
-  }
-  return data as CaseWithRelations | null; // null if not found (PGRST116), or the case data
+  const apiCase = await fetchJson<CaseWithRelations>(`/api/cases/${encodeURIComponent(publicId)}`);
+  if (apiCase) return apiCase;
+
+  const caseFile = cases.find((item) => item.public_id === publicId);
+  return caseFile ? withRelations(caseFile) : null;
 }
 
 // Fetch all cases
 async function getAllCases(): Promise<SimplifiedCase[]> {
-  const { data, error } = await supabase
-    .from('case_files')
-    .select(
-      `
-      id,
-      public_id,
-      title,
-      incident_date,
-      severity,
-      status,
-      sector_id,
-      subsector_id,
-      sectors (name),
-      subsectors (name),
-      tool,
-      tags,
-      summary,
-      incident_overview
-    `
-    )
-    .order('incident_date', { ascending: false });
-  if (error) {
-    console.error('Error fetching all cases:', error);
-    throw error;
-  }
-  return (data || []) as SimplifiedCase[];
+  const apiCases = await fetchJson<SimplifiedCase[]>('/api/cases');
+  return (apiCases?.length ? apiCases : cases.map((caseFile) => withRelations(caseFile)))
+    .map((caseFile) => withRelations(caseFile))
+    .sort((a, b) => b.incident_date.localeCompare(a.incident_date));
 }
 
 // Awareness month configuration - maps month to priority sector IDs
@@ -191,7 +155,6 @@ function tagsToHashtags(tags: string | null): string[] {
 function getAwarenessMonth(date: Date = new Date()): { name: string; sectorIds: number[] } | null {
   const month = date.getMonth() + 1; // JavaScript months are 0-indexed
   const monthKey = month as keyof typeof AWARENESS_MONTHS;
-  // eslint-disable-next-line security/detect-object-injection -- monthKey is validated via 'in' check
   return monthKey in AWARENESS_MONTHS ? AWARENESS_MONTHS[monthKey] : null;
 }
 
@@ -209,79 +172,46 @@ async function fetchCaseOfTheDay(
   const seed = getDateSeed(targetDate);
   const month = targetDate.getMonth() + 1;
   const monthKey = month as keyof typeof AWARENESS_MONTHS;
-  // eslint-disable-next-line security/detect-object-injection -- monthKey is validated via 'in' check
   const awareness = monthKey in AWARENESS_MONTHS ? AWARENESS_MONTHS[monthKey] : undefined;
-
-  // First, try to get pre-selected case from daily_case_selections (if migration was run)
-  const dateStr = targetDate.toISOString().split('T')[0];
-  const { data: selection } = await supabase
-    .from('daily_case_selections')
-    .select('case_id')
-    .eq('selection_date', dateStr)
-    .single();
 
   let selectedPublicId: string | null = null;
 
-  if (selection?.case_id) {
-    // Use pre-selected case
-    const { data: preSelected } = await supabase
-      .from('case_files')
-      .select('public_id')
-      .eq('id', selection.case_id)
-      .single();
-    if (preSelected) {
-      selectedPublicId = preSelected.public_id;
-    }
-  }
-
   if (!selectedPublicId) {
-    // Deterministic selection: fetch all cases and select based on date seed
-    let query = supabase
-      .from('case_files')
-      .select('id, public_id, sector_id, featured_date')
-      .order('id', { ascending: true });
+    let candidateCases = [...cases].sort((a, b) => a.id - b.id);
 
     // During awareness months, prioritize relevant sectors (70% chance)
     const prioritizeSector = awareness && seed % 10 < 7;
 
     if (prioritizeSector) {
-      query = query.in('sector_id', awareness.sectorIds);
+      candidateCases = candidateCases.filter((caseFile) =>
+        awareness.sectorIds.includes(caseFile.sector_id)
+      );
     }
 
-    const { data: cases, error } = await query.limit(100);
-
-    if (error || !cases || cases.length === 0) {
-      // Fallback: get any case
-      const { data: fallbackCases } = await supabase
-        .from('case_files')
-        .select('id, public_id')
-        .limit(100);
-
-      if (!fallbackCases || fallbackCases.length === 0) {
+    if (candidateCases.length === 0) {
+      candidateCases = [...cases].sort((a, b) => a.id - b.id);
+      if (candidateCases.length === 0) {
         console.warn('No cases found for Case of the Day.');
         return null;
       }
 
       // Deterministic selection using seed
-      const index = seed % fallbackCases.length;
-      const selectedCase =
-        // eslint-disable-next-line security/detect-object-injection -- index is bounds-checked
-        index >= 0 && index < fallbackCases.length ? fallbackCases[index] : undefined;
+      const index = seed % candidateCases.length;
+      const selectedCase = candidateCases[index];
       selectedPublicId = selectedCase?.public_id ?? null;
     } else {
       // Prefer cases not recently featured (within 30 days)
       const thirtyDaysAgo = new Date(targetDate);
       thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
-      const eligibleCases = cases.filter(
+      const eligibleCases = candidateCases.filter(
         (c) => !c.featured_date || new Date(c.featured_date) < thirtyDaysAgo
       );
 
-      const casePool = eligibleCases.length > 0 ? eligibleCases : cases;
+      const casePool = eligibleCases.length > 0 ? eligibleCases : candidateCases;
 
       // Deterministic selection using seed
       const index = seed % casePool.length;
-      // eslint-disable-next-line security/detect-object-injection -- index is bounds-checked
       const poolCase = index >= 0 && index < casePool.length ? casePool[index] : undefined;
       selectedPublicId = poolCase?.public_id ?? null;
     }
@@ -331,65 +261,35 @@ async function searchCases(query: string): Promise<CaseWithRelations[]> {
     throw new Error(validation.error || 'Invalid search query');
   }
 
-  // Sanitize query to prevent SQL injection - escape special LIKE characters
-  const sanitizedQuery = query.trim().replace(/[%_\\]/g, '\\$&');
+  const normalizedQuery = query.trim().toLowerCase();
+  const searchableFields: Array<keyof CaseFile> = [
+    'title',
+    'tags',
+    'category',
+    'incident_overview',
+    'tool',
+  ];
 
-  // Use multiple .ilike() calls instead of .or() string interpolation
-  // This is safer as Supabase properly escapes each parameter
-  let searchQuery = supabase.from('case_files').select(`
-      id,
-      public_id,
-      title,
-      sector_id,
-      subsector_id,
-      tool,
-      location,
-      category,
-      incident_date,
-      tags,
-      incident_overview,
-      investigation_breakdown,
-      root_cause,
-      resolution,
-      verdict,
-      summary,
-      detected_by,
-      severity,
-      status,
-      impact_scope,
-      duration_minutes,
-      validated_by,
-      sectors (name),
-      subsectors (name)
-    `);
-
-  // Apply OR filters using individual .or() with escaped query
-  // This prevents SQL injection by using parameterized queries
-  searchQuery = searchQuery.or(
-    `title.ilike.%${sanitizedQuery}%,` +
-      `tags.ilike.%${sanitizedQuery}%,` +
-      `category.ilike.%${sanitizedQuery}%,` +
-      `incident_overview.ilike.%${sanitizedQuery}%,` +
-      `tool.ilike.%${sanitizedQuery}%`
-  );
-
-  const { data, error } = await searchQuery.limit(100).order('incident_date', { ascending: false });
-
-  if (error) {
-    console.error('Error searching cases:', error);
-    throw error;
-  }
-
-  return (data || []) as CaseWithRelations[];
+  return cases
+    .filter((caseFile) =>
+      searchableFields.some((field) =>
+        String(caseFile[field] ?? '')
+          .toLowerCase()
+          .includes(normalizedQuery)
+      )
+    )
+    .map((caseFile) => withRelations(caseFile))
+    .sort((a, b) => b.incident_date.localeCompare(a.incident_date))
+    .slice(0, 100);
 }
 
 export {
+  fetchCaseOfTheDay,
+  getAllCases,
+  getAwarenessMonth,
+  getCase,
   getSectors,
   getSubsectors,
-  getCase,
-  getAllCases,
-  fetchCaseOfTheDay,
   searchCases,
   tagsToHashtags,
-  getAwarenessMonth,
 };

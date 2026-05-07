@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
-  LoadingSpinner,
   LoadingCard,
   LoadingPage,
+  LoadingSpinner,
   Skeleton,
-  SkeletonText,
   SkeletonCard,
+  SkeletonText,
 } from './Loading';
 
 const meta: Meta = {

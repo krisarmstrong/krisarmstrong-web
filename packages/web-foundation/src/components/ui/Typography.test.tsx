@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import {
-  H1,
-  H2,
-  P,
-  SmallText,
-  MutedText,
   AccentLink,
   ArticleTitle,
-  Tag,
   Badge,
+  H1,
+  H2,
+  MutedText,
+  P,
+  SmallText,
+  Tag,
 } from './Typography';
 
 // Helper function to render with MemoryRouter (needed for AccentLink)
@@ -44,11 +44,7 @@ describe('Typography', () => {
     });
 
     it('renders with icon', () => {
-      render(
-        <H1 icon={<span data-testid="test-icon">Icon</span>}>
-          Heading 1
-        </H1>
-      );
+      render(<H1 icon={<span data-testid="test-icon">Icon</span>}>Heading 1</H1>);
       const icon = screen.getByTestId('test-icon');
       expect(icon).toBeInTheDocument();
     });
@@ -86,11 +82,7 @@ describe('Typography', () => {
     });
 
     it('renders with icon', () => {
-      render(
-        <H2 icon={<span data-testid="h2-icon">Icon</span>}>
-          Heading 2
-        </H2>
-      );
+      render(<H2 icon={<span data-testid="h2-icon">Icon</span>}>Heading 2</H2>);
       const icon = screen.getByTestId('h2-icon');
       expect(icon).toBeInTheDocument();
     });
@@ -180,12 +172,7 @@ describe('Typography', () => {
         </P>
       );
       const paragraph = screen.getByText(/styled paragraph/i);
-      expect(paragraph).toHaveClass(
-        'text-text-primary',
-        'text-sm',
-        'leading-loose',
-        'extra-class'
-      );
+      expect(paragraph).toHaveClass('text-text-primary', 'text-sm', 'leading-loose', 'extra-class');
     });
   });
 
@@ -293,25 +280,16 @@ describe('Typography', () => {
 
   describe('AccentLink Component', () => {
     it('renders the AccentLink component with the correct text and href', () => {
-      renderWithRouter(
-        <AccentLink to="/test">Click here</AccentLink>
-      );
+      renderWithRouter(<AccentLink to="/test">Click here</AccentLink>);
       const link = screen.getByRole('link', { name: /click here/i });
       expect(link).toBeInTheDocument();
       expect(link).toHaveAttribute('href', '/test');
     });
 
     it('applies correct base styles', () => {
-      renderWithRouter(
-        <AccentLink to="/test">Click here</AccentLink>
-      );
+      renderWithRouter(<AccentLink to="/test">Click here</AccentLink>);
       const link = screen.getByRole('link');
-      expect(link).toHaveClass(
-        'inline-flex',
-        'items-center',
-        'gap-1.5',
-        'transition-colors'
-      );
+      expect(link).toHaveClass('inline-flex', 'items-center', 'gap-1.5', 'transition-colors');
     });
 
     it('renders with left icon', () => {
@@ -432,9 +410,7 @@ describe('Typography', () => {
     });
 
     it('renders with custom className', () => {
-      const { container } = render(
-        <Tag className="custom-tag-class">Tag text</Tag>
-      );
+      const { container } = render(<Tag className="custom-tag-class">Tag text</Tag>);
       const tag = container.querySelector('span');
       expect(tag).toHaveClass('custom-tag-class');
     });
@@ -470,10 +446,7 @@ describe('Typography', () => {
     it('applies success variant', () => {
       const { container } = render(<Badge variant="success">Success</Badge>);
       const badge = container.querySelector('span');
-      expect(badge).toHaveClass(
-        'bg-[var(--color-status-success)]',
-        'text-white'
-      );
+      expect(badge).toHaveClass('bg-[var(--color-status-success)]', 'text-white');
     });
 
     it('applies warning variant', () => {
@@ -488,19 +461,13 @@ describe('Typography', () => {
     it('applies danger variant', () => {
       const { container } = render(<Badge variant="danger">Danger</Badge>);
       const badge = container.querySelector('span');
-      expect(badge).toHaveClass(
-        'bg-[var(--color-status-error)]',
-        'text-white'
-      );
+      expect(badge).toHaveClass('bg-[var(--color-status-error)]', 'text-white');
     });
 
     it('applies info variant', () => {
       const { container } = render(<Badge variant="info">Info</Badge>);
       const badge = container.querySelector('span');
-      expect(badge).toHaveClass(
-        'bg-[var(--color-status-info)]',
-        'text-white'
-      );
+      expect(badge).toHaveClass('bg-[var(--color-status-info)]', 'text-white');
     });
 
     it('applies correct base styles', () => {
@@ -518,9 +485,7 @@ describe('Typography', () => {
     });
 
     it('renders with custom className', () => {
-      const { container } = render(
-        <Badge className="custom-badge-class">Badge text</Badge>
-      );
+      const { container } = render(<Badge className="custom-badge-class">Badge text</Badge>);
       const badge = container.querySelector('span');
       expect(badge).toHaveClass('custom-badge-class');
     });
@@ -565,24 +530,22 @@ describe('Typography', () => {
 
     it('applies custom className to AccentLink', () => {
       renderWithRouter(
-        <AccentLink to="/test" className="custom-link">Test</AccentLink>
+        <AccentLink to="/test" className="custom-link">
+          Test
+        </AccentLink>
       );
       const link = screen.getByRole('link');
       expect(link).toHaveClass('custom-link');
     });
 
     it('applies custom className to Tag', () => {
-      const { container } = render(
-        <Tag className="custom-tag">Test</Tag>
-      );
+      const { container } = render(<Tag className="custom-tag">Test</Tag>);
       const tag = container.querySelector('span');
       expect(tag).toHaveClass('custom-tag');
     });
 
     it('applies custom className to Badge', () => {
-      const { container } = render(
-        <Badge className="custom-badge">Test</Badge>
-      );
+      const { container } = render(<Badge className="custom-badge">Test</Badge>);
       const badge = container.querySelector('span');
       expect(badge).toHaveClass('custom-badge');
     });

@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 export interface UseProgressiveLoadOptions {
   /** Number of items to load per "Load More" action */

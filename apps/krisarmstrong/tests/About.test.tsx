@@ -1,7 +1,7 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { describe, expect, it, vi } from 'vitest';
 import About from '../src/pages/About';
 
 // Mock framer-motion

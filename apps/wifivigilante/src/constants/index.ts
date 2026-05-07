@@ -53,9 +53,9 @@ export const PAGINATION = {
 
 // API
 export const API = {
-  TIMEOUT: 30000,  // 30 seconds
+  TIMEOUT: 30000, // 30 seconds
   RETRY_COUNT: 3,
-  RETRY_DELAY: 1000,  // 1 second
+  RETRY_DELAY: 1000, // 1 second
 } as const;
 
 // Validation

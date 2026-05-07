@@ -133,7 +133,10 @@ export const validateCaseData = (caseData: Partial<CaseFile>): ValidationResult 
     errors.incident_overview = 'Incident overview is too long (max 5000 characters)';
   }
 
-  if (caseData.duration_minutes && (isNaN(caseData.duration_minutes) || caseData.duration_minutes < 0)) {
+  if (
+    caseData.duration_minutes &&
+    (isNaN(caseData.duration_minutes) || caseData.duration_minutes < 0)
+  ) {
     errors.duration_minutes = 'Duration must be a positive number';
   }
 

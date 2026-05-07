@@ -35,7 +35,7 @@ class RateLimiter {
 
     // Remove timestamps outside the current time window
     const validTimestamps = requestTimestamps.filter(
-      timestamp => now - timestamp < this.timeWindowMs
+      (timestamp) => now - timestamp < this.timeWindowMs
     );
 
     if (validTimestamps.length >= this.maxRequests) {
@@ -44,7 +44,7 @@ class RateLimiter {
 
       return {
         allowed: false,
-        retryAfter
+        retryAfter,
       };
     }
 
@@ -54,7 +54,7 @@ class RateLimiter {
 
     return {
       allowed: true,
-      retryAfter: null
+      retryAfter: null,
     };
   }
 
@@ -83,13 +83,13 @@ class RateLimiter {
     const requestTimestamps = this.requests.get(endpoint) || [];
 
     const validTimestamps = requestTimestamps.filter(
-      timestamp => now - timestamp < this.timeWindowMs
+      (timestamp) => now - timestamp < this.timeWindowMs
     );
 
     return {
       used: validTimestamps.length,
       remaining: this.maxRequests - validTimestamps.length,
-      total: this.maxRequests
+      total: this.maxRequests,
     };
   }
 }

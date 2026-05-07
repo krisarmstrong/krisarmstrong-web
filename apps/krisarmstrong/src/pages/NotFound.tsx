@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 export default function NotFound() {
   return (
@@ -15,7 +15,10 @@ export default function NotFound() {
       <p className="text-text-muted mb-6">
         The page you're looking for doesn't exist. Try the links below!
       </p>
-      <Link to="/" className="px-6 py-2 rounded-lg bg-brand-accent text-surface-raised font-semibold hover:bg-interactive-hover transition">
+      <Link
+        to="/"
+        className="px-6 py-2 rounded-lg bg-brand-accent text-surface-raised font-semibold hover:bg-interactive-hover transition"
+      >
         Back to Home
       </Link>
     </section>

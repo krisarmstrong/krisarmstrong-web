@@ -10,20 +10,15 @@
  * - layout: Page structure and theme
  */
 
-// UI Components
-export * from './ui';
-
-// Form Components
-export * from './forms';
-
-// Display Components
-export * from './display';
-
-// Feedback Components
-export * from './feedback';
-
 // Content Components
 export * from './content';
-
+// Display Components
+export * from './display';
+// Feedback Components
+export * from './feedback';
+// Form Components
+export * from './forms';
 // Layout Components
 export * from './layout';
+// UI Components
+export * from './ui';

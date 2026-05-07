@@ -1,108 +1,108 @@
-import { motion } from "framer-motion";
-import { Cpu, Shield, Cloud, Code, Network, Radio } from "lucide-react";
+import { motion } from 'framer-motion';
+import { Cloud, Code, Cpu, Network, Radio, Shield } from 'lucide-react';
 
 interface SkillCategory {
   icon: typeof Cpu;
   title: string;
   color: string;
-  skills: {name: string; level: number}[];
+  skills: { name: string; level: number }[];
 }
 
 const skillCategories: SkillCategory[] = [
   {
     icon: Network,
-    title: "Network Engineering",
-    color: "violet",
+    title: 'Network Engineering',
+    color: 'violet',
     skills: [
-      { name: "Enterprise Wired/Wireless Design", level: 95 },
-      { name: "Wi-Fi 6/6E/7", level: 95 },
-      { name: "Cisco/Aruba/Juniper", level: 90 },
-      { name: "BGP/OSPF/MPLS", level: 85 },
-      { name: "SD-WAN", level: 85 },
-      { name: "QoS & Traffic Engineering", level: 90 },
+      { name: 'Enterprise Wired/Wireless Design', level: 95 },
+      { name: 'Wi-Fi 6/6E/7', level: 95 },
+      { name: 'Cisco/Aruba/Juniper', level: 90 },
+      { name: 'BGP/OSPF/MPLS', level: 85 },
+      { name: 'SD-WAN', level: 85 },
+      { name: 'QoS & Traffic Engineering', level: 90 },
     ],
   },
   {
     icon: Radio,
-    title: "Wireless Technologies",
-    color: "blue",
+    title: 'Wireless Technologies',
+    color: 'blue',
     skills: [
-      { name: "RF Planning & Design", level: 95 },
-      { name: "Site Surveys & Validation", level: 95 },
-      { name: "Spectrum Analysis", level: 90 },
-      { name: "Capacity Planning", level: 90 },
-      { name: "Ekahau/NetAlly Tools", level: 95 },
-      { name: "802.11 Standards", level: 95 },
+      { name: 'RF Planning & Design', level: 95 },
+      { name: 'Site Surveys & Validation', level: 95 },
+      { name: 'Spectrum Analysis', level: 90 },
+      { name: 'Capacity Planning', level: 90 },
+      { name: 'Ekahau/NetAlly Tools', level: 95 },
+      { name: '802.11 Standards', level: 95 },
     ],
   },
   {
     icon: Shield,
-    title: "Security & Compliance",
-    color: "red",
+    title: 'Security & Compliance',
+    color: 'red',
     skills: [
-      { name: "CISSP - Security Architecture", level: 95 },
-      { name: "Wireless Security (CWSP)", level: 95 },
-      { name: "Zero Trust Architecture", level: 90 },
-      { name: "802.1X/EAP", level: 90 },
-      { name: "Penetration Testing", level: 85 },
-      { name: "PCI DSS/ISO 27001", level: 85 },
+      { name: 'CISSP - Security Architecture', level: 95 },
+      { name: 'Wireless Security (CWSP)', level: 95 },
+      { name: 'Zero Trust Architecture', level: 90 },
+      { name: '802.1X/EAP', level: 90 },
+      { name: 'Penetration Testing', level: 85 },
+      { name: 'PCI DSS/ISO 27001', level: 85 },
     ],
   },
   {
     icon: Code,
-    title: "Development & Automation",
-    color: "green",
+    title: 'Development & Automation',
+    color: 'green',
     skills: [
-      { name: "Python", level: 90 },
-      { name: "Go", level: 80 },
-      { name: "TypeScript/JavaScript", level: 85 },
-      { name: "React/Node.js", level: 80 },
-      { name: "Ansible", level: 85 },
-      { name: "Git/CI/CD", level: 85 },
+      { name: 'Python', level: 90 },
+      { name: 'Go', level: 80 },
+      { name: 'TypeScript/JavaScript', level: 85 },
+      { name: 'React/Node.js', level: 80 },
+      { name: 'Ansible', level: 85 },
+      { name: 'Git/CI/CD', level: 85 },
     ],
   },
   {
     icon: Cloud,
-    title: "Cloud & Infrastructure",
-    color: "cyan",
+    title: 'Cloud & Infrastructure',
+    color: 'cyan',
     skills: [
-      { name: "AWS", level: 80 },
-      { name: "Azure", level: 75 },
-      { name: "Docker/Podman", level: 85 },
-      { name: "Hybrid Cloud Design", level: 85 },
-      { name: "Infrastructure as Code", level: 80 },
-      { name: "Cloud Security", level: 85 },
+      { name: 'AWS', level: 80 },
+      { name: 'Azure', level: 75 },
+      { name: 'Docker/Podman', level: 85 },
+      { name: 'Hybrid Cloud Design', level: 85 },
+      { name: 'Infrastructure as Code', level: 80 },
+      { name: 'Cloud Security', level: 85 },
     ],
   },
   {
     icon: Cpu,
-    title: "Sales Engineering",
-    color: "amber",
+    title: 'Sales Engineering',
+    color: 'amber',
     skills: [
-      { name: "Technical Pre-Sales", level: 95 },
-      { name: "RFP/RFQ Response", level: 95 },
-      { name: "Solution Architecture", level: 90 },
-      { name: "POC Development", level: 90 },
-      { name: "Executive Presentations", level: 90 },
-      { name: "Customer Training", level: 95 },
+      { name: 'Technical Pre-Sales', level: 95 },
+      { name: 'RFP/RFQ Response', level: 95 },
+      { name: 'Solution Architecture', level: 90 },
+      { name: 'POC Development', level: 90 },
+      { name: 'Executive Presentations', level: 90 },
+      { name: 'Customer Training', level: 95 },
     ],
   },
 ];
 
-const colorClasses: Record<string, {bg: string; text: string; border: string}> = {
-  violet: { bg: "bg-violet-500", text: "text-violet-400", border: "border-violet-500/30" },
-  blue: { bg: "bg-blue-500", text: "text-blue-400", border: "border-blue-500/30" },
-  red: { bg: "bg-red-500", text: "text-red-400", border: "border-red-500/30" },
-  green: { bg: "bg-green-500", text: "text-green-400", border: "border-green-500/30" },
-  cyan: { bg: "bg-cyan-500", text: "text-cyan-400", border: "border-cyan-500/30" },
-  amber: { bg: "bg-amber-500", text: "text-amber-400", border: "border-amber-500/30" },
+const colorClasses: Record<string, { bg: string; text: string; border: string }> = {
+  violet: { bg: 'bg-violet-500', text: 'text-violet-400', border: 'border-violet-500/30' },
+  blue: { bg: 'bg-blue-500', text: 'text-blue-400', border: 'border-blue-500/30' },
+  red: { bg: 'bg-red-500', text: 'text-red-400', border: 'border-red-500/30' },
+  green: { bg: 'bg-green-500', text: 'text-green-400', border: 'border-green-500/30' },
+  cyan: { bg: 'bg-cyan-500', text: 'text-cyan-400', border: 'border-cyan-500/30' },
+  amber: { bg: 'bg-amber-500', text: 'text-amber-400', border: 'border-amber-500/30' },
 };
 
 const certifications = [
-  { name: "CISSP", org: "(ISC)²", full: "Certified Information Systems Security Professional" },
-  { name: "CWSP", org: "CWNP", full: "Certified Wireless Security Professional" },
-  { name: "CWDP", org: "CWNP", full: "Certified Wireless Design Professional" },
-  { name: "CWNA", org: "CWNP", full: "Certified Wireless Network Administrator" },
+  { name: 'CISSP', org: '(ISC)²', full: 'Certified Information Systems Security Professional' },
+  { name: 'CWSP', org: 'CWNP', full: 'Certified Wireless Security Professional' },
+  { name: 'CWDP', org: 'CWNP', full: 'Certified Wireless Design Professional' },
+  { name: 'CWNA', org: 'CWNP', full: 'Certified Wireless Network Administrator' },
 ];
 
 export default function Skills() {
@@ -190,10 +190,22 @@ export default function Skills() {
         <h2 className="text-2xl font-semibold mb-6">Tools & Platforms</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            "Ekahau", "NetAlly", "Wireshark", "Cisco",
-            "Aruba", "Juniper", "Fortinet", "Palo Alto",
-            "AWS", "Azure", "Docker", "Ansible",
-            "Python", "Go", "TypeScript", "React"
+            'Ekahau',
+            'NetAlly',
+            'Wireshark',
+            'Cisco',
+            'Aruba',
+            'Juniper',
+            'Fortinet',
+            'Palo Alto',
+            'AWS',
+            'Azure',
+            'Docker',
+            'Ansible',
+            'Python',
+            'Go',
+            'TypeScript',
+            'React',
           ].map((tool, i) => (
             <motion.div
               key={tool}

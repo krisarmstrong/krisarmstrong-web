@@ -11,19 +11,17 @@
 // Components - All UI components organized by category
 // ============================================================================
 export * from './components';
-
+export { useProgressiveLoad } from './hooks/useProgressiveLoad';
+export { useReducedMotion } from './hooks/useReducedMotion';
 // ============================================================================
 // Hooks
 // ============================================================================
 export { useTheme as useSimpleTheme } from './hooks/useTheme';
-export { useProgressiveLoad } from './hooks/useProgressiveLoad';
-export { useReducedMotion } from './hooks/useReducedMotion';
-
+export type { ErrorCallback, ErrorData, ErrorStats } from './utils/errorTracking';
+export { errorTracker, setupErrorTracking, withErrorTracking } from './utils/errorTracking';
 // ============================================================================
 // Utils
 // ============================================================================
 export { initTheme } from './utils/initTheme';
-export * from './utils/validation';
 export type { ValidationResult } from './utils/validation';
-export { errorTracker, setupErrorTracking, withErrorTracking } from './utils/errorTracking';
-export type { ErrorData, ErrorStats, ErrorCallback } from './utils/errorTracking';
+export * from './utils/validation';

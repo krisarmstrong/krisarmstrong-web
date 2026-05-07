@@ -1,8 +1,9 @@
 // Display Components - Content presentation
-export { StarRating } from './StarRating';
+
+export type { AggregateRatingProps, RatingAPI, RatingStats } from './AggregateRating';
 export { AggregateRating } from './AggregateRating';
-export type { AggregateRatingProps, RatingStats, RatingAPI } from './AggregateRating';
-export { StatCard } from './StatCard';
-export type { StatCardProps, StatCardSize, StatCardColorScheme } from './StatCard';
-export { ContentCard } from './ContentCard';
 export type { ContentCardProps } from './ContentCard';
+export { ContentCard } from './ContentCard';
+export { StarRating } from './StarRating';
+export type { StatCardColorScheme, StatCardProps, StatCardSize } from './StatCard';
+export { StatCard } from './StatCard';

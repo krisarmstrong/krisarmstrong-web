@@ -1,8 +1,8 @@
-import { defineConfig, searchForWorkspaceRoot, UserConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import tailwindcss from '@tailwindcss/vite';
 import path from 'node:path';
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
+import { defineConfig, searchForWorkspaceRoot, type UserConfig } from 'vite';
 
 /**
  * Configuration options for creating a Vite config
@@ -23,6 +23,15 @@ export interface AppConfig {
  */
 export function createViteConfig(appConfig: AppConfig): UserConfig {
   const plugins = [react(), tailwindcss()];
+  const vendorChunks: Record<string, string[]> = {
+    'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+    'vendor-ui': ['lucide-react', '@krisarmstrong/web-foundation'],
+    'vendor-query': ['@tanstack/react-query'],
+    'vendor-motion': ['framer-motion'],
+    'vendor-markdown': ['react-markdown', 'rehype-sanitize'],
+    'vendor-sentry': ['@sentry/react'],
+    ...appConfig.vendorChunks,
+  };
 
   // Add bundle analyzer when ANALYZE env var is set
   if (process.env.ANALYZE === 'true') {
@@ -56,21 +65,16 @@ export function createViteConfig(appConfig: AppConfig): UserConfig {
       // Optimize chunk size for better caching
       rollupOptions: {
         output: {
-          manualChunks: {
-            // Vendor chunk for React and related libraries
-            'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-            // UI libraries chunk
-            'vendor-ui': ['lucide-react', '@krisarmstrong/web-foundation'],
-            // React Query - separate chunk for better caching (rarely changes)
-            'vendor-query': ['@tanstack/react-query'],
-            // Framer Motion - separate chunk (large library, rarely changes)
-            'vendor-motion': ['framer-motion'],
-            // Markdown rendering - separate chunk for blog content
-            'vendor-markdown': ['react-markdown', 'rehype-sanitize'],
-            // Sentry chunk (loaded on demand)
-            'vendor-sentry': ['@sentry/react'],
-            // Merge any additional app-specific vendor chunks
-            ...appConfig.vendorChunks,
+          manualChunks(id) {
+            if (!id.includes('node_modules')) {
+              return undefined;
+            }
+            for (const [chunkName, packages] of Object.entries(vendorChunks)) {
+              if (packages.some((packageName) => id.includes(`/node_modules/${packageName}/`))) {
+                return chunkName;
+              }
+            }
+            return 'vendor';
           },
         },
       },

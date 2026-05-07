@@ -193,8 +193,6 @@ export function validateZipCode(zip: string): ValidationResult {
   if (!zip || zip.trim().length === 0) {
     return { isValid: false, error: 'ZIP code is required' };
   }
-
-  // eslint-disable-next-line security/detect-unsafe-regex
   const zipRegex = /^\d{5}(-\d{4})?$/;
   if (!zipRegex.test(zip)) {
     return { isValid: false, error: 'Please enter a valid ZIP code (e.g., 12345 or 12345-6789)' };
