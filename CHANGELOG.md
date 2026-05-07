@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0](https://github.com/krisarmstrong/krisarmstrong-web/compare/v1.3.51...v1.4.0) (2026-05-07)
+
+
+### Features
+
+* add check.sh and update release.yml to use CHANGELOG extraction ([9f6263c](https://github.com/krisarmstrong/krisarmstrong-web/commit/9f6263c115b5f028495d1e3f71cd9d678fd30b68))
+
 ## [Unreleased]
 
 ### Added
